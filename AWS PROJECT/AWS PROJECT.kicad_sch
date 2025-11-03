@@ -4,6 +4,12 @@
 	(generator_version "9.0")
 	(uuid "28dd5718-f0db-4cd1-9b2d-c2f5533a75a3")
 	(paper "A4")
+	(title_block
+		(title "GENERAL  DESIGN SHEET")
+		(company "AdeMNEA IoT-ra")
+		(comment 1 "Designed By TN Muhanguzi")
+		(comment 2 "For MPSE Research at Makerere University")
+	)
 	(lib_symbols)
 	(sheet
 		(at 152.4 27.94)
