@@ -1,4 +1,4 @@
-26779587370191393
+26790161549588273
 7508111323
 WE-OLTI_EE16_8_5_L17.78W26.9H13.8
 
@@ -83,6 +83,13 @@ SOT95P285X145-5N
 0
 5
 5
+AP64501SP-13
+SOIC127P600X170-9N
+
+
+0
+9
+9
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -125,6 +132,13 @@ QFN50P350X350X100-17N
 0
 17
 17
+BSC070N10NS5ATMA1
+TRANS_IRFH8334TRPBF
+
+
+0
+5
+5
 Battery
 BatteryClip_Keystone_54_D16-19mm
 Battery clip for batteries with a diameter between 16-19 mm: https://www.keyelco.com/product.cfm/product_id/826
@@ -69285,6 +69299,13 @@ Yellow 5381 Series LED
 0
 2
 2
+LM1085IS-3.3
+TI_LM1085IS-3.3
+
+
+0
+5
+5
 LM2596 ADJ
 VREG_LM2596S-ADJ_NOPB
 
@@ -72246,6 +72267,13 @@ threaded screw
 0
 4
 1
+NTMFS4H01NFT3G
+TRANS_NVMFS5834NLWFT1G
+
+
+0
+5
+5
 NV6115
 TRANS_IRFH9310TRPBF
 
@@ -99427,6 +99455,13 @@ Logo WEEE
 0
 0
 0
+TPS2121RUXR
+IC_TPS2121RUXR
+
+
+0
+16
+16
 TPS25740RGER
 QFN50P400X400X100-25N
 
@@ -99434,6 +99469,13 @@ QFN50P400X400X100-25N
 0
 25
 25
+TPS54331DG4
+SOIC127P599X175-8N
+
+
+0
+8
+8
 TXB0108RGYR
 IC_TXB0108RGYR
 

@@ -1,0 +1,67 @@
+body {
+        margin:0;
+        padding:0;
+}
+
+#adArea {
+	/*background: #cd2a29;*/
+    cursor:pointer;
+}
+
+
+
+
+#icon {
+  width: 227px;
+  height: 227px;
+  background-image: url(images/icon.png);
+}
+
+
+
+
+
+.center {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.wrapper {
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+#pointer{
+  left: -25px;
+  top: -25px;
+}
+
+.abs {
+    position: absolute;
+}
+.opacity0 { opacity: 0; }
+
+.zi1 { z-index: 800; }
+.zi2 { z-index: 900; }
+.zi5 { z-index: 5000; }
+.zi6 { z-index: 6000; }
+.zi7 { z-index: 7000 !important; }
+.zi8 { z-index: 8000 !important; }
+.zi9 { z-index: 9000 !important; }
+.zi10 { z-index: 10000 !important; }
+
+.hidden{
+	visibility: hidden;
+}
+.noEvents{
+  pointer-events: none;
+}
+.noVis{
+    visibility: none;
+}
+.noDisplay{
+    display: none;
+}
+

@@ -9870,7 +9870,7 @@
 	)
 	(text "MPL3115ARI"
 		(exclude_from_sim no)
-		(at 474.472 236.982 0)
+		(at 477.012 234.95 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10094,7 +10094,7 @@
 		)
 		(uuid "f79862f9-3200-4f9c-ab20-c44ceab59c47")
 	)
-	(text_box "ESD protection to be added in future design, communication default set to \nI2C, module set specifically for storing data, and hence transfer speeds are slow"
+	(text_box "ESD protection to be added in future design, communication default set to \nSPI, module set specifically for storing data, and hence transfer speeds are slow"
 		(exclude_from_sim no)
 		(at 436.88 193.04 0)
 		(size 90.17 12.7)
@@ -12192,16 +12192,6 @@
 	)
 	(wire
 		(pts
-			(xy 454.66 241.3) (xy 466.09 241.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4d65949e-1ebe-4f68-be18-99eef7c4b26a")
-	)
-	(wire
-		(pts
 			(xy 125.73 290.83) (xy 147.32 290.83)
 		)
 		(stroke
@@ -12359,16 +12349,6 @@
 			(type default)
 		)
 		(uuid "5992bb6b-91de-4bc0-b648-ba06ab7af94b")
-	)
-	(wire
-		(pts
-			(xy 454.66 243.84) (xy 466.09 243.84)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5ad5593e-069b-49e6-8df0-8f0494b647a3")
 	)
 	(wire
 		(pts
@@ -13462,6 +13442,16 @@
 	)
 	(wire
 		(pts
+			(xy 454.66 237.49) (xy 464.82 237.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "96d7c155-78bf-4071-a8b3-7b36ff1b60c6")
+	)
+	(wire
+		(pts
 			(xy 494.03 177.8) (xy 494.03 181.61)
 		)
 		(stroke
@@ -14059,6 +14049,16 @@
 			(type default)
 		)
 		(uuid "b9f65e97-7453-4d99-a248-84939cec5ec0")
+	)
+	(wire
+		(pts
+			(xy 454.66 240.03) (xy 464.82 240.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9fd38e6-19a6-41c7-883c-e9a478d930ae")
 	)
 	(wire
 		(pts
@@ -15520,16 +15520,6 @@
 		)
 		(uuid "6c923597-cebd-42b6-910c-6f91848f6b52")
 	)
-	(label "I2C SCL"
-		(at 454.66 241.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "706d93a2-509e-416c-a3cb-e15458c8f1d3")
-	)
 	(label "strap12"
 		(at 135.89 280.67 0)
 		(effects
@@ -15699,6 +15689,16 @@
 			(justify left bottom)
 		)
 		(uuid "8dc2ae19-fd42-4f50-b458-d313750bea91")
+	)
+	(label "I2C SCL"
+		(at 454.66 240.03 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8fac4edd-c6ab-4789-aedd-5087134ca383")
 	)
 	(label "SIM RST"
 		(at 220.98 171.45 0)
@@ -16080,16 +16080,6 @@
 		)
 		(uuid "e6d586e8-09f1-4e7f-a3d4-57bc14c0edea")
 	)
-	(label "I2C SDA"
-		(at 454.66 243.84 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "e796923d-13c5-48e1-9e6c-72ad6d920a30")
-	)
 	(label "lora power in"
 		(at 359.41 88.9 0)
 		(effects
@@ -16219,6 +16209,16 @@
 			(justify left bottom)
 		)
 		(uuid "f56011a9-b863-4d33-88b2-2ba71dc1dd47")
+	)
+	(label "I2C SDA"
+		(at 454.66 237.49 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f587f862-acd7-4a74-8dbf-1f9ef3b04e31")
 	)
 	(label "RI"
 		(at 91.44 72.39 0)
@@ -17150,7 +17150,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "110dacc6-a395-4449-95cf-b7b47de9d48e")
 		(property "Reference" "R21"
 			(at 322.58 227.838 0)
@@ -17219,7 +17219,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "11c82d67-ff9a-451c-ab97-5e292c923447")
 		(property "Reference" "#PWR037"
@@ -17737,7 +17737,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "1f30a8d1-4c19-4544-93a2-dc2930792b78")
 		(property "Reference" "C15"
 			(at 292.354 176.022 0)
@@ -17872,7 +17872,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "2269421f-1bd4-40e3-ac3d-1e2ac653769b")
 		(property "Reference" "JP5"
 			(at 360.172 156.21 0)
@@ -18221,7 +18221,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "2a021569-d3d5-4c06-a497-5e0f5a6855fa")
 		(property "Reference" "U4"
@@ -18669,7 +18669,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "33d75058-bfb2-4914-a393-f6dbae1d4791")
 		(property "Reference" "JP3"
 			(at 306.832 233.68 0)
@@ -18869,7 +18869,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "3720a430-9463-4490-80d8-10655a4914bf")
 		(property "Reference" "R18"
@@ -20469,7 +20469,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "57ed99b1-3c01-41e3-ab2e-e0c1ff75d8c9")
 		(property "Reference" "#PWR027"
@@ -20592,6 +20592,83 @@
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Conn_01x04_Pin")
+		(at 469.9 240.03 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5917de12-4a6c-44e6-a45b-bf5f6d97f724")
+		(property "Reference" "J17"
+			(at 471.17 237.4899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "Conn_01x04_Pin"
+			(at 471.17 240.0299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Connector_Phoenix_MC:PhoenixContact_MC_1,5_4-GF-3.5_1x04_P3.50mm_Horizontal_ThreadedFlange_MountHole"
+			(at 469.9 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 469.9 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Generic connector, single row, 01x04, script generated"
+			(at 469.9 240.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "7f839a8b-0ce5-48fc-888e-8daf435d421b")
+		)
+		(pin "4"
+			(uuid "a7ed7e5c-9e4b-4a31-af85-1e1499d87c92")
+		)
+		(pin "2"
+			(uuid "f25cd5e1-2fad-4bd7-8e38-ac7a8a9cd4eb")
+		)
+		(pin "3"
+			(uuid "54ee1551-f323-4316-b153-683cb104e368")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "J17")
 					(unit 1)
 				)
 			)
@@ -23167,79 +23244,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_01x03_Pin")
-		(at 471.17 241.3 0)
-		(mirror y)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "81141236-5833-4857-b749-47a87abc2df7")
-		(property "Reference" "J17"
-			(at 470.535 233.68 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "Conn_01x03_Pin"
-			(at 470.535 236.22 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "Connector_Phoenix_MC:PhoenixContact_MC_1,5_3-GF-3.81_1x03_P3.81mm_Horizontal_ThreadedFlange_MountHole"
-			(at 471.17 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 471.17 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Generic connector, single row, 01x03, script generated"
-			(at 471.17 241.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "2e79252c-8945-42c7-85f7-bc4105da20fd")
-		)
-		(pin "1"
-			(uuid "1b471191-af2d-42d0-ac21-902ca05f9235")
-		)
-		(pin "3"
-			(uuid "6067c95b-2f9c-44c2-8a35-e74cca0532d5")
-		)
-		(instances
-			(project "AWS PROJECT"
-				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
-					(reference "J17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:C_Small")
 		(at 40.64 104.14 0)
 		(unit 1)
@@ -24304,7 +24308,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "8b2f9ff2-840a-4b82-9584-d455e412721f")
 		(property "Reference" "C16"
 			(at 305.054 238.252 0)
@@ -26774,7 +26778,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "b14410cb-d92f-4675-9940-9a98b8e73a2e")
 		(property "Reference" "R17"
 			(at 284.988 153.924 0)
@@ -27193,6 +27197,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Value" "Conn_01x03_Pin"
@@ -28379,7 +28384,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "cb56d78a-7a99-4787-960d-ce86502fa21a")
 		(property "Reference" "U5"
@@ -28525,7 +28530,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "cd3f9957-1e55-4052-ae86-264755ee896c")
 		(property "Reference" "C20"
@@ -28943,7 +28948,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e011ddd9-69f2-4bf9-b78c-20dfd7a67a6d")
 		(property "Reference" "R26"
@@ -29219,7 +29224,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e2ebcb0c-98d9-466b-a27a-fe970550c5e9")
 		(property "Reference" "#PWR033"
@@ -29832,7 +29837,7 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "ece5752d-8621-4bb4-9592-b30aecb8a0bc")
 		(property "Reference" "C19"
 			(at 348.234 164.592 0)
