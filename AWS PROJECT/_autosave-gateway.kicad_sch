@@ -12153,7 +12153,7 @@
 		)
 		(uuid "1d4d5e4c-90d9-4530-a4cc-b97e755b27de")
 	)
-	(text_box "Placement on PCB needs to follow emision standards incase of mass \nproduction or certifications to minimise and contil noise\n\ndesign is referenced from the datasheet and pin 1(32khz) has oprional connection to microcontroller"
+	(text_box "Placement on PCB needs to follow emision standards incase of mass \nproduction or certifications to minimise and contil noise\n\ndesign is referenced from the datasheet and pin 1(32khz) has oprional connection to microcontroller\n\nDEFAULT I2C ADDRESS IS 0x68"
 		(exclude_from_sim no)
 		(at 311.15 408.94 0)
 		(size 127 15.24)
