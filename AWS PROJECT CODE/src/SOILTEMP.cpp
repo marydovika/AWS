@@ -24,6 +24,7 @@ float SoilTemp::readSoilTemperature() {
 
     if (soil_temperature_ == DEVICE_DISCONNECTED_C) {
     Serial.println("Error: DS18B20 not found");
+    return -127.0; // Return error value
     } else {
     Serial.print("Temperature: ");
     Serial.print(soil_temperature_);

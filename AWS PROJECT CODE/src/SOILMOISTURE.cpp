@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include "SOILMOISTURE.h"
-#define ANALOG_PIN 32  // Example analog pin for soil moisture sensor
+#define ANALOG_PIN 34  // Example analog pin for soil moisture sensor
 
 //=SOIL MOISTURE CAN ALSO BE CONSIDERED RAINFALL
 
