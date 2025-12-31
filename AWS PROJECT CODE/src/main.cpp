@@ -89,6 +89,8 @@ void loop() {
   //string dataframe1 = lightStr + "," + rtc1.getDateTime();
   //SDcard.writeData(file_name, dataframe1);
 
+  //geaddaadwa
+
   delay(1000);
 }
 
