@@ -13429,16 +13429,6 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 433.07) (xy 209.55 431.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ec99e76-d97c-49f2-ab00-833c610b1af8")
-	)
-	(wire
-		(pts
 			(xy 78.74 365.76) (xy 88.9 365.76)
 		)
 		(stroke
@@ -14779,7 +14769,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 368.3) (xy 139.7 368.3)
+			(xy 129.54 368.3) (xy 149.86 368.3)
 		)
 		(stroke
 			(width 0)
@@ -14826,6 +14816,16 @@
 			(type default)
 		)
 		(uuid "5992bb6b-91de-4bc0-b648-ba06ab7af94b")
+	)
+	(wire
+		(pts
+			(xy 212.09 433.07) (xy 212.09 431.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59c80335-5236-4e6f-82c3-b13921d2976e")
 	)
 	(wire
 		(pts
@@ -16229,7 +16229,7 @@
 	)
 	(wire
 		(pts
-			(xy 129.54 373.38) (xy 139.7 373.38)
+			(xy 129.54 373.38) (xy 149.86 373.38)
 		)
 		(stroke
 			(width 0)
@@ -16936,6 +16936,16 @@
 			(type default)
 		)
 		(uuid "b05becc0-83b1-45a0-8153-894a5d9bf0da")
+	)
+	(wire
+		(pts
+			(xy 205.74 424.18) (xy 212.09 424.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1679ff9-7bb6-4ff9-b8ca-2c801ed4203e")
 	)
 	(wire
 		(pts
@@ -17819,16 +17829,6 @@
 	)
 	(wire
 		(pts
-			(xy 201.93 424.18) (xy 209.55 424.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d7a1b029-eca5-4889-b821-29b9333b3feb")
-	)
-	(wire
-		(pts
 			(xy 311.15 208.28) (xy 311.15 210.82)
 		)
 		(stroke
@@ -18537,36 +18537,6 @@
 		)
 		(uuid "0e410d29-ba86-4f5f-bb19-6d33f5fcb849")
 	)
-	(label "strap12"
-		(at 201.93 424.18 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "0e46f275-750a-4a93-bd3f-236abdd8cd63")
-	)
-	(label "strap15"
-		(at 139.7 375.92 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "116d2678-f163-4c23-82d4-9bc9d53de4bd")
-	)
-	(label "gsm power key"
-		(at 139.7 373.38 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "12c89ef7-b783-4029-bf94-dc88b98de3c7")
-	)
 	(label "nreset"
 		(at 116.84 217.17 0)
 		(effects
@@ -18637,15 +18607,15 @@
 		)
 		(uuid "18e45286-5dc4-4f17-8530-96adfd75903a")
 	)
-	(label "RX"
-		(at 440.69 148.59 0)
+	(label "LORA_TX"
+		(at 200.66 417.83 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left bottom)
 		)
-		(uuid "199d315f-3088-4be6-8e33-cb1f39eb52cc")
+		(uuid "19530adf-84c3-44f8-8bb8-0596febbc90b")
 	)
 	(label "rs485 en"
 		(at 165.1 370.84 0)
@@ -18787,16 +18757,6 @@
 		)
 		(uuid "32340653-daad-4d7b-890c-7dbc63f524ba")
 	)
-	(label "TX"
-		(at 440.69 146.05 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3623dbe0-5110-4932-b274-0f5481eb530d")
-	)
 	(label "USBD-"
 		(at 632.46 208.28 180)
 		(effects
@@ -18866,16 +18826,6 @@
 			(justify left bottom)
 		)
 		(uuid "3ca81b9f-7b3a-4e56-a82d-337afc91f794")
-	)
-	(label "strap15"
-		(at 200.66 417.83 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "3e92e18d-2b68-4216-9bb9-c4fe9c56a9f4")
 	)
 	(label "MPL power input"
 		(at 311.15 208.28 0)
@@ -19147,16 +19097,6 @@
 		)
 		(uuid "727bc298-d70c-4f91-b38f-d5ebeb083042")
 	)
-	(label "strap12"
-		(at 139.7 368.3 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "741e018f-9813-457f-ab84-53196fec8412")
-	)
 	(label "DS18B20"
 		(at 207.01 383.54 0)
 		(effects
@@ -19166,6 +19106,16 @@
 			(justify left bottom)
 		)
 		(uuid "74cd1f10-3cd4-4f06-9b8e-753a6dc3a052")
+	)
+	(label "LORA_RX"
+		(at 438.15 146.05 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "75aa664e-5da4-4d24-8e6d-8c742ac9ca47")
 	)
 	(label "INSPEED VORTEX"
 		(at 462.28 323.85 0)
@@ -19407,6 +19357,16 @@
 		)
 		(uuid "9bcfca01-ad4e-44f2-972c-cac736308a30")
 	)
+	(label "LORA_RX"
+		(at 149.86 373.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9eb24dbb-ea3e-48a0-ac54-074d66939aae")
+	)
 	(label "SIM DATA"
 		(at 199.39 134.62 0)
 		(effects
@@ -19537,6 +19497,36 @@
 		)
 		(uuid "bb17779b-eb21-45ea-ba9c-c54a3fb7a595")
 	)
+	(label "LORA_TX"
+		(at 438.15 148.59 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bccb0fde-0a6e-4cff-b703-6eb7304b6a8e")
+	)
+	(label "strap12"
+		(at 205.74 424.18 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "be894883-be98-47d9-8529-c4c956e9b44c")
+	)
+	(label "LORA_TX"
+		(at 139.7 375.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c0328df4-ef48-4cb7-9a43-8b316cc03bf0")
+	)
 	(label "I2C SDA"
 		(at 566.42 300.99 0)
 		(effects
@@ -19546,6 +19536,16 @@
 			(justify left bottom)
 		)
 		(uuid "c1f83a30-6255-4f87-adae-52e174b25f6d")
+	)
+	(label "strap12"
+		(at 140.97 368.3 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "c2a42fc1-d092-44db-a203-a66f29a330bf")
 	)
 	(label "VDD_EXT"
 		(at 52.07 160.02 0)
@@ -21353,6 +21353,76 @@
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 212.09 427.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "15eef998-08c3-4cf2-bf46-bc13f2a0c20a")
+		(property "Reference" "R11"
+			(at 214.63 426.7199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10k"
+			(at 214.63 429.2599 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 210.312 427.99 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 212.09 427.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 212.09 427.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "fdcd462c-0642-40f6-a610-513d3562f3a5")
+		)
+		(pin "1"
+			(uuid "27f2c821-bafe-4d4a-bcbe-7acb95cd37c5")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "R11")
 					(unit 1)
 				)
 			)
@@ -31840,76 +31910,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R")
-		(at 209.55 427.99 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "839f533e-5eb9-4b5d-bee5-016fc60c91c4")
-		(property "Reference" "R11"
-			(at 212.09 426.7199 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10k"
-			(at 212.09 429.2599 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 207.772 427.99 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 209.55 427.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 209.55 427.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "ecb4ab87-5514-45fb-bb00-cf3f917a5c89")
-		)
-		(pin "1"
-			(uuid "5ab34615-f079-409b-8d2c-f1fc2135df00")
-		)
-		(instances
-			(project "AWS PROJECT"
-				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
-					(reference "R11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:LED")
 		(at 189.23 387.35 90)
 		(unit 1)
@@ -35032,6 +35032,74 @@
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C41")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 48.26 195.58 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "a153b524-15a5-4064-967f-9e594c578333")
+		(property "Reference" "SNS_TX1"
+			(at 34.544 195.834 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 46.2279 193.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 48.26 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 48.26 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 48.26 195.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "eeef3cd0-4a86-4047-80c7-c4723e8a6b36")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "SNS_TX1")
 					(unit 1)
 				)
 			)
@@ -39135,6 +39203,71 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 212.09 433.07 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e0387c3d-41de-410b-a0d0-56c36c353228")
+		(property "Reference" "#PWR018"
+			(at 212.09 439.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 215.138 432.562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 212.09 433.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 212.09 433.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 212.09 433.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "9fb7dafe-af90-41ea-9c62-08254891f0f7")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "#PWR018")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 44.45 369.57 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -40447,16 +40580,36 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 209.55 433.07 0)
+		(lib_id "Connector:TestPoint")
+		(at 149.86 368.3 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
-		(uuid "f031c238-5101-4d08-bf9f-81c6ae1e4e94")
-		(property "Reference" "#PWR018"
-			(at 209.55 439.42 0)
+		(uuid "efb86b04-6a82-4c57-9baf-f22029ea944a")
+		(property "Reference" "SNS_TX15"
+			(at 163.576 368.046 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 151.8921 370.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 149.86 373.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40464,16 +40617,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "GND"
-			(at 212.598 432.562 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 209.55 433.07 0)
+		(property "Datasheet" "~"
+			(at 149.86 373.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40481,17 +40626,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
-			(at 209.55 433.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 209.55 433.07 0)
+		(property "Description" "test point"
+			(at 149.86 368.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -40500,12 +40636,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "f6bb40d6-485b-4de6-9d4f-31cf2afd21ed")
+			(uuid "a3385864-4b96-448c-93e1-9d6745c885d3")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
-					(reference "#PWR018")
+					(reference "SNS_TX15")
 					(unit 1)
 				)
 			)
