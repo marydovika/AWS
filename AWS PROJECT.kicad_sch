@@ -1,0 +1,104 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "28dd5718-f0db-4cd1-9b2d-c2f5533a75a3")
+	(paper "A4")
+	(title_block
+		(title "GENERAL  DESIGN SHEET")
+		(company "AdeMNEA IoT-ra")
+		(comment 1 "Designed By TN Muhanguzi")
+		(comment 2 "For MPSE Research at Makerere University")
+	)
+	(lib_symbols)
+	(sheet
+		(at 152.4 27.94)
+		(size 128.27 125.73)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4")
+		(property "Sheetname" "power board"
+			(at 152.4 27.2284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power.kicad_sch"
+			(at 152.4 154.2546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 17.78 27.94)
+		(size 125.73 125.73)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "918a84d0-2382-4e9e-a083-abfab5a808df")
+		(property "Sheetname" "gate way"
+			(at 17.78 27.2284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "gateway.kicad_sch"
+			(at 17.78 154.2546 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)
