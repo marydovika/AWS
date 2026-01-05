@@ -8,6 +8,7 @@
 #include "MEMORY.h"
 #include "GSM.h"
 #include "LORA.h"
+#include "DAVIS.h"
 #include <string>
 using namespace std;
 
@@ -21,6 +22,7 @@ Rtc rtc1;
 Memory SDcard;
 GSM simmodule;
 Lora loramodule;
+Davis davisrain;
 
 
 // Uganda/East Africa Time (EAT) Configuration
@@ -34,7 +36,7 @@ string file_name = "/time data.txt";
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-
+/*
    wifi_connection.connect();
     if(wifi_connection.isConnected()) {
     Serial.println(String("Connected to WiFi SSID: ") + String(wifi_connection.getSSID().c_str()));
@@ -61,11 +63,14 @@ void setup() {
 
   dhtsensor.getsensor();
   airpressure.sensor_setup();
+  */
+  davisrain.setupRainGauge();
 }
 
 
 
 void loop() {
+  /*
   float lightVal = lightsensor.readLightLevel();
   Serial.print("Light Voltage: ");
   Serial.print(lightVal);
@@ -81,7 +86,7 @@ void loop() {
   airpressure.readAltitude(1013.25);
 
   SDcard.readData(file_name);
-  
+  */
 
 
   //String lightStrArduino = String(lightVal, 2); // 2 decimal places
@@ -90,8 +95,11 @@ void loop() {
   //SDcard.writeData(file_name, dataframe1);
 
   //geaddaadwa
+  int rainCount = davisrain.readRainGauge();
+  Serial.print("Rainfall Count (last hour): "); 
+  Serial.println(rainCount);
 
-  delay(1000);
+  delay(1);
 }
 
 
