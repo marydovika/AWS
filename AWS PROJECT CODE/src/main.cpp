@@ -9,6 +9,8 @@
 #include "GSM.h"
 #include "LORA.h"
 #include "DAVIS.h"
+#include "WINDSPEED.h"
+#include "WIND_DIRECTION.h"
 #include <string>
 using namespace std;
 
@@ -24,6 +26,8 @@ GSM simmodule;
 Lora loramodule;
 Davis davisrain;
 
+WindSpeedSensor windspeedsensor;
+WindDirectionSensor winddirectionsensor;
 
 // Uganda/East Africa Time (EAT) Configuration
 const char* ntpServer = "africa.pool.ntp.org";
@@ -65,6 +69,8 @@ void setup() {
   airpressure.sensor_setup();
   */
   davisrain.setupRainGauge();
+  windspeedsensor.setupSensor();
+  winddirectionsensor.setupSensor();
 }
 
 
@@ -94,12 +100,22 @@ void loop() {
   //string dataframe1 = lightStr + "," + rtc1.getDateTime();
   //SDcard.writeData(file_name, dataframe1);
 
-  //geaddaadwa
-  int rainCount = davisrain.readRainGauge();
+  
+  /*int rainCount = davisrain.readRainGauge();
   Serial.print("Rainfall Count (last hour): "); 
-  Serial.println(rainCount);
+  Serial.println(rainCount);*/
+  
+ /* float windSpeedKPH = windspeedsensor.readWindSpeedKPH();
+  Serial.print("Wind Speed (km/h): ");  
+  Serial.println(windSpeedKPH);*/
+ 
 
-  delay(1);
+  int windDirectionDeg = winddirectionsensor.readWindDirectionDeg();
+  Serial.print("Wind Direction (Degrees): "); 
+  Serial.println(windDirectionDeg);
+  
+
+  delay(100);
 }
 
 
