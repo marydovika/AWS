@@ -12318,6 +12318,12 @@
 		(uuid "fde868d5-774a-40e4-901b-25ae1260a76c")
 	)
 	(junction
+		(at 168.91 391.16)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "041a0f64-e9c7-4248-9a64-5b8a71ba5a0e")
+	)
+	(junction
 		(at 496.57 220.98)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -12796,6 +12802,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "cfd28f34-2f9d-44da-aaf1-f1bc3f705406")
+	)
+	(junction
+		(at 172.72 388.62)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d8650503-90d3-4c9c-a72a-c144cf22eb64")
 	)
 	(junction
 		(at 499.11 114.3)
@@ -13729,6 +13741,16 @@
 	)
 	(wire
 		(pts
+			(xy 172.72 375.92) (xy 172.72 378.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1e8d0643-ab61-4037-8e2e-d5b72ddd57de")
+	)
+	(wire
+		(pts
 			(xy 102.87 190.5) (xy 118.11 190.5)
 		)
 		(stroke
@@ -13936,6 +13958,16 @@
 			(type default)
 		)
 		(uuid "24d0f2d8-6ca1-47a1-a29a-b23871e6822a")
+	)
+	(wire
+		(pts
+			(xy 168.91 386.08) (xy 168.91 391.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "24d1b296-20cb-42d1-a585-522b42f76286")
 	)
 	(wire
 		(pts
@@ -14189,6 +14221,16 @@
 	)
 	(wire
 		(pts
+			(xy 168.91 375.92) (xy 172.72 375.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34d1cfd1-f20f-4400-b546-5e5147d4a0c5")
+	)
+	(wire
+		(pts
 			(xy 621.03 218.44) (xy 618.49 218.44)
 		)
 		(stroke
@@ -14199,7 +14241,7 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 388.62) (xy 166.37 388.62)
+			(xy 162.56 388.62) (xy 172.72 388.62)
 		)
 		(stroke
 			(width 0)
@@ -14799,7 +14841,7 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 391.16) (xy 166.37 391.16)
+			(xy 160.02 391.16) (xy 168.91 391.16)
 		)
 		(stroke
 			(width 0)
@@ -15106,6 +15148,16 @@
 			(type default)
 		)
 		(uuid "62317c3b-af7c-4263-aa2e-83fbc116dc05")
+	)
+	(wire
+		(pts
+			(xy 168.91 378.46) (xy 168.91 375.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "626b5599-5a73-4724-98e1-a521f012d2c9")
 	)
 	(wire
 		(pts
@@ -15996,6 +16048,16 @@
 			(type default)
 		)
 		(uuid "8880e9e7-6f54-4a47-8c08-c991cdb35df5")
+	)
+	(wire
+		(pts
+			(xy 172.72 386.08) (xy 172.72 388.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "889755e4-1f5c-4694-bb55-549c35ef8c84")
 	)
 	(wire
 		(pts
@@ -17949,6 +18011,16 @@
 	)
 	(wire
 		(pts
+			(xy 168.91 391.16) (xy 176.53 391.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e0ae257a-a839-4e61-a88f-113910ee2827")
+	)
+	(wire
+		(pts
 			(xy 717.55 154.94) (xy 706.12 154.94)
 		)
 		(stroke
@@ -18329,6 +18401,16 @@
 	)
 	(wire
 		(pts
+			(xy 172.72 388.62) (xy 176.53 388.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f78ae6f9-569e-41f7-8be1-878b24caaf5a")
+	)
+	(wire
+		(pts
 			(xy 162.56 386.08) (xy 162.56 388.62)
 		)
 		(stroke
@@ -18657,8 +18739,18 @@
 		)
 		(uuid "22d57494-a9a6-479e-a413-214828c9de9a")
 	)
+	(label "ESP32 power in"
+		(at 168.91 375.92 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "23220800-5ab9-467b-9d84-f8f16213ccbd")
+	)
 	(label "I2C SDA"
-		(at 166.37 388.62 0)
+		(at 176.53 388.62 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -18868,7 +18960,7 @@
 		(uuid "449bf055-681d-4733-bcd1-15cc88c38434")
 	)
 	(label "I2C SCL"
-		(at 166.37 391.16 0)
+		(at 176.53 391.16 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -37576,6 +37668,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 168.91 382.27 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c5f646ed-2760-46af-ab71-2c1c907f5588")
+		(property "Reference" "R54"
+			(at 163.576 381 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 163.576 383.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 170.688 382.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 168.91 382.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 168.91 382.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "559ff8b1-1f98-4d8c-be28-702fa2376f8a")
+		)
+		(pin "1"
+			(uuid "dbf9f6ee-d367-4dc9-a446-3886eb2a09c9")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "R54")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 464.82 430.53 0)
 		(unit 1)
@@ -38714,6 +38875,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 172.72 382.27 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d7536034-1b15-4f63-b3fa-9797901b8c88")
+		(property "Reference" "R38"
+			(at 175.26 380.9999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 175.26 383.5399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 174.498 382.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 172.72 382.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 172.72 382.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "71bc9ca4-4e48-4fcc-9539-1a68c40a6203")
+		)
+		(pin "1"
+			(uuid "4d921cb1-8e75-420a-a315-4f0084beb8d8")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "R38")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
 		(at 449.58 96.52 270)
 		(unit 1)
@@ -38928,10 +39159,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "dde291c7-de49-4ef7-b9b5-7a2226efb9bf")
 		(property "Reference" "J2"
-			(at 163.83 380.3649 90)
+			(at 157.226 382.778 90)
 			(effects
 				(font
 					(size 1.27 1.27)

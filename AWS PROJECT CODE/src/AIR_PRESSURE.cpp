@@ -18,12 +18,11 @@ void AirPressure::sensor_setup() {
     Serial.begin(9600);
     
     if (!bme.begin(0x77, &Wire)) {
-        Serial.println("Could not find a valid BME280 sensor, check wiring!");
+        Serial.println("Could not find a valid BME280 sensor at 0x77, check wiring!");
         //while (1);
-    } else  if (!bme.begin(0x76, &Wire)) {
-        Serial.println("Could not find a valid BME280 sensor, check wiring!");
-        //while (1);
-    } 
+    } else {
+        Serial.println("BME280 sensor initialized successfully.");
+    }
     
 }
 

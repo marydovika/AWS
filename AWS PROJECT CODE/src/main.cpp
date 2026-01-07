@@ -11,6 +11,7 @@
 #include "DAVIS.h"
 #include "WINDSPEED.h"
 #include "WIND_DIRECTION.h"
+#include "POWER_MONITORING.h"
 #include <string>
 using namespace std;
 
@@ -28,6 +29,7 @@ Davis davisrain;
 
 WindSpeedSensor windspeedsensor;
 WindDirectionSensor winddirectionsensor;
+PowerMonitoring powermonitoring;
 
 // Uganda/East Africa Time (EAT) Configuration
 const char* ntpServer = "africa.pool.ntp.org";
@@ -50,13 +52,7 @@ void setup() {
  
   lightsensor.setupSensor();
   soilmoisture.setupSensor();
-  rtc1.setupRTC();
-   if(rtc1.syncWithNTP(ntpServer, gmtOffset_sec, daylightOffset_sec)) {
-        Serial.println("Time synced for Uganda successfully.");
-    } else {
-        Serial.println("Time sync failed.");
-    }
-
+  
     SDcard.setupMemory();
   //SDcard.clearFile(file_name);
   SDcard.createFile(file_name);
@@ -66,11 +62,21 @@ void setup() {
   loramodule.setupLora();
 
   dhtsensor.getsensor();
-  airpressure.sensor_setup();
   */
+
+ rtc1.setupRTC();
+   if(rtc1.syncWithNTP(ntpServer, gmtOffset_sec, daylightOffset_sec)) {
+        Serial.println("Time synced for Uganda successfully.");
+    } else {
+        Serial.println("Time sync failed.");
+    }
+
+  airpressure.sensor_setup();
+  
   davisrain.setupRainGauge();
   windspeedsensor.setupSensor();
   winddirectionsensor.setupSensor();
+  powermonitoring.begin(21, 22); // ESP32 default I2C pins
 }
 
 
@@ -80,7 +86,7 @@ void loop() {
   float lightVal = lightsensor.readLightLevel();
   Serial.print("Light Voltage: ");
   Serial.print(lightVal);
-  rtc1.printDateTime();
+  
   simmodule.sendData("AT", 2000); // Check signal quality
   loramodule.sendData("AT+CDEVEUI?", 2000); // Check signal quality
   soilmoisture.readSoilMoisture();
@@ -88,12 +94,37 @@ void loop() {
   Serial.println(soilmoisture.readSoilMoisture());
   dhtsensor.readHumidity();
   dhtsensor.readTemperature();
-  airpressure.readPressure();
-  airpressure.readAltitude(1013.25);
+  
 
   SDcard.readData(file_name);
   */
+  rtc1.printDateTime();
+  airpressure.readPressure();
+  airpressure.readAltitude(1013.25);
 
+  Serial.print("Air Pressure (hPa): ");
+  Serial.println(airpressure.readPressure());
+  Serial.print("Altitude (m): ");
+  Serial.println(airpressure.readAltitude(1013.25));
+
+   // Read data using the class
+  if (powermonitoring.readData()) {
+    
+    // Retrieve the data struct
+    VoltageData voltages = powermonitoring.getData();
+
+    Serial.println("OK");
+    Serial.println("-------------------------");
+    Serial.printf("3.3V Rail: %.2f V\n", voltages.v1);
+    Serial.printf("5V Rail:   %.2f V\n", voltages.v2);
+    Serial.printf("Battery:   %.2f V\n", voltages.v3);
+    Serial.printf("Solar:     %.2f V\n", voltages.v4);
+    Serial.printf("DC In:     %.2f V\n", voltages.v5);
+    Serial.println("-------------------------");
+
+  } else {
+    Serial.println("Connection Failed.");
+  }
 
   //String lightStrArduino = String(lightVal, 2); // 2 decimal places
   //string lightStr = string(lightStrArduino.c_str());
@@ -109,10 +140,10 @@ void loop() {
   Serial.print("Wind Speed (km/h): ");  
   Serial.println(windSpeedKPH);*/
  
-
-  int windDirectionDeg = winddirectionsensor.readWindDirectionDeg();
+  /*int windDirectionDeg = winddirectionsensor.readWindDirectionDeg();
   Serial.print("Wind Direction (Degrees): "); 
-  Serial.println(windDirectionDeg);
+  Serial.println(windDirectionDeg);*/
+  
   
 
   delay(100);
