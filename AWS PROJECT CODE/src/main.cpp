@@ -98,6 +98,7 @@ void loop() {
 
   SDcard.readData(file_name);
   */
+
   rtc1.printDateTime();
   airpressure.readPressure();
   airpressure.readAltitude(1013.25);
@@ -125,6 +126,7 @@ void loop() {
   } else {
     Serial.println("Connection Failed.");
   }
+  
 
   //String lightStrArduino = String(lightVal, 2); // 2 decimal places
   //string lightStr = string(lightStrArduino.c_str());
@@ -132,17 +134,18 @@ void loop() {
   //SDcard.writeData(file_name, dataframe1);
 
   
-  /*int rainCount = davisrain.readRainGauge();
+  int rainCount = davisrain.readRainGauge();
   Serial.print("Rainfall Count (last hour): "); 
-  Serial.println(rainCount);*/
+  Serial.println(rainCount);
   
- /* float windSpeedKPH = windspeedsensor.readWindSpeedKPH();
+  float windSpeedKPH = windspeedsensor.readWindSpeedKPH();
   Serial.print("Wind Speed (km/h): ");  
-  Serial.println(windSpeedKPH);*/
+  Serial.println(windSpeedKPH);
+  
  
-  /*int windDirectionDeg = winddirectionsensor.readWindDirectionDeg();
+  int windDirectionDeg = winddirectionsensor.readWindDirectionDeg();
   Serial.print("Wind Direction (Degrees): "); 
-  Serial.println(windDirectionDeg);*/
+  Serial.println(windDirectionDeg);
   
   
 

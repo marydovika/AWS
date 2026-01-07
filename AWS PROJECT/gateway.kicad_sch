@@ -11787,7 +11787,7 @@
 	)
 	(text "INSPEED VORTEX\n"
 		(exclude_from_sim no)
-		(at 493.014 320.04 0)
+		(at 493.014 323.85 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11819,7 +11819,7 @@
 	)
 	(text "DAVIS 7852\n"
 		(exclude_from_sim no)
-		(at 494.792 300.228 0)
+		(at 494.792 302.768 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -11929,7 +11929,7 @@
 	)
 	(text "VH400"
 		(exclude_from_sim no)
-		(at 536.448 322.58 0)
+		(at 539.75 324.612 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -12606,6 +12606,12 @@
 		(uuid "79110195-f895-4055-820c-417a49d2d942")
 	)
 	(junction
+		(at 514.35 309.88)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7a57cb68-acdf-4335-921b-d6d528f6a249")
+	)
+	(junction
 		(at 167.64 363.22)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -12678,7 +12684,7 @@
 		(uuid "94cb7614-9851-4553-9194-43b1c5c515d7")
 	)
 	(junction
-		(at 473.71 307.34)
+		(at 473.71 309.88)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "9636ff8f-d91e-4cf9-9b01-7825ddc7a282")
@@ -12736,12 +12742,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a68a0b87-3f01-4201-9d56-cb7c2c7c82f7")
-	)
-	(junction
-		(at 473.71 309.88)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a9ab3915-6546-4176-a20b-5ad0c470b173")
 	)
 	(junction
 		(at 86.36 205.74)
@@ -12808,6 +12808,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d8650503-90d3-4c9c-a72a-c144cf22eb64")
+	)
+	(junction
+		(at 477.52 327.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "de0d6753-f092-4586-9cb5-281071291737")
 	)
 	(junction
 		(at 499.11 114.3)
@@ -12880,6 +12886,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ed13d03d-590f-4712-abfb-51d98b624f21")
+	)
+	(junction
+		(at 471.17 304.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ee515d05-10dc-44cc-86ed-0ab16ebf9c25")
 	)
 	(junction
 		(at 370.84 378.46)
@@ -13171,6 +13183,16 @@
 	)
 	(wire
 		(pts
+			(xy 514.35 311.15) (xy 514.35 309.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "02ed73f7-b8f0-49c0-b60b-a2b5faef2ebe")
+	)
+	(wire
+		(pts
 			(xy 378.46 138.43) (xy 378.46 140.97)
 		)
 		(stroke
@@ -13268,16 +13290,6 @@
 			(type default)
 		)
 		(uuid "07d5253d-adbf-44ad-b477-41afc7e63dd1")
-	)
-	(wire
-		(pts
-			(xy 476.25 309.88) (xy 473.71 309.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "07fb22d2-30b7-4890-be56-f221c245f500")
 	)
 	(wire
 		(pts
@@ -13771,7 +13783,7 @@
 	)
 	(wire
 		(pts
-			(xy 476.25 307.34) (xy 473.71 307.34)
+			(xy 476.25 309.88) (xy 473.71 309.88)
 		)
 		(stroke
 			(width 0)
@@ -14021,7 +14033,7 @@
 	)
 	(wire
 		(pts
-			(xy 473.71 304.8) (xy 473.71 307.34)
+			(xy 473.71 307.34) (xy 473.71 309.88)
 		)
 		(stroke
 			(width 0)
@@ -14301,7 +14313,7 @@
 	)
 	(wire
 		(pts
-			(xy 462.28 323.85) (xy 481.33 323.85)
+			(xy 459.74 327.66) (xy 477.52 327.66)
 		)
 		(stroke
 			(width 0)
@@ -14461,7 +14473,7 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 388.62) (xy 219.71 388.62)
+			(xy 210.82 388.62) (xy 219.71 388.62)
 		)
 		(stroke
 			(width 0)
@@ -14621,7 +14633,7 @@
 	)
 	(wire
 		(pts
-			(xy 461.01 302.26) (xy 476.25 302.26)
+			(xy 458.47 304.8) (xy 471.17 304.8)
 		)
 		(stroke
 			(width 0)
@@ -14751,7 +14763,7 @@
 	)
 	(wire
 		(pts
-			(xy 528.32 328.93) (xy 514.35 328.93)
+			(xy 528.32 331.47) (xy 514.35 331.47)
 		)
 		(stroke
 			(width 0)
@@ -14948,16 +14960,6 @@
 			(type default)
 		)
 		(uuid "5d9c9534-42f4-4d00-a9e8-398c4b692e6c")
-	)
-	(wire
-		(pts
-			(xy 473.71 309.88) (xy 473.71 311.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5dcddcdc-7485-4310-afb0-0b975bc4a3bc")
 	)
 	(wire
 		(pts
@@ -15551,7 +15553,7 @@
 	)
 	(wire
 		(pts
-			(xy 473.71 307.34) (xy 473.71 309.88)
+			(xy 473.71 309.88) (xy 473.71 313.69)
 		)
 		(stroke
 			(width 0)
@@ -15568,6 +15570,16 @@
 			(type default)
 		)
 		(uuid "73bb3432-3e72-4a17-9433-34332c90e402")
+	)
+	(wire
+		(pts
+			(xy 525.78 309.88) (xy 528.32 309.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "75049bb1-49d4-4e3f-aa4e-f9a53b19e69d")
 	)
 	(wire
 		(pts
@@ -16131,7 +16143,7 @@
 	)
 	(wire
 		(pts
-			(xy 509.27 309.88) (xy 528.32 309.88)
+			(xy 501.65 309.88) (xy 514.35 309.88)
 		)
 		(stroke
 			(width 0)
@@ -17101,7 +17113,7 @@
 	)
 	(wire
 		(pts
-			(xy 476.25 304.8) (xy 473.71 304.8)
+			(xy 476.25 307.34) (xy 473.71 307.34)
 		)
 		(stroke
 			(width 0)
@@ -17401,7 +17413,7 @@
 	)
 	(wire
 		(pts
-			(xy 209.55 381) (xy 219.71 381)
+			(xy 201.93 381) (xy 219.71 381)
 		)
 		(stroke
 			(width 0)
@@ -17448,6 +17460,16 @@
 			(type default)
 		)
 		(uuid "c17c00b4-3107-473d-887d-78c348e5c4f2")
+	)
+	(wire
+		(pts
+			(xy 514.35 309.88) (xy 518.16 309.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1bb7452-5989-4426-92e9-982810d06908")
 	)
 	(wire
 		(pts
@@ -18091,6 +18113,16 @@
 	)
 	(wire
 		(pts
+			(xy 471.17 304.8) (xy 476.25 304.8)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e52026e0-c128-4ad8-8c9a-41246127b873")
+	)
+	(wire
+		(pts
 			(xy 330.2 297.18) (xy 351.79 297.18)
 		)
 		(stroke
@@ -18108,6 +18140,16 @@
 			(type default)
 		)
 		(uuid "e61a3208-2477-4c55-ab12-ee8d85f17b09")
+	)
+	(wire
+		(pts
+			(xy 477.52 327.66) (xy 481.33 327.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e67287bb-1828-46fb-8bd0-42ddef182b68")
 	)
 	(wire
 		(pts
@@ -18451,7 +18493,7 @@
 	)
 	(wire
 		(pts
-			(xy 207.01 383.54) (xy 219.71 383.54)
+			(xy 204.47 383.54) (xy 219.71 383.54)
 		)
 		(stroke
 			(width 0)
@@ -18539,6 +18581,16 @@
 		)
 		(uuid "0102ea96-a186-4193-82d6-11c3a8dca39c")
 	)
+	(label "DAVIS 7852"
+		(at 201.93 381 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "03b9e7f7-7535-45c9-bb28-6a9c03aedbbc")
+	)
 	(label "S1223"
 		(at 209.55 386.08 0)
 		(effects
@@ -18548,6 +18600,16 @@
 			(justify left bottom)
 		)
 		(uuid "048ae81c-a9d7-47f4-94e3-d8d2de974822")
+	)
+	(label "VH400"
+		(at 86.36 375.92 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "0913ac27-42c2-4866-af9c-3f3ed77cd12a")
 	)
 	(label "ESP_TX"
 		(at 143.51 420.37 0)
@@ -18778,6 +18840,16 @@
 			(justify left bottom)
 		)
 		(uuid "297efdab-d80c-4ece-963d-cc3e74a8285f")
+	)
+	(label "DAVIS 7852"
+		(at 149.86 396.24 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "2bbdf6b4-c127-47e6-8358-f62b5ca677fd")
 	)
 	(label "RX"
 		(at 166.37 420.37 0)
@@ -19049,16 +19121,6 @@
 		)
 		(uuid "5292f2c6-c234-4b39-a4cf-5ad05fe92775")
 	)
-	(label "VH400"
-		(at 149.86 396.24 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "530f832d-f59e-4dee-820c-afe38d9d3457")
-	)
 	(label "RTC power input"
 		(at 378.46 358.14 0)
 		(effects
@@ -19179,18 +19241,8 @@
 		)
 		(uuid "6c923597-cebd-42b6-910c-6f91848f6b52")
 	)
-	(label "DAVIS 7852"
-		(at 86.36 375.92 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "727bc298-d70c-4f91-b38f-d5ebeb083042")
-	)
 	(label "DS18B20"
-		(at 207.01 383.54 0)
+		(at 204.47 383.54 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19210,7 +19262,7 @@
 		(uuid "75aa664e-5da4-4d24-8e6d-8c742ac9ca47")
 	)
 	(label "INSPEED VORTEX"
-		(at 462.28 323.85 0)
+		(at 459.74 327.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19370,7 +19422,7 @@
 		(uuid "8ccc111a-4e43-42e9-9c8b-188b1d1fc210")
 	)
 	(label "VH400"
-		(at 514.35 328.93 0)
+		(at 514.35 331.47 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19568,16 +19620,6 @@
 			(justify left bottom)
 		)
 		(uuid "b62398d2-df97-4bfc-956b-0b0a332dbcab")
-	)
-	(label "DAVIS 7852"
-		(at 215.9 388.62 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "b9edf43e-36d9-416b-840c-9598ec11b7d6")
 	)
 	(label "pwkey"
 		(at 118.11 190.5 0)
@@ -19789,16 +19831,6 @@
 		)
 		(uuid "ddc7b9eb-54ce-4690-8f6f-6c0e186ff5f8")
 	)
-	(label "VH400"
-		(at 209.55 381 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "df9102d4-bd1a-41c3-8fd1-ce71710393d3")
-	)
 	(label "LORA ANT"
 		(at 445.77 128.27 0)
 		(effects
@@ -19940,7 +19972,7 @@
 		(uuid "f08cb1c8-9421-495c-80ae-d2889cef2604")
 	)
 	(label "INSPEEED VANE"
-		(at 509.27 309.88 0)
+		(at 501.65 309.88 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19970,7 +20002,7 @@
 		(uuid "f316dc13-4bf5-4500-8719-6a1770cddbf2")
 	)
 	(label "DAVIS 7852"
-		(at 461.01 302.26 0)
+		(at 458.47 304.8 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -19998,6 +20030,16 @@
 			(justify left bottom)
 		)
 		(uuid "f587f862-acd7-4a74-8dbf-1f9ef3b04e31")
+	)
+	(label "VH400"
+		(at 210.82 388.62 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "f62fd572-3eec-4e28-8f87-f22b5fb0a61b")
 	)
 	(label "RI"
 		(at 111.76 132.08 0)
@@ -21908,204 +21950,6 @@
 		)
 	)
 	(symbol
-		(lib_id "B4B-XH-A_LF__SN_:B4B-XH-A_LF__SN_")
-		(at 483.87 304.8 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "1aca30db-9494-4dc3-b20a-9f5d634bc089")
-		(property "Reference" "J16"
-			(at 488.95 304.7999 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "B4B-XH-A_LF__SN_"
-			(at 488.95 307.3399 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "B4B-XH-A_LF__SN_:JST_B4B-XH-A_LF__SN_"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MF" "JST Sales"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" "7.00 mm"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Package" "None"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Price" "None"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Check_prices" "https://www.snapeda.com/parts/B4B-XH-A(LF)(SN)/JST/view-part/?ref=eda"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "STANDARD" "Manufacturer Recommendations"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "PARTREV" "7/4/21"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "SnapEDA_Link" "https://www.snapeda.com/parts/B4B-XH-A(LF)(SN)/JST/view-part/?ref=snap"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MP" "B4B-XH-A(LF)(SN)"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Description_1" "Connector Header Through Hole 4 position 0.098 (2.50mm)"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Availability" "In Stock"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "JST"
-			(at 483.87 304.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(pin "3"
-			(uuid "e8917140-4606-4be6-afd9-ea7df6f59a8c")
-		)
-		(pin "4"
-			(uuid "010e91b5-5fae-4560-9fef-e8560ec95c30")
-		)
-		(pin "2"
-			(uuid "f3523cc5-de45-47d4-8003-88b77a778102")
-		)
-		(pin "1"
-			(uuid "37047c35-50fc-4096-94c5-92a32a317cfc")
-		)
-		(instances
-			(project "AWS PROJECT"
-				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
-					(reference "J16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Jumper:Jumper_2_Small_Open")
 		(at 73.66 62.23 0)
 		(unit 1)
@@ -22563,6 +22407,72 @@
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR015")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 514.35 318.77 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "21b54c6b-2e81-4c4d-a474-e11a3877ccfc")
+		(property "Reference" "#PWR0133"
+			(at 514.35 325.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 514.35 323.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 514.35 318.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 514.35 318.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 514.35 318.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f12cb20b-5425-41d7-88e4-99d996a4c1fa")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "#PWR0133")
 					(unit 1)
 				)
 			)
@@ -24180,6 +24090,74 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 521.97 309.88 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "34730ec2-e502-4497-901f-63767b679986")
+		(property "Reference" "R62"
+			(at 521.97 303.53 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 521.97 306.07 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 521.97 308.102 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 521.97 309.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 521.97 309.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "a842a10e-b9f7-452b-9b42-51fe3db49d84")
+		)
+		(pin "1"
+			(uuid "333c65ae-18e0-498b-b41e-bbb6bfe6a91e")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "R62")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "B4B-XH-A_LF__SN_:B4B-XH-A_LF__SN_")
 		(at 482.6 288.29 0)
 		(unit 1)
@@ -25369,7 +25347,7 @@
 	)
 	(symbol
 		(lib_id "B3B-XH-A_LF__SN_:B3B-XH-A_LF__SN_")
-		(at 535.94 328.93 0)
+		(at 535.94 331.47 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25378,7 +25356,7 @@
 		(fields_autoplaced yes)
 		(uuid "3f48fd40-2482-41c6-9a3b-5cbeb7eac9c8")
 		(property "Reference" "J20"
-			(at 541.02 327.6599 0)
+			(at 541.02 330.1999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25387,7 +25365,7 @@
 			)
 		)
 		(property "Value" "B3B-XH-A_LF__SN_"
-			(at 541.02 330.1999 0)
+			(at 541.02 332.7399 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25397,7 +25375,7 @@
 			)
 		)
 		(property "Footprint" "B3B-XH-A_LF__SN_:JST_B3B-XH-A_LF__SN_"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25407,7 +25385,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25416,7 +25394,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25425,7 +25403,7 @@
 			)
 		)
 		(property "MF" "JST Sales"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25435,7 +25413,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" "7.00 mm"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25445,7 +25423,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25455,7 +25433,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25465,7 +25443,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/B3B-XH-A(LF)(SN)/JST/view-part/?ref=eda"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25475,7 +25453,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25485,7 +25463,7 @@
 			)
 		)
 		(property "PARTREV" "7/4/21"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25495,7 +25473,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/B3B-XH-A(LF)(SN)/JST/view-part/?ref=snap"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25505,7 +25483,7 @@
 			)
 		)
 		(property "MP" "B3B-XH-A(LF)(SN)"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25515,7 +25493,7 @@
 			)
 		)
 		(property "Description_1" "Connector Header Through Hole 3 position 0.098 (2.50mm)"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25525,7 +25503,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25535,7 +25513,7 @@
 			)
 		)
 		(property "MANUFACTURER" "JST Sales America Inc."
-			(at 535.94 328.93 0)
+			(at 535.94 331.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25557,6 +25535,71 @@
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 471.17 297.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "409edd86-8aa7-40ec-bc5e-c7b569e5dc61")
+		(property "Reference" "#PWR0132"
+			(at 471.17 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3v3"
+			(at 468.376 294.894 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 471.17 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 471.17 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 471.17 297.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "637bf784-91df-4aad-9eba-f20cc0c584f9")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "#PWR0132")
 					(unit 1)
 				)
 			)
@@ -25843,7 +25886,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 481.33 326.39 0)
+		(at 481.33 330.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -25851,7 +25894,7 @@
 		(dnp no)
 		(uuid "45036a98-13d5-4bc0-9eb3-47cdcd960bfc")
 		(property "Reference" "#PWR0123"
-			(at 481.33 332.74 0)
+			(at 481.33 336.55 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25860,7 +25903,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 481.584 330.708 0)
+			(at 481.584 334.518 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25868,7 +25911,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 481.33 326.39 0)
+			(at 481.33 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25877,7 +25920,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 481.33 326.39 0)
+			(at 481.33 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -25886,7 +25929,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 481.33 326.39 0)
+			(at 481.33 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28877,7 +28920,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 528.32 331.47 0)
+		(at 528.32 334.01 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -28886,7 +28929,7 @@
 		(fields_autoplaced yes)
 		(uuid "65be41c1-14a0-4357-b70c-030879c6b06f")
 		(property "Reference" "#PWR0121"
-			(at 528.32 337.82 0)
+			(at 528.32 340.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28895,7 +28938,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 528.32 336.55 0)
+			(at 528.32 339.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28903,7 +28946,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 528.32 331.47 0)
+			(at 528.32 334.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28912,7 +28955,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 528.32 331.47 0)
+			(at 528.32 334.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -28921,7 +28964,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 528.32 331.47 0)
+			(at 528.32 334.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29952,7 +29995,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 473.71 311.15 0)
+		(at 473.71 313.69 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -29960,7 +30003,7 @@
 		(dnp no)
 		(uuid "7328d343-abf8-4cb5-a2fd-86bd66fb60c4")
 		(property "Reference" "#PWR0134"
-			(at 473.71 317.5 0)
+			(at 473.71 320.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29969,7 +30012,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 470.154 313.69 0)
+			(at 470.154 316.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29977,7 +30020,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 473.71 311.15 0)
+			(at 473.71 313.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29986,7 +30029,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 473.71 311.15 0)
+			(at 473.71 313.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -29995,7 +30038,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 473.71 311.15 0)
+			(at 473.71 313.69 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31089,6 +31132,201 @@
 		)
 	)
 	(symbol
+		(lib_id "B3B-XH-A_LF__SN_:B3B-XH-A_LF__SN_")
+		(at 483.87 307.34 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7f0aaa69-57fd-4012-b855-dec29a34b2c5")
+		(property "Reference" "J3"
+			(at 488.95 306.0699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "B3B-XH-A_LF__SN_"
+			(at 488.95 308.6099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "B3B-XH-A_LF__SN_:JST_B3B-XH-A_LF__SN_"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MF" "JST Sales"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE_HEIGHT" "7.00 mm"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Package" "None"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Price" "None"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Check_prices" "https://www.snapeda.com/parts/B3B-XH-A(LF)(SN)/JST/view-part/?ref=eda"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "STANDARD" "Manufacturer Recommendations"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" "7/4/21"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/B3B-XH-A(LF)(SN)/JST/view-part/?ref=snap"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "B3B-XH-A(LF)(SN)"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "Connector Header Through Hole 3 position 0.098 (2.50mm)"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "In Stock"
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "JST Sales America Inc."
+			(at 483.87 307.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "1406ab9b-7cea-43ad-9b2f-34dcb664fe1a")
+		)
+		(pin "2"
+			(uuid "cbedf878-89e4-48ed-a2d5-5060165d84a6")
+		)
+		(pin "1"
+			(uuid "5e8d4535-09e2-41c3-89d2-14fa569dbc7b")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "J3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 396.24 215.9 180)
 		(unit 1)
@@ -31160,7 +31398,7 @@
 	)
 	(symbol
 		(lib_id "B2B-XH-A_LF__SN_:B2B-XH-A_LF__SN_")
-		(at 488.95 326.39 0)
+		(at 488.95 330.2 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -31169,7 +31407,7 @@
 		(fields_autoplaced yes)
 		(uuid "7f6a4449-7432-4dec-87e1-6fa943f24862")
 		(property "Reference" "J14"
-			(at 494.03 323.8499 0)
+			(at 494.03 327.6599 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31178,7 +31416,7 @@
 			)
 		)
 		(property "Value" "B2B-XH-A_LF__SN_"
-			(at 494.03 326.3899 0)
+			(at 494.03 330.1999 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31188,7 +31426,7 @@
 			)
 		)
 		(property "Footprint" "B2B-XH-A_LF__SN_:JST_B2B-XH-A_LF__SN_"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31198,7 +31436,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31207,7 +31445,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31216,7 +31454,7 @@
 			)
 		)
 		(property "MF" "JST Sales"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31226,7 +31464,7 @@
 			)
 		)
 		(property "MAXIMUM_PACKAGE_HEIGHT" "7 mm"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31236,7 +31474,7 @@
 			)
 		)
 		(property "Package" "None"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31246,7 +31484,7 @@
 			)
 		)
 		(property "Price" "None"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31256,7 +31494,7 @@
 			)
 		)
 		(property "Check_prices" "https://www.snapeda.com/parts/B2B-XH-A(LF)(SN)/JST/view-part/?ref=eda"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31266,7 +31504,7 @@
 			)
 		)
 		(property "STANDARD" "Manufacturer Recommendations"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31276,7 +31514,7 @@
 			)
 		)
 		(property "PARTREV" "N/A"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31286,7 +31524,7 @@
 			)
 		)
 		(property "SnapEDA_Link" "https://www.snapeda.com/parts/B2B-XH-A(LF)(SN)/JST/view-part/?ref=snap"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31296,7 +31534,7 @@
 			)
 		)
 		(property "MP" "B2B-XH-A(LF)(SN)"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31306,7 +31544,7 @@
 			)
 		)
 		(property "Description_1" "Connector Header Through Hole 2 position 0.098 (2.50mm)"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31316,7 +31554,7 @@
 			)
 		)
 		(property "Availability" "In Stock"
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31326,7 +31564,7 @@
 			)
 		)
 		(property "MANUFACTURER" "JST Sales America Inc."
-			(at 488.95 326.39 0)
+			(at 488.95 330.2 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -34319,6 +34557,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 514.35 314.96 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "9346257d-30b2-4381-ad4a-1ebb8ad6bf77")
+		(property "Reference" "R63"
+			(at 516.89 313.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "20K"
+			(at 516.89 316.2299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 516.128 314.96 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 514.35 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 514.35 314.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "6ed47fb7-7980-4fee-8d01-34b05be6eee3")
+		)
+		(pin "1"
+			(uuid "7cda5fe1-c90c-4d17-b3d7-991634a35785")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "R63")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 167.64 364.49 0)
 		(unit 1)
@@ -35337,6 +35645,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 477.52 323.85 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "a611f09a-e00e-4607-a2cb-55bc0a9c31bd")
+		(property "Reference" "R55"
+			(at 480.06 322.5799 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 480.06 325.1199 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 479.298 323.85 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 477.52 323.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 477.52 323.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8d843bac-018c-4f42-a25a-ee8f9f245ed2")
+		)
+		(pin "1"
+			(uuid "bf972732-ca23-45d2-9209-3c8cb98fac24")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "R55")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 369.57 107.95 0)
 		(unit 1)
@@ -35735,6 +36113,71 @@
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR044")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 477.52 320.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a9675d84-9c2d-462d-8c4b-0e86057ff2e0")
+		(property "Reference" "#PWR0130"
+			(at 477.52 323.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3v3"
+			(at 480.06 318.516 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 477.52 320.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 477.52 320.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 477.52 320.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "d1f9c985-428a-446f-8bc9-4222cdd72b4b")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "#PWR0130")
 					(unit 1)
 				)
 			)
@@ -36413,7 +36856,7 @@
 	)
 	(symbol
 		(lib_id "power:VCC")
-		(at 528.32 326.39 0)
+		(at 528.32 328.93 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -36422,7 +36865,7 @@
 		(fields_autoplaced yes)
 		(uuid "b15b45c3-38da-482c-a7da-42d379f41a9d")
 		(property "Reference" "#PWR0117"
-			(at 528.32 330.2 0)
+			(at 528.32 332.74 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36431,7 +36874,7 @@
 			)
 		)
 		(property "Value" "5v"
-			(at 528.32 321.31 0)
+			(at 528.32 323.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36439,7 +36882,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 528.32 326.39 0)
+			(at 528.32 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36448,7 +36891,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 528.32 326.39 0)
+			(at 528.32 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -36457,7 +36900,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VCC\""
-			(at 528.32 326.39 0)
+			(at 528.32 328.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41090,7 +41533,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "f7c55dbe-952a-433c-bbe6-ccf695e53792")
 		(property "Reference" "#PWR0124"
 			(at 474.98 299.72 0)
@@ -41102,7 +41544,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 474.98 298.45 0)
+			(at 476.758 296.672 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -41210,6 +41652,75 @@
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 471.17 300.99 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f8af6615-7339-4057-b073-49717c0d86ce")
+		(property "Reference" "R61"
+			(at 467.106 296.926 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 465.582 298.958 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 472.948 300.99 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 471.17 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 471.17 300.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "3bb91653-5905-4b68-a041-58e7bd19a601")
+		)
+		(pin "1"
+			(uuid "7eb95a53-93c8-4d3e-a654-85f511fd32aa")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "R61")
 					(unit 1)
 				)
 			)

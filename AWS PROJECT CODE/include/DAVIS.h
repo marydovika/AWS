@@ -14,7 +14,7 @@ class Davis {
 
   private:
     // UPDATE THIS PIN to match your wiring
-    const int rainfallpin = 34; 
+    const int rainfallpin = 25; 
 
     // Volatile is crucial for variables changed in an interrupt
     volatile unsigned int rainCounter; 
