@@ -16,7 +16,7 @@
 using namespace std;
 
 
-WIFI_CONNECTION wifi_connection("transysit-2G", "V@m@Li@1");
+WIFI_CONNECTION wifi_connection("Godfidence-2G", "blu3rose");
 DHTSensor dhtsensor;
 AirPressure airpressure;
 LightSensor lightsensor;
@@ -49,6 +49,8 @@ void setup() {
   } else {
     Serial.println("Not connected to WiFi.");
   }
+
+  */
  
   lightsensor.setupSensor();
   soilmoisture.setupSensor();
@@ -57,12 +59,13 @@ void setup() {
   //SDcard.clearFile(file_name);
   SDcard.createFile(file_name);
    SDcard.readData(file_name);
- 
+
+
   simmodule.setupGSM();
   loramodule.setupLora();
 
   dhtsensor.getsensor();
-  */
+ 
 
  rtc1.setupRTC();
    if(rtc1.syncWithNTP(ntpServer, gmtOffset_sec, daylightOffset_sec)) {
@@ -82,7 +85,7 @@ void setup() {
 
 
 void loop() {
-  /*
+  
   float lightVal = lightsensor.readLightLevel();
   Serial.print("Light Voltage: ");
   Serial.print(lightVal);
@@ -97,7 +100,7 @@ void loop() {
   
 
   SDcard.readData(file_name);
-  */
+  
 
   rtc1.printDateTime();
   airpressure.readPressure();
