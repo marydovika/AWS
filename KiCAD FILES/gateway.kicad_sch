@@ -12962,6 +12962,10 @@
 		(uuid "253df0e1-0e38-4741-8e03-7e0977d9e5ca")
 	)
 	(no_connect
+		(at 351.79 231.14)
+		(uuid "26c94f23-e889-4535-9dd0-652c161063bd")
+	)
+	(no_connect
 		(at 513.08 218.44)
 		(uuid "27ffa5bb-700b-489b-9420-9419863310f3")
 	)
@@ -12992,6 +12996,10 @@
 	(no_connect
 		(at 138.43 157.48)
 		(uuid "41ea4c37-eec1-4ed2-899c-9709af58f6e5")
+	)
+	(no_connect
+		(at 256.54 204.47)
+		(uuid "593f5fd2-6a16-4c68-ae05-fddd96f0f7c9")
 	)
 	(no_connect
 		(at 189.23 139.7)
@@ -13056,6 +13064,10 @@
 	(no_connect
 		(at 236.22 207.01)
 		(uuid "b70f2bf0-7a9b-4612-823e-e53b74642bf5")
+	)
+	(no_connect
+		(at 351.79 228.6)
+		(uuid "b9fb8097-709e-4564-bae6-34977e19c202")
 	)
 	(no_connect
 		(at 66.04 149.86)
@@ -13453,7 +13465,7 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 365.76) (xy 88.9 365.76)
+			(xy 82.55 365.76) (xy 88.9 365.76)
 		)
 		(stroke
 			(width 0)
@@ -29249,6 +29261,74 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 111.76 132.08 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "6b447f4e-ffc3-44e3-bbec-d69534fd11a9")
+		(property "Reference" "SNS_TX18"
+			(at 125.476 131.826 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 113.7921 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 111.76 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 111.76 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 111.76 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4dad8c1f-cfa1-4c01-9beb-a4dfde872c96")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "SNS_TX18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 397.51 374.65 0)
 		(unit 1)
@@ -36920,6 +37000,74 @@
 		)
 	)
 	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 82.55 365.76 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "b30571a0-56b7-450e-b847-d6439e23d343")
+		(property "Reference" "SNS_TX16"
+			(at 68.834 366.014 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 80.5179 363.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 82.55 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 82.55 360.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 82.55 365.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "85b0b0a3-609b-4d19-80b9-c14531e0a234")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "SNS_TX16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 496.57 444.5 0)
 		(unit 1)
@@ -39243,6 +39391,74 @@
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:TestPoint")
+		(at 82.55 368.3 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "d6d8de34-45c7-4af2-a94b-7901749ea0dd")
+		(property "Reference" "SNS_TX17"
+			(at 68.834 368.554 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Value" "TestPoint"
+			(at 80.5179 365.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+			(at 82.55 363.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 82.55 363.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "test point"
+			(at 82.55 368.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2b24d42a-595a-4cbf-bf07-0b83f182e1dd")
+		)
+		(instances
+			(project "AWS PROJECT"
+				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
+					(reference "SNS_TX17")
 					(unit 1)
 				)
 			)
