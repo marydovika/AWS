@@ -38,7 +38,7 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 1.5,
+          "height": 0.5,
           "width": 1.0
         },
         "silk_line_width": 0.1,
@@ -547,7 +547,7 @@
       "plot": "",
       "pos_files": "",
       "specctra_dsn": "",
-      "step": "../AWS PROJECT 3D files.step",
+      "step": "../CAD MODELS/AWS PROJECT 3D ver2 files.step",
       "svg": "",
       "vrml": ""
     },
