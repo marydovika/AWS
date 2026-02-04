@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 Automatic Weather Stations (AWS) play a critical role in environmental monitoring, yet
 their deployment in remote and energy-constrained locations remains limited by rigid and
-monolithic power architectures. Conventional systems are often designed for single enrgy
+monolithic power architectures. Conventional systems are often designed for single energy
 sources, leading to inefficiencies, frequent power interruptions, high maintenance costs, and
 poor adaptability to dynamic environmental conditions. This research proposes the
 development of a modular and adaptive power electronics system architecture tailered for
