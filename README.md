@@ -4,7 +4,7 @@ their deployment in remote and energy-constrained locations remains limited by r
 monolithic power architectures. Conventional systems are often designed for single energy
 sources, leading to inefficiencies, frequent power interruptions, high maintenance costs, and
 poor adaptability to dynamic environmental conditions. This research proposes the
-development of a modular and adaptive power electronics system architecture tailered for
+development of a modular and adaptive power electronics system architecture tailored for
 energy-constrained AWS. The modular design introduces swappable converter topologies
 that allow scalable integration of multiple renewable energy sources, including solar,
 batteries, and supercapacitors, while simplifying upgrades, repairs, and fault isolation.
