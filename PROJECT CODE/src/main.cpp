@@ -1,158 +1,124 @@
 #include <Arduino.h>
-#include "WIFI_CONNECTION.h"
+#include <Wire.h>
+#include "WIFI_CONNECTION.h" // Even if unused, keeping your include
 #include "DHT22.h"
 #include "AIR_PRESSURE.h"
 #include "LIGHT_SENSOR.h"
 #include "SOILMOISTURE.h"
 #include "RTC.h"
-#include "MEMORY.h"
 #include "GSM.h"
-#include "LORA.h"
 #include "DAVIS.h"
 #include "WINDSPEED.h"
 #include "WIND_DIRECTION.h"
 #include "POWER_MONITORING.h"
-#include <string>
-using namespace std;
+#include "DataLogger.h"   // The new file handler class
+#include "SensorData.h"   // The data struct
 
-
-WIFI_CONNECTION wifi_connection("Godfidence-2G", "blu3rose");
+// Objects
+// (Assumed your sensor constructors are correct as per your snippet)
 DHTSensor dhtsensor;
 AirPressure airpressure;
 LightSensor lightsensor;
 Soilmoisture soilmoisture;
 Rtc rtc1;
-Memory SDcard;
-GSM simmodule;
-Lora loramodule;
 Davis davisrain;
-
 WindSpeedSensor windspeedsensor;
 WindDirectionSensor winddirectionsensor;
 PowerMonitoring powermonitoring;
 
-// Uganda/East Africa Time (EAT) Configuration
-const char* ntpServer = "africa.pool.ntp.org";
-const long  gmtOffset_sec = 10800;      // UTC +3 hours
-const int   daylightOffset_sec = 0;    // No DST in Uganda*/
+GSM simmodule;
+DataLogger dataLogger(4); // CS pin 4 for SD card
 
-
-string file_name = "/time data.txt";
+// Timer variables
+unsigned long lastUploadTime = 0;
+const long uploadInterval = 15000; // 15 seconds
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-/*
-   wifi_connection.connect();
-    if(wifi_connection.isConnected()) {
-    Serial.println(String("Connected to WiFi SSID: ") + String(wifi_connection.getSSID().c_str()));
-  } else {
-    Serial.println("Not connected to WiFi.");
-  }
+    Serial.begin(9600);
+    
+    // 1. Initialize RTC
+    rtc1.setupRTC();
+    // (Optional: sync NTP if Wifi available, code omitted for brevity)
 
-  */
- 
-  lightsensor.setupSensor();
-  soilmoisture.setupSensor();
-  
-    SDcard.setupMemory();
-  //SDcard.clearFile(file_name);
-  SDcard.createFile(file_name);
-   SDcard.readData(file_name);
+    // 2. Initialize Sensors
+    // Note: Add logic inside your specific sensor setup() functions 
+    // to handle missing hardware gracefully, or we handle it in loop.
+    dhtsensor.getsensor(); // Assuming this is setup
+    airpressure.sensor_setup();
+    davisrain.setupRainGauge();
+    windspeedsensor.setupSensor();
+    winddirectionsensor.setupSensor();
+    lightsensor.setupSensor();
+    soilmoisture.setupSensor();
+    powermonitoring.begin(21, 22);
 
-
-  simmodule.setupGSM();
-  loramodule.setupLora();
-
-  dhtsensor.getsensor();
- 
-
- rtc1.setupRTC();
-   if(rtc1.syncWithNTP(ntpServer, gmtOffset_sec, daylightOffset_sec)) {
-        Serial.println("Time synced for Uganda successfully.");
-    } else {
-        Serial.println("Time sync failed.");
-    }
-
-  airpressure.sensor_setup();
-  
-  davisrain.setupRainGauge();
-  windspeedsensor.setupSensor();
-  winddirectionsensor.setupSensor();
-  powermonitoring.begin(21, 22); // ESP32 default I2C pins
+    // 3. Initialize SD and GSM
+    dataLogger.begin();
+    simmodule.setupGSM(); // Includes GPRS setup
 }
-
-
 
 void loop() {
-  
-  float lightVal = lightsensor.readLightLevel();
-  Serial.print("Light Voltage: ");
-  Serial.print(lightVal);
-  
-  simmodule.sendData("AT", 2000); // Check signal quality
-  loramodule.sendData("AT+CDEVEUI?", 2000); // Check signal quality
-  soilmoisture.readSoilMoisture();
-  Serial.print("Soil Moisture Voltage: ");
-  Serial.println(soilmoisture.readSoilMoisture());
-  dhtsensor.readHumidity();
-  dhtsensor.readTemperature();
-  
+    SensorData currentData;
 
-  SDcard.readData(file_name);
-  
+    // --- READ SENSORS (With Error Checking) ---
 
-  rtc1.printDateTime();
-  airpressure.readPressure();
-  airpressure.readAltitude(1013.25);
-
-  Serial.print("Air Pressure (hPa): ");
-  Serial.println(airpressure.readPressure());
-  Serial.print("Altitude (m): ");
-  Serial.println(airpressure.readAltitude(1013.25));
-
-   // Read data using the class
-  if (powermonitoring.readData()) {
+    // 1. Air Pressure / BME280
+    // If your library returns NAN or 0 on failure, we sanitize it here.
+    float p = airpressure.readPressure();
+    currentData.airPressure = isnan(p) ? 0.0 : p;
     
-    // Retrieve the data struct
-    VoltageData voltages = powermonitoring.getData();
+    float alt = airpressure.readAltitude(1013.25);
+    currentData.altitude = isnan(alt) ? 0.0 : alt;
 
-    Serial.println("OK");
-    Serial.println("-------------------------");
-    Serial.printf("3.3V Rail: %.2f V\n", voltages.v1);
-    Serial.printf("5V Rail:   %.2f V\n", voltages.v2);
-    Serial.printf("Battery:   %.2f V\n", voltages.v3);
-    Serial.printf("Solar:     %.2f V\n", voltages.v4);
-    Serial.printf("DC In:     %.2f V\n", voltages.v5);
-    Serial.println("-------------------------");
+    float t = airpressure.readTemperature(); // Using BME temp
+    currentData.temperature = isnan(t) ? 0.0 : t;
+    
+    float h = airpressure.readHumidity();
+    currentData.humidity = isnan(h) ? 0.0 : h;
 
-  } else {
-    Serial.println("Connection Failed.");
-  }
-  
+    // 2. Power Monitoring
+    if (powermonitoring.readData()) {
+        VoltageData v = powermonitoring.getData();
+        currentData.volt_3v3 = v.v1;
+        currentData.volt_5v = v.v2;
+        currentData.volt_batt = v.v3;
+        currentData.volt_solar = v.v4;
+        currentData.volt_dc = v.v5;
+    } else {
+        // Init to 0 if fails
+        currentData.volt_3v3 = 0.0;
+        currentData.volt_5v = 0.0;
+        currentData.volt_batt = 0.0;
+        currentData.volt_solar = 0.0;
+        currentData.volt_dc = 0.0;
+    }
 
-  //String lightStrArduino = String(lightVal, 2); // 2 decimal places
-  //string lightStr = string(lightStrArduino.c_str());
-  //string dataframe1 = lightStr + "," + rtc1.getDateTime();
-  //SDcard.writeData(file_name, dataframe1);
+    // 3. Other Sensors (Add basic checks if your libraries support it)
+    currentData.lightLevel = lightsensor.readLightLevel(); // Ensure library returns 0 on fail
+    currentData.soilMoisture = soilmoisture.readSoilMoisture();
+    currentData.rainCount = davisrain.readRainGauge();
+    currentData.windSpeed = windspeedsensor.readWindSpeedKPH();
+    currentData.windDirection = winddirectionsensor.readWindDirectionDeg();
 
-  
-  int rainCount = davisrain.readRainGauge();
-  Serial.print("Rainfall Count (last hour): "); 
-  Serial.println(rainCount);
-  
-  float windSpeedKPH = windspeedsensor.readWindSpeedKPH();
-  Serial.print("Wind Speed (km/h): ");  
-  Serial.println(windSpeedKPH);
-  
- 
-  int windDirectionDeg = winddirectionsensor.readWindDirectionDeg();
-  Serial.print("Wind Direction (Degrees): "); 
-  Serial.println(windDirectionDeg);
-  
-  
+    // --- LOGGING ---
 
-  delay(100);
+    // Get current time string
+    String timeStr = String(rtc1.getDateTime().c_str());
+
+    // Save to SD (DataLogger class handles formatting and error checking)
+    dataLogger.logSensorData(timeStr, currentData);
+
+    // --- UPLOAD ---
+    
+    if (millis() - lastUploadTime >= uploadInterval) {
+        lastUploadTime = millis();
+        
+        Serial.println("Triggering Upload Sequence...");
+        
+        // This function retrieves the last logged line, 
+        // deconstructs it, and sends it to the GSM module
+        dataLogger.uploadLastDataToThingspeak(simmodule);
+    }
+    
+    delay(1000); // 1 sec loop delay
 }
-
-
