@@ -5,9 +5,9 @@ monolithic power architectures. Conventional systems are often designed for sing
 sources, leading to inefficiencies, frequent power interruptions, high maintenance costs, and
 poor adaptability to dynamic environmental conditions. This research proposes the
 development of a modular and adaptive power electronics system architecture tailored for
-energy-constrained AWS. The modular design introduces swappable converter topologies
-that allow scalable integration of multiple renewable energy sources, including solar,
-batteries, and supercapacitors, while simplifying upgrades, repairs, and fault isolation.
+energy-constrained AWS deployments. The modular design introduces swappable converter topologies
+that allow scalable integration (multiplexing) of multiple energy sources, including solar, DC input and 
+batteries, while simplifying upgrades, repairs, and fault isolation.
 Complementing this, an adaptive control strategy will be implemented to dynamically
 optimize power flow in response to load variations, source intermittency, and environmental
 disturbances, thereby enhancing system stability and efficiency. The study will involve
