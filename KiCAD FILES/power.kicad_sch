@@ -8366,26 +8366,6 @@
 	)
 	(wire
 		(pts
-			(xy 505.46 161.29) (xy 506.73 161.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1b206ba7-4aac-4d69-96b6-f54d0fde1301")
-	)
-	(wire
-		(pts
-			(xy 481.33 161.29) (xy 497.84 161.29)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1b93b18c-d853-493a-bd52-e8c5c0b0f52a")
-	)
-	(wire
-		(pts
 			(xy 499.11 87.63) (xy 499.11 90.17)
 		)
 		(stroke
@@ -11276,6 +11256,16 @@
 	)
 	(wire
 		(pts
+			(xy 505.46 161.29) (xy 506.73 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d4006c46-3de0-4c9b-9d4b-664a96d7875b")
+	)
+	(wire
+		(pts
 			(xy 369.57 243.84) (xy 370.84 243.84)
 		)
 		(stroke
@@ -11793,6 +11783,16 @@
 			(type default)
 		)
 		(uuid "f709f295-84fc-4b51-a0a7-37aa13d2c0c9")
+	)
+	(wire
+		(pts
+			(xy 481.33 161.29) (xy 497.84 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7df7ffa-c7cd-4913-ba2a-f4a32d9d43dd")
 	)
 	(wire
 		(pts
@@ -12713,7 +12713,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0234797d-a508-4dc7-bf2f-43ea91fd28d2")
-		(property "Reference" "C69"
+		(property "Reference" "C70"
 			(at 514.35 111.7662 0)
 			(effects
 				(font
@@ -12767,6 +12767,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 511.81 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bc18216c-bbd8-4a6e-9496-ddd747462611")
 		)
@@ -12776,7 +12785,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C69")
+					(reference "C70")
 					(unit 1)
 				)
 			)
@@ -12792,7 +12801,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "04c373db-11e2-4ccc-bea8-e90fe6cf267f")
-		(property "Reference" "D16"
+		(property "Reference" "D21"
 			(at 100.33 81.28 0)
 			(effects
 				(font
@@ -12800,7 +12809,7 @@
 				)
 			)
 		)
-		(property "Value" "D"
+		(property "Value" "B540C-13-F"
 			(at 100.33 83.82 0)
 			(effects
 				(font
@@ -12808,7 +12817,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_1210_3225Metric"
+		(property "Footprint" "Diode_SMD:D_SMB-SMC_Universal_Handsoldering"
 			(at 100.33 86.36 0)
 			(effects
 				(font
@@ -12853,6 +12862,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C72264"
+			(at 100.33 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 100.33 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b2043a15-ac4b-44af-8e59-4e15ddde799e")
 		)
@@ -12862,7 +12889,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "D16")
+					(reference "D21")
 					(unit 1)
 				)
 			)
@@ -12877,7 +12904,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0760db69-6ce8-401c-9753-3ac3813e0c5b")
-		(property "Reference" "R44"
+		(property "Reference" "R46"
 			(at 66.294 241.3 90)
 			(effects
 				(font
@@ -12929,6 +12956,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 68.58 241.3 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22912"
+			(at 68.58 241.3 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b26e75d4-bd39-445a-9997-fb02430fc96d")
 		)
@@ -12938,7 +12983,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R44")
+					(reference "R46")
 					(unit 1)
 				)
 			)
@@ -12954,7 +12999,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0a33fc56-dbc4-4cb0-bc06-8319afaf65c0")
-		(property "Reference" "#PWR0150"
+		(property "Reference" "#PWR0137"
 			(at 346.71 262.89 0)
 			(effects
 				(font
@@ -13004,7 +13049,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0150")
+					(reference "#PWR0137")
 					(unit 1)
 				)
 			)
@@ -13021,7 +13066,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0a510f91-fd7a-44a8-84a6-3733bd86aab6")
-		(property "Reference" "Q5"
+		(property "Reference" "Q6"
 			(at 205.74 132.0799 0)
 			(effects
 				(font
@@ -13093,6 +13138,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 199.39 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C604579"
+			(at 199.39 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5_6"
 			(uuid "1c2c30c1-9a8c-4afa-a2ca-23a83253afa0")
 		)
@@ -13111,7 +13174,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "Q5")
+					(reference "Q6")
 					(unit 1)
 				)
 			)
@@ -13126,7 +13189,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0c1b8a66-8b23-483b-8e7d-097a73ba2331")
-		(property "Reference" "R39"
+		(property "Reference" "R62"
 			(at 241.554 238.76 90)
 			(effects
 				(font
@@ -13178,6 +13241,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 243.84 238.76 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2907044"
+			(at 243.84 238.76 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "3dcd397c-cf0b-425a-ac67-8afa8282acbe")
 		)
@@ -13187,7 +13268,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R39")
+					(reference "R62")
 					(unit 1)
 				)
 			)
@@ -13202,7 +13283,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0d0fe680-9021-4db4-92d2-44c6a7bdde53")
-		(property "Reference" "#PWR073"
+		(property "Reference" "#PWR0107"
 			(at 106.68 287.02 0)
 			(effects
 				(font
@@ -13252,7 +13333,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR073")
+					(reference "#PWR0107")
 					(unit 1)
 				)
 			)
@@ -13267,7 +13348,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0f763a87-201b-4ad0-9218-d9be5eb3d636")
-		(property "Reference" "#PWR076"
+		(property "Reference" "#PWR097"
 			(at 50.8 287.02 0)
 			(effects
 				(font
@@ -13317,7 +13398,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR076")
+					(reference "#PWR097")
 					(unit 1)
 				)
 			)
@@ -13332,7 +13413,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "14411fd7-1906-479a-8969-350284c5f2dc")
-		(property "Reference" "C29"
+		(property "Reference" "C45"
 			(at 197.612 251.968 0)
 			(effects
 				(font
@@ -13386,6 +13467,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C24497"
+			(at 200.66 254 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 200.66 254 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ef0fab77-affd-4e65-9600-ecfa235f800c")
 		)
@@ -13395,7 +13494,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C29")
+					(reference "C45")
 					(unit 1)
 				)
 			)
@@ -13410,7 +13509,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "14e54804-f4be-4bc5-b714-c607b9f33e9a")
-		(property "Reference" "C59"
+		(property "Reference" "C48"
 			(at 216.154 98.552 0)
 			(effects
 				(font
@@ -13428,7 +13527,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 215.5952 106.68 0)
 			(effects
 				(font
@@ -13473,6 +13572,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C89632"
+			(at 214.63 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 214.63 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "de7c65ec-6233-481d-bd51-1c02a7089bbe")
 		)
@@ -13482,7 +13599,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C59")
+					(reference "C48")
 					(unit 1)
 				)
 			)
@@ -13493,11 +13610,11 @@
 		(at 266.7 86.36 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "1744c435-9c1c-48b0-88c3-5342affdec93")
-		(property "Reference" "JP18"
+		(property "Reference" "JP20"
 			(at 268.986 81.788 90)
 			(effects
 				(font
@@ -13543,6 +13660,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 266.7 86.36 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a2e3aa94-ae29-4bfd-8b74-f0e21dc811d7")
 		)
@@ -13552,7 +13678,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "JP18")
+					(reference "JP20")
 					(unit 1)
 				)
 			)
@@ -13567,7 +13693,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "174b1497-737f-4d0b-b086-126936e60304")
-		(property "Reference" "C30"
+		(property "Reference" "C46"
 			(at 197.612 277.368 0)
 			(effects
 				(font
@@ -13630,6 +13756,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C100042"
+			(at 200.66 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 200.66 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e6490495-3e35-4699-86ad-f41581b6db54")
 		)
@@ -13639,7 +13783,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C30")
+					(reference "C46")
 					(unit 1)
 				)
 			)
@@ -13655,7 +13799,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "17ce1ba2-d06e-45bd-a31b-fbdbb9190153")
-		(property "Reference" "#PWR0149"
+		(property "Reference" "#PWR0142"
 			(at 373.38 242.57 0)
 			(effects
 				(font
@@ -13705,7 +13849,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0149")
+					(reference "#PWR0142")
 					(unit 1)
 				)
 			)
@@ -13721,7 +13865,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "189a17bd-cc46-491c-94c8-b059e1096900")
-		(property "Reference" "TH2"
+		(property "Reference" "TH1"
 			(at 273.05 124.7774 0)
 			(effects
 				(font
@@ -13766,6 +13910,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 270.51 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C5146262"
+			(at 270.51 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "734fa9d5-6900-4814-853a-9b64d893acb1")
 		)
@@ -13775,7 +13937,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "TH2")
+					(reference "TH1")
 					(unit 1)
 				)
 			)
@@ -13790,7 +13952,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "190235ef-170c-4c29-97bd-cfc6c0edbce5")
-		(property "Reference" "R80"
+		(property "Reference" "R68"
 			(at 261.874 155.956 0)
 			(effects
 				(font
@@ -13835,6 +13997,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 260.35 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2998114"
+			(at 260.35 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a4738f1a-bf54-4ace-9a21-cebbcf3d9867")
 		)
@@ -13844,7 +14024,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R80")
+					(reference "R68")
 					(unit 1)
 				)
 			)
@@ -13859,7 +14039,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "19bb05a9-e062-43e6-abec-b6a37f7b9409")
-		(property "Reference" "C33"
+		(property "Reference" "C56"
 			(at 250.952 239.268 0)
 			(effects
 				(font
@@ -13922,6 +14102,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C86295"
+			(at 254 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 254 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1d8b0b28-5ab5-4121-94c8-93bdfdd24a37")
 		)
@@ -13931,7 +14129,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C33")
+					(reference "C56")
 					(unit 1)
 				)
 			)
@@ -13946,7 +14144,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1a409155-ec25-44cd-b028-bdcc11bc72fc")
-		(property "Reference" "C72"
+		(property "Reference" "C68"
 			(at 508 91.4462 0)
 			(effects
 				(font
@@ -14000,6 +14198,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 505.46 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "256af698-7145-413f-9b7d-5405f956e34d")
 		)
@@ -14009,7 +14216,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C72")
+					(reference "C68")
 					(unit 1)
 				)
 			)
@@ -14024,7 +14231,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1ca10f03-3b03-46f4-898b-dc57f6d5deae")
-		(property "Reference" "R41"
+		(property "Reference" "R65"
 			(at 253.746 273.05 90)
 			(effects
 				(font
@@ -14076,6 +14283,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 251.46 273.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2907044"
+			(at 251.46 273.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "045f5c01-d052-4b05-8ae5-131771e391c3")
 		)
@@ -14085,7 +14310,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R41")
+					(reference "R65")
 					(unit 1)
 				)
 			)
@@ -14100,7 +14325,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1d7244fb-cf92-4968-9ae7-880bbaf3725e")
-		(property "Reference" "#PWR0102"
+		(property "Reference" "#PWR0117"
 			(at 201.93 147.32 0)
 			(effects
 				(font
@@ -14150,7 +14375,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0102")
+					(reference "#PWR0117")
 					(unit 1)
 				)
 			)
@@ -14165,7 +14390,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1ea632b8-7222-4b40-b337-41d5fc6b1385")
-		(property "Reference" "R74"
+		(property "Reference" "R59"
 			(at 141.986 138.938 90)
 			(effects
 				(font
@@ -14210,6 +14435,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 143.51 140.97 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C105588"
+			(at 143.51 140.97 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "bbca5c43-f949-415b-ab64-a9279e9b0349")
 		)
@@ -14219,7 +14462,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R74")
+					(reference "R59")
 					(unit 1)
 				)
 			)
@@ -14235,7 +14478,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1fc2b74b-cdfe-417f-8dac-b734f5eb17c7")
-		(property "Reference" "SW5"
+		(property "Reference" "SW2"
 			(at 60.96 270.51 0)
 			(effects
 				(font
@@ -14278,6 +14521,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 60.96 275.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f66d3575-aaec-4651-85b4-e97c73fdeebd")
 		)
@@ -14287,7 +14539,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "SW5")
+					(reference "SW2")
 					(unit 1)
 				)
 			)
@@ -14302,7 +14554,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1ff5242b-f6bc-47e9-aa90-d806f18c340c")
-		(property "Reference" "PB5"
+		(property "Reference" "PB4"
 			(at 406.4 161.29 90)
 			(effects
 				(font
@@ -14347,13 +14599,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 412.75 161.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9ddd392a-b4f8-482d-8961-b2d01a154e78")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB5")
+					(reference "PB4")
 					(unit 1)
 				)
 			)
@@ -14369,7 +14630,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "21ff7e76-2ffc-4324-900b-d248a48ac348")
-		(property "Reference" "U12"
+		(property "Reference" "U15"
 			(at 121.92 232.41 0)
 			(effects
 				(font
@@ -14503,6 +14764,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 121.92 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C485916"
+			(at 121.92 257.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "9"
 			(uuid "3d63ed54-c18f-4ff4-90d3-77202de39675")
 		)
@@ -14554,7 +14833,7 @@
 		(instances
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "U12")
+					(reference "U15")
 					(unit 1)
 				)
 			)
@@ -14569,7 +14848,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "22018577-9063-4ce8-9a20-bce73daf39c0")
-		(property "Reference" "PB17"
+		(property "Reference" "PB18"
 			(at 500.38 156.21 90)
 			(effects
 				(font
@@ -14614,13 +14893,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 156.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "54f691d8-1afa-44a6-b7b4-0e2ca41a17b8")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB17")
+					(reference "PB18")
 					(unit 1)
 				)
 			)
@@ -14631,11 +14919,11 @@
 		(at 275.59 115.57 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "2281d1d7-1ba2-421a-8444-56a6068ce914")
-		(property "Reference" "JP19"
+		(property "Reference" "JP21"
 			(at 277.876 110.998 90)
 			(effects
 				(font
@@ -14681,6 +14969,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 275.59 115.57 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1d3b4eae-b8ba-4e93-8df3-84bb9500bcff")
 		)
@@ -14690,7 +14987,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "JP19")
+					(reference "JP21")
 					(unit 1)
 				)
 			)
@@ -14706,7 +15003,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "23190ef1-2455-4cfb-bf78-16b585f2f7d5")
-		(property "Reference" "SW6"
+		(property "Reference" "SW1"
 			(at 60.96 231.14 0)
 			(effects
 				(font
@@ -14749,6 +15046,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 60.96 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6fad4bad-872a-4698-8ae7-03d9f442bee4")
 		)
@@ -14758,7 +15064,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "SW6")
+					(reference "SW1")
 					(unit 1)
 				)
 			)
@@ -14773,7 +15079,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "231dbad7-2188-4500-b7b8-065fd39839ee")
-		(property "Reference" "R43"
+		(property "Reference" "R49"
 			(at 66.294 290.83 90)
 			(effects
 				(font
@@ -14825,6 +15131,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 68.58 290.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2828621"
+			(at 68.58 290.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "ceac9eab-dc83-47f7-822a-f74a8732bd34")
 		)
@@ -14834,7 +15158,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R43")
+					(reference "R49")
 					(unit 1)
 				)
 			)
@@ -14849,7 +15173,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "23c72b18-d274-44a5-a922-0c921f036a8a")
-		(property "Reference" "#PWR069"
+		(property "Reference" "#PWR0101"
 			(at 68.58 302.26 0)
 			(effects
 				(font
@@ -14899,7 +15223,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR069")
+					(reference "#PWR0101")
 					(unit 1)
 				)
 			)
@@ -14914,7 +15238,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2425a907-e69f-4755-bca7-c5fb442f8659")
-		(property "Reference" "C57"
+		(property "Reference" "C43"
 			(at 184.404 98.552 0)
 			(effects
 				(font
@@ -14977,6 +15301,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 182.88 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 182.88 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "0d3875c4-ea86-49a9-b089-891518d71021")
 		)
@@ -14986,7 +15328,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C57")
+					(reference "C43")
 					(unit 1)
 				)
 			)
@@ -15001,7 +15343,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "253dca7a-292a-4589-91c9-b121391e0512")
-		(property "Reference" "#PWR097"
+		(property "Reference" "#PWR0106"
 			(at 102.87 193.04 0)
 			(effects
 				(font
@@ -15051,7 +15393,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR097")
+					(reference "#PWR0106")
 					(unit 1)
 				)
 			)
@@ -15067,7 +15409,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "25cef786-d747-460b-9b79-da55bcf8dd0b")
-		(property "Reference" "U13"
+		(property "Reference" "U16"
 			(at 220.98 252.73 0)
 			(effects
 				(font
@@ -15121,6 +15463,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 200.66 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2071517"
+			(at 200.66 261.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "3"
 			(uuid "e87aac0e-8aa9-4aaa-ae11-4ba4e5df4780")
 		)
@@ -15151,7 +15511,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "U13")
+					(reference "U16")
 					(unit 1)
 				)
 			)
@@ -15166,7 +15526,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "275156b2-93e6-44cd-a099-41a8990e05c6")
-		(property "Reference" "C43"
+		(property "Reference" "C61"
 			(at 323.85 245.618 0)
 			(effects
 				(font
@@ -15211,6 +15571,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C19702"
+			(at 327.66 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 327.66 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "eda6fa94-2adf-43c1-a7b4-bbf0c6a4f7cc")
 		)
@@ -15220,7 +15598,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C43")
+					(reference "C61")
 					(unit 1)
 				)
 			)
@@ -15236,7 +15614,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "27dd2453-7699-4ca9-947d-39ff42712aa2")
-		(property "Reference" "L1"
+		(property "Reference" "L2"
 			(at 233.68 229.87 90)
 			(effects
 				(font
@@ -15288,6 +15666,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C3221229"
+			(at 233.68 234.95 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 233.68 234.95 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "36a6b531-244f-4d8c-92f0-5127a7232841")
 		)
@@ -15297,7 +15693,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "L1")
+					(reference "L2")
 					(unit 1)
 				)
 			)
@@ -15312,7 +15708,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "27dd9786-2069-44c4-b715-0d7e1178e3be")
-		(property "Reference" "R32"
+		(property "Reference" "R79"
 			(at 384.81 83.82 90)
 			(effects
 				(font
@@ -15363,6 +15759,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 384.81 83.82 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "23fc5f0a-143b-4ca0-a933-7fbea6233899")
 		)
@@ -15372,7 +15777,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R32")
+					(reference "R79")
 					(unit 1)
 				)
 			)
@@ -15388,7 +15793,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2a69c65a-63b5-43b3-b4df-13700f5d9955")
-		(property "Reference" "#PWR0145"
+		(property "Reference" "#PWR0138"
 			(at 347.98 175.26 0)
 			(effects
 				(font
@@ -15438,7 +15843,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0145")
+					(reference "#PWR0138")
 					(unit 1)
 				)
 			)
@@ -15454,7 +15859,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2c1484fd-e700-457e-a886-e0e263259451")
-		(property "Reference" "C28"
+		(property "Reference" "C44"
 			(at 191.77 277.6981 0)
 			(effects
 				(font
@@ -15499,6 +15904,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C30110"
+			(at 187.96 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 187.96 279.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fdff0ab7-8547-4d90-a0b2-ea88a6628d4f")
 		)
@@ -15508,7 +15931,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C28")
+					(reference "C44")
 					(unit 1)
 				)
 			)
@@ -15524,7 +15947,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2d751014-4bf8-46d6-a573-0996fce30ba0")
-		(property "Reference" "#PWR099"
+		(property "Reference" "#PWR0110"
 			(at 137.16 157.48 0)
 			(effects
 				(font
@@ -15574,7 +15997,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR099")
+					(reference "#PWR0110")
 					(unit 1)
 				)
 			)
@@ -15585,12 +16008,12 @@
 		(at 396.24 80.01 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2de47891-4a03-4037-baba-cd9091279c57")
-		(property "Reference" "J7"
+		(property "Reference" "J30"
 			(at 396.875 77.47 0)
 			(effects
 				(font
@@ -15635,6 +16058,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 396.24 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a1f50d2e-afd1-4adf-a619-0037f1cfc580")
 		)
@@ -15644,7 +16076,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "J7")
+					(reference "J30")
 					(unit 1)
 				)
 			)
@@ -15659,7 +16091,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2e78ff7f-57bd-490a-ae86-59408509b731")
-		(property "Reference" "R77"
+		(property "Reference" "R64"
 			(at 249.174 149.606 0)
 			(effects
 				(font
@@ -15704,6 +16136,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 247.65 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C3009313"
+			(at 247.65 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b7596053-3ff7-418f-8cac-f020782d6000")
 		)
@@ -15713,7 +16163,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R77")
+					(reference "R64")
 					(unit 1)
 				)
 			)
@@ -15728,7 +16178,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2e833b38-dfad-4738-872f-2b6defaaed31")
-		(property "Reference" "D14"
+		(property "Reference" "D19"
 			(at 98.552 157.734 0)
 			(effects
 				(font
@@ -15771,6 +16221,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22371297"
+			(at 97.79 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 97.79 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "2320d90d-ae0a-4d4a-8b3c-dbc587f1af4f")
 		)
@@ -15780,7 +16248,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "D14")
+					(reference "D19")
 					(unit 1)
 				)
 			)
@@ -15791,11 +16259,11 @@
 		(at 275.59 234.95 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "2f011880-7793-4ac0-8f69-dbfe0046f729")
-		(property "Reference" "JP12"
+		(property "Reference" "JP22"
 			(at 275.336 227.838 90)
 			(effects
 				(font
@@ -15841,6 +16309,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 275.59 234.95 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f0475bba-3af4-47e5-bc3c-5c4da6161ee6")
 		)
@@ -15850,7 +16327,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "JP12")
+					(reference "JP22")
 					(unit 1)
 				)
 			)
@@ -15866,7 +16343,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2f85cf6a-a911-4c26-9649-3d3bd96a1198")
-		(property "Reference" "#PWR0148"
+		(property "Reference" "#PWR0141"
 			(at 367.03 203.2 0)
 			(effects
 				(font
@@ -15916,7 +16393,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0148")
+					(reference "#PWR0141")
 					(unit 1)
 				)
 			)
@@ -15931,7 +16408,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "332dbaf8-6fdf-4862-849f-bed25c0efcc9")
-		(property "Reference" "R40"
+		(property "Reference" "R63"
 			(at 241.554 246.38 90)
 			(effects
 				(font
@@ -15983,6 +16460,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 243.84 246.38 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2907044"
+			(at 243.84 246.38 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5e25e9bc-d96b-4407-8e64-2535de812c07")
 		)
@@ -15992,7 +16487,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R40")
+					(reference "R63")
 					(unit 1)
 				)
 			)
@@ -16007,7 +16502,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3350b536-1242-4ef0-be35-8aaeae3247a1")
-		(property "Reference" "C68"
+		(property "Reference" "C65"
 			(at 495.3 111.7662 0)
 			(effects
 				(font
@@ -16062,6 +16557,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 492.76 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a9a673c1-0c88-46e6-8053-38f57968f484")
 		)
@@ -16071,7 +16575,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C68")
+					(reference "C65")
 					(unit 1)
 				)
 			)
@@ -16086,7 +16590,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "378f923c-0270-43aa-af64-0af2b5ae07ff")
-		(property "Reference" "C71"
+		(property "Reference" "C66"
 			(at 501.65 91.4462 0)
 			(effects
 				(font
@@ -16140,6 +16644,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 499.11 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8ef86af2-5e09-4c43-940e-e4ca1589bff4")
 		)
@@ -16149,7 +16662,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C71")
+					(reference "C66")
 					(unit 1)
 				)
 			)
@@ -16164,7 +16677,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "37f070bf-e321-4c45-bbc0-b5525be9620f")
-		(property "Reference" "R45"
+		(property "Reference" "R47"
 			(at 66.294 251.46 90)
 			(effects
 				(font
@@ -16216,6 +16729,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 68.58 251.46 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2828621"
+			(at 68.58 251.46 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "89fe66bc-4b85-4e91-9085-a1b557b19878")
 		)
@@ -16225,7 +16756,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R45")
+					(reference "R47")
 					(unit 1)
 				)
 			)
@@ -16240,7 +16771,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3810151a-2c3d-4c13-bb14-69621387f029")
-		(property "Reference" "#PWR051"
+		(property "Reference" "#PWR0148"
 			(at 499.11 124.46 0)
 			(effects
 				(font
@@ -16290,7 +16821,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR051")
+					(reference "#PWR0148")
 					(unit 1)
 				)
 			)
@@ -16301,7 +16832,7 @@
 		(at 299.72 115.57 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -16351,6 +16882,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 299.72 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "04078deb-4b66-441d-8d1e-ce283c322897")
 		)
@@ -16375,7 +16915,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "38d0d577-f16e-48b2-ae28-957bba6db8a4")
-		(property "Reference" "C55"
+		(property "Reference" "C41"
 			(at 136.652 106.934 0)
 			(effects
 				(font
@@ -16438,6 +16978,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 143.51 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 143.51 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "4699028c-270c-4483-90ae-404ae74d1536")
 		)
@@ -16447,7 +17005,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C55")
+					(reference "C41")
 					(unit 1)
 				)
 			)
@@ -16462,7 +17020,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3ae89b24-addb-467b-b851-d10d415ad170")
-		(property "Reference" "R73"
+		(property "Reference" "R58"
 			(at 139.7 94.234 0)
 			(effects
 				(font
@@ -16507,6 +17065,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 143.51 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C109318"
+			(at 143.51 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a5cfdc69-8f8f-4f03-9fef-eeea6c669427")
 		)
@@ -16516,7 +17092,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R73")
+					(reference "R58")
 					(unit 1)
 				)
 			)
@@ -16527,11 +17103,11 @@
 		(at 236.22 123.19 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "3b943901-8896-4eed-9e0b-0a054b342f59")
-		(property "Reference" "C62"
+		(property "Reference" "C51"
 			(at 237.744 118.872 0)
 			(effects
 				(font
@@ -16594,6 +17170,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C19702"
+			(at 236.22 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 236.22 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e274c372-0e70-496c-91d9-a5d81a4c442c")
 		)
@@ -16603,7 +17197,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C62")
+					(reference "C51")
 					(unit 1)
 				)
 			)
@@ -16618,7 +17212,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3d94d826-bb1d-4fe0-926d-8d52af01324b")
-		(property "Reference" "R33"
+		(property "Reference" "R80"
 			(at 401.32 99.06 90)
 			(effects
 				(font
@@ -16669,6 +17263,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 401.32 99.06 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "78b2f116-98df-4c63-bb63-7a9602a45ebb")
 		)
@@ -16678,7 +17281,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R33")
+					(reference "R80")
 					(unit 1)
 				)
 			)
@@ -16693,7 +17296,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3ff31973-1953-4a65-bca9-ec21361fd670")
-		(property "Reference" "PB8"
+		(property "Reference" "PB6"
 			(at 408.94 168.91 90)
 			(effects
 				(font
@@ -16738,13 +17341,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 415.29 168.91 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "32cb02c2-cbc8-493b-a7df-e8002c55c676")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB8")
+					(reference "PB6")
 					(unit 1)
 				)
 			)
@@ -16759,7 +17371,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4172acba-6e4c-4b3b-a02b-a338ea2690b8")
-		(property "Reference" "#PWR077"
+		(property "Reference" "#PWR0131"
 			(at 293.37 127 0)
 			(effects
 				(font
@@ -16809,7 +17421,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR077")
+					(reference "#PWR0131")
 					(unit 1)
 				)
 			)
@@ -16824,7 +17436,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "421fc82b-e84e-4199-854c-ba72fff527bc")
-		(property "Reference" "R46"
+		(property "Reference" "R53"
 			(at 104.394 273.05 90)
 			(effects
 				(font
@@ -16876,6 +17488,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 106.68 273.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2933234"
+			(at 106.68 273.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a135417b-cf1c-4514-8e2b-a0e80887429c")
 		)
@@ -16885,7 +17515,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R46")
+					(reference "R53")
 					(unit 1)
 				)
 			)
@@ -16900,7 +17530,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4293d5d7-6bb2-4c3c-b9fd-0441b4d5c68a")
-		(property "Reference" "C63"
+		(property "Reference" "C53"
 			(at 244.094 118.872 0)
 			(effects
 				(font
@@ -16963,6 +17593,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 242.57 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 242.57 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "aeccfc3d-6ff1-42b2-a819-22787c4dcdd8")
 		)
@@ -16972,7 +17620,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C63")
+					(reference "C53")
 					(unit 1)
 				)
 			)
@@ -16987,7 +17635,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "431bd00c-27b6-4e78-ad81-4ea47679fe09")
-		(property "Reference" "#PWR075"
+		(property "Reference" "#PWR096"
 			(at 48.26 247.65 0)
 			(effects
 				(font
@@ -17037,7 +17685,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR075")
+					(reference "#PWR096")
 					(unit 1)
 				)
 			)
@@ -17053,7 +17701,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "467db1ea-ade7-4493-af85-2403600c915d")
-		(property "Reference" "Q12"
+		(property "Reference" "Q7"
 			(at 251.46 162.5599 0)
 			(effects
 				(font
@@ -17269,6 +17917,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 245.11 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9f31a7c9-f0f4-4cf9-a605-ff33b77f2563")
 		)
@@ -17281,7 +17938,7 @@
 		(instances
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "Q12")
+					(reference "Q7")
 					(unit 1)
 				)
 			)
@@ -17296,7 +17953,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "486f138d-bb1e-4129-b6d2-1fe412af82fd")
-		(property "Reference" "R72"
+		(property "Reference" "R57"
 			(at 131.826 144.78 0)
 			(effects
 				(font
@@ -17341,6 +17998,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 137.16 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2930127"
+			(at 137.16 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e7e9c9e5-15b9-453d-8549-f14f27010bc5")
 		)
@@ -17350,7 +18025,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R72")
+					(reference "R57")
 					(unit 1)
 				)
 			)
@@ -17365,7 +18040,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "49685d4e-85aa-4d8d-9dd0-662fe1239539")
-		(property "Reference" "PB21"
+		(property "Reference" "PB7"
 			(at 494.03 120.65 90)
 			(effects
 				(font
@@ -17410,13 +18085,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 487.68 120.65 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "cac38380-89cc-4ef2-b2d6-74983a316e71")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB21")
+					(reference "PB7")
 					(unit 1)
 				)
 			)
@@ -17431,7 +18115,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "49cf4df5-1908-45af-9cbb-b493ef225d78")
-		(property "Reference" "C74"
+		(property "Reference" "C63"
 			(at 354.33 245.618 0)
 			(effects
 				(font
@@ -17476,6 +18160,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 358.14 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 358.14 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "2b77f28d-8e9b-49c7-9a87-6c65c4b2e225")
 		)
@@ -17485,7 +18187,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C74")
+					(reference "C63")
 					(unit 1)
 				)
 			)
@@ -17501,7 +18203,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4a511474-a096-4c7f-9d9f-e824d2419fee")
-		(property "Reference" "#PWR063"
+		(property "Reference" "#PWR0125"
 			(at 251.46 290.83 0)
 			(effects
 				(font
@@ -17551,7 +18253,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR063")
+					(reference "#PWR0125")
 					(unit 1)
 				)
 			)
@@ -17567,7 +18269,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4bebab0c-072b-4565-acf1-5bb1a79ee709")
-		(property "Reference" "#PWR055"
+		(property "Reference" "#PWR0135"
 			(at 326.39 237.49 0)
 			(effects
 				(font
@@ -17617,7 +18319,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR055")
+					(reference "#PWR0135")
 					(unit 1)
 				)
 			)
@@ -17628,8 +18330,8 @@
 		(at 43.18 134.62 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
+		(in_bom no)
+		(on_board no)
 		(dnp no)
 		(uuid "4e98da20-5686-4404-9090-d6b181d0b3c3")
 		(property "Reference" "TP1"
@@ -17677,6 +18379,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 43.18 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6f244d95-a097-420e-b5a4-ad8a5f6a02bc")
 		)
@@ -17694,12 +18405,12 @@
 		(at 330.2 292.1 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "519e87d0-ca14-4a6f-b99c-f0c29b293e42")
-		(property "Reference" "J36"
+		(property "Reference" "J28"
 			(at 335.28 292.0999 0)
 			(effects
 				(font
@@ -17865,6 +18576,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 330.2 292.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "3"
 			(uuid "e80baf32-61fb-46d0-8d67-afd849a6dbef")
 		)
@@ -17880,7 +18600,7 @@
 		(instances
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "J36")
+					(reference "J28")
 					(unit 1)
 				)
 			)
@@ -17896,7 +18616,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5662a0f6-3bc2-45a5-a4bf-1d3379451faf")
-		(property "Reference" "#PWR0140"
+		(property "Reference" "#PWR0151"
 			(at 546.1 127 0)
 			(effects
 				(font
@@ -17946,7 +18666,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0140")
+					(reference "#PWR0151")
 					(unit 1)
 				)
 			)
@@ -17961,7 +18681,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5b79b623-3497-43cc-ab44-e4214075bae5")
-		(property "Reference" "R78"
+		(property "Reference" "R66"
 			(at 261.874 124.206 0)
 			(effects
 				(font
@@ -18006,6 +18726,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 260.35 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C861677"
+			(at 260.35 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "eca99cce-e846-4331-bd2c-b82b97bb7887")
 		)
@@ -18015,7 +18753,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R78")
+					(reference "R66")
 					(unit 1)
 				)
 			)
@@ -18031,7 +18769,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5bc1fe13-d323-4ca6-9923-b69d039b8a63")
-		(property "Reference" "#PWR078"
+		(property "Reference" "#PWR0134"
 			(at 317.5 309.88 0)
 			(effects
 				(font
@@ -18081,7 +18819,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR078")
+					(reference "#PWR0134")
 					(unit 1)
 				)
 			)
@@ -18096,7 +18834,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5bc35113-e3ad-4af5-8e5e-040e5943d76c")
-		(property "Reference" "C73"
+		(property "Reference" "C62"
 			(at 331.47 245.618 0)
 			(effects
 				(font
@@ -18141,6 +18879,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C19702"
+			(at 335.28 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 335.28 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bd22a342-53f1-4149-8346-7a4890dc5bbd")
 		)
@@ -18150,7 +18906,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C73")
+					(reference "C62")
 					(unit 1)
 				)
 			)
@@ -18165,7 +18921,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5c039c03-afb0-4bfe-bf46-69716dac1df9")
-		(property "Reference" "R71"
+		(property "Reference" "R56"
 			(at 138.43 132.588 0)
 			(effects
 				(font
@@ -18210,6 +18966,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 137.16 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2930111"
+			(at 137.16 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "144b2629-7531-43da-94d2-c66440fc4aec")
 		)
@@ -18219,7 +18993,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R71")
+					(reference "R56")
 					(unit 1)
 				)
 			)
@@ -18235,7 +19009,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5d9b63f8-377c-416e-9056-9980b44169d3")
-		(property "Reference" "#PWR058"
+		(property "Reference" "#PWR0115"
 			(at 187.96 289.56 0)
 			(effects
 				(font
@@ -18285,7 +19059,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR058")
+					(reference "#PWR0115")
 					(unit 1)
 				)
 			)
@@ -18300,7 +19074,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5f9b847f-93b4-4e0e-89cf-cd9fe4fea8d5")
-		(property "Reference" "D19"
+		(property "Reference" "D24"
 			(at 501.65 158.75 0)
 			(effects
 				(font
@@ -18360,6 +19134,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 501.65 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b3e621f5-681b-4abb-8074-1d08a485b326")
 		)
@@ -18369,7 +19152,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "D19")
+					(reference "D24")
 					(unit 1)
 				)
 			)
@@ -18384,7 +19167,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5f9dc4d6-4490-4666-be01-59fd85a6da4b")
-		(property "Reference" "#PWR071"
+		(property "Reference" "#PWR0100"
 			(at 68.58 262.89 0)
 			(effects
 				(font
@@ -18434,7 +19217,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR071")
+					(reference "#PWR0100")
 					(unit 1)
 				)
 			)
@@ -18449,7 +19232,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6021946b-420d-4116-af19-b24c3215ae34")
-		(property "Reference" "PB16"
+		(property "Reference" "PB17"
 			(at 500.38 153.67 90)
 			(effects
 				(font
@@ -18494,13 +19277,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 153.67 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "50bdd529-fba4-437e-abfe-8bd631a4f8e1")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB16")
+					(reference "PB17")
 					(unit 1)
 				)
 			)
@@ -18515,7 +19307,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "60dd9f66-a6e7-44c1-8e0e-e99e42277863")
-		(property "Reference" "C35"
+		(property "Reference" "C59"
 			(at 259.842 239.268 0)
 			(effects
 				(font
@@ -18578,6 +19370,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C86295"
+			(at 262.89 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 262.89 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "7157faca-915f-44a0-b7bd-7baaa3941158")
 		)
@@ -18587,7 +19397,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C35")
+					(reference "C59")
 					(unit 1)
 				)
 			)
@@ -18602,7 +19412,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6150b3ef-bf27-4a44-9a87-7ecdc8f93c07")
-		(property "Reference" "PB15"
+		(property "Reference" "PB16"
 			(at 500.38 151.13 90)
 			(effects
 				(font
@@ -18647,13 +19457,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 151.13 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7adfbfd2-2e6a-4f2a-8715-fd5a699e0f6f")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB15")
+					(reference "PB16")
 					(unit 1)
 				)
 			)
@@ -18664,11 +19483,11 @@
 		(at 326.39 238.76 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "61bf7126-5350-41ae-8945-6962b9c3a41f")
-		(property "Reference" "JP9"
+		(property "Reference" "JP23"
 			(at 321.818 236.474 90)
 			(effects
 				(font
@@ -18714,6 +19533,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 326.39 238.76 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "693436cc-3f84-40db-a6c6-7ae1e169b000")
 		)
@@ -18723,7 +19551,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "JP9")
+					(reference "JP23")
 					(unit 1)
 				)
 			)
@@ -18738,7 +19566,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6294086f-3428-43f6-84ac-c5b71b3071c1")
-		(property "Reference" "R75"
+		(property "Reference" "R60"
 			(at 170.434 111.76 90)
 			(effects
 				(font
@@ -18783,6 +19611,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 168.91 109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22939"
+			(at 168.91 109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3e4988de-8cae-4b67-b1cc-b1ae543d46c7")
 		)
@@ -18792,7 +19638,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R75")
+					(reference "R60")
 					(unit 1)
 				)
 			)
@@ -18807,7 +19653,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6352b8c2-31f7-4180-b3f8-978b224afabd")
-		(property "Reference" "#PWR0138"
+		(property "Reference" "#PWR0146"
 			(at 499.11 85.09 0)
 			(effects
 				(font
@@ -18858,7 +19704,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0138")
+					(reference "#PWR0146")
 					(unit 1)
 				)
 			)
@@ -18873,7 +19719,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "63b8f22a-92cb-4f32-82d0-2cbd46ba2bc3")
-		(property "Reference" "#PWR0103"
+		(property "Reference" "#PWR0118"
 			(at 214.63 116.84 0)
 			(effects
 				(font
@@ -18923,7 +19769,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0103")
+					(reference "#PWR0118")
 					(unit 1)
 				)
 			)
@@ -18939,7 +19785,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "67eaac54-3a34-4bb3-b148-a3cdd919df00")
-		(property "Reference" "#PWR065"
+		(property "Reference" "#PWR0128"
 			(at 262.89 251.46 0)
 			(effects
 				(font
@@ -18989,7 +19835,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR065")
+					(reference "#PWR0128")
 					(unit 1)
 				)
 			)
@@ -19004,7 +19850,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "67eb4725-dcdb-4ce9-8c3c-e63fd20da426")
-		(property "Reference" "PB18"
+		(property "Reference" "PB11"
 			(at 500.38 133.35 90)
 			(effects
 				(font
@@ -19049,13 +19895,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 133.35 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9bd963b0-9a94-46eb-9207-e8eb98c6cc90")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB18")
+					(reference "PB11")
 					(unit 1)
 				)
 			)
@@ -19071,7 +19926,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6a3eccd0-bd83-48e8-a3c1-a12605c74f98")
-		(property "Reference" "L2"
+		(property "Reference" "L1"
 			(at 214.63 121.92 90)
 			(effects
 				(font
@@ -19114,6 +19969,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C2454102"
+			(at 214.63 127 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 214.63 127 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "750be6e3-b445-4a73-93c0-1dabf8dc2359")
 		)
@@ -19123,7 +19996,7 @@
 		(instances
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "L2")
+					(reference "L1")
 					(unit 1)
 				)
 			)
@@ -19303,6 +20176,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 538.48 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C5567192"
+			(at 538.48 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "4"
 			(uuid "04790d94-ec63-4c50-b3c3-293c589b55ec")
 		)
@@ -19329,11 +20220,11 @@
 		(at 143.51 242.57 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "6d5c87d5-fbcc-4238-affd-ffbcf5ff1af4")
-		(property "Reference" "JP13"
+		(property "Reference" "JP18"
 			(at 145.796 237.998 90)
 			(effects
 				(font
@@ -19379,6 +20270,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 143.51 242.57 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a55d834d-9afa-4dd8-9b2f-b2ad9a428e07")
 		)
@@ -19388,7 +20288,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "JP13")
+					(reference "JP18")
 					(unit 1)
 				)
 			)
@@ -19403,7 +20303,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6f52a366-cc69-48c0-88a3-758aeef849ed")
-		(property "Reference" "PB4"
+		(property "Reference" "PB5"
 			(at 407.67 158.75 90)
 			(effects
 				(font
@@ -19448,13 +20348,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 414.02 158.75 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b42c8a4e-3e3c-4ea0-9283-7380e70cd30c")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB4")
+					(reference "PB5")
 					(unit 1)
 				)
 			)
@@ -19469,7 +20378,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "70249188-5794-41b6-a679-a1335f5345aa")
-		(property "Reference" "D15"
+		(property "Reference" "D20"
 			(at 100.076 167.386 0)
 			(effects
 				(font
@@ -19512,6 +20421,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22371297"
+			(at 97.79 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 97.79 172.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0386df56-a816-476e-b8ad-d7c923758423")
 		)
@@ -19521,7 +20448,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "D15")
+					(reference "D20")
 					(unit 1)
 				)
 			)
@@ -19536,7 +20463,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7033d056-263c-4ad2-acb0-6df04346263f")
-		(property "Reference" "R76"
+		(property "Reference" "R61"
 			(at 228.346 125.73 0)
 			(effects
 				(font
@@ -19581,6 +20508,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 224.79 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2933875"
+			(at 224.79 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b5528621-f6b7-4d1e-9250-b820fe119b6d")
 		)
@@ -19590,7 +20535,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R76")
+					(reference "R61")
 					(unit 1)
 				)
 			)
@@ -19606,7 +20551,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "707ee7a2-febf-4160-8d7f-2c52ee5658a6")
-		(property "Reference" "R56"
+		(property "Reference" "R70"
 			(at 347.98 129.5399 0)
 			(effects
 				(font
@@ -19651,6 +20596,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 345.44 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C105575"
+			(at 345.44 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "56ced90f-5295-4402-b052-58ea7a300565")
 		)
@@ -19660,7 +20623,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R56")
+					(reference "R70")
 					(unit 1)
 				)
 			)
@@ -19675,7 +20638,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "72561a76-da21-4df7-97e7-7b2287c6fe2b")
-		(property "Reference" "#PWR0107"
+		(property "Reference" "#PWR0126"
 			(at 260.35 106.68 0)
 			(effects
 				(font
@@ -19725,7 +20688,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0107")
+					(reference "#PWR0126")
 					(unit 1)
 				)
 			)
@@ -19736,12 +20699,12 @@
 		(at 414.02 163.83 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7292aef9-5920-44aa-a50a-7d6ddc0799c3")
-		(property "Reference" "J6"
+		(property "Reference" "J32"
 			(at 414.655 161.29 0)
 			(effects
 				(font
@@ -19786,6 +20749,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 414.02 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "987d6c66-410a-4b8b-9033-61a159e2016d")
 		)
@@ -19795,7 +20767,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "J6")
+					(reference "J32")
 					(unit 1)
 				)
 			)
@@ -19810,7 +20782,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "73887246-a2a7-4319-93b0-cdadaee300f3")
-		(property "Reference" "C44"
+		(property "Reference" "C64"
 			(at 359.41 245.618 0)
 			(effects
 				(font
@@ -19855,6 +20827,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 363.22 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 363.22 247.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "d4b1bf59-8dd8-4aa6-b69a-22ecd5c15607")
 		)
@@ -19864,7 +20854,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C44")
+					(reference "C64")
 					(unit 1)
 				)
 			)
@@ -19880,7 +20870,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74172777-2d49-4748-b6da-47e24bf976fb")
-		(property "Reference" "R82"
+		(property "Reference" "R78"
 			(at 369.57 189.2299 0)
 			(effects
 				(font
@@ -19925,6 +20915,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 367.03 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2906976"
+			(at 367.03 190.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a900ce60-889b-4d95-b3ed-5bcd74f5e553")
 		)
@@ -19934,7 +20942,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R82")
+					(reference "R78")
 					(unit 1)
 				)
 			)
@@ -19950,7 +20958,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74fa2dec-047c-401d-afbf-b117726e8919")
-		(property "Reference" "#PWR062"
+		(property "Reference" "#PWR0123"
 			(at 243.84 256.54 0)
 			(effects
 				(font
@@ -20000,7 +21008,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR062")
+					(reference "#PWR0123")
 					(unit 1)
 				)
 			)
@@ -20016,7 +21024,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "77b3d2b2-68af-454a-be86-1bb9ed73bf37")
-		(property "Reference" "#PWR0142"
+		(property "Reference" "#PWR0144"
 			(at 401.32 115.57 0)
 			(effects
 				(font
@@ -20066,7 +21074,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0142")
+					(reference "#PWR0144")
 					(unit 1)
 				)
 			)
@@ -20082,7 +21090,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "798f0ab4-9006-4d6e-982b-d71a0ef877d1")
-		(property "Reference" "#PWR064"
+		(property "Reference" "#PWR0127"
 			(at 261.62 290.83 0)
 			(effects
 				(font
@@ -20132,7 +21140,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR064")
+					(reference "#PWR0127")
 					(unit 1)
 				)
 			)
@@ -20148,7 +21156,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "79badd51-60cb-43de-9c32-793aa17c7f41")
-		(property "Reference" "#PWR079"
+		(property "Reference" "#PWR0133"
 			(at 304.8 292.1 0)
 			(effects
 				(font
@@ -20198,7 +21206,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR079")
+					(reference "#PWR0133")
 					(unit 1)
 				)
 			)
@@ -20211,9 +21219,9 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "7c1051ef-7cdc-458f-9503-e966968a294e")
-		(property "Reference" "C31"
+		(property "Reference" "C52"
 			(at 234.442 236.728 0)
 			(effects
 				(font
@@ -20231,7 +21239,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0201_0603Metric_Pad0.64x0.40mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
 			(at 238.4552 242.57 0)
 			(effects
 				(font
@@ -20267,6 +21275,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 237.49 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "48706861-cf67-4b11-9765-1d3764f317ba")
 		)
@@ -20276,7 +21293,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C31")
+					(reference "C52")
 					(unit 1)
 				)
 			)
@@ -20291,7 +21308,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7d6f0563-331a-40d2-a3ba-234b791b8166")
-		(property "Reference" "R47"
+		(property "Reference" "R44"
 			(at 49.53 91.694 0)
 			(effects
 				(font
@@ -20336,6 +21353,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 53.34 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2930150"
+			(at 53.34 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "bf601ce9-0675-4998-813a-f610fcc56b04")
 		)
@@ -20345,7 +21380,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R47")
+					(reference "R44")
 					(unit 1)
 				)
 			)
@@ -20360,7 +21395,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "80bebc58-954f-49e8-8dae-c0f97287bbec")
-		(property "Reference" "C54"
+		(property "Reference" "C40"
 			(at 130.302 137.922 0)
 			(effects
 				(font
@@ -20423,6 +21458,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C15849"
+			(at 129.54 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 129.54 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e3637bcc-384b-466d-946c-a85371f7d88a")
 		)
@@ -20432,7 +21485,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C54")
+					(reference "C40")
 					(unit 1)
 				)
 			)
@@ -20447,7 +21500,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8105c917-2268-481c-af7c-b322c9b9731a")
-		(property "Reference" "#PWR0101"
+		(property "Reference" "#PWR0113"
 			(at 182.88 114.3 0)
 			(effects
 				(font
@@ -20497,7 +21550,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0101")
+					(reference "#PWR0113")
 					(unit 1)
 				)
 			)
@@ -20512,7 +21565,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "81807af8-4348-48d7-be71-f093c42c543b")
-		(property "Reference" "#PWR054"
+		(property "Reference" "#PWR0149"
 			(at 516.89 168.91 0)
 			(effects
 				(font
@@ -20562,7 +21615,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR054")
+					(reference "#PWR0149")
 					(unit 1)
 				)
 			)
@@ -20577,7 +21630,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8596ebe8-5e41-449c-b402-4f03cf3833f9")
-		(property "Reference" "PB2"
+		(property "Reference" "PB3"
 			(at 406.4 151.13 90)
 			(effects
 				(font
@@ -20622,13 +21675,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 412.75 151.13 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "a0abc545-43f5-4833-8e21-338d6a79ba2c")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB2")
+					(reference "PB3")
 					(unit 1)
 				)
 			)
@@ -20644,7 +21706,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "85fa9b1d-72ac-4d44-9360-e68e3478ef1a")
-		(property "Reference" "#PWR0147"
+		(property "Reference" "#PWR0140"
 			(at 365.76 171.45 0)
 			(effects
 				(font
@@ -20694,7 +21756,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0147")
+					(reference "#PWR0140")
 					(unit 1)
 				)
 			)
@@ -20709,7 +21771,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "89957bdc-f55d-41c3-b7fd-51875f7bf79d")
-		(property "Reference" "PB13"
+		(property "Reference" "PB14"
 			(at 500.38 146.05 90)
 			(effects
 				(font
@@ -20754,13 +21816,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 146.05 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5b967cba-4349-4f71-8d2a-406257b45bd8")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB13")
+					(reference "PB14")
 					(unit 1)
 				)
 			)
@@ -20775,7 +21846,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8b199452-218f-4691-988e-2a7b2245d1fb")
-		(property "Reference" "#PWR0104"
+		(property "Reference" "#PWR0119"
 			(at 224.79 149.86 0)
 			(effects
 				(font
@@ -20825,7 +21896,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0104")
+					(reference "#PWR0119")
 					(unit 1)
 				)
 			)
@@ -20840,7 +21911,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8d242c55-dbed-4383-8178-ca3097f720f0")
-		(property "Reference" "PB3"
+		(property "Reference" "PB1"
 			(at 406.4 143.51 90)
 			(effects
 				(font
@@ -20885,13 +21956,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 412.75 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bf20f990-e590-473d-af1f-da17c2bf8559")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB3")
+					(reference "PB1")
 					(unit 1)
 				)
 			)
@@ -20907,7 +21987,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8de91c2f-f410-481c-bdc7-8fb8ef8920df")
-		(property "Reference" "C26"
+		(property "Reference" "C67"
 			(at 496.57 111.7662 0)
 			(effects
 				(font
@@ -20961,6 +22041,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 499.11 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6b83f955-9047-493a-9373-0d87221fef4a")
 		)
@@ -20970,7 +22059,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C26")
+					(reference "C67")
 					(unit 1)
 				)
 			)
@@ -20985,7 +22074,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8e0ea325-2a40-47cf-96b1-dd11a3803b38")
-		(property "Reference" "C36"
+		(property "Reference" "C60"
 			(at 269.748 243.84 0)
 			(effects
 				(font
@@ -21048,6 +22137,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C86295"
+			(at 269.24 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 269.24 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ba5d5a3c-4d02-4166-a871-c2548d251d8a")
 		)
@@ -21057,7 +22164,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C36")
+					(reference "C60")
 					(unit 1)
 				)
 			)
@@ -21072,7 +22179,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8e2d1e98-fce7-4993-b610-edb93f8bad4b")
-		(property "Reference" "R66"
+		(property "Reference" "R50"
 			(at 75.438 98.806 0)
 			(effects
 				(font
@@ -21117,6 +22224,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 73.66 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C26751"
+			(at 73.66 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fc83461f-90a6-41a6-9c65-a6c33cf7cd1f")
 		)
@@ -21126,7 +22251,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R66")
+					(reference "R50")
 					(unit 1)
 				)
 			)
@@ -21141,7 +22266,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8ff6c537-8299-4f49-beb3-ee0d2870e42d")
-		(property "Reference" "R67"
+		(property "Reference" "R51"
 			(at 67.564 118.872 0)
 			(effects
 				(font
@@ -21186,6 +22311,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 73.66 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2930097"
+			(at 73.66 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "01946ed6-d9e3-466a-af1e-62cfc939e001")
 		)
@@ -21195,7 +22338,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R67")
+					(reference "R51")
 					(unit 1)
 				)
 			)
@@ -21211,7 +22354,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "91292518-418a-497d-97a0-196afcde04d7")
-		(property "Reference" "#PWR094"
+		(property "Reference" "#PWR099"
 			(at 66.04 151.13 0)
 			(effects
 				(font
@@ -21261,7 +22404,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR094")
+					(reference "#PWR099")
 					(unit 1)
 				)
 			)
@@ -21493,6 +22636,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 173.99 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bca8f659-1403-4480-bb54-e82f6ea4f38f")
 		)
@@ -21518,7 +22670,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "91d98cb9-b176-437d-9761-f54ff850dca4")
-		(property "Reference" "#PWR074"
+		(property "Reference" "#PWR0109"
 			(at 135.89 254 0)
 			(effects
 				(font
@@ -21568,7 +22720,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR074")
+					(reference "#PWR0109")
 					(unit 1)
 				)
 			)
@@ -21583,7 +22735,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "94925f68-f227-44ca-8e59-6baebef3765b")
-		(property "Reference" "C52"
+		(property "Reference" "C37"
 			(at 46.482 106.934 0)
 			(effects
 				(font
@@ -21646,6 +22798,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23630"
+			(at 53.34 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 53.34 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "4d756bcd-83a8-4172-89e0-3d1c3c385675")
 		)
@@ -21655,7 +22825,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C52")
+					(reference "C37")
 					(unit 1)
 				)
 			)
@@ -21671,7 +22841,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9867120c-1761-4238-b483-f1dbd73e97ba")
-		(property "Reference" "#PWR057"
+		(property "Reference" "#PWR0114"
 			(at 187.96 247.65 0)
 			(effects
 				(font
@@ -21721,7 +22891,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR057")
+					(reference "#PWR0114")
 					(unit 1)
 				)
 			)
@@ -21736,7 +22906,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "98b154f4-bc5e-4ecf-848c-d23ff8d8db4c")
-		(property "Reference" "C60"
+		(property "Reference" "C49"
 			(at 212.09 146.812 0)
 			(effects
 				(font
@@ -21799,6 +22969,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C23630"
+			(at 218.44 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 218.44 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "25d80e14-20e9-479b-8ecc-86eaafd4abdb")
 		)
@@ -21808,7 +22996,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C60")
+					(reference "C49")
 					(unit 1)
 				)
 			)
@@ -21819,11 +23007,11 @@
 		(at 187.96 259.08 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "999e9069-af6f-4b4e-9ec6-87277e5490a5")
-		(property "Reference" "JP11"
+		(property "Reference" "JP19"
 			(at 180.848 259.334 90)
 			(effects
 				(font
@@ -21869,6 +23057,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 187.96 259.08 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1f74f1e0-255b-4945-80a0-a3591195f21c")
 		)
@@ -21878,7 +23075,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "JP11")
+					(reference "JP19")
 					(unit 1)
 				)
 			)
@@ -21893,7 +23090,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9b9a18ca-d694-4541-bdef-0e5d86408e36")
-		(property "Reference" "#PWR0105"
+		(property "Reference" "#PWR0120"
 			(at 238.76 137.16 0)
 			(effects
 				(font
@@ -21943,7 +23140,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0105")
+					(reference "#PWR0120")
 					(unit 1)
 				)
 			)
@@ -21958,7 +23155,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9ba80250-d322-4e65-88aa-fac8035596ee")
-		(property "Reference" "C64"
+		(property "Reference" "C54"
 			(at 249.174 132.842 0)
 			(effects
 				(font
@@ -22021,6 +23218,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C92670"
+			(at 247.65 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 247.65 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e93b4b0e-aefa-4e02-840e-7cce237b58c5")
 		)
@@ -22030,7 +23245,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C64")
+					(reference "C54")
 					(unit 1)
 				)
 			)
@@ -22046,7 +23261,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9d5f90c4-754c-4f28-9020-7e707a0caa7f")
-		(property "Reference" "#PWR059"
+		(property "Reference" "#PWR0116"
 			(at 200.66 289.56 0)
 			(effects
 				(font
@@ -22096,7 +23311,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR059")
+					(reference "#PWR0116")
 					(unit 1)
 				)
 			)
@@ -22111,7 +23326,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a03eabe4-28d1-46ee-8d01-de6ae714c0d1")
-		(property "Reference" "C34"
+		(property "Reference" "C58"
 			(at 264.668 280.924 0)
 			(effects
 				(font
@@ -22174,6 +23389,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C107047"
+			(at 261.62 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 261.62 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "4503db92-62cf-4268-8047-9ecc7cb68f78")
 		)
@@ -22183,7 +23416,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C34")
+					(reference "C58")
 					(unit 1)
 				)
 			)
@@ -22199,7 +23432,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a0bc53fc-04a3-4514-9773-f17781171b0d")
-		(property "Reference" "R49"
+		(property "Reference" "R69"
 			(at 347.98 119.3799 0)
 			(effects
 				(font
@@ -22244,6 +23477,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 345.44 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C98220"
+			(at 345.44 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "4b29f0af-2500-4aac-bf93-1087498cf851")
 		)
@@ -22253,7 +23504,7 @@
 		(instances
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R49")
+					(reference "R69")
 					(unit 1)
 				)
 			)
@@ -22268,7 +23519,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a1514696-29d5-472a-884e-5362cdbad5a8")
-		(property "Reference" "PB1"
+		(property "Reference" "PB2"
 			(at 406.4 148.59 90)
 			(effects
 				(font
@@ -22313,13 +23564,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 412.75 148.59 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c6b74556-d3cb-44ee-8635-c62de2a0dfd9")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB1")
+					(reference "PB2")
 					(unit 1)
 				)
 			)
@@ -22335,7 +23595,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a454fa9f-c0de-4429-8079-7a5e4c440dfa")
-		(property "Reference" "#PWR0144"
+		(property "Reference" "#PWR0136"
 			(at 345.44 143.51 0)
 			(effects
 				(font
@@ -22385,7 +23645,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0144")
+					(reference "#PWR0136")
 					(unit 1)
 				)
 			)
@@ -22401,7 +23661,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a65dc750-57fa-43a1-ae00-e10abdc14725")
-		(property "Reference" "#PWR093"
+		(property "Reference" "#PWR098"
 			(at 53.34 120.65 0)
 			(effects
 				(font
@@ -22451,7 +23711,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR093")
+					(reference "#PWR098")
 					(unit 1)
 				)
 			)
@@ -22462,11 +23722,11 @@
 		(at 516.89 138.43 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "a6905490-5a97-4a8e-846b-d0fd29b2b556")
-		(property "Reference" "J4"
+		(property "Reference" "J33"
 			(at 521.97 135.8899 0)
 			(effects
 				(font
@@ -22632,6 +23892,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 516.89 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "9655b93a-be1f-4dd5-a972-80b66a336974")
 		)
@@ -22641,7 +23910,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "J4")
+					(reference "J33")
 					(unit 1)
 				)
 			)
@@ -22700,6 +23969,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 346.71 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C6186"
+			(at 346.71 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "8b0fdb54-6c7d-4b89-a164-e78a96b9acbd")
 		)
@@ -22728,7 +24015,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aa1d3183-468d-4626-b0b8-7c98396181a9")
-		(property "Reference" "U10"
+		(property "Reference" "U14"
 			(at 102.87 95.25 0)
 			(effects
 				(font
@@ -22852,6 +24139,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 102.87 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C53712"
+			(at 102.87 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "10"
 			(uuid "1b3b5fa2-dd0f-4762-b07a-0b1b876414b7")
 		)
@@ -22906,7 +24211,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "U10")
+					(reference "U14")
 					(unit 1)
 				)
 			)
@@ -22922,7 +24227,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "adc79436-ce94-4435-b204-fa68f129f4fe")
-		(property "Reference" "#PWR098"
+		(property "Reference" "#PWR0108"
 			(at 124.46 148.59 0)
 			(effects
 				(font
@@ -22972,7 +24277,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR098")
+					(reference "#PWR0108")
 					(unit 1)
 				)
 			)
@@ -22997,7 +24302,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "D"
+		(property "Value" "B540C-13-F"
 			(at 234.95 110.4899 90)
 			(effects
 				(font
@@ -23006,7 +24311,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_1210_3225Metric"
+		(property "Footprint" "Diode_SMD:D_SMB-SMC_Universal_Handsoldering"
 			(at 232.41 109.22 0)
 			(effects
 				(font
@@ -23051,6 +24356,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C72264"
+			(at 232.41 109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 232.41 109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "63163fe6-efa0-423d-84d2-61c112056259")
 		)
@@ -23075,7 +24398,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b059f08c-824d-4e47-ba97-5a7288f65e26")
-		(property "Reference" "#PWR010"
+		(property "Reference" "#PWR0150"
 			(at 541.02 194.31 0)
 			(effects
 				(font
@@ -23125,7 +24448,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR010")
+					(reference "#PWR0150")
 					(unit 1)
 				)
 			)
@@ -23141,7 +24464,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b08b4a88-8fdf-4713-a6e5-4ec027811694")
-		(property "Reference" "R81"
+		(property "Reference" "R77"
 			(at 369.57 179.0699 0)
 			(effects
 				(font
@@ -23186,6 +24509,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 367.03 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C98220"
+			(at 367.03 180.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "6bcc6000-c024-42dd-b52e-9b956636a3da")
 		)
@@ -23195,7 +24536,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R81")
+					(reference "R77")
 					(unit 1)
 				)
 			)
@@ -23211,7 +24552,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b10b228a-5735-441f-97da-6ac7c1229cf1")
-		(property "Reference" "#PWR096"
+		(property "Reference" "#PWR0103"
 			(at 82.55 139.7 0)
 			(effects
 				(font
@@ -23261,7 +24602,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR096")
+					(reference "#PWR0103")
 					(unit 1)
 				)
 			)
@@ -23276,7 +24617,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b724d156-a24b-4741-b769-0b3025b2c3df")
-		(property "Reference" "R79"
+		(property "Reference" "R67"
 			(at 261.874 135.636 0)
 			(effects
 				(font
@@ -23321,6 +24662,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 260.35 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C5126163"
+			(at 260.35 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e7ccc121-c83b-404e-845c-fb815fa95a01")
 		)
@@ -23330,7 +24689,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R79")
+					(reference "R67")
 					(unit 1)
 				)
 			)
@@ -23345,7 +24704,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b77befee-7b10-4049-9154-af53b20b764e")
-		(property "Reference" "R31"
+		(property "Reference" "R82"
 			(at 546.1 109.22 90)
 			(effects
 				(font
@@ -23396,6 +24755,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 546.1 109.22 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "9b3e3840-6337-4248-8560-fe3943e37958")
 		)
@@ -23405,7 +24773,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R31")
+					(reference "R82")
 					(unit 1)
 				)
 			)
@@ -23421,7 +24789,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b9057f0b-b030-4374-8082-67ebef4d2da4")
-		(property "Reference" "#PWR061"
+		(property "Reference" "#PWR0122"
 			(at 247.65 266.7 0)
 			(effects
 				(font
@@ -23472,7 +24840,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR061")
+					(reference "#PWR0122")
 					(unit 1)
 				)
 			)
@@ -23488,7 +24856,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b97dec65-379a-4ba9-82e1-61f7b855a56c")
-		(property "Reference" "#PWR080"
+		(property "Reference" "#PWR0132"
 			(at 302.26 298.45 0)
 			(effects
 				(font
@@ -23538,7 +24906,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR080")
+					(reference "#PWR0132")
 					(unit 1)
 				)
 			)
@@ -23553,7 +24921,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b9c6d4d3-01b8-43c8-8462-ddabc16598de")
-		(property "Reference" "PB12"
+		(property "Reference" "PB13"
 			(at 500.38 143.51 90)
 			(effects
 				(font
@@ -23598,13 +24966,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 143.51 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0cb8fc69-732c-450e-b6fc-84a1ddd724a2")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB12")
+					(reference "PB13")
 					(unit 1)
 				)
 			)
@@ -23619,7 +24996,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ba5b7440-b477-43dc-ac13-36bc43952292")
-		(property "Reference" "PB19"
+		(property "Reference" "PB10"
 			(at 500.38 130.81 90)
 			(effects
 				(font
@@ -23664,13 +25041,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 130.81 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "962bcc63-2c84-49d4-ad9f-47ef255954db")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB19")
+					(reference "PB10")
 					(unit 1)
 				)
 			)
@@ -23686,7 +25072,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ba5b8a85-0b05-4047-bbde-a10f48b5cc28")
-		(property "Reference" "#PWR0139"
+		(property "Reference" "#PWR0147"
 			(at 499.11 104.14 0)
 			(effects
 				(font
@@ -23736,7 +25122,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0139")
+					(reference "#PWR0147")
 					(unit 1)
 				)
 			)
@@ -23747,12 +25133,12 @@
 		(at 414.02 153.67 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bd71c2ec-2511-48f6-82e2-6766dbc03097")
-		(property "Reference" "J5"
+		(property "Reference" "J31"
 			(at 414.655 151.13 0)
 			(effects
 				(font
@@ -23797,6 +25183,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 414.02 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c0d14f7e-fa0f-46da-94bc-00ff55513dc8")
 		)
@@ -23806,7 +25201,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "J5")
+					(reference "J31")
 					(unit 1)
 				)
 			)
@@ -23817,12 +25212,12 @@
 		(at 379.73 95.25 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bd9424d1-f84b-43b0-8cee-5d98001b4188")
-		(property "Reference" "J8"
+		(property "Reference" "J29"
 			(at 380.365 92.71 0)
 			(effects
 				(font
@@ -23867,6 +25262,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 379.73 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "8452dfc8-158c-43fc-8526-a3a5eb3f00a3")
 		)
@@ -23876,7 +25280,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "J8")
+					(reference "J29")
 					(unit 1)
 				)
 			)
@@ -23891,7 +25295,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bdff6cb4-b74b-4627-9304-911de6b1a7fc")
-		(property "Reference" "R70"
+		(property "Reference" "R55"
 			(at 106.426 170.688 90)
 			(effects
 				(font
@@ -23936,6 +25340,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 107.95 172.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C98220"
+			(at 107.95 172.72 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "42527265-1b56-44e5-9dde-c2b551dc251b")
 		)
@@ -23945,7 +25367,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R70")
+					(reference "R55")
 					(unit 1)
 				)
 			)
@@ -23961,7 +25383,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "be93334f-8143-42a6-be27-bcafd33f4c23")
-		(property "Reference" "#PWR0146"
+		(property "Reference" "#PWR0139"
 			(at 363.22 139.7 0)
 			(effects
 				(font
@@ -24011,7 +25433,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0146")
+					(reference "#PWR0139")
 					(unit 1)
 				)
 			)
@@ -24026,7 +25448,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c0a18976-c4b1-4fd5-87f4-355837cf7ca7")
-		(property "Reference" "C65"
+		(property "Reference" "C57"
 			(at 261.874 89.662 0)
 			(effects
 				(font
@@ -24089,6 +25511,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C89632"
+			(at 260.35 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 260.35 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "18e6b113-21c7-46fe-9e70-fe187f49dccb")
 		)
@@ -24098,7 +25538,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C65")
+					(reference "C57")
 					(unit 1)
 				)
 			)
@@ -24114,7 +25554,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c1ce0e44-357e-4c88-ad83-995bf2beb6ef")
-		(property "Reference" "#PWR0141"
+		(property "Reference" "#PWR0143"
 			(at 384.81 115.57 0)
 			(effects
 				(font
@@ -24164,7 +25604,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0141")
+					(reference "#PWR0143")
 					(unit 1)
 				)
 			)
@@ -24180,7 +25620,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c1dc9d79-334c-4c7b-9176-96240155e058")
-		(property "Reference" "R57"
+		(property "Reference" "R71"
 			(at 350.52 151.1299 0)
 			(effects
 				(font
@@ -24225,6 +25665,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 347.98 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C98220"
+			(at 347.98 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "34157834-bf8e-492f-a7c5-8ceddd1acae8")
 		)
@@ -24234,7 +25692,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R57")
+					(reference "R71")
 					(unit 1)
 				)
 			)
@@ -24250,7 +25708,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c5d7821b-1a69-43ad-a20d-054d0198942a")
-		(property "Reference" "R65"
+		(property "Reference" "R76"
 			(at 368.3 157.4799 0)
 			(effects
 				(font
@@ -24295,6 +25753,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 365.76 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22975"
+			(at 365.76 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7dec5585-9d2a-4406-b1da-3aa962cb4d3d")
 		)
@@ -24304,7 +25780,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R65")
+					(reference "R76")
 					(unit 1)
 				)
 			)
@@ -24319,7 +25795,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c661c62c-ab4c-40d2-89bf-819989e54f48")
-		(property "Reference" "R48"
+		(property "Reference" "R45"
 			(at 61.214 92.202 0)
 			(effects
 				(font
@@ -24364,6 +25840,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 58.42 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2930150"
+			(at 58.42 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3f739a02-6881-4129-b797-388bf0f00972")
 		)
@@ -24373,7 +25867,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R48")
+					(reference "R45")
 					(unit 1)
 				)
 			)
@@ -24388,7 +25882,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c7b42d40-22c9-40fc-a621-6bb28eb62dab")
-		(property "Reference" "PB14"
+		(property "Reference" "PB15"
 			(at 500.38 148.59 90)
 			(effects
 				(font
@@ -24433,13 +25927,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 148.59 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bbd43ac9-fba0-45c1-abbb-841be4773bab")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB14")
+					(reference "PB15")
 					(unit 1)
 				)
 			)
@@ -24455,7 +25958,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c839ec59-3fdc-438d-ac33-e9e8efaa15ac")
-		(property "Reference" "#PWR0108"
+		(property "Reference" "#PWR0129"
 			(at 280.67 90.17 0)
 			(effects
 				(font
@@ -24505,7 +26008,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0108")
+					(reference "#PWR0129")
 					(unit 1)
 				)
 			)
@@ -24521,7 +26024,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ca333e44-a32a-433b-bb9c-6c393a5ab2b0")
-		(property "Reference" "R58"
+		(property "Reference" "R72"
 			(at 350.52 161.2899 0)
 			(effects
 				(font
@@ -24566,6 +26069,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 347.98 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2906992"
+			(at 347.98 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b0fa4864-103e-4394-ae70-81f956d7b97e")
 		)
@@ -24575,7 +26096,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R58")
+					(reference "R72")
 					(unit 1)
 				)
 			)
@@ -24590,7 +26111,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ce13e4a6-4e9f-4a1c-bbcb-b9dc1d06cb3a")
-		(property "Reference" "D10"
+		(property "Reference" "D25"
 			(at 549.402 100.584 90)
 			(effects
 				(font
@@ -24650,6 +26171,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 546.1 100.33 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "77c00341-23f4-4857-afce-d486e61d314f")
 		)
@@ -24659,7 +26189,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "D10")
+					(reference "D25")
 					(unit 1)
 				)
 			)
@@ -24670,11 +26200,11 @@
 		(at 367.03 243.84 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "ce63ef6d-9ec1-4971-adac-c3439624020a")
-		(property "Reference" "JP21"
+		(property "Reference" "JP24"
 			(at 367.03 240.792 0)
 			(effects
 				(font
@@ -24718,6 +26248,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 367.03 243.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0d74d93a-1e91-4d4d-b09e-f7a6d6a10c6d")
 		)
@@ -24727,7 +26266,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "JP21")
+					(reference "JP24")
 					(unit 1)
 				)
 			)
@@ -24742,7 +26281,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cfc92fe6-33d1-4d27-8a98-bd440e6ebae4")
-		(property "Reference" "#PWR0106"
+		(property "Reference" "#PWR0124"
 			(at 247.65 177.8 0)
 			(effects
 				(font
@@ -24792,7 +26331,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0106")
+					(reference "#PWR0124")
 					(unit 1)
 				)
 			)
@@ -24808,7 +26347,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cfcddaaa-d146-40f7-ad24-940ec308f82e")
-		(property "Reference" "#PWR066"
+		(property "Reference" "#PWR0130"
 			(at 287.02 238.76 0)
 			(effects
 				(font
@@ -24858,7 +26397,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR066")
+					(reference "#PWR0130")
 					(unit 1)
 				)
 			)
@@ -24873,7 +26412,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d3efa24a-08d1-4ba4-b282-c94dd7e9a211")
-		(property "Reference" "#PWR072"
+		(property "Reference" "#PWR0105"
 			(at 99.06 267.97 0)
 			(effects
 				(font
@@ -24923,7 +26462,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR072")
+					(reference "#PWR0105")
 					(unit 1)
 				)
 			)
@@ -24938,7 +26477,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d450f16f-389b-4be9-ad94-fe414beaf709")
-		(property "Reference" "#PWR0143"
+		(property "Reference" "#PWR0145"
 			(at 483.87 195.58 0)
 			(effects
 				(font
@@ -24988,7 +26527,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0143")
+					(reference "#PWR0145")
 					(unit 1)
 				)
 			)
@@ -25003,7 +26542,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d4e35d67-79ef-4f08-907c-5f127867e102")
-		(property "Reference" "R37"
+		(property "Reference" "R81"
 			(at 510.54 161.29 90)
 			(effects
 				(font
@@ -25054,6 +26593,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 510.54 161.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "fb864ec8-6a17-446f-863b-3043a12ee487")
 		)
@@ -25063,7 +26611,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R37")
+					(reference "R81")
 					(unit 1)
 				)
 			)
@@ -25080,7 +26628,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d5c3877f-d054-45ed-9b39-300eb0b9baed")
-		(property "Reference" "Q9"
+		(property "Reference" "Q5"
 			(at 205.74 118.1099 0)
 			(effects
 				(font
@@ -25152,6 +26700,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 199.39 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C604579"
+			(at 199.39 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5_6"
 			(uuid "bbad7527-66f4-4863-be82-282ca3da82bd")
 		)
@@ -25170,7 +26736,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "Q9")
+					(reference "Q5")
 					(unit 1)
 				)
 			)
@@ -25185,7 +26751,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d865c529-9e40-4e2e-9f12-9ac25b62bfba")
-		(property "Reference" "R42"
+		(property "Reference" "R48"
 			(at 66.294 280.67 90)
 			(effects
 				(font
@@ -25237,6 +26803,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 68.58 280.67 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22912"
+			(at 68.58 280.67 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "acaab8fb-5b64-4c47-a4bb-3ad6694deafd")
 		)
@@ -25246,7 +26830,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R42")
+					(reference "R48")
 					(unit 1)
 				)
 			)
@@ -25257,7 +26841,7 @@
 		(at 41.91 238.76 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -25306,6 +26890,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 41.91 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "037d6b8b-1ee9-4970-9c46-d22f1a0e63c4")
 		)
@@ -25331,7 +26924,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dab59bc6-60e2-48d2-9d68-886b25975bb7")
-		(property "Reference" "C27"
+		(property "Reference" "C69"
 			(at 502.92 111.7662 0)
 			(effects
 				(font
@@ -25385,6 +26978,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 505.46 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1d99dc48-2bf5-4c47-9016-eef09994cf11")
 		)
@@ -25394,7 +26996,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C27")
+					(reference "C69")
 					(unit 1)
 				)
 			)
@@ -25409,7 +27011,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dbc17742-8824-4c73-89b2-4f93b22d7378")
-		(property "Reference" "C53"
+		(property "Reference" "C38"
 			(at 64.77 98.298 0)
 			(effects
 				(font
@@ -25472,6 +27074,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C92670"
+			(at 68.58 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 68.58 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "26914cfb-9c0c-4e70-b893-45a3c4a29be7")
 		)
@@ -25481,7 +27101,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C53")
+					(reference "C38")
 					(unit 1)
 				)
 			)
@@ -25496,7 +27116,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e0d446f0-6803-44b1-b95c-ce54c338fb0e")
-		(property "Reference" "C56"
+		(property "Reference" "C42"
 			(at 175.514 111.252 0)
 			(effects
 				(font
@@ -25559,6 +27179,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 173.99 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 173.99 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "0ec88d56-c307-44d1-bc43-07c7519956c0")
 		)
@@ -25568,7 +27206,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C56")
+					(reference "C42")
 					(unit 1)
 				)
 			)
@@ -25583,7 +27221,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e293860d-93c2-44ef-9388-c9af5b8796a2")
-		(property "Reference" "C58"
+		(property "Reference" "C47"
 			(at 208.534 98.552 0)
 			(effects
 				(font
@@ -25601,7 +27239,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_1210_3225Metric_Pad1.33x2.70mm_HandSolder"
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
 			(at 207.9752 106.68 0)
 			(effects
 				(font
@@ -25646,6 +27284,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C89632"
+			(at 207.01 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 207.01 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "f39774fc-840a-42fd-a8f8-f3453cb61b26")
 		)
@@ -25655,7 +27311,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C58")
+					(reference "C47")
 					(unit 1)
 				)
 			)
@@ -25670,7 +27326,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e3c009dc-5b14-40c8-a319-4893a62a76fc")
-		(property "Reference" "#PWR095"
+		(property "Reference" "#PWR0102"
 			(at 73.66 130.81 0)
 			(effects
 				(font
@@ -25720,7 +27376,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR095")
+					(reference "#PWR0102")
 					(unit 1)
 				)
 			)
@@ -25735,7 +27391,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e3c8ba7b-f4c5-4c4e-ad84-cb1c5e279661")
-		(property "Reference" "PB20"
+		(property "Reference" "PB9"
 			(at 500.38 128.27 90)
 			(effects
 				(font
@@ -25780,13 +27436,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 128.27 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "821d09f7-c440-457c-9d26-55ea8eadaa08")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB20")
+					(reference "PB9")
 					(unit 1)
 				)
 			)
@@ -25801,7 +27466,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e4601e41-70a6-4eae-9ca4-76d4c6e4fb36")
-		(property "Reference" "R69"
+		(property "Reference" "R54"
 			(at 106.426 161.798 90)
 			(effects
 				(font
@@ -25846,6 +27511,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 107.95 163.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C98220"
+			(at 107.95 163.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "29835475-b1ae-453b-b563-fc14609bffa6")
 		)
@@ -25855,7 +27538,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R69")
+					(reference "R54")
 					(unit 1)
 				)
 			)
@@ -26087,6 +27770,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 63.5 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "043870d6-62a9-45a4-9038-4090ea3fee02")
 		)
@@ -26114,7 +27806,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e704c4f3-a2ed-4571-bcbf-a6aaafa8d305")
-		(property "Reference" "PB11"
+		(property "Reference" "PB12"
 			(at 500.38 140.97 90)
 			(effects
 				(font
@@ -26159,13 +27851,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 140.97 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bbc3ff25-1fba-46b3-9266-768deb5d7f3a")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB11")
+					(reference "PB12")
 					(unit 1)
 				)
 			)
@@ -26180,7 +27881,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e719959d-0a56-4e32-9bf5-227e4f1a0cf8")
-		(property "Reference" "C37"
+		(property "Reference" "C39"
 			(at 94.742 271.272 0)
 			(effects
 				(font
@@ -26243,6 +27944,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C100042"
+			(at 100.33 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 100.33 273.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "33912161-310a-44de-8edf-e7bf0c3345fa")
 		)
@@ -26252,7 +27971,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C37")
+					(reference "C39")
 					(unit 1)
 				)
 			)
@@ -26267,7 +27986,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e77e02d0-8c4b-4842-9115-78a6d1e95417")
-		(property "Reference" "C61"
+		(property "Reference" "C50"
 			(at 226.314 135.382 0)
 			(effects
 				(font
@@ -26330,6 +28049,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C14663"
+			(at 224.79 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 224.79 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "09091153-b8ed-4888-b315-a0b459e8d37a")
 		)
@@ -26339,7 +28076,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C61")
+					(reference "C50")
 					(unit 1)
 				)
 			)
@@ -26354,7 +28091,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e83229ca-9a13-4601-b98d-d5e8be04dbb3")
-		(property "Reference" "C70"
+		(property "Reference" "C71"
 			(at 521.97 111.7662 0)
 			(effects
 				(font
@@ -26408,6 +28145,15 @@
 				)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 519.43 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b8188dc8-8137-46c9-9805-c356a333f65e")
 		)
@@ -26417,7 +28163,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C70")
+					(reference "C71")
 					(unit 1)
 				)
 			)
@@ -26432,7 +28178,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "eb7d8266-20aa-4bc6-9c1f-dcc57eacf8ec")
-		(property "Reference" "PB9"
+		(property "Reference" "PB21"
 			(at 510.54 125.73 90)
 			(effects
 				(font
@@ -26477,13 +28223,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 504.19 125.73 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "039888ba-ad36-4094-bf80-c77044549fb4")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB9")
+					(reference "PB21")
 					(unit 1)
 				)
 			)
@@ -26498,7 +28253,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ec5e4250-3028-44ea-b1b8-12574a07c2cd")
-		(property "Reference" "C45"
+		(property "Reference" "C72"
 			(at 525.78 180.3338 0)
 			(effects
 				(font
@@ -26553,6 +28308,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 528.32 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5ef599a7-191f-4507-a93e-a988d2000570")
 		)
@@ -26562,7 +28326,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C45")
+					(reference "C72")
 					(unit 1)
 				)
 			)
@@ -26573,7 +28337,7 @@
 		(at 44.45 278.13 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -26622,6 +28386,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 44.45 278.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c3b5a369-d695-4ff3-85d8-8b2c07f6eb88")
 		)
@@ -26646,7 +28419,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ef19757a-23d6-401f-b72e-a2e5c7c2d36d")
-		(property "Reference" "#PWR0100"
+		(property "Reference" "#PWR0112"
 			(at 143.51 118.11 0)
 			(effects
 				(font
@@ -26696,7 +28469,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR0100")
+					(reference "#PWR0112")
 					(unit 1)
 				)
 			)
@@ -26711,7 +28484,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f26cbd6e-7ee2-4952-99e2-6a6113a99645")
-		(property "Reference" "PB6"
+		(property "Reference" "PB20"
 			(at 500.38 166.37 90)
 			(effects
 				(font
@@ -26756,13 +28529,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 166.37 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "b8c4e52a-0399-44e5-bb38-fc7bccc2ef57")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB6")
+					(reference "PB20")
 					(unit 1)
 				)
 			)
@@ -26777,7 +28559,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f2d4352c-a12a-42a7-b939-f3fb43793cf8")
-		(property "Reference" "PB22"
+		(property "Reference" "PB8"
 			(at 494.03 123.19 90)
 			(effects
 				(font
@@ -26822,13 +28604,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 487.68 123.19 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5103094d-7f5c-4aa5-92eb-9e9aecebd880")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB22")
+					(reference "PB8")
 					(unit 1)
 				)
 			)
@@ -26844,7 +28635,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f54d1471-5758-432f-814c-3da9f23f6b91")
-		(property "Reference" "#PWR060"
+		(property "Reference" "#PWR0121"
 			(at 241.3 255.27 0)
 			(effects
 				(font
@@ -26894,7 +28685,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR060")
+					(reference "#PWR0121")
 					(unit 1)
 				)
 			)
@@ -26910,7 +28701,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f58995a0-7ea5-4138-b21e-a2665ddf31d6")
-		(property "Reference" "R59"
+		(property "Reference" "R73"
 			(at 365.76 115.5699 0)
 			(effects
 				(font
@@ -26955,6 +28746,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 363.22 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C98220"
+			(at 363.22 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "bc7036d9-76b8-4279-a2c5-9aa0efe95a1c")
 		)
@@ -26964,7 +28773,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R59")
+					(reference "R73")
 					(unit 1)
 				)
 			)
@@ -26979,7 +28788,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f738f6c6-c427-40c6-9964-28268857be20")
-		(property "Reference" "C46"
+		(property "Reference" "C73"
 			(at 549.91 180.3338 0)
 			(effects
 				(font
@@ -27025,12 +28834,21 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C92670"
 			(at 552.45 179.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 552.45 179.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
@@ -27042,7 +28860,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C46")
+					(reference "C73")
 					(unit 1)
 				)
 			)
@@ -27058,7 +28876,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f823663b-014c-4ab2-b3ae-0fef982ac854")
-		(property "Reference" "R60"
+		(property "Reference" "R74"
 			(at 365.76 125.7299 0)
 			(effects
 				(font
@@ -27103,6 +28921,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 363.22 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22843"
+			(at 363.22 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "cb94c4aa-a077-44b3-975e-ce1601d669d3")
 		)
@@ -27112,7 +28948,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R60")
+					(reference "R74")
 					(unit 1)
 				)
 			)
@@ -27127,7 +28963,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f96b6515-6b3c-4e7e-a830-ef2bc3bd9a7c")
-		(property "Reference" "R68"
+		(property "Reference" "R52"
 			(at 100.838 181.864 90)
 			(effects
 				(font
@@ -27172,6 +29008,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 102.87 180.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2828637"
+			(at 102.87 180.34 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "0e1c68b0-0f8f-4b9b-b5b4-367439505923")
 		)
@@ -27181,7 +29035,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R68")
+					(reference "R52")
 					(unit 1)
 				)
 			)
@@ -27196,7 +29050,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f973b331-b946-46f3-bb02-4176da515a50")
-		(property "Reference" "C32"
+		(property "Reference" "C55"
 			(at 246.126 277.876 0)
 			(effects
 				(font
@@ -27259,6 +29113,24 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C107085"
+			(at 251.46 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 251.46 280.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1e17e710-a4be-461b-bb6d-876db984b1b8")
 		)
@@ -27268,7 +29140,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "C32")
+					(reference "C55")
 					(unit 1)
 				)
 			)
@@ -27284,7 +29156,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f9f99ec3-0a95-4e2b-9ddf-e2865384bc16")
-		(property "Reference" "R64"
+		(property "Reference" "R75"
 			(at 368.3 147.3199 0)
 			(effects
 				(font
@@ -27329,6 +29201,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 365.76 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C98220"
+			(at 365.76 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "55cdf53b-6b39-4484-bd22-3889dd150d59")
 		)
@@ -27338,7 +29228,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "R64")
+					(reference "R75")
 					(unit 1)
 				)
 			)
@@ -27354,7 +29244,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fb13ee8b-6e07-4a4d-9945-b848750300b7")
-		(property "Reference" "U15"
+		(property "Reference" "U18"
 			(at 453.39 100.33 0)
 			(effects
 				(font
@@ -27528,6 +29418,24 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 453.39 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C79861"
+			(at 453.39 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "16"
 			(uuid "77959d0e-2436-4248-bfaf-0d3659fdcf7c")
 		)
@@ -27678,7 +29586,7 @@
 		(instances
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "U15")
+					(reference "U18")
 					(unit 1)
 				)
 			)
@@ -27689,11 +29597,11 @@
 		(at 499.11 85.09 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "fc16b6f4-29f8-4f5a-8d82-6acb148f44d9")
-		(property "Reference" "JP20"
+		(property "Reference" "JP25"
 			(at 496.316 82.804 0)
 			(effects
 				(font
@@ -27739,6 +29647,15 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 499.11 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0faa3423-717c-41c6-9d05-d27fe878eee6")
 		)
@@ -27748,7 +29665,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "JP20")
+					(reference "JP25")
 					(unit 1)
 				)
 			)
@@ -27763,7 +29680,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fd38b27c-c468-4e76-843a-dd1ba00e1248")
-		(property "Reference" "PB7"
+		(property "Reference" "PB19"
 			(at 500.38 163.83 90)
 			(effects
 				(font
@@ -27808,13 +29725,22 @@
 				(hide yes)
 			)
 		)
+		(property "MAXIMUM_PACKAGE-HEIGHT" ""
+			(at 494.03 163.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "35db9f0d-90d0-47c7-ada9-f0c1cac026da")
 		)
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "PB7")
+					(reference "PB19")
 					(unit 1)
 				)
 			)
@@ -27829,7 +29755,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fe2a01fb-755a-44b9-9679-7a6184ca5af5")
-		(property "Reference" "#PWR070"
+		(property "Reference" "#PWR0104"
 			(at 97.79 252.73 0)
 			(effects
 				(font
@@ -27879,7 +29805,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR070")
+					(reference "#PWR0104")
 					(unit 1)
 				)
 			)
@@ -27895,7 +29821,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ff60d0f4-b268-4000-8ec7-763cf59fe943")
-		(property "Reference" "#PWR068"
+		(property "Reference" "#PWR0111"
 			(at 138.43 281.94 0)
 			(effects
 				(font
@@ -27945,7 +29871,7 @@
 		(instances
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4"
-					(reference "#PWR068")
+					(reference "#PWR0111")
 					(unit 1)
 				)
 			)
