@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [
@@ -58,28 +58,7 @@
           "width": 0.0
         }
       ],
-      "drc_exclusions": [
-        [
-          "courtyards_overlap|162795000|87215000|0dd8213e-818a-4aac-bec9-f79931f01a8c|bc7280d7-6cc7-4f1a-8d18-91c29750c7c6",
-          ""
-        ],
-        [
-          "courtyards_overlap|186060210|72901666|5ba6195c-e1c4-4300-afec-307088abd40d|e0729086-8bd6-416f-b7bc-fdcd2516cacf",
-          ""
-        ],
-        [
-          "courtyards_overlap|218195000|61365000|49c32632-0b1f-42fc-af22-22f8743e9b62|b87ffc3b-c3ae-4666-8546-d8de206c9149",
-          ""
-        ],
-        [
-          "courtyards_overlap|231945000|65365000|6bf42667-da38-43cd-a318-7b7888bebf27|84d41f6d-33d5-437a-bea4-07e1790caf1e",
-          ""
-        ],
-        [
-          "courtyards_overlap|241003142|58051666|58a058bf-bd37-40ad-a9b2-506cf8f345df|9fb52ff1-80c4-44a4-ba6d-f2b6bc7c5c40",
-          ""
-        ]
-      ],
+      "drc_exclusions": [],
       "meta": {
         "version": 2
       },
@@ -536,7 +515,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "../gerber/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "../CAD MODELS/AWS PROJECT 3D ver2 files.step",
@@ -547,7 +526,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
-    "bom_export_filename": "${PROJECTNAME}.csv",
+    "bom_export_filename": "..\\bom\\AWS PROJECT.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -560,7 +539,7 @@
     },
     "bom_presets": [],
     "bom_settings": {
-      "exclude_dnp": false,
+      "exclude_dnp": true,
       "fields_ordered": [
         {
           "group_by": false,
@@ -949,7 +928,7 @@
       ],
       "filter_string": "",
       "group_symbols": true,
-      "include_excluded_from_bom": true,
+      "include_excluded_from_bom": false,
       "name": "",
       "sort_asc": true,
       "sort_field": "Reference"
