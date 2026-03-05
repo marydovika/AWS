@@ -11557,7 +11557,7 @@
 	)
 	(rectangle
 		(start 38.1 44.45)
-		(end 90.17 85.09)
+		(end 88.9 85.09)
 		(stroke
 			(width 0)
 			(type default)
@@ -11720,6 +11720,18 @@
 			)
 		)
 		(uuid "0fd67c68-ba4e-42e1-be1e-b03000298e22")
+	)
+	(text "FTDI USB-Serial Interface IC"
+		(exclude_from_sim no)
+		(at 668.02 132.08 0)
+		(effects
+			(font
+				(face "Times New Roman")
+				(size 3.81 3.81)
+				(bold yes)
+			)
+		)
+		(uuid "29432b2d-37e0-4072-86b2-609ed281da12")
 	)
 	(text "power indication led,\n optional, placed \nfor block debugging"
 		(exclude_from_sim no)
@@ -20090,7 +20102,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0097719c-c2ee-4fa0-9450-6226843145b5")
-		(property "Reference" "#PWR030"
+		(property "Reference" "#PWR?"
 			(at 358.14 163.83 0)
 			(effects
 				(font
@@ -20138,6 +20150,12 @@
 			(uuid "262719fd-8f6b-4619-861e-065bccfc0597")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR030")
@@ -20155,7 +20173,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0153ce22-72f6-49ff-a37e-e853ef7813cd")
-		(property "Reference" "SNS_TX7"
+		(property "Reference" "SNS_TX?"
 			(at 453.136 138.176 90)
 			(effects
 				(font
@@ -20206,6 +20224,12 @@
 			(uuid "b9521099-4ec1-4919-a463-a67ccbeefabc")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX7")
@@ -20224,7 +20248,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0237e8c4-69b7-420b-9fe0-6c983a1a1dd6")
-		(property "Reference" "R34"
+		(property "Reference" "R?"
 			(at 499.11 214.6299 0)
 			(effects
 				(font
@@ -20276,6 +20300,12 @@
 			(uuid "ba81a814-ce1c-4264-b7dd-7b0459bf606c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R34")
@@ -20293,7 +20323,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "02821e0b-27b8-45a1-b6a5-57699275fce9")
-		(property "Reference" "C2"
+		(property "Reference" "C?"
 			(at 55.88 99.568 0)
 			(effects
 				(font
@@ -20345,6 +20375,12 @@
 			(uuid "b18e1027-603a-4cb9-a5a6-ae28cf0a2385")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C2")
@@ -20362,7 +20398,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "085a673f-8ad6-429a-a833-462d58967257")
-		(property "Reference" "#PWR024"
+		(property "Reference" "#PWR?"
 			(at 273.05 130.81 0)
 			(effects
 				(font
@@ -20410,6 +20446,12 @@
 			(uuid "cd272bdb-9dc6-46fd-8f27-28f2a5c4b9ed")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR024")
@@ -20428,7 +20470,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0acbebf4-da62-4f9c-a5ba-4af0fd425106")
-		(property "Reference" "U14"
+		(property "Reference" "U?"
 			(at 706.12 139.7 0)
 			(effects
 				(font
@@ -20481,6 +20523,12 @@
 			(uuid "104fd432-b156-445e-a9b1-d0d01be349cc")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U14")
@@ -20498,7 +20546,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0dc80026-7080-42b7-a4e3-6a6e1df72492")
-		(property "Reference" "U1"
+		(property "Reference" "U?"
 			(at 83.82 114.3 0)
 			(effects
 				(font
@@ -20738,6 +20786,12 @@
 			(uuid "acac1397-4c1b-45d4-88a5-83de9e34925a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U1")
@@ -20756,7 +20810,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0dd3d99b-be72-4cd3-82fa-8b75ff71fc72")
-		(property "Reference" "#PWR0129"
+		(property "Reference" "#PWR?"
 			(at 78.74 64.77 0)
 			(effects
 				(font
@@ -20804,6 +20858,12 @@
 			(uuid "dae18b18-d49c-4811-849f-acc28e11db79")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0129")
@@ -20822,7 +20882,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0ebb65cc-df92-4bc1-a6dc-be31f0a68f6f")
-		(property "Reference" "R8"
+		(property "Reference" "R?"
 			(at 482.6 350.5199 0)
 			(effects
 				(font
@@ -20874,6 +20934,12 @@
 			(uuid "c84c5cdc-516f-4364-bd74-02b913c86bec")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R8")
@@ -20891,7 +20957,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0fd1ee78-f427-4366-9004-4b6356dca26f")
-		(property "Reference" "SNS_TX5"
+		(property "Reference" "SNS_TX?"
 			(at 388.874 133.604 90)
 			(effects
 				(font
@@ -20942,6 +21008,12 @@
 			(uuid "d8831477-1bc2-40fa-94a6-c885f9f5e509")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX5")
@@ -20960,7 +21032,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1003c115-186f-43d9-87d6-d1bc936c66d9")
-		(property "Reference" "#PWR0127"
+		(property "Reference" "#PWR?"
 			(at 55.88 85.09 0)
 			(effects
 				(font
@@ -21008,6 +21080,12 @@
 			(uuid "536d3173-c5ca-4957-bda3-f0a7315a95eb")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0127")
@@ -21026,7 +21104,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "10a7e980-06f9-4ce7-ab52-6b231feb36fc")
-		(property "Reference" "R36"
+		(property "Reference" "R?"
 			(at 553.72 426.7199 0)
 			(effects
 				(font
@@ -21078,6 +21156,12 @@
 			(uuid "c8a1f1d7-b5ad-41cb-8701-6c7658ea2ec2")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R36")
@@ -21095,7 +21179,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "110dacc6-a395-4449-95cf-b7b47de9d48e")
-		(property "Reference" "R21"
+		(property "Reference" "R?"
 			(at 342.9 287.528 0)
 			(effects
 				(font
@@ -21147,6 +21231,12 @@
 			(uuid "f1626039-79a1-4b97-a376-61f0acbda356")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R21")
@@ -21164,7 +21254,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "113f3230-2669-4093-ab01-76ce4c50a9d0")
-		(property "Reference" "C51"
+		(property "Reference" "C?"
 			(at 482.6 105.918 0)
 			(effects
 				(font
@@ -21216,6 +21306,12 @@
 			(uuid "0945e755-c5d0-448b-baec-06af1248f823")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C51")
@@ -21234,7 +21330,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "11c82d67-ff9a-451c-ab97-5e292c923447")
-		(property "Reference" "#PWR037"
+		(property "Reference" "#PWR?"
 			(at 383.54 217.17 0)
 			(effects
 				(font
@@ -21282,6 +21378,12 @@
 			(uuid "5b09a001-67d7-4a98-9d61-817a72081a96")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR037")
@@ -21299,7 +21401,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "11ca65c0-c57b-4500-97d4-4a1fe0ffa4ac")
-		(property "Reference" "C47"
+		(property "Reference" "C?"
 			(at 44.45 312.928 0)
 			(effects
 				(font
@@ -21351,6 +21453,12 @@
 			(uuid "e99d5135-9d0b-4463-b745-631dd5cf1b1a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C47")
@@ -21368,7 +21476,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "125513eb-e8b8-47b0-97a5-0ba396750911")
-		(property "Reference" "#PWR035"
+		(property "Reference" "#PWR?"
 			(at 377.19 166.37 0)
 			(effects
 				(font
@@ -21416,6 +21524,12 @@
 			(uuid "f0a44940-208b-4aab-aa61-ea05d4508ea3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR035")
@@ -21433,7 +21547,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "152ad467-fa64-4f3c-a4b6-b912d7a6c082")
-		(property "Reference" "JP16"
+		(property "Reference" "JP?"
 			(at 670.052 173.99 0)
 			(effects
 				(font
@@ -21484,6 +21598,12 @@
 			(uuid "a088bbda-8fef-4082-983f-49f251a882d8")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP16")
@@ -21502,7 +21622,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "15eef998-08c3-4cf2-bf46-bc13f2a0c20a")
-		(property "Reference" "R11"
+		(property "Reference" "R?"
 			(at 214.63 426.7199 0)
 			(effects
 				(font
@@ -21554,6 +21674,12 @@
 			(uuid "27f2c821-bafe-4d4a-bcbe-7acb95cd37c5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R11")
@@ -21572,7 +21698,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1781b629-1e17-4242-bd7e-35109043323b")
-		(property "Reference" "R28"
+		(property "Reference" "R?"
 			(at 422.91 370.8399 0)
 			(effects
 				(font
@@ -21624,6 +21750,12 @@
 			(uuid "821dbf38-6248-4434-91ac-246b6ce47540")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R28")
@@ -21642,7 +21774,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "18b34ae3-75d3-4e42-a440-e0dbd6955edd")
-		(property "Reference" "#PWR022"
+		(property "Reference" "#PWR?"
 			(at 254 107.95 0)
 			(effects
 				(font
@@ -21690,6 +21822,12 @@
 			(uuid "e2c46d4e-678a-46ca-845f-62798c506dd5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR022")
@@ -21708,7 +21846,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1a0e02e4-ca54-4206-9257-f66e90e00d90")
-		(property "Reference" "U7"
+		(property "Reference" "U?"
 			(at 417.83 120.65 0)
 			(effects
 				(font
@@ -21806,6 +21944,12 @@
 			(uuid "94298b8a-b8e7-4599-8076-9d716724222a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U7")
@@ -21823,7 +21967,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1a947a1c-9b5c-49dc-b16b-9c2ecafeb23d")
-		(property "Reference" "C14"
+		(property "Reference" "C?"
 			(at 266.192 212.598 0)
 			(effects
 				(font
@@ -21875,6 +22019,12 @@
 			(uuid "5e25faea-f386-4a26-862a-a8513264a3c3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C14")
@@ -21893,7 +22043,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "1aa34270-d5a8-4bc3-8f39-469110a613a9")
-		(property "Reference" "#PWR0135"
+		(property "Reference" "#PWR?"
 			(at 568.96 359.41 0)
 			(effects
 				(font
@@ -21941,6 +22091,12 @@
 			(uuid "02be50bc-d608-4205-afce-7a60c0b3a73b")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0135")
@@ -21958,7 +22114,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "1afb9a6f-f90f-494c-a0de-cc650fa6a9aa")
-		(property "Reference" "JP25"
+		(property "Reference" "JP?"
 			(at 72.39 62.992 0)
 			(effects
 				(font
@@ -22009,6 +22165,12 @@
 			(uuid "f880e2ca-61f2-4a53-8006-2856cc103c77")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP25")
@@ -22026,7 +22188,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "1f30a8d1-4c19-4544-93a2-dc2930792b78")
-		(property "Reference" "C15"
+		(property "Reference" "C?"
 			(at 312.674 235.712 0)
 			(effects
 				(font
@@ -22078,6 +22240,12 @@
 			(uuid "a5460801-edda-4431-a959-26d657752b96")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C15")
@@ -22095,7 +22263,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2073061b-dbba-4706-a911-3c4b94fd8b75")
-		(property "Reference" "JP17"
+		(property "Reference" "JP?"
 			(at 726.44 143.002 0)
 			(effects
 				(font
@@ -22146,6 +22314,12 @@
 			(uuid "45dba5af-f13a-48d6-b82d-06b863a4b876")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP17")
@@ -22164,7 +22338,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "207a6ab8-e9ad-4ba7-b0bc-6c36e613914e")
-		(property "Reference" "J29"
+		(property "Reference" "J?"
 			(at 594.36 298.4499 0)
 			(effects
 				(font
@@ -22338,6 +22512,12 @@
 			(uuid "a04f7a8b-b7dc-4c79-9ade-4bfb094d9e27")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J29")
@@ -22356,7 +22536,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "20bb443d-b7c7-4dc9-b8b2-356073f150cb")
-		(property "Reference" "#PWR015"
+		(property "Reference" "#PWR?"
 			(at 189.23 364.49 0)
 			(effects
 				(font
@@ -22404,6 +22584,12 @@
 			(uuid "9ca51c07-178f-46cf-a8cd-0450050a0747")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR015")
@@ -22422,7 +22608,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "21b54c6b-2e81-4c4d-a474-e11a3877ccfc")
-		(property "Reference" "#PWR0133"
+		(property "Reference" "#PWR?"
 			(at 514.35 325.12 0)
 			(effects
 				(font
@@ -22470,6 +22656,12 @@
 			(uuid "f12cb20b-5425-41d7-88e4-99d996a4c1fa")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0133")
@@ -22487,7 +22679,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "2269421f-1bd4-40e3-ac3d-1e2ac653769b")
-		(property "Reference" "JP5"
+		(property "Reference" "JP?"
 			(at 380.492 215.9 0)
 			(effects
 				(font
@@ -22538,6 +22730,12 @@
 			(uuid "b71b0f64-cded-4ae7-9d42-2f2863b47271")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP5")
@@ -22556,7 +22754,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "227c96e6-631a-4dbc-9918-2bf687092cb5")
-		(property "Reference" "J1"
+		(property "Reference" "J?"
 			(at 148.59 207.6449 90)
 			(effects
 				(font
@@ -22609,6 +22807,12 @@
 			(uuid "39eb98d7-0c21-40d3-be32-a1d62d5a6769")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J1")
@@ -22626,7 +22830,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "22d2b616-c1bf-40f0-bc1c-f5f9c5408a29")
-		(property "Reference" "SNS_TX4"
+		(property "Reference" "SNS_TX?"
 			(at 388.874 136.144 90)
 			(effects
 				(font
@@ -22677,6 +22881,12 @@
 			(uuid "a94f17d7-8ab6-4590-a324-be124ca8d72d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX4")
@@ -22694,7 +22904,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "231e6a4c-c048-48dc-af5b-02e26acdd387")
-		(property "Reference" "C38"
+		(property "Reference" "C?"
 			(at 675.64 188.468 0)
 			(effects
 				(font
@@ -22746,6 +22956,12 @@
 			(uuid "14008b7f-6995-46f1-97e0-d2a7cce11614")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C38")
@@ -22763,7 +22979,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "23436ff9-bc1c-463a-a57b-31db568c4185")
-		(property "Reference" "JP23"
+		(property "Reference" "JP?"
 			(at 514.35 101.092 0)
 			(effects
 				(font
@@ -22814,6 +23030,12 @@
 			(uuid "6feb8596-feca-4a43-bcad-f445b0d59fa8")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP23")
@@ -22831,7 +23053,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "23ca2398-c25c-4eef-916b-872795713a08")
-		(property "Reference" "R13"
+		(property "Reference" "R?"
 			(at 247.65 169.164 0)
 			(effects
 				(font
@@ -22883,6 +23105,12 @@
 			(uuid "3b33f226-f0d3-4288-9146-769493e3d599")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R13")
@@ -22901,7 +23129,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "25380329-71c9-4149-8b99-a5cef6fc444d")
-		(property "Reference" "#PWR086"
+		(property "Reference" "#PWR?"
 			(at 680.72 147.32 0)
 			(effects
 				(font
@@ -22949,6 +23177,12 @@
 			(uuid "3a1d31cf-e439-435e-923b-c53ca0d6cfdc")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR086")
@@ -22966,7 +23200,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2611460f-d56a-4ffd-bb5f-56f3bfc2e055")
-		(property "Reference" "#PWR0122"
+		(property "Reference" "#PWR?"
 			(at 480.06 363.22 0)
 			(effects
 				(font
@@ -23014,6 +23248,12 @@
 			(uuid "49e1d0b6-fb37-4ed8-bec5-3d053be779ee")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0122")
@@ -23032,7 +23272,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "267734cc-44ee-4d6d-b80e-c1dac0ebe7ad")
-		(property "Reference" "J9"
+		(property "Reference" "J?"
 			(at 200.66 347.9799 0)
 			(effects
 				(font
@@ -23090,6 +23330,12 @@
 			(uuid "6e7760e7-cd60-4489-a0c0-532625c22aca")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J9")
@@ -23108,7 +23354,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "28248a54-1b1f-44a0-b368-72c3372c8503")
-		(property "Reference" "D11"
+		(property "Reference" "D?"
 			(at 400.05 226.3774 90)
 			(effects
 				(font
@@ -23160,6 +23406,12 @@
 			(uuid "b2708855-1f57-46a6-9230-ed84485d2b34")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D11")
@@ -23178,7 +23430,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "2a021569-d3d5-4c06-a497-5e0f5a6855fa")
-		(property "Reference" "U4"
+		(property "Reference" "U?"
 			(at 336.55 213.36 0)
 			(effects
 				(font
@@ -23337,6 +23589,12 @@
 			(uuid "86fa323e-820a-4aac-8f58-207d343cbbfe")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U4")
@@ -23355,7 +23613,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2ab55b9c-2bcf-47f3-8429-fcd3c3be048f")
-		(property "Reference" "R7"
+		(property "Reference" "R?"
 			(at 193.04 375.9199 0)
 			(effects
 				(font
@@ -23407,6 +23665,12 @@
 			(uuid "c23ea852-b6c5-49e8-b9be-aedd15f6bad7")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R7")
@@ -23424,7 +23688,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2ab8d9ce-8108-4ca9-a0d3-d8687008e026")
-		(property "Reference" "SNS_TX13"
+		(property "Reference" "SNS_TX?"
 			(at 38.354 222.504 90)
 			(effects
 				(font
@@ -23475,6 +23739,12 @@
 			(uuid "5fc031be-4a2f-4dff-b2f1-8587885d3e90")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX13")
@@ -23493,7 +23763,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2adf83ca-938e-43b5-a39a-fdbe3e0abb17")
-		(property "Reference" "#PWR0114"
+		(property "Reference" "#PWR?"
 			(at 499.11 123.19 0)
 			(effects
 				(font
@@ -23541,6 +23811,12 @@
 			(uuid "ada78860-dcb1-47f9-bb9a-a81e075906b4")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0114")
@@ -23558,7 +23834,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2d00dcf4-832a-469f-b264-f207f9510ff2")
-		(property "Reference" "C76"
+		(property "Reference" "C?"
 			(at 40.64 67.818 0)
 			(effects
 				(font
@@ -23610,6 +23886,12 @@
 			(uuid "e4a47491-1cbc-4b55-a99a-086746ea7e04")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C76")
@@ -23628,7 +23910,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "2e0bcebb-6c6d-47e5-bd7c-3cc6e2221c37")
-		(property "Reference" "#PWR049"
+		(property "Reference" "#PWR?"
 			(at 482.6 224.79 0)
 			(effects
 				(font
@@ -23676,6 +23958,12 @@
 			(uuid "45ed2aa1-cbc1-4f06-bc89-0c6dfa25454f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR049")
@@ -23693,7 +23981,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2f0e9816-f39a-4860-ab3b-72a7108bd727")
-		(property "Reference" "JP24"
+		(property "Reference" "JP?"
 			(at 39.878 51.054 90)
 			(effects
 				(font
@@ -23746,6 +24034,12 @@
 			(uuid "87e55355-ac6f-4909-85af-d7674951aad6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP24")
@@ -23764,7 +24058,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3041b1d2-c113-47a3-b16d-54e8cf4b160e")
-		(property "Reference" "FB1"
+		(property "Reference" "FB?"
 			(at 247.6119 110.49 90)
 			(effects
 				(font
@@ -23815,6 +24109,12 @@
 			(uuid "9a10469c-be3c-4925-8335-a8df0678fe9b")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "FB?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "FB1")
@@ -23833,7 +24133,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "31dc70e6-6121-47b9-b169-bdf7b9662c6f")
-		(property "Reference" "#PWR067"
+		(property "Reference" "#PWR?"
 			(at 59.69 330.2 0)
 			(effects
 				(font
@@ -23881,6 +24181,12 @@
 			(uuid "b1f62b35-9912-44b8-909f-6c17c0d28e5f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR067")
@@ -23899,7 +24205,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "32837ab8-985c-4636-8f01-9ef79ae6ed99")
-		(property "Reference" "#PWR048"
+		(property "Reference" "#PWR?"
 			(at 482.6 207.01 0)
 			(effects
 				(font
@@ -23947,6 +24253,12 @@
 			(uuid "26b3d271-e10c-428c-84cf-7d2ce9c14a7d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR048")
@@ -23964,7 +24276,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "33d75058-bfb2-4914-a393-f6dbae1d4791")
-		(property "Reference" "JP3"
+		(property "Reference" "JP?"
 			(at 327.152 293.37 0)
 			(effects
 				(font
@@ -24015,6 +24327,12 @@
 			(uuid "f79566eb-6073-4e10-b565-9a7f26e299c6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP3")
@@ -24033,7 +24351,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "34087585-07f5-448f-aee1-2c511d446f07")
-		(property "Reference" "#PWR085"
+		(property "Reference" "#PWR?"
 			(at 706.12 165.1 0)
 			(effects
 				(font
@@ -24081,6 +24399,12 @@
 			(uuid "3fba892c-8205-4e10-a653-cff7324fc82a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR085")
@@ -24099,7 +24423,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "34730ec2-e502-4497-901f-63767b679986")
-		(property "Reference" "R62"
+		(property "Reference" "R?"
 			(at 521.97 303.53 90)
 			(effects
 				(font
@@ -24149,6 +24473,12 @@
 			(uuid "333c65ae-18e0-498b-b41e-bbb6bfe6a91e")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R62")
@@ -24167,7 +24497,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "35064cdd-1c71-42cd-a98b-c6bfed5b939e")
-		(property "Reference" "J28"
+		(property "Reference" "J?"
 			(at 487.68 288.2899 0)
 			(effects
 				(font
@@ -24347,6 +24677,12 @@
 			(uuid "a00de232-9f41-47af-accc-59573570581c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J28")
@@ -24364,7 +24700,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "35095871-90d2-4d01-9624-bbfc5c0704f8")
-		(property "Reference" "SNS_TX11"
+		(property "Reference" "SNS_TX?"
 			(at 379.984 143.764 90)
 			(effects
 				(font
@@ -24415,6 +24751,12 @@
 			(uuid "83c67c6d-7726-4762-9f8e-6a7326344190")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX11")
@@ -24433,7 +24775,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "352a85cb-2995-4a0c-bd76-5c54175761af")
-		(property "Reference" "#PWR01"
+		(property "Reference" "#PWR?"
 			(at 60.96 132.08 0)
 			(effects
 				(font
@@ -24481,6 +24823,12 @@
 			(uuid "3a772d49-9eb5-4406-8726-cca5638677de")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR01")
@@ -24499,7 +24847,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "3720a430-9463-4490-80d8-10655a4914bf")
-		(property "Reference" "R18"
+		(property "Reference" "R?"
 			(at 317.5 213.3599 0)
 			(effects
 				(font
@@ -24551,6 +24899,12 @@
 			(uuid "fa2b9367-71d3-449e-ba70-5580caf1845c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R18")
@@ -24568,7 +24922,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "373cbeb3-6b8d-494f-8d9c-95f255359625")
-		(property "Reference" "C5"
+		(property "Reference" "C?"
 			(at 72.644 99.822 0)
 			(effects
 				(font
@@ -24620,6 +24974,12 @@
 			(uuid "b2757197-61be-4d3b-8a6c-bf3409f190d6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C5")
@@ -24637,7 +24997,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "373cca5c-5f9d-4189-bf6b-7c6fffdcfc1d")
-		(property "Reference" "C9"
+		(property "Reference" "C?"
 			(at 154.94 356.108 0)
 			(effects
 				(font
@@ -24689,6 +25049,12 @@
 			(uuid "19799a99-090f-4c1a-b168-c328c2a82e9a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C9")
@@ -24707,7 +25073,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "376e7fee-5c91-4100-801d-e3da2535da77")
-		(property "Reference" "D1"
+		(property "Reference" "D?"
 			(at 105.41 223.2024 0)
 			(effects
 				(font
@@ -24930,6 +25296,12 @@
 			(uuid "ba01f62c-8651-4817-8952-398aa0f10273")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D1")
@@ -24948,7 +25320,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "381f32fb-432c-43c4-9d55-4f05d6a9aba0")
-		(property "Reference" "R16"
+		(property "Reference" "R?"
 			(at 312.42 293.3699 0)
 			(effects
 				(font
@@ -25000,6 +25372,12 @@
 			(uuid "691e5d21-2b76-4f64-a834-9da49aed21dc")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R16")
@@ -25018,7 +25396,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "383a31d1-1d67-4fb1-a965-8a012f4374f5")
-		(property "Reference" "J12"
+		(property "Reference" "J?"
 			(at 455.93 146.0499 0)
 			(effects
 				(font
@@ -25070,6 +25448,12 @@
 			(uuid "4dafd18d-161b-468f-8c1a-af846796d960")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J12")
@@ -25088,7 +25472,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3aad5e1d-bd39-42b4-acd0-97cfec249044")
-		(property "Reference" "#PWR0111"
+		(property "Reference" "#PWR?"
 			(at 476.25 372.11 0)
 			(effects
 				(font
@@ -25136,6 +25520,12 @@
 			(uuid "8f6ad0db-f037-43c1-8b72-96c4e14327e5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0111")
@@ -25153,7 +25543,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3c3a2b57-a359-431d-869a-53c3985f2475")
-		(property "Reference" "C67"
+		(property "Reference" "C?"
 			(at 506.73 105.918 0)
 			(effects
 				(font
@@ -25206,6 +25596,12 @@
 			(uuid "3d979c06-d8c8-476e-bb4f-bfec5bddadfd")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C67")
@@ -25223,7 +25619,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3d72bba2-0458-4f81-90bd-ac3369d4db72")
-		(property "Reference" "#PWR034"
+		(property "Reference" "#PWR?"
 			(at 373.38 407.67 0)
 			(effects
 				(font
@@ -25271,6 +25667,12 @@
 			(uuid "9f1dd77d-b542-486a-8922-6a17194ab03f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR034")
@@ -25289,7 +25691,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3e39847c-7872-42e6-ba8b-e6356b0a5d3d")
-		(property "Reference" "#PWR0112"
+		(property "Reference" "#PWR?"
 			(at 486.41 83.82 0)
 			(effects
 				(font
@@ -25337,6 +25739,12 @@
 			(uuid "cb5d6a0b-bdfe-4ad5-9481-3f13610ffac6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0112")
@@ -25355,7 +25763,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3f48fd40-2482-41c6-9a3b-5cbeb7eac9c8")
-		(property "Reference" "J20"
+		(property "Reference" "J?"
 			(at 541.02 330.1999 0)
 			(effects
 				(font
@@ -25532,6 +25940,12 @@
 			(uuid "61965551-ee9b-48ab-a5b6-713d2951194f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J20")
@@ -25549,7 +25963,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "409edd86-8aa7-40ec-bc5e-c7b569e5dc61")
-		(property "Reference" "#PWR0132"
+		(property "Reference" "#PWR?"
 			(at 471.17 300.99 0)
 			(effects
 				(font
@@ -25597,6 +26011,12 @@
 			(uuid "637bf784-91df-4aad-9eba-f20cc0c584f9")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0132")
@@ -25614,7 +26034,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "40a72598-d8c9-4124-9613-04fce1460708")
-		(property "Reference" "JP22"
+		(property "Reference" "JP?"
 			(at 481.838 82.804 90)
 			(effects
 				(font
@@ -25667,6 +26087,12 @@
 			(uuid "92c97c49-f13e-4113-ac6d-b86efb240dce")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP22")
@@ -25685,7 +26111,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "416d248d-85bc-4667-86fe-b57f7ccfc591")
-		(property "Reference" "D17"
+		(property "Reference" "D?"
 			(at 750.57 206.0574 90)
 			(effects
 				(font
@@ -25737,6 +26163,12 @@
 			(uuid "369899b9-73e6-44af-bcb5-90a360679d8b")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D17")
@@ -25754,7 +26186,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4357fc88-4d98-40c2-9605-c637f5cefe81")
-		(property "Reference" "C8"
+		(property "Reference" "C?"
 			(at 92.71 196.088 0)
 			(effects
 				(font
@@ -25806,6 +26238,12 @@
 			(uuid "6fa9e22f-ae0d-4a38-90a4-fa768b7abe29")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C8")
@@ -25823,7 +26261,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "44de2361-3476-41df-bb75-b299619c787d")
-		(property "Reference" "JP10"
+		(property "Reference" "JP?"
 			(at 43.688 294.894 90)
 			(effects
 				(font
@@ -25876,6 +26314,12 @@
 			(uuid "1ac9bffe-e0df-4684-9ceb-6ea5e1675875")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP10")
@@ -25893,7 +26337,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "45036a98-13d5-4bc0-9eb3-47cdcd960bfc")
-		(property "Reference" "#PWR0123"
+		(property "Reference" "#PWR?"
 			(at 481.33 336.55 0)
 			(effects
 				(font
@@ -25941,6 +26385,12 @@
 			(uuid "6271295a-98f5-4435-b87f-cc33f4a4d46d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0123")
@@ -25958,7 +26408,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "452fd70c-0ef3-4bf1-9c81-8e5c23abbd14")
-		(property "Reference" "#PWR017"
+		(property "Reference" "#PWR?"
 			(at 194.31 439.42 0)
 			(effects
 				(font
@@ -26006,6 +26456,12 @@
 			(uuid "263366a2-dd42-4991-b072-fe9d54ceab5e")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR017")
@@ -26024,7 +26480,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4706e436-43b3-4621-975f-1c3b7a620d21")
-		(property "Reference" "R1"
+		(property "Reference" "R?"
 			(at 66.04 90.17 90)
 			(effects
 				(font
@@ -26074,6 +26530,12 @@
 			(uuid "a8c42c8a-2e30-43b2-9f77-b6f0c138ed5a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R1")
@@ -26092,7 +26554,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "48493f86-50ca-4e19-b666-c0f32df2bd63")
-		(property "Reference" "#PWR0136"
+		(property "Reference" "#PWR?"
 			(at 568.96 367.03 0)
 			(effects
 				(font
@@ -26140,6 +26602,12 @@
 			(uuid "41be17ce-7947-4b98-933f-ac869a1b9577")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0136")
@@ -26157,7 +26625,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "48b148c2-8406-402e-b40e-1705524beec4")
-		(property "Reference" "BT1"
+		(property "Reference" "BT?"
 			(at 386.334 378.46 90)
 			(effects
 				(font
@@ -26333,6 +26801,12 @@
 			(uuid "213516da-ef7a-4b63-bb35-5cba4c62a316")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "BT?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "BT1")
@@ -26351,7 +26825,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4c2a0935-4102-43b4-a2e5-56936d9fbf48")
-		(property "Reference" "#PWR014"
+		(property "Reference" "#PWR?"
 			(at 189.23 344.17 0)
 			(effects
 				(font
@@ -26399,6 +26873,12 @@
 			(uuid "b090f3ab-9b4e-4dd5-b467-1c1e55d2f47e")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR014")
@@ -26417,7 +26897,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4c40ae52-892a-4e8a-9b0d-f3287ada2fce")
-		(property "Reference" "#PWR081"
+		(property "Reference" "#PWR?"
 			(at 472.44 377.19 0)
 			(effects
 				(font
@@ -26465,6 +26945,12 @@
 			(uuid "76c2c166-c74e-4917-a785-f420d12c4160")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR081")
@@ -26482,7 +26968,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4c6bf67b-7288-43fe-9c75-f0188a5a1ba2")
-		(property "Reference" "C13"
+		(property "Reference" "C?"
 			(at 229.108 119.634 0)
 			(effects
 				(font
@@ -26534,6 +27020,12 @@
 			(uuid "f83bd987-0f0d-42f0-a76e-bce9f3d16222")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C13")
@@ -26551,7 +27043,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4ed76c43-9b55-4b82-86cd-50468d3f1282")
-		(property "Reference" "SNS_TX14"
+		(property "Reference" "SNS_TX?"
 			(at 115.824 132.334 90)
 			(effects
 				(font
@@ -26602,6 +27094,12 @@
 			(uuid "f2896a81-e696-4987-965c-90c630eb8f74")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX14")
@@ -26620,7 +27118,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4ee4035b-5a38-49ff-95bc-32923a17b20a")
-		(property "Reference" "#PWR083"
+		(property "Reference" "#PWR?"
 			(at 673.1 201.93 0)
 			(effects
 				(font
@@ -26668,6 +27166,12 @@
 			(uuid "f4737e55-ab22-4e72-a86e-d642abde5d47")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR083")
@@ -26686,7 +27190,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4f3e3117-7242-431d-82e4-6730821184b7")
-		(property "Reference" "#PWR046"
+		(property "Reference" "#PWR?"
 			(at 464.82 422.91 0)
 			(effects
 				(font
@@ -26734,6 +27238,12 @@
 			(uuid "94152ca5-c54c-42e6-aa06-14fd8cbe1ab1")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR046")
@@ -26752,7 +27262,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4fa259b6-700e-4e68-ba0e-2513e909a32e")
-		(property "Reference" "R20"
+		(property "Reference" "R?"
 			(at 335.28 360.6799 0)
 			(effects
 				(font
@@ -26804,6 +27314,12 @@
 			(uuid "086a236c-591b-428c-87cb-725c8c992ae4")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R20")
@@ -26822,7 +27338,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "51144e22-e926-4222-a071-cbcecdd68c84")
-		(property "Reference" "#PWR040"
+		(property "Reference" "#PWR?"
 			(at 397.51 367.03 0)
 			(effects
 				(font
@@ -26870,6 +27386,12 @@
 			(uuid "89558972-1016-4dd2-9489-72328e8ecddf")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR040")
@@ -26888,7 +27410,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "52648517-f6e4-4681-81d7-741a20696d4d")
-		(property "Reference" "J17"
+		(property "Reference" "J?"
 			(at 541.02 288.2899 0)
 			(effects
 				(font
@@ -27068,6 +27590,12 @@
 			(uuid "7f6e7b27-55b0-4474-b65c-0dd9b47c3b91")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J17")
@@ -27086,7 +27614,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "559bf417-748d-4ca7-a9f6-e5bd45404a08")
-		(property "Reference" "GSM2"
+		(property "Reference" "GSM?"
 			(at 363.22 92.71 0)
 			(effects
 				(font
@@ -27211,6 +27739,12 @@
 			(uuid "4165a764-3de8-40d5-8b58-fe0f934a57fc")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "GSM?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "GSM2")
@@ -27229,7 +27763,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "57ed99b1-3c01-41e3-ab2e-e0c1ff75d8c9")
-		(property "Reference" "#PWR027"
+		(property "Reference" "#PWR?"
 			(at 330.2 293.37 0)
 			(effects
 				(font
@@ -27277,6 +27811,12 @@
 			(uuid "b16f9e1b-8ebe-4dd0-bc18-0548fa205c53")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR027")
@@ -27294,7 +27834,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "590a7551-042f-4915-a725-f0997f90f2a1")
-		(property "Reference" "R5"
+		(property "Reference" "R?"
 			(at 75.184 198.12 0)
 			(effects
 				(font
@@ -27346,6 +27886,12 @@
 			(uuid "ca339f49-bbd4-4f14-9a47-f4a713648b76")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R5")
@@ -27363,7 +27909,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5c9fe522-a156-4de8-ab65-d527fac6223b")
-		(property "Reference" "JP1"
+		(property "Reference" "JP?"
 			(at 164.592 347.98 0)
 			(effects
 				(font
@@ -27414,6 +27960,12 @@
 			(uuid "e25666b6-8166-42bf-b64e-7872219d48f3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP1")
@@ -27432,7 +27984,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5d6d5288-8dbd-4f2b-b529-ad3c82c3c0b9")
-		(property "Reference" "#PWR0113"
+		(property "Reference" "#PWR?"
 			(at 480.06 386.08 0)
 			(effects
 				(font
@@ -27480,6 +28032,12 @@
 			(uuid "9b1e32cc-fc11-42e3-89ab-395b06fa74ac")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0113")
@@ -27498,7 +28056,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5dfbd3ac-09c8-4987-9539-7fd81e5577a5")
-		(property "Reference" "R12"
+		(property "Reference" "R?"
 			(at 240.03 160.02 90)
 			(effects
 				(font
@@ -27548,6 +28106,12 @@
 			(uuid "f098be34-6565-4b78-ba61-ef6b38bb1f67")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R12")
@@ -27566,7 +28130,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5e769e3b-e69c-448b-965e-47ca70d66882")
-		(property "Reference" "R3"
+		(property "Reference" "R?"
 			(at 67.31 189.23 90)
 			(effects
 				(font
@@ -27616,6 +28180,12 @@
 			(uuid "280be4f7-9234-4bad-b853-f1fbc56ef7f6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R3")
@@ -27633,7 +28203,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5ee51d48-d392-4379-b5ae-b965e5e1cdeb")
-		(property "Reference" "JP15"
+		(property "Reference" "JP?"
 			(at 76.2 308.102 0)
 			(effects
 				(font
@@ -27684,6 +28254,12 @@
 			(uuid "cf6e4302-0480-4c50-94d8-47b7b895546e")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP15")
@@ -27701,7 +28277,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5f483ab9-4566-479a-92fd-f3f20857dfe6")
-		(property "Reference" "Q2"
+		(property "Reference" "Q?"
 			(at 88.9 194.3099 0)
 			(effects
 				(font
@@ -27759,6 +28335,12 @@
 			(uuid "b1d3763b-b273-4476-b5bd-92eff860b246")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "Q?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "Q2")
@@ -27777,7 +28359,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "5f5a66dc-e9c0-4a22-a2b3-87940a740da3")
-		(property "Reference" "U3"
+		(property "Reference" "U?"
 			(at 163.83 109.22 0)
 			(effects
 				(font
@@ -28094,6 +28676,12 @@
 			(uuid "4d02ab9b-6509-47ad-b5d8-e091fcdbc2c7")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U3")
@@ -28111,7 +28699,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5feeb739-6a3f-4016-b9d8-a1283dc0f873")
-		(property "Reference" "#PWR020"
+		(property "Reference" "#PWR?"
 			(at 251.46 184.15 0)
 			(effects
 				(font
@@ -28159,6 +28747,12 @@
 			(uuid "9be8ec92-edaf-45d0-8578-ed54306e4f9f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR020")
@@ -28177,7 +28771,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6119e819-f24a-4667-a899-4fce598ea970")
-		(property "Reference" "U8"
+		(property "Reference" "U?"
 			(at 518.16 416.56 0)
 			(effects
 				(font
@@ -28376,6 +28970,12 @@
 			(uuid "f83e90d1-d1ca-4cd9-87df-53bf42ceafc6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U8")
@@ -28394,7 +28994,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "62bedff7-9f78-48af-9489-b10c8dc7af3b")
-		(property "Reference" "J32"
+		(property "Reference" "J?"
 			(at 581.66 356.8699 0)
 			(effects
 				(font
@@ -28571,6 +29171,12 @@
 			(uuid "c86e27b9-d2db-4e54-9ece-285b76350781")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J32")
@@ -28589,7 +29195,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "62e955d7-fc73-4ae4-bf6b-b17d3ce65206")
-		(property "Reference" "D9"
+		(property "Reference" "D?"
 			(at 361.95 151.4474 90)
 			(effects
 				(font
@@ -28641,6 +29247,12 @@
 			(uuid "c46401b7-d9d6-4422-93b4-c398c5b5db9f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D9")
@@ -28659,7 +29271,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "639d2bbc-c3bf-41c7-9481-74889cfa2862")
-		(property "Reference" "R14"
+		(property "Reference" "R?"
 			(at 262.89 140.9699 0)
 			(effects
 				(font
@@ -28711,6 +29323,12 @@
 			(uuid "00db8a7d-f44b-4ec5-825f-732d82d94120")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R14")
@@ -28728,7 +29346,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "64e7822f-da5c-4288-9206-fc0f9d7e596d")
-		(property "Reference" "#PWR016"
+		(property "Reference" "#PWR?"
 			(at 189.23 400.05 0)
 			(effects
 				(font
@@ -28776,6 +29394,12 @@
 			(uuid "b318e1d1-782e-493c-b8c6-5893df2bd41d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR016")
@@ -28794,7 +29418,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6546622a-73e5-4422-90b0-68ad41fce1d1")
-		(property "Reference" "#PWR091"
+		(property "Reference" "#PWR?"
 			(at 621.03 229.87 0)
 			(effects
 				(font
@@ -28842,6 +29466,12 @@
 			(uuid "bee26f30-0942-47d7-bb46-374a1b2b1654")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR091")
@@ -28859,7 +29489,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "65b965c1-62a1-441f-b947-754634dee7b9")
-		(property "Reference" "SNS_TX12"
+		(property "Reference" "SNS_TX?"
 			(at 379.984 146.304 90)
 			(effects
 				(font
@@ -28910,6 +29540,12 @@
 			(uuid "29b5489a-1790-41d2-905c-47cb886b9f00")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX12")
@@ -28928,7 +29564,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "65be41c1-14a0-4357-b70c-030879c6b06f")
-		(property "Reference" "#PWR0121"
+		(property "Reference" "#PWR?"
 			(at 528.32 340.36 0)
 			(effects
 				(font
@@ -28976,6 +29612,12 @@
 			(uuid "7f689df0-d182-4c23-bb1e-053d5d94b850")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0121")
@@ -28994,7 +29636,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "68601f3b-1bfa-409e-918e-cdb48224c8fc")
-		(property "Reference" "J18"
+		(property "Reference" "J?"
 			(at 496.57 370.8399 0)
 			(effects
 				(font
@@ -29174,6 +29816,12 @@
 			(uuid "ac1f191f-e201-48a4-8df5-bde4fe2d0efd")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J18")
@@ -29192,7 +29840,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "68f5a131-daf2-44c7-8d92-cc5a76e47be7")
-		(property "Reference" "#PWR029"
+		(property "Reference" "#PWR?"
 			(at 354.33 245.11 0)
 			(effects
 				(font
@@ -29240,6 +29888,12 @@
 			(uuid "e1b9ba52-d126-4f86-a0e4-1aed65c383e6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR029")
@@ -29257,7 +29911,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6b8cbc88-8410-451a-9e5b-194c73899099")
-		(property "Reference" "C22"
+		(property "Reference" "C?"
 			(at 398.018 372.11 0)
 			(effects
 				(font
@@ -29309,6 +29963,12 @@
 			(uuid "2fe49dde-fae2-4a63-a405-f1b9c106cd85")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C22")
@@ -29326,7 +29986,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6b97fcf3-295f-4661-8bf2-8f4ffe55c04a")
-		(property "Reference" "C1"
+		(property "Reference" "C?"
 			(at 44.45 161.798 0)
 			(effects
 				(font
@@ -29378,6 +30038,12 @@
 			(uuid "fa9882dd-97db-4f04-abac-0b178a1e2c21")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C1")
@@ -29395,7 +30061,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6c7e89b4-81c7-4d1b-8503-3b4f1662c327")
-		(property "Reference" "JP7"
+		(property "Reference" "JP?"
 			(at 461.772 422.91 0)
 			(effects
 				(font
@@ -29446,6 +30112,12 @@
 			(uuid "eef51639-99b3-4c68-b655-485cb072261c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP7")
@@ -29464,7 +30136,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6df0cec3-b3fb-4fbc-8bc4-082a0b2fe106")
-		(property "Reference" "#PWR056"
+		(property "Reference" "#PWR?"
 			(at 48.26 297.18 0)
 			(effects
 				(font
@@ -29512,6 +30184,12 @@
 			(uuid "edd40b1a-74bf-4414-b65b-668d9b3b7345")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR056")
@@ -29530,7 +30208,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6e0b6444-6bc2-42d2-85e7-c7ae5212801f")
-		(property "Reference" "#PWR0110"
+		(property "Reference" "#PWR?"
 			(at 82.55 309.88 0)
 			(effects
 				(font
@@ -29578,6 +30256,12 @@
 			(uuid "ff79b6bc-c929-4780-8dbb-79e568ef3e16")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0110")
@@ -29596,7 +30280,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6e128cf3-9714-402a-802b-679f7188a31e")
-		(property "Reference" "J35"
+		(property "Reference" "J?"
 			(at 54.61 348.6149 90)
 			(effects
 				(font
@@ -29648,6 +30332,12 @@
 			(uuid "b7e580af-4959-4430-b1fb-6a42c2bb71f5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J35")
@@ -29665,7 +30355,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6eaffdba-7d42-458d-bb11-65bd5d0775e6")
-		(property "Reference" "JP2"
+		(property "Reference" "JP?"
 			(at 250.952 107.95 0)
 			(effects
 				(font
@@ -29716,6 +30406,12 @@
 			(uuid "3b1aca9e-6b2d-43ea-a898-925ba9c3b5fa")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP2")
@@ -29733,7 +30429,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6edaa37a-25e8-4876-a61f-8638d16b2378")
-		(property "Reference" "#PWR038"
+		(property "Reference" "#PWR?"
 			(at 392.43 137.16 0)
 			(effects
 				(font
@@ -29781,6 +30477,12 @@
 			(uuid "7b9d736f-fe19-4367-ab28-77f0d9726076")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR038")
@@ -29798,7 +30500,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "727706db-e49f-4006-bd2f-c6d9324f2777")
-		(property "Reference" "#PWR042"
+		(property "Reference" "#PWR?"
 			(at 419.1 394.97 0)
 			(effects
 				(font
@@ -29846,6 +30548,12 @@
 			(uuid "a650ca0f-46f3-4c3a-ad77-05b34e2b3ea9")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR042")
@@ -29863,7 +30571,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "72acd15a-a432-477a-82b2-1012d86571fe")
-		(property "Reference" "C39"
+		(property "Reference" "C?"
 			(at 669.29 188.468 0)
 			(effects
 				(font
@@ -29915,6 +30623,12 @@
 			(uuid "9983423d-cf9d-4857-b806-09844a4c7dcd")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C39")
@@ -29933,7 +30647,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "72e843b0-7785-420d-aa91-08f9cab28bb6")
-		(property "Reference" "D8"
+		(property "Reference" "D?"
 			(at 312.42 305.1174 90)
 			(effects
 				(font
@@ -29985,6 +30699,12 @@
 			(uuid "1e13fd4b-d839-42f7-8054-2af0f8fd3637")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D8")
@@ -30002,7 +30722,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7328d343-abf8-4cb5-a2fd-86bd66fb60c4")
-		(property "Reference" "#PWR0134"
+		(property "Reference" "#PWR?"
 			(at 473.71 320.04 0)
 			(effects
 				(font
@@ -30050,6 +30770,12 @@
 			(uuid "cee6e310-373e-43a5-a100-baaee263b9f0")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0134")
@@ -30068,7 +30794,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74663141-91d6-469c-b8f0-0ba450531554")
-		(property "Reference" "R53"
+		(property "Reference" "R?"
 			(at 638.81 217.1699 0)
 			(effects
 				(font
@@ -30120,6 +30846,12 @@
 			(uuid "e5a48251-7b24-486a-903d-51c0cbc5a51a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R53")
@@ -30138,7 +30870,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "74d3ba3b-bb6f-4582-9c8c-8ec533c53310")
-		(property "Reference" "R50"
+		(property "Reference" "R?"
 			(at 750.57 194.3099 0)
 			(effects
 				(font
@@ -30190,6 +30922,12 @@
 			(uuid "52228a45-0677-4f95-95f5-059c4b16ba89")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R50")
@@ -30208,7 +30946,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "75539d7e-a1c0-4d79-9f98-269287ac3c00")
-		(property "Reference" "D6"
+		(property "Reference" "D?"
 			(at 262.89 152.7174 90)
 			(effects
 				(font
@@ -30260,6 +30998,12 @@
 			(uuid "589b86f5-c03a-4d93-b55e-14d0897cb001")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D6")
@@ -30278,7 +31022,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "76030130-50a9-4832-813e-c196f3afbb0e")
-		(property "Reference" "#PWR0128"
+		(property "Reference" "#PWR?"
 			(at 528.32 299.72 0)
 			(effects
 				(font
@@ -30326,6 +31070,12 @@
 			(uuid "8f22db7d-516a-4c40-9426-ee915494f4cd")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0128")
@@ -30343,7 +31093,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "766831dc-b047-4917-8e65-ff295ff2120b")
-		(property "Reference" "J40"
+		(property "Reference" "J?"
 			(at 208.026 368.808 0)
 			(effects
 				(font
@@ -30407,6 +31157,12 @@
 			(uuid "60a401b3-a385-4e7e-be70-e90f621a4c38")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J40")
@@ -30425,7 +31181,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "77451d23-faf8-49c1-adc4-3b5c5c34cfbc")
-		(property "Reference" "R22"
+		(property "Reference" "R?"
 			(at 361.95 139.6999 0)
 			(effects
 				(font
@@ -30477,6 +31233,12 @@
 			(uuid "faa314a6-b5a7-4f48-bf4f-f6cce94200d5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R22")
@@ -30494,7 +31256,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "7a68e185-8bab-41fa-a425-5c0b62186b9c")
-		(property "Reference" "C17"
+		(property "Reference" "C?"
 			(at 349.25 102.108 0)
 			(effects
 				(font
@@ -30546,6 +31308,12 @@
 			(uuid "b3a78174-cfe6-48ce-9740-19bf9f75c80b")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C17")
@@ -30563,7 +31331,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7ae609c0-04f6-4a3d-8870-36cef5e1f0fe")
-		(property "Reference" "C21"
+		(property "Reference" "C?"
 			(at 389.128 150.114 0)
 			(effects
 				(font
@@ -30615,6 +31383,12 @@
 			(uuid "61dab5aa-907b-4cf8-b8ca-ec4681b724d5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C21")
@@ -30633,7 +31407,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7c2c81fe-6486-4b47-add0-84260b485a9c")
-		(property "Reference" "U6"
+		(property "Reference" "U?"
 			(at 351.79 363.22 0)
 			(effects
 				(font
@@ -30782,6 +31556,12 @@
 			(uuid "91b434dd-a135-4327-929b-13b8e8c53485")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U6")
@@ -30799,7 +31579,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7c3b8e7f-d699-41f0-85a2-c398961880db")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR?"
 			(at 66.04 113.03 0)
 			(effects
 				(font
@@ -30847,6 +31627,12 @@
 			(uuid "81cb6ec7-e1ee-430e-b496-8db6d9cc7415")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR04")
@@ -30865,7 +31651,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7d11dd44-9b1e-4ae9-b534-86eb07e77900")
-		(property "Reference" "J38"
+		(property "Reference" "J?"
 			(at 144.78 352.4249 90)
 			(effects
 				(font
@@ -30918,6 +31704,12 @@
 			(uuid "4cbdebfc-222a-479a-9143-c14a54da0d66")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J38")
@@ -30935,7 +31727,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7d52ed49-aad6-44dd-ad2c-ef6d118106f9")
-		(property "Reference" "R24"
+		(property "Reference" "R?"
 			(at 362.966 360.934 0)
 			(effects
 				(font
@@ -30987,6 +31779,12 @@
 			(uuid "ebbf0be6-d6f0-448a-aa81-6ee66dba814d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R24")
@@ -31004,7 +31802,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7da93e8a-245e-472e-b8ae-6e99edd5f883")
-		(property "Reference" "C12"
+		(property "Reference" "C?"
 			(at 220.98 119.888 0)
 			(effects
 				(font
@@ -31056,6 +31854,12 @@
 			(uuid "7b64b251-6e49-45b6-b3d1-39ed857f6fed")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C12")
@@ -31074,7 +31878,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7f09156f-3b23-4531-8df0-6a13e0d6baac")
-		(property "Reference" "#PWR0115"
+		(property "Reference" "#PWR?"
 			(at 474.98 287.02 0)
 			(effects
 				(font
@@ -31122,6 +31926,12 @@
 			(uuid "0c6826d2-9319-47b0-b90a-9e0ac7e57c9c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0115")
@@ -31140,7 +31950,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7f0aaa69-57fd-4012-b855-dec29a34b2c5")
-		(property "Reference" "J3"
+		(property "Reference" "J?"
 			(at 488.95 306.0699 0)
 			(effects
 				(font
@@ -31317,6 +32127,12 @@
 			(uuid "5e8d4535-09e2-41c3-89d2-14fa569dbc7b")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J3")
@@ -31335,7 +32151,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "7f4ba539-fc32-4a13-ae5a-0f80c6fb5d23")
-		(property "Reference" "R27"
+		(property "Reference" "R?"
 			(at 400.05 214.6299 0)
 			(effects
 				(font
@@ -31387,6 +32203,12 @@
 			(uuid "82f33927-d822-4968-a844-5a17abb93d18")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R27")
@@ -31405,7 +32227,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7f6a4449-7432-4dec-87e1-6fa943f24862")
-		(property "Reference" "J14"
+		(property "Reference" "J?"
 			(at 494.03 327.6599 0)
 			(effects
 				(font
@@ -31579,6 +32401,12 @@
 			(uuid "ac3a12da-9d59-42d2-9462-3684e2402544")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J14")
@@ -31597,7 +32425,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "802997dd-0547-4cb5-bd07-c51c5318bf45")
-		(property "Reference" "J15"
+		(property "Reference" "J?"
 			(at 494.03 344.1699 0)
 			(effects
 				(font
@@ -31771,6 +32599,12 @@
 			(uuid "9193025e-601e-4d3a-8591-7f7fc38faed8")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J15")
@@ -31789,7 +32623,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "822c3cbe-472d-4d9e-8e8e-0f1311771a83")
-		(property "Reference" "#PWR011"
+		(property "Reference" "#PWR?"
 			(at 167.64 347.98 0)
 			(effects
 				(font
@@ -31837,6 +32671,12 @@
 			(uuid "b6a23031-d880-47e1-a31d-0a7d30b5a63f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR011")
@@ -31854,7 +32694,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8381ebf0-d197-4861-8f9a-9bcd4f13791f")
-		(property "Reference" "C3"
+		(property "Reference" "C?"
 			(at 57.15 161.798 0)
 			(effects
 				(font
@@ -31906,6 +32746,12 @@
 			(uuid "f4357b62-aaf5-4cbf-8bcb-213c964856de")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C3")
@@ -31924,7 +32770,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "839350bb-d911-40fa-ae55-bba5659eddad")
-		(property "Reference" "U2"
+		(property "Reference" "U?"
 			(at 109.22 345.44 0)
 			(effects
 				(font
@@ -32230,6 +33076,12 @@
 			(uuid "3e59c4cd-cf0c-430f-8c61-69f13c544823")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U2")
@@ -32248,7 +33100,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "83dce28f-0909-4432-b184-f5f9886c22cf")
-		(property "Reference" "D3"
+		(property "Reference" "D?"
 			(at 193.04 387.6674 90)
 			(effects
 				(font
@@ -32300,6 +33152,12 @@
 			(uuid "f4e5ed7e-7d15-4997-9810-fee22a75f0cc")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D3")
@@ -32317,7 +33175,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "845ff89e-83d4-491e-bd4d-cacc398b18cc")
-		(property "Reference" "#PWR039"
+		(property "Reference" "#PWR?"
 			(at 396.24 238.76 0)
 			(effects
 				(font
@@ -32365,6 +33223,12 @@
 			(uuid "9ac666f5-b32f-4801-afff-cec4bdab3ab7")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR039")
@@ -32383,7 +33247,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "84f2b748-f931-46a9-982c-d532f6725dda")
-		(property "Reference" "#PWR0118"
+		(property "Reference" "#PWR?"
 			(at 533.4 353.06 0)
 			(effects
 				(font
@@ -32431,6 +33295,12 @@
 			(uuid "effef0bd-6bdf-42b2-98cb-758ca6ca30f1")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0118")
@@ -32448,7 +33318,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "886c80e8-d200-4fcc-8a46-a61fc446880e")
-		(property "Reference" "#PWR043"
+		(property "Reference" "#PWR?"
 			(at 440.69 120.65 0)
 			(effects
 				(font
@@ -32496,6 +33366,12 @@
 			(uuid "dbd9a314-d2d4-4e11-afc1-499c33fc2066")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR043")
@@ -32514,7 +33390,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "894d9d1a-a44f-4c25-837b-36ddd570b1ec")
-		(property "Reference" "#PWR084"
+		(property "Reference" "#PWR?"
 			(at 673.1 173.99 0)
 			(effects
 				(font
@@ -32562,6 +33438,12 @@
 			(uuid "9067163a-190d-4ff4-9ea2-19bc143ec20f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR084")
@@ -32580,7 +33462,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "89ce0f3e-5fa8-4a18-acd7-226c81ecb148")
-		(property "Reference" "U11"
+		(property "Reference" "U?"
 			(at 59.69 304.8 0)
 			(effects
 				(font
@@ -32633,6 +33515,12 @@
 			(uuid "2e812ca2-3e5c-4c44-8705-084b25b41830")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U11")
@@ -32650,7 +33538,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "8a2e0cd2-6235-4ee5-baf9-3c1585b7161e")
-		(property "Reference" "#PWR088"
+		(property "Reference" "#PWR?"
 			(at 744.22 187.96 0)
 			(effects
 				(font
@@ -32698,6 +33586,12 @@
 			(uuid "96ec19c2-1c10-41b7-b6d5-02149c78552b")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR088")
@@ -32716,7 +33610,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8a69ff76-f147-49bf-a428-8aee93b4cbd1")
-		(property "Reference" "D5"
+		(property "Reference" "D?"
 			(at 240.03 240.03 0)
 			(effects
 				(font
@@ -32896,6 +33790,12 @@
 			(uuid "df8816c2-1e2e-4f46-aca7-ce8e6f2ec1fe")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D5")
@@ -32914,7 +33814,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8ae96197-c464-416c-a91c-e8be2e74299c")
-		(property "Reference" "U16"
+		(property "Reference" "U?"
 			(at 499.11 97.79 0)
 			(effects
 				(font
@@ -32967,6 +33867,12 @@
 			(uuid "22e50f63-5bd8-40f1-86c1-3abdd58105aa")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U16")
@@ -32984,7 +33890,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "8b2f9ff2-840a-4b82-9584-d455e412721f")
-		(property "Reference" "C16"
+		(property "Reference" "C?"
 			(at 325.374 297.942 0)
 			(effects
 				(font
@@ -33036,6 +33942,12 @@
 			(uuid "7fc1ee50-1837-4b63-b9ff-225531dcbfb5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C16")
@@ -33054,7 +33966,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8bba7641-61e3-4c1b-8219-dcc9b0402ca4")
-		(property "Reference" "#PWR036"
+		(property "Reference" "#PWR?"
 			(at 378.46 142.24 0)
 			(effects
 				(font
@@ -33102,6 +34014,12 @@
 			(uuid "86088255-5696-4b8d-9cf2-1f8e1e355cb0")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR036")
@@ -33120,7 +34038,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8c0f290b-b0d0-45a0-90b7-486c788d14ed")
-		(property "Reference" "#PWR0119"
+		(property "Reference" "#PWR?"
 			(at 528.32 311.15 0)
 			(effects
 				(font
@@ -33168,6 +34086,12 @@
 			(uuid "987e38a2-aad8-474c-9aa7-aeb00b9b82f2")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0119")
@@ -33186,7 +34110,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8cb2c22b-50a3-4ce1-a5a7-6d062a944b3c")
-		(property "Reference" "D21"
+		(property "Reference" "D?"
 			(at 46.99 60.0074 90)
 			(effects
 				(font
@@ -33239,6 +34163,12 @@
 			(uuid "2dd7c1b9-30e4-41a3-9b45-faf1279c526c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D21")
@@ -33257,7 +34187,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8dacff8d-b519-49a7-a3eb-d064d493766c")
-		(property "Reference" "#PWR092"
+		(property "Reference" "#PWR?"
 			(at 635 231.14 0)
 			(effects
 				(font
@@ -33305,6 +34235,12 @@
 			(uuid "4b128925-fc3c-477d-a968-85ca945d423e")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR092")
@@ -33323,7 +34259,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8ddbbc17-09ac-4e61-8898-7c3f7cf910c1")
-		(property "Reference" "D7"
+		(property "Reference" "D?"
 			(at 276.86 118.4274 90)
 			(effects
 				(font
@@ -33375,6 +34311,12 @@
 			(uuid "ac5e63ea-2e37-421c-8a7c-3733d8fe4cfc")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D7")
@@ -33393,7 +34335,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8e113adc-b5ad-44f8-b597-f7e4d2540a53")
-		(property "Reference" "J21"
+		(property "Reference" "J?"
 			(at 546.1 350.5199 0)
 			(effects
 				(font
@@ -33570,6 +34512,12 @@
 			(uuid "ebc0217e-3c3a-4269-97f0-9dfced13b939")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J21")
@@ -33588,7 +34536,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8ee8f191-20b4-4a59-bd12-392b9a86f1aa")
-		(property "Reference" "J10"
+		(property "Reference" "J?"
 			(at 246.38 196.85 0)
 			(effects
 				(font
@@ -33780,6 +34728,12 @@
 			(uuid "3fda9ae2-c64c-48e1-b06d-f341ed9ec8bd")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J10")
@@ -33797,7 +34751,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "90830651-9147-40db-be3f-6ab5702eca38")
-		(property "Reference" "C49"
+		(property "Reference" "C?"
 			(at 67.31 312.928 0)
 			(effects
 				(font
@@ -33850,6 +34804,12 @@
 			(uuid "2a1663f3-04d2-437b-90d4-71b71a318b04")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C49")
@@ -33868,7 +34828,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9104a28b-8261-42e7-8fda-547fda37698d")
-		(property "Reference" "#PWR0116"
+		(property "Reference" "#PWR?"
 			(at 528.32 285.75 0)
 			(effects
 				(font
@@ -33916,6 +34876,12 @@
 			(uuid "6acd135b-5d38-421b-8951-a136b6dcbc67")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0116")
@@ -33933,7 +34899,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "91372f18-18f0-4397-b069-f23ddc13b3ee")
-		(property "Reference" "C7"
+		(property "Reference" "C?"
 			(at 91.44 222.758 0)
 			(effects
 				(font
@@ -33985,6 +34951,12 @@
 			(uuid "7e0eec7a-f4c5-456d-a600-d368d0c9a5aa")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C7")
@@ -34002,7 +34974,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "915e397c-079a-445c-93e7-c49984cf1eef")
-		(property "Reference" "J19"
+		(property "Reference" "J?"
 			(at 534.67 220.9799 0)
 			(effects
 				(font
@@ -34175,6 +35147,12 @@
 			(uuid "5cb32204-317a-4dad-b1df-61c586928a3e")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J19")
@@ -34193,7 +35171,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9168afe0-862c-4eeb-b5b6-ff591d553bf5")
-		(property "Reference" "#PWR026"
+		(property "Reference" "#PWR?"
 			(at 317.5 248.92 0)
 			(effects
 				(font
@@ -34241,6 +35219,12 @@
 			(uuid "52cf1ef1-e0a4-4c34-9c6d-df00726c7d9a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR026")
@@ -34258,7 +35242,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "921d569a-68d9-46ee-8479-9e6ee2486821")
-		(property "Reference" "#PWR0137"
+		(property "Reference" "#PWR?"
 			(at 480.06 345.44 0)
 			(effects
 				(font
@@ -34306,6 +35290,12 @@
 			(uuid "f33f78b7-9e9a-4c62-86bb-2149dcb82c97")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0137")
@@ -34324,7 +35314,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "928f5db3-8b08-4044-9954-ab48083caf97")
-		(property "Reference" "D2"
+		(property "Reference" "D?"
 			(at 106.68 196.5324 0)
 			(effects
 				(font
@@ -34547,6 +35537,12 @@
 			(uuid "eb5ab072-9f26-419a-ac8b-a93069d90213")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D2")
@@ -34565,7 +35561,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9346257d-30b2-4381-ad4a-1ebb8ad6bf77")
-		(property "Reference" "R63"
+		(property "Reference" "R?"
 			(at 516.89 313.6899 0)
 			(effects
 				(font
@@ -34617,6 +35613,12 @@
 			(uuid "7cda5fe1-c90c-4d17-b3d7-991634a35785")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R63")
@@ -34634,7 +35636,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9363c540-2af7-4837-a06f-c4c7fcf53190")
-		(property "Reference" "#PWR012"
+		(property "Reference" "#PWR?"
 			(at 167.64 370.84 0)
 			(effects
 				(font
@@ -34682,6 +35684,12 @@
 			(uuid "a188f6f2-f3f7-4991-b268-c7834d4d8085")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR012")
@@ -34699,7 +35707,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9366d5aa-dc90-487a-a922-ea8b58d701f4")
-		(property "Reference" "#PWR041"
+		(property "Reference" "#PWR?"
 			(at 397.51 400.05 0)
 			(effects
 				(font
@@ -34747,6 +35755,12 @@
 			(uuid "6a53ec42-2823-465d-a805-f5a072744003")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR041")
@@ -34764,7 +35778,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "95545861-89f7-419b-aabe-855523d8fda4")
-		(property "Reference" "#PWR031"
+		(property "Reference" "#PWR?"
 			(at 359.41 115.57 0)
 			(effects
 				(font
@@ -34812,6 +35826,12 @@
 			(uuid "1f1fa2ae-362b-47fc-8220-be1c00195c3c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR031")
@@ -34830,7 +35850,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "99d0c322-fe71-4abc-a525-76dedefbe05f")
-		(property "Reference" "GSM1"
+		(property "Reference" "GSM?"
 			(at 69.85 90.17 0)
 			(effects
 				(font
@@ -34955,6 +35975,12 @@
 			(uuid "b9d570eb-4fb0-4066-983f-368f6fcb3a7d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "GSM?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "GSM1")
@@ -34972,7 +35998,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9a1571eb-e647-418e-89d9-974a4ce9d5cb")
-		(property "Reference" "SNS_TX8"
+		(property "Reference" "SNS_TX?"
 			(at 394.716 378.206 90)
 			(effects
 				(font
@@ -35023,6 +36049,12 @@
 			(uuid "32672607-593d-4f92-ada5-e035c2b229ac")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX8")
@@ -35041,7 +36073,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9b0b939e-7735-4255-95eb-11cf69f8399f")
-		(property "Reference" "#PWR08"
+		(property "Reference" "#PWR?"
 			(at 68.58 375.92 0)
 			(effects
 				(font
@@ -35089,6 +36121,12 @@
 			(uuid "4e385762-2bf3-4845-a72f-14c5a67822ca")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR08")
@@ -35107,7 +36145,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9c031523-853a-4687-8036-24581d082942")
-		(property "Reference" "#PWR028"
+		(property "Reference" "#PWR?"
 			(at 330.2 311.15 0)
 			(effects
 				(font
@@ -35155,6 +36193,12 @@
 			(uuid "57e16ef7-cbd9-4f42-9e3b-38ad0550e89f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR028")
@@ -35173,7 +36217,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9d46a2f5-eea1-454c-9422-5cbb108dea8d")
-		(property "Reference" "R15"
+		(property "Reference" "R?"
 			(at 276.86 106.6799 0)
 			(effects
 				(font
@@ -35225,6 +36269,12 @@
 			(uuid "641c75a2-fdbc-47ba-8b8a-403a63957b38")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R15")
@@ -35242,7 +36292,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9e24da8c-1c0b-40d1-af0d-926c0775c35a")
-		(property "Reference" "SNS_TX10"
+		(property "Reference" "SNS_TX?"
 			(at 302.514 386.334 90)
 			(effects
 				(font
@@ -35293,6 +36343,12 @@
 			(uuid "62daf032-2a6c-4624-8f57-bf664c1c59e6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX10")
@@ -35311,7 +36367,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9f19666e-f2ae-4cc9-94aa-90b805f18779")
-		(property "Reference" "#PWR0125"
+		(property "Reference" "#PWR?"
 			(at 520.7 102.87 0)
 			(effects
 				(font
@@ -35359,6 +36415,12 @@
 			(uuid "5d3af4c3-e736-4cf5-81ed-b2e1836c081a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0125")
@@ -35376,7 +36438,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a14a8d02-3ebd-49c7-ad59-9ea0d1f7f3a4")
-		(property "Reference" "C41"
+		(property "Reference" "C?"
 			(at 690.88 147.828 0)
 			(effects
 				(font
@@ -35428,6 +36490,12 @@
 			(uuid "4075f89d-48aa-4723-8d83-63e668a53115")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C41")
@@ -35445,7 +36513,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a153b524-15a5-4064-967f-9e594c578333")
-		(property "Reference" "SNS_TX1"
+		(property "Reference" "SNS_TX?"
 			(at 34.544 195.834 90)
 			(effects
 				(font
@@ -35496,6 +36564,12 @@
 			(uuid "eeef3cd0-4a86-4047-80c7-c4723e8a6b36")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX1")
@@ -35513,7 +36587,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a242926c-8fdb-46e6-8def-085f00a49756")
-		(property "Reference" "C23"
+		(property "Reference" "C?"
 			(at 399.542 150.368 0)
 			(effects
 				(font
@@ -35565,6 +36639,12 @@
 			(uuid "2da7266d-a119-4511-970b-deefa8cba541")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C23")
@@ -35583,7 +36663,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a4b0be0e-031f-4c6e-838c-f3d4163f56ec")
-		(property "Reference" "R25"
+		(property "Reference" "R?"
 			(at 378.46 360.6799 0)
 			(effects
 				(font
@@ -35635,6 +36715,12 @@
 			(uuid "6dfd2b22-6f9a-4e16-b555-b21878f80223")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R25")
@@ -35653,7 +36739,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a611f09a-e00e-4607-a2cb-55bc0a9c31bd")
-		(property "Reference" "R55"
+		(property "Reference" "R?"
 			(at 480.06 322.5799 0)
 			(effects
 				(font
@@ -35705,6 +36791,12 @@
 			(uuid "bf972732-ca23-45d2-9209-3c8cb98fac24")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R55")
@@ -35722,7 +36814,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a66a1854-af92-4a19-82da-85d700fce59c")
-		(property "Reference" "#PWR032"
+		(property "Reference" "#PWR?"
 			(at 369.57 114.3 0)
 			(effects
 				(font
@@ -35770,6 +36862,12 @@
 			(uuid "04130866-04ca-4583-a49c-d15b2cdf8c8e")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR032")
@@ -35788,7 +36886,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a6ce6a14-5e5a-444f-aeb2-57d71b0756f4")
-		(property "Reference" "R9"
+		(property "Reference" "R?"
 			(at 196.85 426.7199 0)
 			(effects
 				(font
@@ -35840,6 +36938,12 @@
 			(uuid "4a51b0b0-a448-4914-a4d7-6d02c8a6fb88")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R9")
@@ -35858,7 +36962,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a7e5d2e7-3efb-48ce-8c71-5fef8b773f92")
-		(property "Reference" "R30"
+		(property "Reference" "R?"
 			(at 466.09 207.0099 0)
 			(effects
 				(font
@@ -35910,6 +37014,12 @@
 			(uuid "013ccc47-354c-47c2-b30e-e4478f55d1d3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R30")
@@ -35927,7 +37037,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a7f32645-0399-4e9f-9524-53722ee45c47")
-		(property "Reference" "C42"
+		(property "Reference" "C?"
 			(at 713.74 147.828 0)
 			(effects
 				(font
@@ -35979,6 +37089,12 @@
 			(uuid "e8b93805-7820-4621-ad50-5bb0d4da504c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C42")
@@ -35996,7 +37112,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a8fc2ff8-04b7-42ec-9fd1-503df6cb8b6c")
-		(property "Reference" "#PWR07"
+		(property "Reference" "#PWR?"
 			(at 78.74 213.36 0)
 			(effects
 				(font
@@ -36044,6 +37160,12 @@
 			(uuid "685d8956-8b45-4cbd-b664-6aff4bbadd30")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR07")
@@ -36061,7 +37183,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a8fd728b-b295-45c2-bff6-810fc34be1ff")
-		(property "Reference" "#PWR044"
+		(property "Reference" "#PWR?"
 			(at 458.47 137.16 0)
 			(effects
 				(font
@@ -36109,6 +37231,12 @@
 			(uuid "8ce20f9d-5de4-4224-a5f6-078bbb89ce90")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR044")
@@ -36126,7 +37254,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a9675d84-9c2d-462d-8c4b-0e86057ff2e0")
-		(property "Reference" "#PWR0130"
+		(property "Reference" "#PWR?"
 			(at 477.52 323.85 0)
 			(effects
 				(font
@@ -36174,6 +37302,12 @@
 			(uuid "d1f9c985-428a-446f-8bc9-4222cdd72b4b")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0130")
@@ -36192,7 +37326,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aa909879-b925-45f1-89b9-d1d1ca633f56")
-		(property "Reference" "J37"
+		(property "Reference" "J?"
 			(at 541.02 308.6099 0)
 			(effects
 				(font
@@ -36369,6 +37503,12 @@
 			(uuid "77c269ad-6aab-42b2-9881-dc48f9f707c4")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J37")
@@ -36387,7 +37527,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "aba46019-6f67-43a7-9cab-b2861bdaf2d3")
-		(property "Reference" "D25"
+		(property "Reference" "D?"
 			(at 488.95 91.7574 90)
 			(effects
 				(font
@@ -36440,6 +37580,12 @@
 			(uuid "090e5237-e628-426a-ac8e-d0931c696a72")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D25")
@@ -36458,7 +37604,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "abd79af3-470b-41ee-924b-edf52c517535")
-		(property "Reference" "#PWR0126"
+		(property "Reference" "#PWR?"
 			(at 44.45 54.61 0)
 			(effects
 				(font
@@ -36506,6 +37652,12 @@
 			(uuid "dac89905-1585-4a61-bf29-470efe4dd0b8")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0126")
@@ -36524,7 +37676,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "acfd7c9d-9a0a-43cc-afac-ba61240d9850")
-		(property "Reference" "R2"
+		(property "Reference" "R?"
 			(at 66.04 215.9 90)
 			(effects
 				(font
@@ -36574,6 +37726,12 @@
 			(uuid "02769a18-d5ae-45c5-9ee9-e48ee25eae58")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R2")
@@ -36591,7 +37749,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ad369c5d-623d-444d-957e-4602c7c97fb2")
-		(property "Reference" "#PWR05"
+		(property "Reference" "#PWR?"
 			(at 76.2 111.76 0)
 			(effects
 				(font
@@ -36639,6 +37797,12 @@
 			(uuid "d9b4a791-9243-4f0f-ba04-9094fd301611")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR05")
@@ -36656,7 +37820,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "b0bdd612-0de3-4338-9d2b-d96e9868be65")
-		(property "Reference" "C18"
+		(property "Reference" "C?"
 			(at 366.014 102.362 0)
 			(effects
 				(font
@@ -36708,6 +37872,12 @@
 			(uuid "9ba68855-bfea-4374-9d65-0b8b684a8b24")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C18")
@@ -36725,7 +37895,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b1256070-beb4-428f-92c6-197de0a9e146")
-		(property "Reference" "JP4"
+		(property "Reference" "JP?"
 			(at 375.412 143.51 0)
 			(effects
 				(font
@@ -36776,6 +37946,12 @@
 			(uuid "23821ded-9136-4a90-bbf5-09a30d9a5ec0")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP4")
@@ -36793,7 +37969,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "b14410cb-d92f-4675-9940-9a98b8e73a2e")
-		(property "Reference" "R17"
+		(property "Reference" "R?"
 			(at 305.308 213.614 0)
 			(effects
 				(font
@@ -36845,6 +38021,12 @@
 			(uuid "809b9b6d-2d5c-4b7e-a108-98c38d8f83f4")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R17")
@@ -36863,7 +38045,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b15b45c3-38da-482c-a7da-42d379f41a9d")
-		(property "Reference" "#PWR0117"
+		(property "Reference" "#PWR?"
 			(at 528.32 332.74 0)
 			(effects
 				(font
@@ -36911,6 +38093,12 @@
 			(uuid "fbb9cad9-ff95-457a-96bf-1cff0d7c4f79")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0117")
@@ -36928,7 +38116,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b3ba61ed-b391-42cc-96be-bdb25b785209")
-		(property "Reference" "#PWR050"
+		(property "Reference" "#PWR?"
 			(at 496.57 450.85 0)
 			(effects
 				(font
@@ -36976,6 +38164,12 @@
 			(uuid "fc81129f-deb1-4c19-8162-87062707a17c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR050")
@@ -36993,7 +38187,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b66505c8-4e42-49d6-a25e-b57e5cd225a1")
-		(property "Reference" "Q3"
+		(property "Reference" "Q?"
 			(at 261.62 165.0999 0)
 			(effects
 				(font
@@ -37051,6 +38245,12 @@
 			(uuid "66ddded4-90ef-4874-b7a9-743441724c91")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "Q?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "Q3")
@@ -37069,7 +38269,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "b7129ed7-690b-4da5-90f9-7594ebba9c4c")
-		(property "Reference" "U18"
+		(property "Reference" "U?"
 			(at 55.88 59.69 0)
 			(effects
 				(font
@@ -37122,6 +38322,12 @@
 			(uuid "92768c7b-f56b-4a8f-8484-c17b9aa84977")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U18")
@@ -37139,7 +38345,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b72fb62e-db10-44a7-b6da-901d704595ce")
-		(property "Reference" "#PWR09"
+		(property "Reference" "#PWR?"
 			(at 132.08 419.1 0)
 			(effects
 				(font
@@ -37187,6 +38393,12 @@
 			(uuid "0bd141dc-ef32-41ca-af93-59b6dd8e7d7c")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR09")
@@ -37204,7 +38416,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b7cbe618-945d-49b1-b407-4bbef6664576")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR?"
 			(at 77.47 240.03 0)
 			(effects
 				(font
@@ -37252,6 +38464,12 @@
 			(uuid "a982f608-5194-4d8b-b7b7-c85fce11ae5d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR06")
@@ -37270,7 +38488,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bcc106a3-6d21-4f00-978d-8aa431a1e121")
-		(property "Reference" "J13"
+		(property "Reference" "J?"
 			(at 455.93 140.9699 0)
 			(effects
 				(font
@@ -37322,6 +38540,12 @@
 			(uuid "b8de8815-3a5e-46cf-80a3-1d55dd22ebc3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J13")
@@ -37340,7 +38564,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bce03c31-c140-4e4a-8c52-862009236ac0")
-		(property "Reference" "D18"
+		(property "Reference" "D?"
 			(at 764.54 206.0574 90)
 			(effects
 				(font
@@ -37392,6 +38616,12 @@
 			(uuid "d6cc7878-7b7f-4d9b-9589-4e16f5108a7a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D18")
@@ -37409,7 +38639,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bfd22ab0-d449-4f7f-9fcd-26c6918df73a")
-		(property "Reference" "R4"
+		(property "Reference" "R?"
 			(at 73.66 225.044 0)
 			(effects
 				(font
@@ -37461,6 +38691,12 @@
 			(uuid "bc110be7-a6ce-4ea8-9a56-f44fd372bbfa")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R4")
@@ -37479,7 +38715,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c0f9cb6e-588c-4f00-8ee3-1b929edd5d64")
-		(property "Reference" "#PWR019"
+		(property "Reference" "#PWR?"
 			(at 240.03 138.43 0)
 			(effects
 				(font
@@ -37527,6 +38763,12 @@
 			(uuid "f67228c0-b48b-4dd9-9345-011bb2391e48")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR019")
@@ -37544,7 +38786,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c1ebf6bc-14f9-43a6-bc63-eed2c4519fd9")
-		(property "Reference" "R52"
+		(property "Reference" "R?"
 			(at 560.832 208.28 0)
 			(effects
 				(font
@@ -37596,6 +38838,12 @@
 			(uuid "7b0601c5-ec04-47b8-846b-0d6000e3a219")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R52")
@@ -37613,7 +38861,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c32f465d-566f-4a9a-93d6-cbf468516a0f")
-		(property "Reference" "#PWR045"
+		(property "Reference" "#PWR?"
 			(at 462.28 231.14 0)
 			(effects
 				(font
@@ -37661,6 +38909,12 @@
 			(uuid "1ec8cc23-16f8-4458-899d-92c5f86cf217")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR045")
@@ -37679,7 +38933,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c404672c-5301-4f10-98fb-4996f38e1137")
-		(property "Reference" "#PWR052"
+		(property "Reference" "#PWR?"
 			(at 513.08 243.84 0)
 			(effects
 				(font
@@ -37727,6 +38981,12 @@
 			(uuid "bcca7c2c-d106-4ddb-9323-0475c5b1e925")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR052")
@@ -37744,7 +39004,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c423f17b-cab1-4467-9aed-3b510d33d928")
-		(property "Reference" "#PWR025"
+		(property "Reference" "#PWR?"
 			(at 308.61 317.5 0)
 			(effects
 				(font
@@ -37792,6 +39052,12 @@
 			(uuid "f217b6b0-d27e-4cdf-9fb7-8f9e228d553d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR025")
@@ -37810,7 +39076,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c466df35-47b1-45b4-9615-b4379c4b9fb1")
-		(property "Reference" "D4"
+		(property "Reference" "D?"
 			(at 243.84 121.6024 0)
 			(effects
 				(font
@@ -38033,6 +39299,12 @@
 			(uuid "9b434dce-59cd-4614-8c81-7ed7f943130a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D4")
@@ -38050,7 +39322,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c4c92163-80e5-4b01-8f21-5c563122d8df")
-		(property "Reference" "JP8"
+		(property "Reference" "JP?"
 			(at 479.552 207.01 0)
 			(effects
 				(font
@@ -38101,6 +39373,12 @@
 			(uuid "5eb3ecbe-39a3-4705-8796-6e96b443fef0")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP8")
@@ -38118,7 +39396,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c5f646ed-2760-46af-ab71-2c1c907f5588")
-		(property "Reference" "R54"
+		(property "Reference" "R?"
 			(at 163.576 381 0)
 			(effects
 				(font
@@ -38170,6 +39448,12 @@
 			(uuid "dbf9f6ee-d367-4dc9-a446-3886eb2a09c9")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R54")
@@ -38187,7 +39471,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c8e00fdf-2c34-4fd2-b88a-482185fb8783")
-		(property "Reference" "C24"
+		(property "Reference" "C?"
 			(at 459.486 433.324 0)
 			(effects
 				(font
@@ -38239,6 +39523,12 @@
 			(uuid "62132f3b-857b-4d9f-8bec-db537dad349a")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C24")
@@ -38257,7 +39547,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c9103ffc-8ff6-4a3d-a9a6-1d70dc590ae1")
-		(property "Reference" "#PWR0131"
+		(property "Reference" "#PWR?"
 			(at 528.32 318.77 0)
 			(effects
 				(font
@@ -38305,6 +39595,12 @@
 			(uuid "7506440a-4b8d-48de-bcb7-a3578f6f71a5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0131")
@@ -38322,7 +39618,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c92b2123-b9d0-43da-a6d0-69f043e4b9d6")
-		(property "Reference" "C40"
+		(property "Reference" "C?"
 			(at 681.99 188.468 0)
 			(effects
 				(font
@@ -38374,6 +39670,12 @@
 			(uuid "48352c1c-19c4-4ba2-ad4f-6bdf997e7870")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C40")
@@ -38392,7 +39694,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cae6d947-e336-42b4-b74d-f1ee010f21d3")
-		(property "Reference" "#PWR02"
+		(property "Reference" "#PWR?"
 			(at 60.96 176.53 0)
 			(effects
 				(font
@@ -38440,6 +39742,12 @@
 			(uuid "37f645ad-ac16-4bd6-9af6-7837876ca7de")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR02")
@@ -38458,7 +39766,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "cb56d78a-7a99-4787-960d-ce86502fa21a")
-		(property "Reference" "U5"
+		(property "Reference" "U?"
 			(at 363.22 287.02 90)
 			(effects
 				(font
@@ -38520,6 +39828,12 @@
 			(uuid "9ebc105c-4d84-427a-b419-fcdd00fade00")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U5")
@@ -38538,7 +39852,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cbdd8576-255c-4676-b082-c7a1bddb0979")
-		(property "Reference" "#PWR053"
+		(property "Reference" "#PWR?"
 			(at 523.24 347.98 0)
 			(effects
 				(font
@@ -38586,6 +39900,12 @@
 			(uuid "7760e488-daca-4702-9614-5b8794fb8596")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR053")
@@ -38604,7 +39924,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cc12b6c6-4b2f-45a8-a161-209a1cd838e5")
-		(property "Reference" "J31"
+		(property "Reference" "J?"
 			(at 600.71 194.31 0)
 			(effects
 				(font
@@ -38827,6 +40147,12 @@
 			(uuid "a386e8f5-793d-49e4-9b45-bf8de70a985f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J31")
@@ -38845,7 +40171,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ccd63827-4621-46fe-b424-eb71e617bed4")
-		(property "Reference" "#PWR013"
+		(property "Reference" "#PWR?"
 			(at 193.04 182.88 0)
 			(effects
 				(font
@@ -38893,6 +40219,12 @@
 			(uuid "ce3440d6-dad2-4e60-8a9c-cbf0e4ddb307")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR013")
@@ -38911,7 +40243,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "cd3f9957-1e55-4052-ae86-264755ee896c")
-		(property "Reference" "C20"
+		(property "Reference" "C?"
 			(at 387.35 224.7899 0)
 			(effects
 				(font
@@ -38963,6 +40295,12 @@
 			(uuid "0ee610fa-a51b-4018-b765-7c08d82762da")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C20")
@@ -38981,7 +40319,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d155fe55-27d4-4d7c-b0ec-21db8247b57e")
-		(property "Reference" "R51"
+		(property "Reference" "R?"
 			(at 764.54 194.3099 0)
 			(effects
 				(font
@@ -39033,6 +40371,12 @@
 			(uuid "c4eb07fb-a456-4498-83c6-73fa9275d5db")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R51")
@@ -39051,7 +40395,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d4658032-9780-4d30-8c27-776a467788ca")
-		(property "Reference" "C6"
+		(property "Reference" "C?"
 			(at 71.12 363.2262 0)
 			(effects
 				(font
@@ -39103,6 +40447,12 @@
 			(uuid "137928fa-751a-4086-8649-15274c9a997b")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C6")
@@ -39120,7 +40470,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d4a83fa3-e97c-4b6e-97a5-4c9652e55b9d")
-		(property "Reference" "R19"
+		(property "Reference" "R?"
 			(at 319.786 360.934 0)
 			(effects
 				(font
@@ -39172,6 +40522,12 @@
 			(uuid "fdb70361-09ad-4d16-8b01-46498a0ce9f6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R19")
@@ -39189,7 +40545,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d5f3f343-2373-4931-9f64-acee97834d3c")
-		(property "Reference" "SNS_TX6"
+		(property "Reference" "SNS_TX?"
 			(at 388.874 131.064 90)
 			(effects
 				(font
@@ -39240,6 +40596,12 @@
 			(uuid "dc5509d5-4389-42db-bf55-ce249adc2b96")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX6")
@@ -39257,7 +40619,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d7119a32-89cc-4084-bff1-c285a7035798")
-		(property "Reference" "JP6"
+		(property "Reference" "JP?"
 			(at 394.462 367.03 0)
 			(effects
 				(font
@@ -39308,6 +40670,12 @@
 			(uuid "25122f9c-f882-4714-b294-27734dbde59d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP6")
@@ -39326,7 +40694,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d7536034-1b15-4f63-b3fa-9797901b8c88")
-		(property "Reference" "R38"
+		(property "Reference" "R?"
 			(at 175.26 380.9999 0)
 			(effects
 				(font
@@ -39378,6 +40746,12 @@
 			(uuid "4d921cb1-8e75-420a-a315-4f0084beb8d8")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R38")
@@ -39396,7 +40770,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "da6d9aed-5595-4f65-85e6-3c26d06a53fb")
-		(property "Reference" "J39"
+		(property "Reference" "J?"
 			(at 450.85 95.8849 90)
 			(effects
 				(font
@@ -39449,6 +40823,12 @@
 			(uuid "2c216db5-cd47-4ea3-8d3b-2e7d5fd14e8f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J39")
@@ -39467,7 +40847,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dc00cf54-b119-4bc8-a494-6684cdd3866c")
-		(property "Reference" "#PWR090"
+		(property "Reference" "#PWR?"
 			(at 732.79 144.78 0)
 			(effects
 				(font
@@ -39515,6 +40895,12 @@
 			(uuid "55ecd883-8f23-4691-82a9-229245937c00")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR090")
@@ -39533,7 +40919,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ddbc0e8f-0ddd-4135-b87e-940175b5c865")
-		(property "Reference" "D13"
+		(property "Reference" "D?"
 			(at 466.09 218.7574 90)
 			(effects
 				(font
@@ -39585,6 +40971,12 @@
 			(uuid "cfac3ab2-0ce2-486c-ac06-7bd6638da7f2")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D13")
@@ -39602,7 +40994,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dde291c7-de49-4ef7-b9b5-7a2226efb9bf")
-		(property "Reference" "J2"
+		(property "Reference" "J?"
 			(at 157.226 382.778 90)
 			(effects
 				(font
@@ -39655,6 +41047,12 @@
 			(uuid "89b6c618-4797-414e-b7aa-bddb03c187c3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J2")
@@ -39673,7 +41071,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ddf54982-a2ff-4bd6-b3e1-3d774efcdf64")
-		(property "Reference" "D24"
+		(property "Reference" "D?"
 			(at 50.8 303.8474 90)
 			(effects
 				(font
@@ -39726,6 +41124,12 @@
 			(uuid "b673db4f-9457-4ad4-84d7-01ab4d84f37f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D24")
@@ -39744,7 +41148,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e011ddd9-69f2-4bf9-b78c-20dfd7a67a6d")
-		(property "Reference" "R26"
+		(property "Reference" "R?"
 			(at 383.54 289.5599 0)
 			(effects
 				(font
@@ -39796,6 +41200,12 @@
 			(uuid "06b0a706-95a7-4bbc-9d4c-108d60b64636")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R26")
@@ -39813,7 +41223,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e03564fb-b669-4009-b869-ec805451d39b")
-		(property "Reference" "C78"
+		(property "Reference" "C?"
 			(at 63.5 67.818 0)
 			(effects
 				(font
@@ -39865,6 +41275,12 @@
 			(uuid "f0cf63eb-8d1c-4aae-b13d-41f825d17033")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C78")
@@ -39882,7 +41298,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e0387c3d-41de-410b-a0d0-56c36c353228")
-		(property "Reference" "#PWR018"
+		(property "Reference" "#PWR?"
 			(at 212.09 439.42 0)
 			(effects
 				(font
@@ -39930,6 +41346,12 @@
 			(uuid "9fb7dafe-af90-41ea-9c62-08254891f0f7")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR018")
@@ -39948,7 +41370,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e0a6e805-cf90-41db-a0f8-e5a2a1707247")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR?"
 			(at 44.45 375.92 0)
 			(effects
 				(font
@@ -39996,6 +41418,12 @@
 			(uuid "f322df35-ba90-4ec4-9c51-a007cac11714")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR03")
@@ -40014,7 +41442,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e0c460f2-ffba-49e4-b32b-ef99a6c16b25")
-		(property "Reference" "R6"
+		(property "Reference" "R?"
 			(at 71.12 349.2499 0)
 			(effects
 				(font
@@ -40066,6 +41494,12 @@
 			(uuid "7a305653-2a68-4fee-b8e2-4f364141a432")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R6")
@@ -40084,7 +41518,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e1c5ad80-df29-410a-98a5-5e6f007a6d16")
-		(property "Reference" "R35"
+		(property "Reference" "R?"
 			(at 525.78 346.7099 0)
 			(effects
 				(font
@@ -40136,6 +41570,12 @@
 			(uuid "d290eb50-41a8-4d37-b9a9-31066b56cd89")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R35")
@@ -40154,7 +41594,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e2ebcb0c-98d9-466b-a27a-fe970550c5e9")
-		(property "Reference" "#PWR033"
+		(property "Reference" "#PWR?"
 			(at 373.38 236.22 0)
 			(effects
 				(font
@@ -40202,6 +41642,12 @@
 			(uuid "aa7ad3cf-12d5-451a-86fa-ab677f97f169")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR033")
@@ -40220,7 +41666,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e361f196-3e98-4cde-8140-db7a6f761d2c")
-		(property "Reference" "#PWR0120"
+		(property "Reference" "#PWR?"
 			(at 533.4 360.68 0)
 			(effects
 				(font
@@ -40268,6 +41714,12 @@
 			(uuid "a16a4643-4e56-487c-a5b1-9e8942a802cd")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0120")
@@ -40286,7 +41738,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e3da73d6-b9dd-48d0-9729-7b250d61bed6")
-		(property "Reference" "D12"
+		(property "Reference" "D?"
 			(at 422.91 382.5874 90)
 			(effects
 				(font
@@ -40338,6 +41790,12 @@
 			(uuid "cf8b02fc-0d70-48a7-aef9-6ba568dfcee3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D12")
@@ -40356,7 +41814,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "e5fc15e3-e8f1-4a98-ae04-bf12846bf49e")
-		(property "Reference" "U9"
+		(property "Reference" "U?"
 			(at 709.93 172.72 0)
 			(effects
 				(font
@@ -40569,6 +42027,12 @@
 			(uuid "afec5bd5-6e9a-4d3c-a352-019256e277cb")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "U?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "U9")
@@ -40587,7 +42051,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e7bf547d-be42-4001-96b1-bc2544c96cc2")
-		(property "Reference" "#PWR023"
+		(property "Reference" "#PWR?"
 			(at 265.43 227.33 0)
 			(effects
 				(font
@@ -40635,6 +42099,12 @@
 			(uuid "80a6944b-ead8-4776-9b54-22cce8ee8f0e")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR023")
@@ -40653,7 +42123,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e8dc2b2b-b036-415b-ae81-6be7473650c2")
-		(property "Reference" "R23"
+		(property "Reference" "R?"
 			(at 359.41 92.71 90)
 			(effects
 				(font
@@ -40703,6 +42173,12 @@
 			(uuid "8fa57447-b642-4d52-902e-11f711376a03")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R23")
@@ -40721,7 +42197,7 @@
 		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "e9d09378-9bde-441f-b8c9-8146a64594c5")
-		(property "Reference" "R10"
+		(property "Reference" "R?"
 			(at 212.09 412.7499 0)
 			(effects
 				(font
@@ -40773,6 +42249,12 @@
 			(uuid "18ad24fb-60ec-4ec1-bf50-c3ad4f2b2db0")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R10")
@@ -40791,7 +42273,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ea81f044-6182-4834-a6e5-68c3e769ad64")
-		(property "Reference" "#PWR021"
+		(property "Reference" "#PWR?"
 			(at 252.73 259.08 0)
 			(effects
 				(font
@@ -40839,6 +42321,12 @@
 			(uuid "b9d48528-a191-4255-a1bf-635c30677b0d")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR021")
@@ -40856,7 +42344,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ec581cda-e462-43c2-9bef-4bd7427fcf91")
-		(property "Reference" "SNS_TX3"
+		(property "Reference" "SNS_TX?"
 			(at 388.874 138.684 90)
 			(effects
 				(font
@@ -40907,6 +42395,12 @@
 			(uuid "454593b2-dcf8-4e63-ac02-5c78d49138fc")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX3")
@@ -40924,7 +42418,7 @@
 		(on_board no)
 		(dnp yes)
 		(uuid "ece5752d-8621-4bb4-9592-b30aecb8a0bc")
-		(property "Reference" "C19"
+		(property "Reference" "C?"
 			(at 368.554 224.282 0)
 			(effects
 				(font
@@ -40976,6 +42470,12 @@
 			(uuid "512a81b0-2e0e-4067-bec3-1b6e9bb50e65")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C19")
@@ -40993,7 +42493,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ed6f00c1-b0cf-47eb-8a3b-eafcb0ecf61e")
-		(property "Reference" "SNS_TX2"
+		(property "Reference" "SNS_TX?"
 			(at 388.874 141.224 90)
 			(effects
 				(font
@@ -41044,6 +42544,12 @@
 			(uuid "5524dd95-6c1e-43e4-a931-8c48a5901bed")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX2")
@@ -41062,7 +42568,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ed856d58-c363-401b-b605-e6dbe1bc3026")
-		(property "Reference" "D20"
+		(property "Reference" "D?"
 			(at 686.1175 139.7 0)
 			(effects
 				(font
@@ -41112,6 +42618,12 @@
 			(uuid "e55e8a0e-0ee1-4a45-975c-c1aa21fd7abb")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "D?")
+					(unit 1)
+				)
+			)
 			(project ""
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "D20")
@@ -41129,7 +42641,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ede09bc1-ca83-4752-b824-4f67c0d7e3c9")
-		(property "Reference" "#PWR047"
+		(property "Reference" "#PWR?"
 			(at 464.82 443.23 0)
 			(effects
 				(font
@@ -41177,6 +42689,12 @@
 			(uuid "701a8f5a-585b-4b43-b8ec-dc8ec50e98a7")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR047")
@@ -41195,7 +42713,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "eed83513-cd21-464e-94d5-9bf0ba4cadb7")
-		(property "Reference" "#PWR082"
+		(property "Reference" "#PWR?"
 			(at 690.88 236.22 0)
 			(effects
 				(font
@@ -41243,6 +42761,12 @@
 			(uuid "97f547e0-5906-485c-96c4-49b50c343fdd")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR082")
@@ -41260,7 +42784,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "efb86b04-6a82-4c57-9baf-f22029ea944a")
-		(property "Reference" "SNS_TX15"
+		(property "Reference" "SNS_TX?"
 			(at 163.576 368.046 90)
 			(effects
 				(font
@@ -41311,6 +42835,12 @@
 			(uuid "a3385864-4b96-448c-93e1-9d6745c885d3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX15")
@@ -41329,7 +42859,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f0cad815-a575-4260-828b-b3752c181e88")
-		(property "Reference" "#PWR089"
+		(property "Reference" "#PWR?"
 			(at 760.73 187.96 0)
 			(effects
 				(font
@@ -41377,6 +42907,12 @@
 			(uuid "b97dade6-f069-4973-95fa-eaee457f7df5")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR089")
@@ -41395,7 +42931,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f28ff7be-7752-4ab8-91bd-ef36e74efac1")
-		(property "Reference" "C10"
+		(property "Reference" "C?"
 			(at 171.45 356.8699 0)
 			(effects
 				(font
@@ -41447,6 +42983,12 @@
 			(uuid "6eab99a5-a783-4353-ae9f-aceaf3734507")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C10")
@@ -41464,7 +43006,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f4841156-7dad-44e1-bd02-b1b8905b3c36")
-		(property "Reference" "C25"
+		(property "Reference" "C?"
 			(at 478.79 212.598 0)
 			(effects
 				(font
@@ -41516,6 +43058,12 @@
 			(uuid "2b695a82-9b37-42b4-b9a3-2f5a0802926f")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C25")
@@ -41533,7 +43081,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f7c55dbe-952a-433c-bbe6-ccf695e53792")
-		(property "Reference" "#PWR0124"
+		(property "Reference" "#PWR?"
 			(at 474.98 299.72 0)
 			(effects
 				(font
@@ -41581,6 +43129,12 @@
 			(uuid "e93ea419-0510-489e-9460-6a2ee5bdf2bd")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0124")
@@ -41598,7 +43152,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f7f55aaf-a9b8-4509-899b-a97082cbbbde")
-		(property "Reference" "C4"
+		(property "Reference" "C?"
 			(at 52.07 360.934 90)
 			(effects
 				(font
@@ -41648,6 +43202,12 @@
 			(uuid "76619692-e5a3-4193-a284-8a4ccec69867")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C4")
@@ -41665,7 +43225,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f8af6615-7339-4057-b073-49717c0d86ce")
-		(property "Reference" "R61"
+		(property "Reference" "R?"
 			(at 467.106 296.926 0)
 			(effects
 				(font
@@ -41717,6 +43277,12 @@
 			(uuid "7eb95a53-93c8-4d3e-a654-85f511fd32aa")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R61")
@@ -41735,7 +43301,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f98c3214-c506-439e-a261-ba6d64961a91")
-		(property "Reference" "#PWR0109"
+		(property "Reference" "#PWR?"
 			(at 566.42 224.79 0)
 			(effects
 				(font
@@ -41783,6 +43349,12 @@
 			(uuid "082d83df-78f7-4eab-8f24-1384abde24a4")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR0109")
@@ -41800,7 +43372,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "f9b62ded-25ea-4853-91e0-c86c40aca2ca")
-		(property "Reference" "C11"
+		(property "Reference" "C?"
 			(at 214.63 119.888 0)
 			(effects
 				(font
@@ -41852,6 +43424,12 @@
 			(uuid "2a7e3e9c-1887-4028-8b23-43e9616299c3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "C?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "C11")
@@ -41869,7 +43447,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fa535d05-fe75-41f4-8b1b-aafeb60fb3b7")
-		(property "Reference" "#PWR087"
+		(property "Reference" "#PWR?"
 			(at 731.52 199.39 0)
 			(effects
 				(font
@@ -41917,6 +43495,12 @@
 			(uuid "a44aa986-3052-458e-893e-43c444fa0d55")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "#PWR087")
@@ -41934,7 +43518,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fafea7ac-a14f-4401-a3b2-99b3fa850c97")
-		(property "Reference" "JP14"
+		(property "Reference" "JP?"
 			(at 731.52 184.912 0)
 			(effects
 				(font
@@ -41985,6 +43569,12 @@
 			(uuid "c692755d-daea-4aa7-a59d-e16e46ed7108")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "JP?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "JP14")
@@ -42002,7 +43592,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fc1ae6df-8785-4dde-afdb-e2f12929442d")
-		(property "Reference" "Q1"
+		(property "Reference" "Q?"
 			(at 87.63 220.9799 0)
 			(effects
 				(font
@@ -42060,6 +43650,12 @@
 			(uuid "7dfffbca-a743-458f-b612-3f7e32da14a3")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "Q?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "Q1")
@@ -42078,7 +43674,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "fcd62b24-881a-4f6d-b923-5ca73bda11d4")
-		(property "Reference" "R29"
+		(property "Reference" "R?"
 			(at 443.23 106.6799 0)
 			(effects
 				(font
@@ -42130,6 +43726,12 @@
 			(uuid "143667fd-54e6-45f9-839b-4f96da14f1b6")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "R?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "R29")
@@ -42147,7 +43749,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fe878256-3ea6-4a95-9c03-fa9723b5bb60")
-		(property "Reference" "SNS_TX9"
+		(property "Reference" "SNS_TX?"
 			(at 390.906 380.746 90)
 			(effects
 				(font
@@ -42198,6 +43800,12 @@
 			(uuid "fc0b3fe2-e196-45da-8be4-ae8d57746b04")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "SNS_TX?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "SNS_TX9")
@@ -42216,7 +43824,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ff7c6f6c-28b7-4492-9764-e3e556f1b076")
-		(property "Reference" "J24"
+		(property "Reference" "J?"
 			(at 572.77 426.7199 0)
 			(effects
 				(font
@@ -42390,6 +43998,12 @@
 			(uuid "0354684d-6d47-4848-a280-a8abe60e02f0")
 		)
 		(instances
+			(project "gateway"
+				(path "/110b66a9-236c-47df-a1f3-57c0b3af7b15"
+					(reference "J?")
+					(unit 1)
+				)
+			)
 			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3/918a84d0-2382-4e9e-a083-abfab5a808df"
 					(reference "J24")
@@ -42398,4 +44012,10 @@
 			)
 		)
 	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
 )
