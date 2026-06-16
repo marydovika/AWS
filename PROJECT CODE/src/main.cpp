@@ -36,8 +36,8 @@ static const uint64_t TON_MS = 2ULL * 60ULL * 1000ULL; // 2 min active window
 
 // ── Config portal ─────────────────────────────────────────
 #define PORTAL_TIMEOUT_MS  15000   // 15 seconds portal window per wake
-const char* AP_SSID     = "WIMEA-AWS-001";
-const char* AP_PASSWORD = "wimea2026";
+const char* AP_SSID     = "AWS-001";
+const char* AP_PASSWORD = "aws2026";
 WebServer server(80);
 Preferences prefs;
 uint32_t savedInterval = 10; // loaded from flash
@@ -191,7 +191,7 @@ String buildPage(String message) {
   <div class="brand">
     <div class="brand-icon">&#9729;</div>
     <div>
-      <div class="brand-name">WIMEA-ICT</div>
+      <div class="brand-name">AWS</div>
       <div class="brand-sub">Automatic Weather Station</div>
     </div>
   </div>
