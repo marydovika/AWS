@@ -94,3 +94,42 @@ void ErrorLogger::printLast(uint8_t n) {
     }
     Serial.println("──────────────────────────────────────");
 }
+
+String ErrorLogger::_getTimestamp() {
+    if (_rtc != nullptr) {
+        DateTime now = _rtc->now();
+
+        char buf[24];
+        snprintf(buf, sizeof(buf),
+                 "%04d-%02d-%02d %02d:%02d:%02d",
+                 now.year(), now.month(),  now.day(),
+                 now.hour(), now.minute(), now.second());
+        return String(buf);
+    }
+
+    unsigned long ms = millis();
+    unsigned long secs  = ms / 1000;
+    unsigned long mins  = secs / 60;
+    unsigned long hours = mins / 60;
+
+    char buf[24];
+    snprintf(buf, sizeof(buf),
+             "UPTIME %02luh%02lum%02lus",
+             hours, mins % 60, secs % 60);
+    return String(buf);
+}
+
+void ErrorLogger::_writeToSD(const String& line) {
+    File f = SD.open(ERROR_LOG_FILE, FILE_APPEND);
+    if (f) {
+        f.println(line);
+        f.close();
+    } else {
+        _sdAvailable = false;
+        Serial.println("[ErrorLogger] SD write failed — switching to Serial only.");
+    }
+}
+
+void ErrorLogger::_writeToSerial(const String& line) {
+    Serial.println(line);
+}
