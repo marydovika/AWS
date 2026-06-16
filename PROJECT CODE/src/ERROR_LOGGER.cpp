@@ -23,3 +23,28 @@ void ErrorLogger::begin(RTC_DS3231* rtc) {
                        "Errors will be logged to Serial only.");
     }
 }
+
+void ErrorLogger::log(const char* component,
+                      const char* errorType,
+                      const char* detail) {
+
+    _errorCount++;
+
+    String line = "[" + _getTimestamp() + "]";
+    line += " [";
+    line += component;
+    line += "] [";
+    line += errorType;
+    line += "]";
+
+    if (detail && strlen(detail) > 0) {
+        line += " ";
+        line += detail;
+    }
+
+    _writeToSerial(line);
+
+    if (_sdAvailable) {
+        _writeToSD(line);
+    }
+}
