@@ -128,6 +128,37 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
     }
 }
 
+void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles) {
+    File statsFile = SD.open("/gsm_usage.csv", FILE_APPEND);
+    if (statsFile) {
+        // Create header if file is new
+        if (statsFile.size() == 0) {
+            statsFile.println("Timestamp,BytesSent,BytesReceived,TotalCycles,AvgKBPerCycle");
+        }
+        
+        uint32_t total = sent + received;
+        float avgKB = 0;
+        if (cycles > 0) {
+            avgKB = (total / 1024.0) / cycles;
+        }
+
+        statsFile.print(timestamp);
+        statsFile.print(",");
+        statsFile.print(sent);
+        statsFile.print(",");
+        statsFile.print(received);
+        statsFile.print(",");
+        statsFile.print(cycles);
+        statsFile.print(",");
+        statsFile.println(avgKB, 3);
+        
+        statsFile.close();
+        Serial.println("[SD] GSM usage stats saved to /gsm_usage.csv");
+    } else {
+        Serial.println("[SD] Failed to open /gsm_usage.csv for writing");
+    }
+}
+
 bool DataLogger::popQueue() {
     if (!SD.exists(_queueFileName)) return false;
 

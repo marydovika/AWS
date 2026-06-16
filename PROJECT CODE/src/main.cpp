@@ -152,6 +152,25 @@ void transmitData(SensorData &data, unsigned long tonStart) {
 
     gsmPowerOn();
     dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
+    
+    // Display Byte Usage
+    Serial.println("\n[GSM] === Data Usage Stats ===");
+    Serial.printf("[GSM] Total Sent: %u bytes\n", simmodule.getTotalBytesSent());
+    Serial.printf("[GSM] Total Received: %u bytes\n", simmodule.getTotalBytesReceived());
+    uint32_t total = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
+    Serial.printf("[GSM] Total Traffic: %u bytes (%.2f KB)\n", total, total / 1024.0);
+    Serial.printf("[GSM] Total Cycles: %u\n", simmodule.getCycleCount());
+    if (simmodule.getCycleCount() > 0) {
+        Serial.printf("[GSM] Avg per Cycle: %.2f KB\n", (total / 1024.0) / simmodule.getCycleCount());
+    }
+    Serial.println("[GSM] ========================\n");
+
+    // Log to SD
+    dataLogger.logGSMStats(rtc1.getDateTime().c_str(), 
+                           simmodule.getTotalBytesSent(), 
+                           simmodule.getTotalBytesReceived(), 
+                           simmodule.getCycleCount());
+
     gsmPowerOff();
     Serial.println("[DC] TX Phase complete.");
 }

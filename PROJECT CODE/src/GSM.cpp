@@ -1,5 +1,11 @@
 #include "GSM.h"
 #include <SD.h>
+
+// Persistent counters across deep sleep
+RTC_DATA_ATTR uint32_t gsmBytesSent = 0;
+RTC_DATA_ATTR uint32_t gsmBytesReceived = 0;
+RTC_DATA_ATTR uint32_t gsmCycles = 0;
+
 // ESP32 WROVER: Use 26/27 or 4/13. DO NOT use 16/17 if using PSRAM.
 #define RX_GSM 16 
 #define TX_GSM 17
@@ -8,7 +14,21 @@ HardwareSerial SerialG = Serial2;
 
 GSM::GSM() {}
 
+void GSM::countSent(const String& s) {
+    gsmBytesSent += s.length();
+}
+
+void GSM::countReceived(const String& s) {
+    gsmBytesReceived += s.length();
+}
+
+uint32_t GSM::getTotalBytesSent() { return gsmBytesSent; }
+uint32_t GSM::getTotalBytesReceived() { return gsmBytesReceived; }
+uint32_t GSM::getCycleCount() { return gsmCycles; }
+void GSM::resetByteCounters() { gsmBytesSent = 0; gsmBytesReceived = 0; gsmCycles = 0; }
+
 void GSM::setupGSM() {
+    gsmCycles++;
     SerialG.begin(9600, SERIAL_8N1, RX_GSM, TX_GSM); 
     delay(1000);
     Serial.println("Initializing GSM...");
@@ -17,10 +37,13 @@ void GSM::setupGSM() {
     bool gsmReady = false;
     int attempts = 0;
     while (!gsmReady && attempts < 10) {
-        SerialG.println("AT"); 
+        String cmd = "AT";
+        SerialG.println(cmd); 
+        countSent(cmd + "\r\n");
         delay(500);
         if (SerialG.available()) {
             String response = SerialG.readString();
+            countReceived(response);
             if (response.indexOf("OK") != -1) {
                 gsmReady = true;
                 Serial.println("GSM Ready.");
@@ -67,7 +90,9 @@ bool GSM::sendThingSpeakRequest(String url) {
     sendCommand(cmd, 2000, false);
 
     // GET Request (Action 0)
-    SerialG.println("AT+HTTPACTION=0");
+    String actionCmd = "AT+HTTPACTION=0";
+    SerialG.println(actionCmd);
+    countSent(actionCmd + "\r\n");
     
     String actionResp = "";
     unsigned long start = millis();
@@ -79,6 +104,7 @@ bool GSM::sendThingSpeakRequest(String url) {
         while (SerialG.available()) {
             char c = SerialG.read();
             actionResp += c;
+            countReceived(String(c));
             Serial.write(c);
         }
         
@@ -114,8 +140,12 @@ bool GSM::sendThingSpeakRequest(String url) {
 }
 
 void GSM::sendCommand(const String& command, int timeout, boolean debug) {
-    while(SerialG.available()) SerialG.read(); // Clear buffer
+    while(SerialG.available()) {
+        char c = SerialG.read();
+        countReceived(String(c));
+    }
     SerialG.println(command);
+    countSent(command + "\r\n");
 
     String resp = "";
     unsigned long start = millis();
@@ -123,6 +153,7 @@ void GSM::sendCommand(const String& command, int timeout, boolean debug) {
         while (SerialG.available()) {
             char c = SerialG.read();
             resp += c;
+            countReceived(String(c));
             if (debug) Serial.write(c);
         }
         // Early exit if we see common terminators
@@ -133,3 +164,4 @@ void GSM::sendCommand(const String& command, int timeout, boolean debug) {
     }
     if (debug) Serial.println();
 }
+

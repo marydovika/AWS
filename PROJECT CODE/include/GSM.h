@@ -11,8 +11,16 @@ public:
     // Sends data to a specific ThingSpeak URL
     bool sendThingSpeakRequest(String url); 
 
+    // Byte counter for data estimation
+    uint32_t getTotalBytesSent();
+    uint32_t getTotalBytesReceived();
+    uint32_t getCycleCount();
+    void resetByteCounters();
+
 private:
     void sendCommand(const String& command, int timeout, boolean debug);
+    void countSent(const String& s);
+    void countReceived(const String& s);
 };
 
 #endif

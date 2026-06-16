@@ -15,10 +15,13 @@ public:
     // Formats data into labeled string and saves to BOTH Archive and Queue
     void logSensorData(String timestamp, SensorData data);
     
-    // New: Processes the queue, sending oldest data first
+    // Processes the queue, sending oldest data first
     void uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs);
 
-private:
+    // Save GSM usage statistics to SD
+    void logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles);
+
+    private:
     int _csPin;
     String _fileName;      // Archive file (permanent)
     String _queueFileName; // Queue file (temporary buffer)
