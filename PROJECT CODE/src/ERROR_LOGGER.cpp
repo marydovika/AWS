@@ -48,3 +48,49 @@ void ErrorLogger::log(const char* component,
         _writeToSD(line);
     }
 }
+
+uint32_t ErrorLogger::errorCount() {
+    return _errorCount;
+}
+
+void ErrorLogger::printLast(uint8_t n) {
+    if (!_sdAvailable) {
+        Serial.println("[ErrorLogger] SD not available — cannot read log.");
+        return;
+    }
+
+    File f = SD.open(ERROR_LOG_FILE, FILE_READ);
+    if (!f) {
+        Serial.println("[ErrorLogger] Could not open log file for reading.");
+        return;
+    }
+
+    String lines[n];
+    uint8_t idx = 0;
+    uint8_t count = 0;
+    String current = "";
+
+    while (f.available()) {
+        char c = f.read();
+        if (c == '\n') {
+            if (current.length() > 0) {
+                lines[idx % n] = current;
+                idx++;
+                count++;
+            }
+            current = "";
+        } else {
+            current += c;
+        }
+    }
+    f.close();
+
+    uint8_t total = (count < n) ? count : n;
+    uint8_t start = (count < n) ? 0 : (idx % n);
+
+    Serial.println("──── Last " + String(total) + " error log entries ────");
+    for (uint8_t i = 0; i < total; i++) {
+        Serial.println(lines[(start + i) % n]);
+    }
+    Serial.println("──────────────────────────────────────");
+}
