@@ -69,3 +69,45 @@
 
 #define ERR_MAIN_BME_NAN          "BME280_NAN_SUBSTITUTED"
 #define ERR_MAIN_POWER_FAIL       "POWER_READ_FAIL"
+
+class ErrorLogger {
+public:
+    static void begin(RTC_DS3231* rtc);
+    static void log(const char* component,
+                    const char* errorType,
+                    const char* detail = "");
+    static uint32_t errorCount();
+    static void printLast(uint8_t n = 10);
+
+private:
+    static RTC_DS3231* _rtc;
+    static uint32_t    _errorCount;
+    static bool        _sdAvailable;
+
+    static String _getTimestamp();
+    static void   _writeToSD(const String& line);
+    static void   _writeToSerial(const String& line);
+};
+
+#endif // ERROR_LOGGER_H
+
+class ErrorLogger {
+public:
+    static void begin(RTC_DS3231* rtc);
+    static void log(const char* component,
+                    const char* errorType,
+                    const char* detail = "");
+    static uint32_t errorCount();
+    static void printLast(uint8_t n = 10);
+
+private:
+    static RTC_DS3231* _rtc;
+    static uint32_t    _errorCount;
+    static bool        _sdAvailable;
+
+    static String _getTimestamp();
+    static void   _writeToSD(const String& line);
+    static void   _writeToSerial(const String& line);
+};
+
+#endif // ERROR_LOGGER_H
