@@ -1,4 +1,5 @@
 #include "GSM.h"
+#include "ERROR_LOGGER.h"
 
 // ESP32 WROVER: Use 26/27 or 4/13. DO NOT use 16/17 if using PSRAM.
 #define RX_GSM 16 
@@ -33,6 +34,7 @@ void GSM::setupGSM() {
         connectGPRS();
     } else {
         Serial.println("GSM Failure (Check Wiring/Power).");
+        ErrorLogger::log(COMP_GSM, ERR_GSM_HANDSHAKE_FAIL, "No OK response after 10 attempts");
     }
 }
 
