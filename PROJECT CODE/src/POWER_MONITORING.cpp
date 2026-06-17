@@ -1,4 +1,5 @@
 #include "POWER_MONITORING.h"
+#include "ERROR_LOGGER.h"
 
 
 // Constructor
@@ -26,6 +27,8 @@ bool PowerMonitoring::readData() {
     while (Wire.available()) {
       Wire.read();
     }
+    ErrorLogger::log(COMP_POWER_MONITOR, ERR_PWR_I2C_INCOMPLETE,
+                     "Bytes received did not match expected payload size");
     return false;
   }
 }
