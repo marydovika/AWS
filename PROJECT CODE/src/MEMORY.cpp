@@ -1,4 +1,5 @@
 #include "MEMORY.h"
+#include "ERROR_LOGGER.h"
 #include <Arduino.h>
 #include <SD.h>
 #include <string>
@@ -12,6 +13,7 @@ void Memory::setupMemory() {
   Serial.begin(9600);
   if (!SD.begin(chipSelectPin)) {
     Serial.println("Card failed, or not present");
+    ErrorLogger::log(COMP_MEMORY, ERR_MEM_INIT_FAIL, "SD.begin() failed");
     return;
   }
   Serial.println("SD card initialized.");
@@ -32,6 +34,7 @@ void Memory::createFile(const string& filename) {
     } else {
         Serial.print("Error creating file: ");
         Serial.println(filename.c_str());
+        ErrorLogger::log(COMP_MEMORY, ERR_MEM_CREATE_FAIL, filename.c_str());
     }
  }
 }
@@ -72,6 +75,7 @@ void Memory::writeData(const string& filename, const string& data) {
   } else {
     Serial.print("Error opening ");
     Serial.println(filename.c_str());
+    ErrorLogger::log(COMP_MEMORY, ERR_MEM_WRITE_FAIL, filename.c_str());
   }
 }
 
@@ -84,5 +88,6 @@ void Memory::clearFile(const string& filename) {
   } else {
     Serial.print("File does not exist: ");
     Serial.println(filename.c_str());
+    ErrorLogger::log(COMP_MEMORY, ERR_MEM_FILE_NOT_FOUND, ("Attempted to clear non-existent file: " + filename).c_str());
   }
 }
