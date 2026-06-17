@@ -1,4 +1,5 @@
 #include "DataLogger.h"
+#include "ERROR_LOGGER.h"
 
 // USE IP INSTEAD OF DOMAIN TO FIX ERROR 601
 String THINGSPEAK_IP = "http://184.106.153.149"; 
@@ -13,6 +14,7 @@ void DataLogger::begin() {
     // Initialize SPI before SD (ensure pins are correct for your board)
     if (!SD.begin(_csPin)) {
         Serial.println("SD Card Mount Failed");
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_MOUNT_FAIL, "SD.begin() failed");
         return;
     }
     Serial.println("SD Card Initialized");
@@ -45,13 +47,17 @@ void DataLogger::logSensorData(String timestamp, SensorData data) {
         _lastDataString = dataStr; 
     } else {
         Serial.println("Error writing to SD");
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_WRITE_FAIL, "SD.open() in APPEND mode failed - data lost");
     }
 }
 
 String DataLogger::getValueFromLog(String logLine, String label) {
     String searchKey = label + ":";
     int startIndex = logLine.indexOf(searchKey);
-    if (startIndex == -1) return "0"; 
+    if (startIndex == -1){
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_PARSE_FAIL, ("Label not found: " + label).c_str());
+        return "0"; 
+    }
     
     startIndex += searchKey.length();
     int endIndex = logLine.indexOf(",", startIndex);
@@ -63,6 +69,7 @@ String DataLogger::getValueFromLog(String logLine, String label) {
 void DataLogger::uploadLastDataToThingspeak(GSM &gsmModule) {
     if (_lastDataString == "") {
         Serial.println("No data to upload.");
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_NO_DATA, "_lastDataString is empty");
         return;
     }
 
