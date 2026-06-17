@@ -1,4 +1,5 @@
 #include "LORA.h"
+#include "ERROR_LOGGER.h"
 #include <Arduino.h>
 #include <HardwareSerial.h>
 #define RX 14
@@ -12,6 +13,7 @@ void Lora::setupLora() {
         Serial.println("LoRa module serial initialized.");
     } else {
         Serial.println("Failed to initialize LoRa module serial.");
+        ErrorLogger::log(COMP_LORA, ERR_LORA_SERIAL_INIT_FAIL, "SerialL object invalid after begin()");
     }
 }
 
