@@ -29,10 +29,6 @@ PowerMonitoring powermonitoring;
 GSM simmodule;
 DataLogger dataLogger(4); // CS pin 4 for SD card
 
-// Timer variables
-unsigned long lastUploadTime = 0;
-const long uploadInterval = 15000; // 15 seconds
-
 void setup() {
     Serial.begin(9600);
     
@@ -109,16 +105,8 @@ void loop() {
     dataLogger.logSensorData(timeStr, currentData);
 
     // --- UPLOAD ---
-    
-    if (millis() - lastUploadTime >= uploadInterval) {
-        lastUploadTime = millis();
-        
-        Serial.println("Triggering Upload Sequence...");
-        
-        // This function retrieves the last logged line, 
-        // deconstructs it, and sends it to the GSM module
-        dataLogger.uploadLastDataToThingspeak(simmodule);
-    }
+    // Non-blocking uploader state machine. Must run every loop iteration.
+    dataLogger.update(simmodule);
     
     delay(1000); // 1 sec loop delay
 }

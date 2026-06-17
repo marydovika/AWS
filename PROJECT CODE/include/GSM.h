@@ -9,9 +9,10 @@ public:
     void setupGSM();
     void connectGPRS(); // New: Setup Internet
     // Sends data to a specific ThingSpeak URL
-    void sendThingSpeakRequest(String url); 
+    int sendThingSpeakRequest(String url);
 
 private:
+    String readResponse(int timeout, boolean debug);
     void sendCommand(const String& command, int timeout, boolean debug);
 };
 

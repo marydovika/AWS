@@ -55,7 +55,21 @@ void GSM::connectGPRS() {
     sendCommand("AT+HTTPINIT", 1000, true);  
 }
 
-void GSM::sendThingSpeakRequest(String url) {
+String GSM::readResponse(int timeout, boolean debug) {
+    String response = "";
+    long int start = millis();
+    while ((start + timeout) > millis()) {
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            response += c;
+            if (debug) Serial.write(c);
+        }
+    }
+    if (debug) Serial.println();
+    return response;
+}
+
+int GSM::sendThingSpeakRequest(String url) {
     // Terminate any stuck previous sessions just in case
     sendCommand("AT+HTTPTERM", 500, false);
     sendCommand("AT+HTTPINIT", 500, false);
@@ -67,14 +81,62 @@ void GSM::sendThingSpeakRequest(String url) {
     sendCommand(cmd, 2000, false);
 
     // GET Request (Action 0)
-    // We wait longer (8000ms) because network can be slow
-    sendCommand("AT+HTTPACTION=0", 8000, true);
+    // We wait longer because network can be slow.
+    while (SerialG.available()) SerialG.read();
+    SerialG.println("AT+HTTPACTION=0");
+    String actionResponse = readResponse(12000, true);
 
-    // Read Response to see if it worked
-    sendCommand("AT+HTTPREAD", 2000, true);
+    int actionPos = actionResponse.lastIndexOf("+HTTPACTION:");
+    if (actionPos == -1) {
+        Serial.println("HTTPACTION parse failed");
+        sendCommand("AT+HTTPTERM", 500, false);
+        return -1;
+    }
+
+    int lineEnd = actionResponse.indexOf('\n', actionPos);
+    String actionLine = (lineEnd == -1)
+                            ? actionResponse.substring(actionPos)
+                            : actionResponse.substring(actionPos, lineEnd);
+
+    int firstComma = actionLine.indexOf(',');
+    int secondComma = actionLine.indexOf(',', firstComma + 1);
+    if (firstComma == -1 || secondComma == -1) {
+        Serial.println("HTTPACTION format invalid");
+        sendCommand("AT+HTTPTERM", 500, false);
+        return -1;
+    }
+
+    int httpStatus = actionLine.substring(firstComma + 1, secondComma).toInt();
+    if (httpStatus != 200) {
+        Serial.println("HTTP status not OK: " + String(httpStatus));
+        sendCommand("AT+HTTPTERM", 500, false);
+        return -1;
+    }
+
+    // Read response body (ThingSpeak entry_id on success, 0 on limit).
+    while (SerialG.available()) SerialG.read();
+    SerialG.println("AT+HTTPREAD");
+    String readResponseBody = readResponse(2500, true);
+
+    int entryId = 0;
+    int bodyStart = readResponseBody.indexOf("\r\n");
+    if (bodyStart != -1) {
+        int i = bodyStart + 2;
+        while (i < readResponseBody.length() && !isDigit(readResponseBody[i])) i++;
+        int j = i;
+        while (j < readResponseBody.length() && isDigit(readResponseBody[j])) j++;
+        if (j > i) {
+            entryId = readResponseBody.substring(i, j).toInt();
+        }
+    }
+
+    if (entryId <= 0) {
+        Serial.println("ThingSpeak body returned no entry id: " + readResponseBody);
+    }
     
     // Close this specific HTTP session to prevent memory leaks in modem
-    sendCommand("AT+HTTPTERM", 500, false); 
+    sendCommand("AT+HTTPTERM", 500, false);
+    return entryId;
 }
 
 void GSM::sendCommand(const String& command, int timeout, boolean debug) {

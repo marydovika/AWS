@@ -4,8 +4,18 @@
 #include <Arduino.h>
 #include <SD.h>
 #include <SPI.h>
+#include <initializer_list>
+#include <utility>
 #include "SensorData.h"
 #include "GSM.h"
+
+enum UploadState {
+    UPLOAD_IDLE,
+    UPLOAD_WAIT_CH1,
+    UPLOAD_CH2,
+    UPLOAD_WAIT_CH2,
+    UPLOAD_CH3
+};
 
 class DataLogger {
 public:
@@ -14,19 +24,34 @@ public:
     
     // Formats data into labeled string and saves to SD
     void logSensorData(String timestamp, SensorData data);
+
+    // Non-blocking upload state-machine (call every loop()).
+    void update(GSM &gsmModule);
     
-    // Reads the last written line and sends to ThingSpeak via GSM
+    // Legacy/manual trigger.
     void uploadLastDataToThingspeak(GSM &gsmModule);
+
+    // Helper to extract value from "Label:Value" string
+    String getValueFromLog(String logLine, String label);
 
 private:
     int _csPin;
     String _fileName;
-    String _lastDataString; // Caches the last written line for efficiency
+    String _lastDataString;
+    bool _sdAvailable;
 
-    // Helper to extract value from "Label:Value" string
-    String getValueFromLog(String logLine, String label);
+    UploadState _uploadState;
+    unsigned long _lastUploadTime;
+    bool _uploadPending;
     
-    // ThingSpeak Config (Update these)
+    String _buildUrl(String apiKey,
+        std::initializer_list<std::pair<String, String>> fields);
+    bool _sendWithRetry(GSM &gsmModule, String url);
+    void _deleteLineFromSD(String uploadedLine);
+    void _rotateLogIfNeeded();
+    String _peekFirstPendingLine();
+
+    // ThingSpeak Config
     const String API_KEY_1 = "WL5ALGBAQDZV674Z"; 
     const String API_KEY_2 = "IKCHAI6ID958MEYG";
     const String API_KEY_3 = "IBK1KTD4E6A0CKZK";
