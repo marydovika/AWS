@@ -10,6 +10,7 @@ public:
     Rtc();
     void setupRTC();
     bool syncWithNTP(const char* ntpServer, long gmtOffsetSec, int daylightOffsetSec);
+    bool syncWithGSM(String gsmTime);
     std::string getDateTime();
     void printDateTime(); 
 

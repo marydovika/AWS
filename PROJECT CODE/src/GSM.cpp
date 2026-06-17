@@ -53,10 +53,39 @@ void GSM::setupGSM() {
     }
     
     if(gsmReady) {
+        sendCommand("AT+CLTS=1", 500, false); // Enable network time sync
         connectGPRS();
     } else {
         Serial.println("GSM Failure (Check Wiring/Power).");
     }
+}
+
+String GSM::getNetworkTime() {
+    while(SerialG.available()) SerialG.read(); // Clear buffer
+    
+    SerialG.println("AT+CCLK?");
+    countSent("AT+CCLK?\r\n");
+    
+    String response = "";
+    unsigned long start = millis();
+    while (millis() - start < 2000) {
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            response += c;
+            countReceived(String(c));
+        }
+        if (response.indexOf("OK") != -1) break;
+    }
+    
+    // Response format: +CCLK: "yy/mm/dd,hh:mm:ss+zz"
+    int firstQuote = response.indexOf('\"');
+    int lastQuote = response.lastIndexOf('\"');
+    
+    if (firstQuote != -1 && lastQuote != -1 && lastQuote > firstQuote) {
+        return response.substring(firstQuote + 1, lastQuote);
+    }
+    
+    return "";
 }
 
 void GSM::connectGPRS() {

@@ -54,6 +54,32 @@ bool Rtc::syncWithNTP(const char* ntpServer, long gmtOffsetSec, int daylightOffs
     return true;
 }
 
+bool Rtc::syncWithGSM(String gsmTime) {
+    if (!rtcFound) return false;
+    if (gsmTime.length() < 17) {
+        Serial.println("[RTC] Invalid GSM time format.");
+        return false;
+    }
+
+    // Format: "yy/mm/dd,hh:mm:ss+zz"
+    //          01234567890123456
+    int year = gsmTime.substring(0, 2).toInt() + 2000;
+    int month = gsmTime.substring(3, 5).toInt();
+    int day = gsmTime.substring(6, 8).toInt();
+    int hour = gsmTime.substring(9, 11).toInt();
+    int min = gsmTime.substring(12, 14).toInt();
+    int sec = gsmTime.substring(15, 17).toInt();
+
+    if (year < 2024) { // Basic sanity check
+        Serial.println("[RTC] GSM time seems invalid (pre-2024). Skipping sync.");
+        return false;
+    }
+
+    rtc.adjust(DateTime(year, month, day, hour, min, sec));
+    Serial.println("[RTC] Synchronized with GSM network time.");
+    return true;
+}
+
 void Rtc::printDateTime() {
     std::string currentTime = getDateTime();
     Serial.println(currentTime.c_str());

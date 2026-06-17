@@ -11,6 +11,9 @@ public:
     // Sends data to a specific ThingSpeak URL
     bool sendThingSpeakRequest(String url); 
 
+    // New: Get network time from GSM module
+    String getNetworkTime();
+
     // Byte counter for data estimation
     uint32_t getTotalBytesSent();
     uint32_t getTotalBytesReceived();

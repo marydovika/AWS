@@ -151,6 +151,13 @@ void transmitData(SensorData &data, unsigned long tonStart) {
     loraSleep();
 
     gsmPowerOn();
+    
+    // Sync RTC with GSM network time
+    String networkTime = simmodule.getNetworkTime();
+    if (networkTime != "") {
+        rtc1.syncWithGSM(networkTime);
+    }
+
     dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
     
     // Display Byte Usage
