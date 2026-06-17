@@ -1,11 +1,12 @@
 #include <Arduino.h>
+#include "ERROR_LOGGER.h"
 #include "DHT22.h"
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
 #include <DHT_U.h>
 #include <string>
 using namespace std;
-#include "ERROR_LOGGER.h"
+
 
 #define DHTTYPE    DHT22     // DHT 22 (AM2302)
 DHT_Unified dht(DHTPIN, DHTTYPE);
