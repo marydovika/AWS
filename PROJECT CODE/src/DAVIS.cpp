@@ -1,4 +1,5 @@
 #include "DAVIS.h"
+#include "ERROR_LOGGER.h"
 
 // =========================================================
 // GLOBAL HELPERS FOR INTERRUPTS
@@ -7,10 +8,17 @@
 // 1. Global pointer to the class instance
 Davis* davisInstance = nullptr;
 
+// Flag set inside the ISR if it fires before davisInstance is ready.
+// Checked and logged later in readRainGauge() since SD/Serial I/O
+// is not safe to call directly from interrupt context.
+volatile bool g_davisIsrNullFlag = false;
+
 // 2. Global Interrupt Service Routine (ISR) wrapper
 void IRAM_ATTR rainISR() {
   if (davisInstance) {
     davisInstance->handleInterrupt();
+  } else {
+    g_davisIsrNullFlag = true;
   }
 }
 
@@ -54,6 +62,14 @@ void IRAM_ATTR Davis::handleInterrupt() {
 
 int Davis::readRainGauge(){
   unsigned long currentTime = millis();
+
+  // Check for ISR-before-init flag set from interrupt context.
+  // Logged here (outside the ISR) because file/Serial I/O is not
+  // safe to perform directly inside an IRAM_ATTR interrupt handler.
+  if (g_davisIsrNullFlag) {
+    ErrorLogger::log(COMP_DAVIS, ERR_DAVIS_ISR_NULL, "ISR fired before davisInstance was set");
+    g_davisIsrNullFlag = false;
+  }
 
   // --- HOURLY RESET LOGIC ---
   if (currentTime - lastResetTime >= RESET_INTERVAL) {
