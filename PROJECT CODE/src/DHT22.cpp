@@ -5,6 +5,7 @@
 #include <DHT_U.h>
 #include <string>
 using namespace std;
+#include "ERROR_LOGGER.h"
 
 #define DHTTYPE    DHT22     // DHT 22 (AM2302)
 DHT_Unified dht(DHTPIN, DHTTYPE);
@@ -52,6 +53,7 @@ float DHTSensor::readTemperature() {
   dht.temperature().getEvent(&event);
   if (isnan(event.temperature)) {
     Serial.println(F("Error reading temperature!"));
+    ErrorLogger::log(COMP_DHT22, ERR_DHT_TEMP_FAIL, "Sensor returned NaN");
   }
   else {
     Serial.print(F("Temperature: "));
@@ -70,6 +72,7 @@ float DHTSensor::readHumidity() {
   dht.humidity().getEvent(&event);
   if (isnan(event.relative_humidity)) {
     Serial.println(F("Error reading humidity!"));
+    ErrorLogger::log(COMP_DHT22, ERR_DHT_HUM_FAIL, "Sensor returned NaN");
   }
   else {
     Serial.print(F("Humidity: "));
