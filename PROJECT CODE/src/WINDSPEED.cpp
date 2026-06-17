@@ -1,12 +1,20 @@
 #include "WINDSPEED.h"
+#include "ERROR_LOGGER.h"
 
 // Pointer for the global ISR
 WindSpeedSensor* speedSensorInstance = nullptr;
+
+// Flag set inside the ISR if it fires before speedSensorInstance is ready.
+// Checked and logged later in readWindSpeedKPH() since SD/Serial I/O
+// is not safe to call directly from interrupt context.
+volatile bool g_windIsrNullFlag = false;
 
 // Global ISR wrapper
 void IRAM_ATTR speedGlobalISR() {
   if (speedSensorInstance) {
     speedSensorInstance->handleInterrupt();
+  } else {
+    g_windIsrNullFlag = true;
   }
 }
 
@@ -43,9 +51,16 @@ void IRAM_ATTR WindSpeedSensor::handleInterrupt() {
 float WindSpeedSensor::readWindSpeedKPH() {
   unsigned long currentTime = millis();
 
+  // Check for ISR-before-init flag set from interrupt context
+  if (g_windIsrNullFlag) {
+    ErrorLogger::log(COMP_WINDSPEED, ERR_WIND_ISR_NULL, "ISR fired before speedSensorInstance was set");
+    g_windIsrNullFlag = false;
+  }
+
   // 1. TIMEOUT CHECK
   // If we haven't seen a pulse in 3 seconds, assume wind stopped.
   if ((currentTime - _lastPulseTime) > TIMEOUT_MS) {
+    ErrorLogger::log(COMP_WINDSPEED, ERR_WIND_TIMEOUT, "No pulse for 3s - returning 0.0 (calm or sensor fault)");
     return 0.0;
   }
 
@@ -59,5 +74,6 @@ float WindSpeedSensor::readWindSpeedKPH() {
     return freqHz * KPH_PER_HZ;
   }
 
+  ErrorLogger::log(COMP_WINDSPEED, ERR_WIND_DIVIDE_ZERO, "_pulseInterval is 0 - returning 0.0");
   return 0.0;
 }
