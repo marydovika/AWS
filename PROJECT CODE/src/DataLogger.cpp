@@ -1,32 +1,21 @@
 #include "DataLogger.h"
-#include "ERROR_LOGGER.h"
 
 // USE IP INSTEAD OF DOMAIN TO FIX ERROR 601
-String THINGSPEAK_IP = "http://184.106.153.149";
-
-static const int MAX_RETRIES = 3;
-static const int MAX_LOG_LINES = 500;
-static const String TEMP_FILE = "/datalog_tmp.txt";
-static const unsigned long TS_INTERVAL = 16000UL;
+String THINGSPEAK_IP = "http://184.106.153.149"; 
 
 DataLogger::DataLogger(int csPin) {
     _csPin = csPin;
     _fileName = "/datalog.txt";
+    _queueFileName = "/queue.txt";
     _lastDataString = "";
-    _sdAvailable = false;
-    _uploadState = UPLOAD_IDLE;
-    _lastUploadTime = 0;
-    _uploadPending = false;
 }
 
 void DataLogger::begin() {
     if (!SD.begin(_csPin)) {
         Serial.println("SD Card Mount Failed");
-        ErrorLogger::log(COMP_SD_CARD, ERR_SD_MOUNT_FAIL, "SD.begin() failed");
         return;
     }
-    Serial.println("[DataLogger] SD Card Initialized");
-    _sdAvailable = true;
+    Serial.println("SD Card Initialized");
 }
 
 void DataLogger::logSensorData(String timestamp, SensorData data) {
@@ -45,234 +34,170 @@ void DataLogger::logSensorData(String timestamp, SensorData data) {
     dataStr += "V5:" + String(data.volt_5v, 2) + ",";
     dataStr += "VBatt:" + String(data.volt_batt, 2) + ",";
     dataStr += "VSol:" + String(data.volt_solar, 2) + ",";
-    dataStr += "VDC:" + String(data.volt_dc, 2);
+    dataStr += "VDC:" + String(data.volt_dc, 2) + ",";
+    dataStr += "CBatt:" + String(data.curr_batt, 2) + ",";
+    dataStr += "CSol:" + String(data.curr_solar, 2);
 
-    File file = SD.open(_fileName, FILE_APPEND);
-    if (file) {
-        file.println(dataStr);
-        file.close();
-        Serial.println("Logged: " + dataStr);
-        _lastDataString = dataStr; 
-    } else {
-        Serial.println("Error writing to SD");
-        ErrorLogger::log(COMP_SD_CARD, ERR_SD_WRITE_FAIL, "SD.open() in APPEND mode failed - data lost");
+    // 1. Write to Archive (Permanent)
+    File archFile = SD.open(_fileName, FILE_APPEND);
+    if (archFile) {
+        archFile.println(dataStr);
+        archFile.close();
     }
+
+    // 2. Write to Queue (Buffer)
+    File queueFile = SD.open(_queueFileName, FILE_APPEND);
+    if (queueFile) {
+        queueFile.println(dataStr);
+        queueFile.close();
+        Serial.println("Queued: " + dataStr);
+    }
+}
+
+void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs) {
+    while (true) {
+        // Check if we still have time in the TON window (leave 45s margin for a full 3-channel upload)
+        if (millis() - startTimeMs > (tonLimitMs - 45000)) {
+            Serial.println("[Queue] TON limit approaching. Saving remaining for next cycle.");
+            break;
+        }
+
+        if (!SD.exists(_queueFileName)) {
+            Serial.println("[Queue] No pending data.");
+            break;
+        }
+
+        File queueFile = SD.open(_queueFileName, FILE_READ);
+        if (!queueFile || queueFile.size() == 0) {
+            if (queueFile) queueFile.close();
+            SD.remove(_queueFileName);
+            break;
+        }
+
+        // Read the first line (oldest)
+        String line = queueFile.readStringUntil('\n');
+        line.trim();
+        queueFile.close();
+
+        if (line == "") {
+            popQueue(); // Remove empty lines
+            continue;
+        }
+
+        Serial.println("[Queue] Attempting upload of oldest record...");
+        
+        // CHANNEL 1
+        String url1 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_1;
+        url1 += "&field1=" + getValueFromLog(line, "Temp");
+        url1 += "&field2=" + getValueFromLog(line, "Hum");
+        url1 += "&field3=" + getValueFromLog(line, "Press");
+        url1 += "&field4=" + getValueFromLog(line, "Rain");
+        url1 += "&field5=" + getValueFromLog(line, "WSpd");
+        url1 += "&field6=" + getValueFromLog(line, "WDir");
+        url1 += "&field7=" + getValueFromLog(line, "Light");
+        url1 += "&field8=" + getValueFromLog(line, "SoilM");
+
+        bool success = gsmModule.sendThingSpeakRequest(url1);
+        
+        if (success) {
+            delay(16000); // Rate limit
+            
+            // CHANNEL 2
+            String url2 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_2;
+            url2 += "&field1=" + getValueFromLog(line, "V33");
+            url2 += "&field2=" + getValueFromLog(line, "V5");
+            url2 += "&field3=" + getValueFromLog(line, "VBatt");
+            url2 += "&field4=" + getValueFromLog(line, "VSol");
+            url2 += "&field5=" + getValueFromLog(line, "VDC");
+            gsmModule.sendThingSpeakRequest(url2);
+            
+            delay(16000); // Rate limit
+
+            // CHANNEL 3
+            String url3 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_3;
+            url3 += "&field1=" + getValueFromLog(line, "CBatt");
+            url3 += "&field2=" + getValueFromLog(line, "CSol");
+            gsmModule.sendThingSpeakRequest(url3);
+
+            Serial.println("[Queue] Upload successful. Popping from queue.");
+            popQueue();
+        } else {
+            Serial.println("[Queue] Upload failed. GSM likely offline. Stopping.");
+            break; // Stop trying if GSM is failing
+        }
+    }
+}
+
+void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles) {
+    File statsFile = SD.open("/gsm_usage.csv", FILE_APPEND);
+    if (statsFile) {
+        // Create header if file is new
+        if (statsFile.size() == 0) {
+            statsFile.println("Timestamp,BytesSent,BytesReceived,TotalCycles,AvgKBPerCycle");
+        }
+        
+        uint32_t total = sent + received;
+        float avgKB = 0;
+        if (cycles > 0) {
+            avgKB = (total / 1024.0) / cycles;
+        }
+
+        statsFile.print(timestamp);
+        statsFile.print(",");
+        statsFile.print(sent);
+        statsFile.print(",");
+        statsFile.print(received);
+        statsFile.print(",");
+        statsFile.print(cycles);
+        statsFile.print(",");
+        statsFile.println(avgKB, 3);
+        
+        statsFile.close();
+        Serial.println("[SD] GSM usage stats saved to /gsm_usage.csv");
+    } else {
+        Serial.println("[SD] Failed to open /gsm_usage.csv for writing");
+    }
+}
+
+bool DataLogger::popQueue() {
+    if (!SD.exists(_queueFileName)) return false;
+
+    File queueFile = SD.open(_queueFileName, FILE_READ);
+    if (!queueFile) return false;
+
+    File tempFile = SD.open("/temp_q.txt", FILE_WRITE);
+    if (!tempFile) {
+        queueFile.close();
+        return false;
+    }
+
+    // Skip the first line
+    bool skipped = false;
+    while (queueFile.available()) {
+        String line = queueFile.readStringUntil('\n');
+        if (!skipped) {
+            skipped = true;
+            continue;
+        }
+        tempFile.println(line);
+    }
+
+    queueFile.close();
+    tempFile.close();
+
+    SD.remove(_queueFileName);
+    SD.rename("/temp_q.txt", _queueFileName);
+    return true;
 }
 
 String DataLogger::getValueFromLog(String logLine, String label) {
     String searchKey = label + ":";
     int startIndex = logLine.indexOf(searchKey);
-    if (startIndex == -1){
-        ErrorLogger::log(COMP_SD_CARD, ERR_SD_PARSE_FAIL, ("Label not found: " + label).c_str());
-        return "0"; 
-    }
+    if (startIndex == -1) return "0"; 
     
     startIndex += searchKey.length();
     int endIndex = logLine.indexOf(",", startIndex);
-    if (endIndex == -1) endIndex = logLine.length();
+    if (endIndex == -1) endIndex = logLine.length(); 
     
     return logLine.substring(startIndex, endIndex);
-}
-
-String DataLogger::_buildUrl(String apiKey,
-    std::initializer_list<std::pair<String, String>> fields) {
-    String url = THINGSPEAK_IP + "/update?api_key=" + apiKey;
-    for (auto &f : fields) {
-        url += "&" + f.second + "=" + getValueFromLog(_lastDataString, f.first);
-    }
-    return url;
-}
-
-bool DataLogger::_sendWithRetry(GSM &gsmModule, String url) {
-    for (int attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-        int responseCode = gsmModule.sendThingSpeakRequest(url);
-
-        // ThingSpeak success returns positive entry_id.
-        if (responseCode > 0) {
-            Serial.println("[DataLogger] Upload success, entry_id=" + String(responseCode));
-            return true;
-        }
-
-        Serial.println("[DataLogger] Upload failed (code=" + String(responseCode) +
-                       "), retry " + String(attempt) + "/" + String(MAX_RETRIES));
-        delay(2000);
-    }
-    return false;
-}
-
-String DataLogger::_peekFirstPendingLine() {
-    if (!_sdAvailable) return "";
-    File file = SD.open(_fileName, FILE_READ);
-    if (!file) return "";
-
-    String line = "";
-    while (file.available()) {
-        line = file.readStringUntil('\n');
-        line.trim();
-        if (line.length() > 0) {
-            file.close();
-            return line;
-        }
-    }
-    file.close();
-    return "";
-}
-
-void DataLogger::update(GSM &gsmModule) {
-    // If nothing currently pending, pull next queued sample from SD.
-    if (!_uploadPending) {
-        if (_lastDataString.length() == 0) {
-            String pending = _peekFirstPendingLine();
-            if (pending.length() == 0) return;
-            _lastDataString = pending;
-        }
-        _uploadPending = true;
-        _uploadState = UPLOAD_IDLE;
-    }
-
-    if (_lastDataString.length() == 0) return;
-    unsigned long now = millis();
-
-    switch (_uploadState) {
-        case UPLOAD_IDLE: {
-            bool ok = _sendWithRetry(gsmModule, _buildUrl(API_KEY_1,
-                { {"Temp", "field1"}, {"Hum", "field2"}, {"Press", "field3"},
-                  {"Rain", "field4"}, {"WSpd", "field5"}, {"WDir", "field6"},
-                  {"Light", "field7"}, {"SoilM", "field8"} }));
-            if (ok) {
-                _lastUploadTime = now;
-                _uploadState = UPLOAD_WAIT_CH1;
-            } else {
-                _uploadPending = false;
-            }
-            break;
-        }
-
-        case UPLOAD_WAIT_CH1:
-            if (now - _lastUploadTime >= TS_INTERVAL) _uploadState = UPLOAD_CH2;
-            break;
-
-        case UPLOAD_CH2: {
-            bool ok = _sendWithRetry(gsmModule, _buildUrl(API_KEY_2,
-                { {"V33", "field1"}, {"V5", "field2"}, {"VBatt", "field3"} }));
-            if (ok) {
-                _lastUploadTime = now;
-                _uploadState = UPLOAD_WAIT_CH2;
-            } else {
-                _uploadPending = false;
-            }
-            break;
-        }
-
-        case UPLOAD_WAIT_CH2:
-            if (now - _lastUploadTime >= TS_INTERVAL) _uploadState = UPLOAD_CH3;
-            break;
-
-        case UPLOAD_CH3: {
-            bool ok = _sendWithRetry(gsmModule, _buildUrl(API_KEY_3,
-                { {"VSol", "field1"}, {"VDC", "field2"}, {"Alt", "field3"} }));
-            if (ok) {
-                _deleteLineFromSD(_lastDataString);
-                _lastDataString = "";
-                _uploadPending = false;
-                _uploadState = UPLOAD_IDLE;
-            } else {
-                _uploadPending = false;
-            }
-            break;
-        }
-
-        default:
-            _uploadState = UPLOAD_IDLE;
-            break;
-    }
-}
-
-void DataLogger::_deleteLineFromSD(String uploadedLine) {
-    if (!_sdAvailable) return;
-
-    File src = SD.open(_fileName, FILE_READ);
-    if (!src) return;
-    File tmp = SD.open(TEMP_FILE, FILE_WRITE);
-    if (!tmp) {
-        src.close();
-        return;
-    }
-
-    bool lineDeleted = false;
-    while (src.available()) {
-        String line = src.readStringUntil('\n');
-        line.trim();
-        if (line.length() == 0) continue;
-        if (!lineDeleted && line == uploadedLine) {
-            lineDeleted = true;
-            continue;
-        }
-        tmp.println(line);
-    }
-
-    src.close();
-    tmp.close();
-
-    if (!SD.exists(TEMP_FILE)) {
-        Serial.println("[DataLogger] Temp log file missing, keeping original log.");
-        return;
-    }
-
-    SD.remove(_fileName);
-    if (!SD.rename(TEMP_FILE, _fileName)) {
-        Serial.println("[DataLogger] Failed to replace log file after upload.");
-    }
-}
-
-void DataLogger::_rotateLogIfNeeded() {
-    if (!_sdAvailable) return;
-    File file = SD.open(_fileName, FILE_READ);
-    if (!file) return;
-
-    int lineCount = 0;
-    while (file.available()) {
-        String line = file.readStringUntil('\n');
-        line.trim();
-        if (line.length() > 0) lineCount++;
-    }
-    file.close();
-
-    if (lineCount < MAX_LOG_LINES) return;
-
-    File src = SD.open(_fileName, FILE_READ);
-    File tmp = SD.open(TEMP_FILE, FILE_WRITE);
-    if (!src || !tmp) {
-        if (src) src.close();
-        if (tmp) tmp.close();
-        return;
-    }
-
-    int skipLines = lineCount / 2;
-    int skipped = 0;
-    while (src.available()) {
-        String line = src.readStringUntil('\n');
-        line.trim();
-        if (line.length() == 0) continue;
-        if (skipped < skipLines) {
-            skipped++;
-            continue;
-        }
-        tmp.println(line);
-    }
-    src.close();
-    tmp.close();
-    SD.remove(_fileName);
-    SD.rename(TEMP_FILE, _fileName);
-}
-
-void DataLogger::uploadLastDataToThingspeak(GSM &gsmModule) {
-    if (_lastDataString == "") {
-        Serial.println("No data to upload.");
-        ErrorLogger::log(COMP_SD_CARD, ERR_SD_NO_DATA, "_lastDataString is empty");
-        return;
-    }
-    _uploadPending = true;
-    _uploadState = UPLOAD_IDLE;
-    Serial.println("[DataLogger] Manual upload queued. Call update() in loop().");
 }

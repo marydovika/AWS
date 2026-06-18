@@ -4,57 +4,39 @@
 #include <Arduino.h>
 #include <SD.h>
 #include <SPI.h>
-#include <initializer_list>
-#include <utility>
 #include "SensorData.h"
 #include "GSM.h"
-
-enum UploadState {
-    UPLOAD_IDLE,
-    UPLOAD_WAIT_CH1,
-    UPLOAD_CH2,
-    UPLOAD_WAIT_CH2,
-    UPLOAD_CH3
-};
 
 class DataLogger {
 public:
     DataLogger(int csPin);
     void begin();
     
-    // Formats data into labeled string and saves to SD
+    // Formats data into labeled string and saves to BOTH Archive and Queue
     void logSensorData(String timestamp, SensorData data);
-
-    // Non-blocking upload state-machine (call every loop()).
-    void update(GSM &gsmModule);
     
-    // Legacy/manual trigger.
-    void uploadLastDataToThingspeak(GSM &gsmModule);
+    // Processes the queue, sending oldest data first
+    void uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs);
+
+    // Save GSM usage statistics to SD
+    void logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles);
+
+    private:
+    int _csPin;
+    String _fileName;      // Archive file (permanent)
+    String _queueFileName; // Queue file (temporary buffer)
+    String _lastDataString; 
 
     // Helper to extract value from "Label:Value" string
     String getValueFromLog(String logLine, String label);
 
-private:
-    int _csPin;
-    String _fileName;
-    String _lastDataString;
-    bool _sdAvailable;
-
-    UploadState _uploadState;
-    unsigned long _lastUploadTime;
-    bool _uploadPending;
+    // New: Removes the first line from the queue file
+    bool popQueue();
     
-    String _buildUrl(String apiKey,
-        std::initializer_list<std::pair<String, String>> fields);
-    bool _sendWithRetry(GSM &gsmModule, String url);
-    void _deleteLineFromSD(String uploadedLine);
-    void _rotateLogIfNeeded();
-    String _peekFirstPendingLine();
-
     // ThingSpeak Config
-    const String API_KEY_1 = "WL5ALGBAQDZV674Z"; 
-    const String API_KEY_2 = "IKCHAI6ID958MEYG";
-    const String API_KEY_3 = "IBK1KTD4E6A0CKZK";
+    const String API_KEY_1 = "0UOU523VQPM2FZXJ"; 
+    const String API_KEY_2 = "5N37KH8M7FCF5PU2";
+    const String API_KEY_3 = "XH83XCG9LMURW45L";
 };
 
 #endif

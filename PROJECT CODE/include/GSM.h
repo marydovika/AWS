@@ -8,12 +8,24 @@ public:
     GSM();
     void setupGSM();
     void connectGPRS(); // New: Setup Internet
+    bool waitForNetwork(int timeoutMs); // New: Wait for cell signal
     // Sends data to a specific ThingSpeak URL
-    int sendThingSpeakRequest(String url);
+    bool sendThingSpeakRequest(String url); 
+
+    // New: Get network time from GSM module
+    String getNetworkTime();
+
+    // Byte counter for data estimation
+    uint32_t getTotalBytesSent();
+    uint32_t getTotalBytesReceived();
+    uint32_t getCycleCount();
+    void resetByteCounters();
 
 private:
-    String readResponse(int timeout, boolean debug);
     void sendCommand(const String& command, int timeout, boolean debug);
+    String sendCommandWithResponse(const String& command, int timeout, boolean debug);
+    void countSent(const String& s);
+    void countReceived(const String& s);
 };
 
 #endif
