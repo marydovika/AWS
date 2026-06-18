@@ -75,8 +75,13 @@ bool Rtc::syncWithGSM(String gsmTime) {
         return false;
     }
 
-    rtc.adjust(DateTime(year, month, day, hour, min, sec));
-    Serial.println("[RTC] Synchronized with GSM network time.");
+    // Apply EAT Timezone Offset (+3 hours)
+    DateTime gsmDt(year, month, day, hour, min, sec);
+    TimeSpan eatOffset(0, 3, 0, 0); // 0 days, 3 hours, 0 mins, 0 secs
+    DateTime localDt = gsmDt + eatOffset;
+
+    rtc.adjust(localDt);
+    Serial.println("[RTC] Synchronized with GSM network time (EAT Offset applied).");
     return true;
 }
 

@@ -8,6 +8,7 @@ public:
     GSM();
     void setupGSM();
     void connectGPRS(); // New: Setup Internet
+    bool waitForNetwork(int timeoutMs); // New: Wait for cell signal
     // Sends data to a specific ThingSpeak URL
     bool sendThingSpeakRequest(String url); 
 
@@ -22,6 +23,7 @@ public:
 
 private:
     void sendCommand(const String& command, int timeout, boolean debug);
+    String sendCommandWithResponse(const String& command, int timeout, boolean debug);
     void countSent(const String& s);
     void countReceived(const String& s);
 };

@@ -28,7 +28,7 @@
 #include "LORA.h"
 
 static const uint32_t UPDATE_INTERVAL_MINUTES = 10;
-static const uint64_t TON_MS  = 2ULL  * 60ULL * 1000ULL;
+static const uint64_t TON_MS  = 4ULL  * 60ULL * 1000ULL;
 
 #define GSM_POWER_PIN  32
 static const uint32_t GSM_WARMUP_MS = 3000;
@@ -152,14 +152,14 @@ void transmitData(SensorData &data, unsigned long tonStart) {
 
     gsmPowerOn();
     
-    // Sync RTC with GSM network time
+    // SYNC EARLY: Get network time as soon as GPRS is connected
     String networkTime = simmodule.getNetworkTime();
     if (networkTime != "") {
         rtc1.syncWithGSM(networkTime);
     }
 
     dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
-    
+
     // Display Byte Usage
     Serial.println("\n[GSM] === Data Usage Stats ===");
     Serial.printf("[GSM] Total Sent: %u bytes\n", simmodule.getTotalBytesSent());
