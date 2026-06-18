@@ -54,71 +54,37 @@ void GSM::setupGSM() {
     
     if(gsmReady) {
         sendCommand("AT+CLTS=1", 500, false); // Enable network time sync
-        if (waitForNetwork(40000)) { // Wait up to 40 seconds
-            connectGPRS();
-        } else {
-            Serial.println("Network Registration Failed (Timeout).");
-        }
+        connectGPRS();
     } else {
         Serial.println("GSM Failure (Check Wiring/Power).");
     }
 }
 
-bool GSM::waitForNetwork(int timeoutMs) {
-    Serial.print("Waiting for network registration...");
-    unsigned long start = millis();
-    while (millis() - start < (unsigned long)timeoutMs) {
-        String resp = sendCommandWithResponse("AT+CREG?", 1000, false);
-        // Look for +CREG: 0,1 (Home) or 0,5 (Roaming)
-        if (resp.indexOf(",1") != -1 || resp.indexOf(",5") != -1) {
-            Serial.println(" Registered!");
-            return true;
-        }
-        Serial.print(".");
-        delay(2000); // Wait 2s between checks
-    }
-    Serial.println(" Failed (Timeout)");
-    return false;
-}
-
 String GSM::getNetworkTime() {
-    // 1. Force the module to update its clock from the network
-    sendCommand("AT+CLTS=1", 500, false);
+    while(SerialG.available()) SerialG.read(); // Clear buffer
     
-    for (int retry = 0; retry < 3; retry++) {
-        // Try GSMLOC (uses tower location to get very accurate time)
-        // Format: +CIPGSMLOC: 0,2026/06/17,09:42:30
-        String response = sendCommandWithResponse("AT+CIPGSMLOC=2,1", 10000, true);
-        
-        if (response.indexOf("601") != -1) {
-            Serial.println("[GSM] Bearer error, skipping GSMLOC.");
-        } else {
-            int firstComma = response.indexOf(',');
-            int secondComma = response.indexOf(',', firstComma + 1);
-            if (firstComma != -1 && secondComma != -1) {
-                String fullDate = response.substring(secondComma + 1);
-                fullDate.trim();
-                if (fullDate.startsWith("20")) {
-                    return fullDate.substring(2); // "26/06/17,09:42:30"
-                }
-            }
+    SerialG.println("AT+CCLK?");
+    countSent("AT+CCLK?\r\n");
+    
+    String response = "";
+    unsigned long start = millis();
+    while (millis() - start < 2000) {
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            response += c;
+            countReceived(String(c));
         }
-        
-        // 2. Fallback to CCLK
-        // Format: +CCLK: "yy/mm/dd,hh:mm:ss+zz"
-        response = sendCommandWithResponse("AT+CCLK?", 2000, true);
-        int firstQuote = response.indexOf('\"');
-        int lastQuote = response.lastIndexOf('\"');
-        if (firstQuote != -1 && lastQuote != -1) {
-            String timeStr = response.substring(firstQuote + 1, lastQuote);
-            if (!timeStr.startsWith("04")) { // Not the factory default
-                 return timeStr;
-            }
-        }
-
-        Serial.println("[GSM] Time not ready, waiting...");
-        delay(2000);
+        if (response.indexOf("OK") != -1) break;
     }
+    
+    // Response format: +CCLK: "yy/mm/dd,hh:mm:ss+zz"
+    int firstQuote = response.indexOf('\"');
+    int lastQuote = response.lastIndexOf('\"');
+    
+    if (firstQuote != -1 && lastQuote != -1 && lastQuote > firstQuote) {
+        return response.substring(firstQuote + 1, lastQuote);
+    }
+    
     return "";
 }
 
@@ -126,25 +92,19 @@ void GSM::connectGPRS() {
     Serial.println("Configuring GPRS...");
     
     // 1. CLEAN UP START: Close previous connections to stop "ERROR"
-    sendCommand("AT+HTTPTERM", 1000, true); 
-    sendCommand("AT+SAPBR=0,1", 1000, true); 
+    sendCommand("AT+HTTPTERM", 500, true); // Close HTTP if open
+    sendCommand("AT+SAPBR=0,1", 500, true); // Close Bearer if open
 
     // 2. Start Connection
-    sendCommand("AT+SAPBR=3,1,\"Contype\",\"GPRS\"", 2000, true);
-    sendCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 2000, true); 
-    
-    Serial.println("[GSM] Opening GPRS Bearer (can take 30s)...");
-    sendCommand("AT+SAPBR=1,1", 30000, true); // Increase to 30s
+    sendCommand("AT+SAPBR=3,1,\"Contype\",\"GPRS\"", 1000, true);
+    sendCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 1000, true); 
+    sendCommand("AT+SAPBR=1,1", 3000, true); // Enable GPRS
     
     // 3. Verify IP
-    String ipResp = sendCommandWithResponse("AT+SAPBR=2,1", 5000, true); 
-    if (ipResp.indexOf("0.0.0.0") != -1 || ipResp.indexOf("ERROR") != -1) {
-        Serial.println("[GSM] Bearer failed to get IP. Retrying SAPBR=1,1...");
-        sendCommand("AT+SAPBR=1,1", 10000, true);
-    }
+    sendCommand("AT+SAPBR=2,1", 3000, true); 
     
-    // 4. Initialize HTTP Service
-    sendCommand("AT+HTTPINIT", 2000, true);  
+    // 4. Initialize HTTP Service once
+    sendCommand("AT+HTTPINIT", 1000, true);  
 }
 
 bool GSM::sendThingSpeakRequest(String url) {
@@ -169,7 +129,7 @@ bool GSM::sendThingSpeakRequest(String url) {
     bool seenOK = false;
     bool seenAction = false;
     
-    while (millis() - start < 45000) { // Increase timeout to 45s for slow GPRS
+    while (millis() - start < 15000) { // Increase timeout to 15s for slow GPRS
         while (SerialG.available()) {
             char c = SerialG.read();
             actionResp += c;
@@ -233,30 +193,3 @@ void GSM::sendCommand(const String& command, int timeout, boolean debug) {
     }
     if (debug) Serial.println();
 }
-
-String GSM::sendCommandWithResponse(const String& command, int timeout, boolean debug) {
-    while(SerialG.available()) {
-        char c = SerialG.read();
-        countReceived(String(c));
-    }
-    SerialG.println(command);
-    countSent(command + "\r\n");
-
-    String resp = "";
-    unsigned long start = millis();
-    while (millis() - start < (unsigned long)timeout) {
-        while (SerialG.available()) {
-            char c = SerialG.read();
-            resp += c;
-            countReceived(String(c));
-            if (debug) Serial.write(c);
-        }
-        if (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1) {
-            break; 
-        }
-        delay(1);
-    }
-    if (debug) Serial.println();
-    return resp;
-}
-
