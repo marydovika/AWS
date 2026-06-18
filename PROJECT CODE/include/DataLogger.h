@@ -3,33 +3,31 @@
 
 #include <Arduino.h>
 #include <SD.h>
-#include <SPI.h>
 #include "SensorData.h"
 #include "GSM.h"
 
+// ThingSpeak API keys
+#define API_KEY_1 "YOUR_KEY_1"
+#define API_KEY_2 "YOUR_KEY_2"
+#define API_KEY_3 "YOUR_KEY_3"
+
 class DataLogger {
-public:
+  public:
     DataLogger(int csPin);
     void begin();
-    
-    // Formats data into labeled string and saves to SD
     void logSensorData(String timestamp, SensorData data);
-    
-    // Reads the last written line and sends to ThingSpeak via GSM
-    void uploadLastDataToThingspeak(GSM &gsmModule);
 
-private:
+    // ← these three were missing entirely
+    void uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs);
+    void logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles);
+    bool popQueue();
+
+  private:
     int _csPin;
     String _fileName;
-    String _lastDataString; // Caches the last written line for efficiency
-
-    // Helper to extract value from "Label:Value" string
+    String _queueFileName;   // ← this was missing
+    String _lastDataString;
     String getValueFromLog(String logLine, String label);
-    
-    // ThingSpeak Config (Update these)
-    const String API_KEY_1 = "WL5ALGBAQDZV674Z"; 
-    const String API_KEY_2 = "IKCHAI6ID958MEYG";
-    const String API_KEY_3 = "IBK1KTD4E6A0CKZK";
 };
 
 #endif

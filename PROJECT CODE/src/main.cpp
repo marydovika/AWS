@@ -35,9 +35,9 @@ static uint32_t UPDATE_INTERVAL_MINUTES = 10; // overwritten from flash if set
 static const uint64_t TON_MS = 2ULL * 60ULL * 1000ULL; // 2 min active window
 
 // ── Config portal ─────────────────────────────────────────
-#define PORTAL_TIMEOUT_MS  15000   // 15 seconds portal window per wake
-const char* AP_SSID     = "AWS-001";
-const char* AP_PASSWORD = "aws2026";
+#define PORTAL_TIMEOUT_MS  120000   // 2 minutes portal window per wake
+const char* AP_SSID     = "AWS-WIFI-2026";
+const char* AP_PASSWORD = "aws-2026@!";
 WebServer server(80);
 Preferences prefs;
 uint32_t savedInterval = 10; // loaded from flash
