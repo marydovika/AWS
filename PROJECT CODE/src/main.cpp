@@ -13,6 +13,7 @@
 #include "POWER_MONITORING.h"
 #include "DataLogger.h"   // The new file handler class
 #include "SensorData.h"   // The data struct
+#include "ERROR_LOGGER.h"
 
 // Objects
 // (Assumed your sensor constructors are correct as per your snippet)
@@ -51,6 +52,9 @@ void setup() {
     // 3. Initialize SD and GSM
     dataLogger.begin();
     simmodule.setupGSM(); // Includes GPRS setup
+
+    // 4. Initialize ErrorLogger (nullptr = use uptime-based timestamps)
+    ErrorLogger::begin(nullptr);
 }
 
 void loop() {
@@ -61,15 +65,19 @@ void loop() {
     // 1. Air Pressure / BME280
     // If your library returns NAN or 0 on failure, we sanitize it here.
     float p = airpressure.readPressure();
+    if (isnan(p)) ErrorLogger::log(COMP_MAIN, ERR_MAIN_BME_NAN, "Pressure NaN - substituted 0.0");
     currentData.airPressure = isnan(p) ? 0.0 : p;
     
     float alt = airpressure.readAltitude(1013.25);
+    if (isnan(alt)) ErrorLogger::log(COMP_MAIN, ERR_MAIN_BME_NAN, "Altitude NaN - substituted 0.0");
     currentData.altitude = isnan(alt) ? 0.0 : alt;
 
     float t = airpressure.readTemperature(); // Using BME temp
+    if (isnan(t)) ErrorLogger::log(COMP_MAIN, ERR_MAIN_BME_NAN, "Temperature NaN - substituted 0.0");
     currentData.temperature = isnan(t) ? 0.0 : t;
     
     float h = airpressure.readHumidity();
+    if (isnan(h)) ErrorLogger::log(COMP_MAIN, ERR_MAIN_BME_NAN, "Humidity NaN - substituted 0.0");
     currentData.humidity = isnan(h) ? 0.0 : h;
 
     // 2. Power Monitoring
@@ -81,6 +89,7 @@ void loop() {
         currentData.volt_solar = v.v4;
         currentData.volt_dc = v.v5;
     } else {
+        ErrorLogger::log(COMP_MAIN, ERR_MAIN_POWER_FAIL, "powermonitoring.readData() failed - all voltages set to 0.0");
         // Init to 0 if fails
         currentData.volt_3v3 = 0.0;
         currentData.volt_5v = 0.0;

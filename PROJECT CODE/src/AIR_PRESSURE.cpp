@@ -3,6 +3,7 @@
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
+#include "ERROR_LOGGER.h"
 
 #define seaLevelhPa 1013.25
 
@@ -19,6 +20,7 @@ void AirPressure::sensor_setup() {
     
     if (!bme.begin(0x77, &Wire)) {
         Serial.println("Could not find a valid BME280 sensor at 0x77, check wiring!");
+        ErrorLogger::log(COMP_BME280, ERR_BME_NOT_FOUND, "I2C address 0x77 not responding");
         //while (1);
     } else {
         Serial.println("BME280 sensor initialized successfully.");

@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <WiFi.h>
 #include <time.h>
+#include "ERROR_LOGGER.h"
 
 char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
@@ -11,11 +12,13 @@ void Rtc::setupRTC() {
     Wire.begin();
     if (!rtc.begin()) {
         Serial.println("Couldn't find RTC");
+        ErrorLogger::log(COMP_RTC, ERR_RTC_NOT_FOUND, "DS3231 not responding on I2C");
         //while (1); // Stop if RTC is missing
     }
 
     if (rtc.lostPower()) {
         Serial.println("RTC lost power, let's set the time!");
+        ErrorLogger::log(COMP_RTC, ERR_RTC_POWER_LOSS, "Battery depleted - reset to compile time");
         // Only sets to compile time if the RTC completely stopped
         rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     }
@@ -43,6 +46,7 @@ bool Rtc::syncWithNTP(const char* ntpServer, long gmtOffsetSec, int daylightOffs
 
     if (retry >= 10) {
         Serial.println("\nFailed to get NTP time");
+        ErrorLogger::log(COMP_RTC, ERR_RTC_NTP_SYNC_FAIL, "10 retries exhausted");
         return false;
     }
 

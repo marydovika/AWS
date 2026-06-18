@@ -1,4 +1,5 @@
 #include "DataLogger.h"
+#include "ERROR_LOGGER.h"
 
 // USE IP INSTEAD OF DOMAIN TO FIX ERROR 601
 String THINGSPEAK_IP = "http://184.106.153.149";
@@ -20,8 +21,8 @@ DataLogger::DataLogger(int csPin) {
 
 void DataLogger::begin() {
     if (!SD.begin(_csPin)) {
-        Serial.println("[DataLogger] SD Card Mount Failed - RAM buffer mode.");
-        _sdAvailable = false;
+        Serial.println("SD Card Mount Failed");
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_MOUNT_FAIL, "SD.begin() failed");
         return;
     }
     Serial.println("[DataLogger] SD Card Initialized");
@@ -46,43 +47,25 @@ void DataLogger::logSensorData(String timestamp, SensorData data) {
     dataStr += "VSol:" + String(data.volt_solar, 2) + ",";
     dataStr += "VDC:" + String(data.volt_dc, 2);
 
-    bool writtenToSD = false;
-    if (_sdAvailable) {
-        _rotateLogIfNeeded();
-
-        File file = SD.open(_fileName, FILE_APPEND);
-        if (file) {
-            file.println(dataStr);
-            file.close();
-            writtenToSD = true;
-            Serial.println("[DataLogger] SD write OK.");
-        } else {
-            Serial.println("[DataLogger] SD write failed, keeping in RAM.");
-        }
-    }
-
-    if (!writtenToSD) {
-        // Keep unsaved sample in RAM only when SD write failed.
-        _lastDataString = dataStr;
-        Serial.println("[DataLogger] RAM buffer holding unsent sample.");
-    }
-
-    // Do not reset an in-flight upload when new sensor data arrives.
-    // New samples are already queued on SD and will be drained in order.
-    if (!_uploadPending && _uploadState == UPLOAD_IDLE) {
-        if (_lastDataString.length() == 0) {
-            _lastDataString = _peekFirstPendingLine();
-        }
-        if (_lastDataString.length() > 0) {
-            _uploadPending = true;
-        }
+    File file = SD.open(_fileName, FILE_APPEND);
+    if (file) {
+        file.println(dataStr);
+        file.close();
+        Serial.println("Logged: " + dataStr);
+        _lastDataString = dataStr; 
+    } else {
+        Serial.println("Error writing to SD");
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_WRITE_FAIL, "SD.open() in APPEND mode failed - data lost");
     }
 }
 
 String DataLogger::getValueFromLog(String logLine, String label) {
     String searchKey = label + ":";
     int startIndex = logLine.indexOf(searchKey);
-    if (startIndex == -1) return "0";
+    if (startIndex == -1){
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_PARSE_FAIL, ("Label not found: " + label).c_str());
+        return "0"; 
+    }
     
     startIndex += searchKey.length();
     int endIndex = logLine.indexOf(",", startIndex);
@@ -284,12 +267,9 @@ void DataLogger::_rotateLogIfNeeded() {
 }
 
 void DataLogger::uploadLastDataToThingspeak(GSM &gsmModule) {
-    (void)gsmModule;
-    if (_lastDataString.length() == 0) {
-        _lastDataString = _peekFirstPendingLine();
-    }
-    if (_lastDataString.length() == 0) {
-        Serial.println("[DataLogger] No data to upload.");
+    if (_lastDataString == "") {
+        Serial.println("No data to upload.");
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_NO_DATA, "_lastDataString is empty");
         return;
     }
     _uploadPending = true;

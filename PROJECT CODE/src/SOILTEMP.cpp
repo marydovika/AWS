@@ -2,6 +2,7 @@
 #include "SOILTEMP.h"
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include "ERROR_LOGGER.h"
 
 #define ONE_WIRE_BUS 33   // GPIO where DS18B20 DATA is connected
 
@@ -24,6 +25,7 @@ float SoilTemp::readSoilTemperature() {
 
     if (soil_temperature_ == DEVICE_DISCONNECTED_C) {
     Serial.println("Error: DS18B20 not found");
+    ErrorLogger::log(COMP_DS18B20, ERR_DS18B20_DISCONNECTED, "DEVICE_DISCONNECTED_C returned");
     return -127.0; // Return error value
     } else {
     Serial.print("Temperature: ");

@@ -2,6 +2,7 @@
 #define TINY_GSM_RX_BUFFER 1024 // Buffer for large HTTP responses
 
 #include "SIM.h"
+#include "ERROR_LOGGER.h"
 #include <Arduino.h>
 #include <string>
 #include <TinyGsmClient.h>
@@ -59,6 +60,7 @@ void Sim::setupSIM() {
   Serial.println("Initializing firmware...");
   if (!modem.restart()) {
     Serial.println("Modem not responding. Check wiring/baud rate.");
+    ErrorLogger::log(COMP_SIM, ERR_SIM_RESTART_FAIL, "modem.restart() returned false");
   } else {
     String modemInfo = modem.getModemInfo();
     Serial.print("Modem Info: ");
@@ -80,6 +82,7 @@ bool Sim::connectNetwork(const string& apn, const string& gprsUser, const string
   Serial.print("Waiting for network...");
   if (!modem.waitForNetwork()) {
     Serial.println(" fail. (Check Antenna & Power)");
+    ErrorLogger::log(COMP_SIM, ERR_SIM_NETWORK_TIMEOUT, "waitForNetwork() timed out");
     //delay(10000);
     return false;
   }
@@ -91,6 +94,7 @@ bool Sim::connectNetwork(const string& apn, const string& gprsUser, const string
   Serial.print(")...");
   if (!modem.gprsConnect(apn_.c_str(), gprsUser_.c_str(), gprsPass_.c_str())) {
     Serial.println(" fail");
+    ErrorLogger::log(COMP_SIM, ERR_SIM_GPRS_FAIL, ("APN: " + apn_).c_str());
     //delay(10000);
     return false;
   }
@@ -114,6 +118,7 @@ void Sim::sendData(const string& server_url_path, const string& data) {
          // Optional: Try to reconnect here automatically?
         if(!connectNetwork(apn_, gprsUser_, gprsPass_)) {
             Serial.println("Reconnect failed.");
+            ErrorLogger::log(COMP_SIM, ERR_SIM_CONN_LOST, "Reconnect attempt failed after connection lost");
             return;
         }
     }
@@ -142,6 +147,10 @@ void Sim::sendData(const string& server_url_path, const string& data) {
     Serial.println(statusCode);
     Serial.print("Response: ");
     Serial.println(response);
+
+    if (statusCode < 200 || statusCode >= 300) {
+    ErrorLogger::log(COMP_SIM, ERR_SIM_HTTP_ERROR, ("Status: " + String(statusCode)).c_str());
+    }
 
     http.stop();
 }
