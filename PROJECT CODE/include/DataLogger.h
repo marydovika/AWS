@@ -3,14 +3,33 @@
 
 #include <Arduino.h>
 #include <SD.h>
-#include <SPI.h>
 #include "SensorData.h"
 #include "GSM.h"
 
+// ThingSpeak API keys
+#define API_KEY_1 "YOUR_KEY_1"
+#define API_KEY_2 "YOUR_KEY_2"
+#define API_KEY_3 "YOUR_KEY_3"
+
 class DataLogger {
-public:
+  public:
     DataLogger(int csPin);
     void begin();
+<<<<<<< HEAD
+    void logSensorData(String timestamp, SensorData data);
+
+    // ← these three were missing entirely
+    void uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs);
+    void logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles);
+    bool popQueue();
+
+  private:
+    int _csPin;
+    String _fileName;
+    String _queueFileName;   // ← this was missing
+    String _lastDataString;
+    String getValueFromLog(String logLine, String label);
+=======
     
     // Formats data into labeled string and saves to BOTH Archive and Queue
     void logSensorData(String timestamp, SensorData data);
@@ -37,6 +56,7 @@ public:
     const String API_KEY_1 = "0UOU523VQPM2FZXJ"; 
     const String API_KEY_2 = "5N37KH8M7FCF5PU2";
     const String API_KEY_3 = "XH83XCG9LMURW45L";
+>>>>>>> origin/Trevor
 };
 
 #endif

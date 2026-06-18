@@ -4,7 +4,7 @@
 #include <Arduino.h>
 
 class GSM {
-public:
+  public:
     GSM();
     void setupGSM();
     void connectGPRS(); // New: Setup Internet
@@ -26,6 +26,18 @@ private:
     String sendCommandWithResponse(const String& command, int timeout, boolean debug);
     void countSent(const String& s);
     void countReceived(const String& s);
+    String getNetworkTime();
+
+    // ← all of these were missing
+    void countSent(const String& s);
+    void countReceived(const String& s);
+    uint32_t getTotalBytesSent();
+    uint32_t getTotalBytesReceived();
+    uint32_t getCycleCount();
+    void resetByteCounters();
+
+  private:
+    void connectGPRS();
 };
 
 #endif

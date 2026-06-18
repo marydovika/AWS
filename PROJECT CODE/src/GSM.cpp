@@ -54,16 +54,47 @@ void GSM::setupGSM() {
     
     if(gsmReady) {
         sendCommand("AT+CLTS=1", 500, false); // Enable network time sync
+<<<<<<< HEAD
+        connectGPRS();
+=======
         if (waitForNetwork(40000)) { // Wait up to 40 seconds
             connectGPRS();
         } else {
             Serial.println("Network Registration Failed (Timeout).");
         }
+>>>>>>> origin/Trevor
     } else {
         Serial.println("GSM Failure (Check Wiring/Power).");
     }
 }
 
+<<<<<<< HEAD
+String GSM::getNetworkTime() {
+    while(SerialG.available()) SerialG.read(); // Clear buffer
+    
+    SerialG.println("AT+CCLK?");
+    countSent("AT+CCLK?\r\n");
+    
+    String response = "";
+    unsigned long start = millis();
+    while (millis() - start < 2000) {
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            response += c;
+            countReceived(String(c));
+        }
+        if (response.indexOf("OK") != -1) break;
+    }
+    
+    // Response format: +CCLK: "yy/mm/dd,hh:mm:ss+zz"
+    int firstQuote = response.indexOf('\"');
+    int lastQuote = response.lastIndexOf('\"');
+    
+    if (firstQuote != -1 && lastQuote != -1 && lastQuote > firstQuote) {
+        return response.substring(firstQuote + 1, lastQuote);
+    }
+    
+=======
 bool GSM::waitForNetwork(int timeoutMs) {
     Serial.print("Waiting for network registration...");
     unsigned long start = millis();
@@ -119,6 +150,7 @@ String GSM::getNetworkTime() {
         Serial.println("[GSM] Time not ready, waiting...");
         delay(2000);
     }
+>>>>>>> origin/Trevor
     return "";
 }
 
@@ -169,7 +201,11 @@ bool GSM::sendThingSpeakRequest(String url) {
     bool seenOK = false;
     bool seenAction = false;
     
+<<<<<<< HEAD
+    while (millis() - start < 15000) { // Increase timeout to 15s for slow GPRS
+=======
     while (millis() - start < 45000) { // Increase timeout to 45s for slow GPRS
+>>>>>>> origin/Trevor
         while (SerialG.available()) {
             char c = SerialG.read();
             actionResp += c;
@@ -233,6 +269,8 @@ void GSM::sendCommand(const String& command, int timeout, boolean debug) {
     }
     if (debug) Serial.println();
 }
+<<<<<<< HEAD
+=======
 
 String GSM::sendCommandWithResponse(const String& command, int timeout, boolean debug) {
     while(SerialG.available()) {
@@ -260,3 +298,4 @@ String GSM::sendCommandWithResponse(const String& command, int timeout, boolean 
     return resp;
 }
 
+>>>>>>> origin/Trevor
