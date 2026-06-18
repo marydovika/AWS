@@ -10,12 +10,14 @@ public:
     Rtc();
     void setupRTC();
     bool syncWithNTP(const char* ntpServer, long gmtOffsetSec, int daylightOffsetSec);
+    bool syncWithGSM(String gsmTime);
     std::string getDateTime();
     void printDateTime(); 
 
 private:
     RTC_DS3231 rtc;
     std::string date_time_;
+    bool rtcFound;
 };
 
 #endif
