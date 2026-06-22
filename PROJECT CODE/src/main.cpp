@@ -21,6 +21,7 @@
 #include "SensorData.h"
 #include "LORA.h"
 #include "ERROR_LOGGER.h"
+#include "SENSOR_VALIDATOR.h"
 
 static uint32_t UPDATE_INTERVAL_MINUTES = 10;
 static const uint64_t TON_MS = 2ULL * 60ULL * 1000ULL;
@@ -449,6 +450,7 @@ void setup() {
     unsigned long tonStart = millis();
 
     SensorData currentData = readAllSensors();
+    SensorValidator::validate(currentData);
     logToSD(currentData);
     transmitData(currentData, tonStart);
 
