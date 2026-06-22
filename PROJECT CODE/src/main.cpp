@@ -1,12 +1,3 @@
-/**
- * main.cpp — Multi-Level Fixed Duty Cycling Implementation
- * =========================================================
- * Strategy:
- *   UPDATE_INTERVAL_MINUTES = 10 minutes default (configurable via web portal)
- *   TON  = 2 minutes  (active window: sensors + log + transmit)
- *   TOFF = Dynamic (Total Cycle - Active Time)
- */
-
 #include <Arduino.h>
 #include <Wire.h>
 #include <SPI.h>
@@ -29,20 +20,18 @@
 #include "DataLogger.h"
 #include "SensorData.h"
 #include "LORA.h"
+#include "ERROR_LOGGER.h"
 
-// ── Duty cycle config (defaults match original code) ─────
-static uint32_t UPDATE_INTERVAL_MINUTES = 10; // overwritten from flash if set
-static const uint64_t TON_MS = 2ULL * 60ULL * 1000ULL; // 2 min active window
+static uint32_t UPDATE_INTERVAL_MINUTES = 10;
+static const uint64_t TON_MS = 2ULL * 60ULL * 1000ULL;
 
-// ── Config portal ─────────────────────────────────────────
-#define PORTAL_TIMEOUT_MS  120000   // 2 minutes portal window per wake
+#define PORTAL_TIMEOUT_MS  120000
 const char* AP_SSID     = "AWS-WIFI-2026";
 const char* AP_PASSWORD = "aws-2026@!";
 WebServer server(80);
 Preferences prefs;
-uint32_t savedInterval = 10; // loaded from flash
+uint32_t savedInterval = 10;
 
-// ── Hardware ──────────────────────────────────────────────
 #define GSM_POWER_PIN  32
 static const uint32_t GSM_WARMUP_MS = 3000;
 
@@ -61,16 +50,13 @@ GSM                  simmodule;
 Lora                 loramodule;
 DataLogger           dataLogger(4);
 
-// ── Forward declarations ──────────────────────────────────
 String buildPage(String message = "");
 void handleRoot();
 void handleSave();
 void handleNotFound();
 void runPortalWindow();
 
-// ─────────────────────────────────────────────────────────
-// Web portal HTML
-// ─────────────────────────────────────────────────────────
+// ── Web portal HTML (unchanged) ───────────────────────────
 String buildPage(String message) {
   String html = R"rawhtml(
 <!DOCTYPE html>
@@ -83,107 +69,43 @@ String buildPage(String message) {
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #EBF4FB;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      background: #EBF4FB; min-height: 100vh; display: flex;
+      align-items: center; justify-content: center; padding: 20px;
     }
     .card {
-      background: white;
-      border-radius: 14px;
-      border: 1px solid #D8E4EF;
-      padding: 32px 28px;
-      width: 100%;
-      max-width: 420px;
+      background: white; border-radius: 14px; border: 1px solid #D8E4EF;
+      padding: 32px 28px; width: 100%; max-width: 420px;
       box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid #EBF4FB;
-    }
-    .brand-icon {
-      width: 36px; height: 36px;
-      background: #1A3A5C;
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 18px;
-    }
+    .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
+              padding-bottom: 18px; border-bottom: 1px solid #EBF4FB; }
+    .brand-icon { width: 36px; height: 36px; background: #1A3A5C; border-radius: 8px;
+                   display: flex; align-items: center; justify-content: center;
+                   color: white; font-size: 18px; }
     .brand-name { font-size: 15px; font-weight: 700; color: #1A3A5C; }
     .brand-sub  { font-size: 11px; color: #8A9BB0; }
     h1 { font-size: 18px; font-weight: 600; color: #1A2332; margin-bottom: 4px; }
     .subtitle { font-size: 13px; color: #5C6E82; margin-bottom: 22px; }
-    label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #1A2332;
-      margin-bottom: 6px;
-    }
+    label { display: block; font-size: 12.5px; font-weight: 600; color: #1A2332; margin-bottom: 6px; }
     input[type="number"] {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid #D8E4EF;
-      border-radius: 8px;
-      font-size: 14px;
-      color: #1A2332;
-      background: #F8FAFC;
-      margin-bottom: 6px;
-      outline: none;
+      width: 100%; padding: 10px 14px; border: 1px solid #D8E4EF; border-radius: 8px;
+      font-size: 14px; color: #1A2332; background: #F8FAFC; margin-bottom: 6px; outline: none;
     }
     input:focus { border-color: #0A6EBD; box-shadow: 0 0 0 3px rgba(10,110,189,0.1); }
     .hint { font-size: 11.5px; color: #8A9BB0; margin-bottom: 20px; }
     button {
-      width: 100%;
-      padding: 12px;
-      background: #1A3A5C;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
+      width: 100%; padding: 12px; background: #1A3A5C; color: white; border: none;
+      border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer;
     }
     button:hover { background: #0A6EBD; }
-    .success {
-      background: #E8F5E9;
-      border: 1px solid #A5D6A7;
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #2E7D32;
-      margin-bottom: 18px;
-    }
-    .current {
-      background: #F2F6FA;
-      border-radius: 8px;
-      padding: 12px 14px;
-      margin-bottom: 20px;
-      font-size: 12.5px;
-      color: #5C6E82;
-      line-height: 1.7;
-    }
+    .success { background: #E8F5E9; border: 1px solid #A5D6A7; border-radius: 8px;
+                padding: 10px 14px; font-size: 13px; color: #2E7D32; margin-bottom: 18px; }
+    .current { background: #F2F6FA; border-radius: 8px; padding: 12px 14px;
+                margin-bottom: 20px; font-size: 12.5px; color: #5C6E82; line-height: 1.7; }
     .current strong { color: #1A2332; }
-    .warn {
-      background: #FFF8E1;
-      border: 1px solid #FFE082;
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 12px;
-      color: #7B5800;
-      margin-top: 16px;
-    }
-    .station-id {
-      font-size: 11px;
-      color: #B0C4D8;
-      text-align: center;
-      margin-top: 18px;
-    }
+    .warn { background: #FFF8E1; border: 1px solid #FFE082; border-radius: 8px;
+             padding: 10px 14px; font-size: 12px; color: #7B5800; margin-top: 16px; }
+    .station-id { font-size: 11px; color: #B0C4D8; text-align: center; margin-top: 18px; }
   </style>
 </head>
 <body>
@@ -195,7 +117,6 @@ String buildPage(String message) {
       <div class="brand-sub">Automatic Weather Station</div>
     </div>
   </div>
-
   <h1>Sleep Cycle Configuration</h1>
   <p class="subtitle">
     Set how many minutes the station sleeps between readings.
@@ -207,10 +128,7 @@ String buildPage(String message) {
     html += "<div class='success'>&#10003; " + message + "</div>";
   }
 
-  // Show current running config
-  uint32_t toff = UPDATE_INTERVAL_MINUTES >= 2
-                  ? UPDATE_INTERVAL_MINUTES - 2
-                  : 0;
+  uint32_t toff = UPDATE_INTERVAL_MINUTES >= 2 ? UPDATE_INTERVAL_MINUTES - 2 : 0;
   html += "<div class='current'>"
           "Current cycle: <strong>" + String(UPDATE_INTERVAL_MINUTES) + " min total</strong><br>"
           "Active (TON): <strong>2 min</strong> &nbsp;&middot;&nbsp; "
@@ -231,12 +149,10 @@ String buildPage(String message) {
     </p>
     <button type="submit">&#128190; Save configuration</button>
   </form>
-
   <div class="warn">
     &#9888; Setting takes effect on the <strong>next wake cycle</strong>.
     The station will sleep after this portal window closes.
   </div>
-
   <p class="station-id">Station ID: AWS-UG-001 &nbsp;&middot;&nbsp; Firmware v1.1</p>
 </div>
 </body>
@@ -246,9 +162,6 @@ String buildPage(String message) {
   return html;
 }
 
-// ─────────────────────────────────────────────────────────
-// Route handlers
-// ─────────────────────────────────────────────────────────
 void handleRoot() {
   server.send(200, "text/html", buildPage());
 }
@@ -261,8 +174,6 @@ void handleSave() {
   }
 
   uint32_t requested = server.arg("interval").toInt();
-
-  // Clamp to safe range — active window is 2 min so minimum total is 3
   if (requested < 3)  requested = 3;
   if (requested > 60) requested = 60;
 
@@ -281,20 +192,16 @@ void handleSave() {
 }
 
 void handleNotFound() {
-  // Captive portal redirect — catches any domain the phone tries
   server.sendHeader("Location", "http://192.168.4.1/");
   server.send(302, "text/plain", "Redirecting to config portal...");
 }
 
-// ─────────────────────────────────────────────────────────
-// Portal window — runs for PORTAL_TIMEOUT_MS then returns
-// ─────────────────────────────────────────────────────────
 void runPortalWindow() {
   WiFi.mode(WIFI_AP);
   WiFi.softAP(AP_SSID, AP_PASSWORD);
 
   Serial.print("[Portal] AP IP: ");
-  Serial.println(WiFi.softAPIP()); // 192.168.4.1
+  Serial.println(WiFi.softAPIP());
 
   server.on("/",     HTTP_GET,  handleRoot);
   server.on("/save", HTTP_POST, handleSave);
@@ -309,16 +216,12 @@ void runPortalWindow() {
     delay(10);
   }
 
-  // Tear down WiFi cleanly before sleep to save power
   server.stop();
   WiFi.softAPdisconnect(true);
   WiFi.mode(WIFI_OFF);
   Serial.println("[Portal] Window closed, WiFi off.");
 }
 
-// ─────────────────────────────────────────────────────────
-// Original helper functions (unchanged)
-// ─────────────────────────────────────────────────────────
 float computeAvgPower(float duty, float pActive_mW, float pSleep_mW) {
     return (duty * pActive_mW) + ((1.0f - duty) * pSleep_mW);
 }
@@ -371,10 +274,16 @@ void enterDeepSleep(unsigned long tonStart) {
     uint64_t totalCycleUs = (uint64_t)UPDATE_INTERVAL_MINUTES * 60ULL * 1000000ULL;
     uint64_t activeUs     = (uint64_t)(millis() - tonStart) * 1000ULL;
 
-    // Guard: if active ran over the cycle window, sleep minimum 10 seconds
-    uint64_t sleepUs = (totalCycleUs > activeUs)
-                       ? (totalCycleUs - activeUs)
-                       : (10ULL * 1000000ULL);
+    uint64_t sleepUs;
+    if (totalCycleUs > activeUs) {
+        sleepUs = totalCycleUs - activeUs;
+    } else {
+        // Active phase overran its budget — fall back to a minimum sleep.
+        // Worth flagging: usually means something in the active window hung.
+        sleepUs = 10ULL * 1000000ULL;
+        String detail = "Active phase ran " + String((unsigned long)(activeUs / 1000ULL)) + "ms";
+        ErrorLogger::log(COMP_MAIN, ERR_MAIN_TON_OVERRUN, detail.c_str());
+    }
 
     Serial.printf("[DC] Total Active Time : %lu ms\n", (unsigned long)(activeUs  / 1000ULL));
     Serial.printf("[DC] Deep Sleep Duration: %lu ms\n", (unsigned long)(sleepUs / 1000ULL));
@@ -397,6 +306,7 @@ SensorData readAllSensors() {
         data.volt_solar  = v.v4; data.volt_dc     = v.v5; data.curr_batt  = v.v6;
         data.curr_solar  = v.v7;
     } else {
+        ErrorLogger::log(COMP_MAIN, ERR_MAIN_POWER_FAIL, "powermonitoring.readData() failed - all voltages 0.0");
         data.volt_3v3 = data.volt_5v   = data.volt_batt  = 0.0f;
         data.volt_solar = data.volt_dc = data.curr_batt  = data.curr_solar = 0.0f;
     }
@@ -426,10 +336,13 @@ void transmitData(SensorData &data, unsigned long tonStart) {
 
     gsmPowerOn();
 
+    // Sync RTC against GSM network time — catches a clock that is
+    // running but silently wrong, not just one that lost power.
     String netTime = simmodule.getNetworkTime();
     if (netTime != "") {
         rtc1.syncWithGSM(netTime);
     }
+    // failure case already logged inside GSM::getNetworkTime()
 
     dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
 
@@ -451,16 +364,19 @@ void transmitData(SensorData &data, unsigned long tonStart) {
     Serial.println("[DC] TX Phase complete.");
 }
 
-// ─────────────────────────────────────────────────────────
-// Setup — everything happens here, loop() is empty
-// ─────────────────────────────────────────────────────────
 void setup() {
     Serial.begin(9600);
     delay(200);
 
     Wire.setTimeOut(50);
 
-    // ── Wake / reset diagnostics (unchanged) ──────────────
+    // ── Mount SD and start ErrorLogger FIRST ──────────────
+    // So that wake/reset diagnostics below (brownout, watchdog,
+    // panic) are captured to persistent storage, not just Serial.
+    dataLogger.begin();
+    ErrorLogger::begin(nullptr);
+
+    // ── Wake / reset diagnostics ───────────────────────────
     esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
     esp_reset_reason_t       reset_reason  = esp_reset_reason();
 
@@ -479,25 +395,40 @@ void setup() {
         case ESP_RST_POWERON:   Serial.println("Power-on"); break;
         case ESP_RST_EXT:       Serial.println("External pin"); break;
         case ESP_RST_SW:        Serial.println("Software"); break;
-        case ESP_RST_PANIC:     Serial.println("Exception/Panic"); break;
-        case ESP_RST_INT_WDT:   Serial.println("Interrupt Watchdog"); break;
-        case ESP_RST_TASK_WDT:  Serial.println("Task Watchdog"); break;
-        case ESP_RST_WDT:       Serial.println("Other Watchdog"); break;
+        case ESP_RST_PANIC:
+            Serial.println("Exception/Panic");
+            ErrorLogger::log(COMP_MAIN, ERR_FIRMWARE_PANIC, "esp_reset_reason() = ESP_RST_PANIC");
+            break;
+        case ESP_RST_INT_WDT:
+            Serial.println("Interrupt Watchdog");
+            ErrorLogger::log(COMP_MAIN, ERR_FIRMWARE_WATCHDOG, "ESP_RST_INT_WDT");
+            break;
+        case ESP_RST_TASK_WDT:
+            Serial.println("Task Watchdog");
+            ErrorLogger::log(COMP_MAIN, ERR_FIRMWARE_WATCHDOG, "ESP_RST_TASK_WDT");
+            break;
+        case ESP_RST_WDT:
+            Serial.println("Other Watchdog");
+            ErrorLogger::log(COMP_MAIN, ERR_FIRMWARE_WATCHDOG, "ESP_RST_WDT");
+            break;
         case ESP_RST_DEEPSLEEP: Serial.println("Deep Sleep"); break;
-        case ESP_RST_BROWNOUT:  Serial.println("Brownout"); break;
+        case ESP_RST_BROWNOUT:
+            Serial.println("Brownout");
+            ErrorLogger::log(COMP_MAIN, ERR_POWER_BROWNOUT, "esp_reset_reason() = ESP_RST_BROWNOUT");
+            break;
         case ESP_RST_SDIO:      Serial.println("SDIO"); break;
         default:                Serial.println("Unknown"); break;
     }
     Serial.println("[DC] ================================");
 
-    // ── Load saved interval from flash ────────────────────
+    // ── Load saved interval from flash ─────────────────────
     prefs.begin("awsconfig", true);
-    savedInterval = prefs.getUInt("interval", 10); // default: 10 min
+    savedInterval = prefs.getUInt("interval", 10);
     prefs.end();
     UPDATE_INTERVAL_MINUTES = savedInterval;
     Serial.println("[Portal] Loaded interval: " + String(UPDATE_INTERVAL_MINUTES) + " min");
 
-    // ── Hardware init ─────────────────────────────────────
+    // ── Hardware init ───────────────────────────────────────
     pinMode(GSM_POWER_PIN, OUTPUT);
     digitalWrite(GSM_POWER_PIN, LOW);
 
@@ -512,19 +443,14 @@ void setup() {
     winddirectionsensor.setupSensor();
     lightsensor.setupSensor();
     soilmoisture.setupSensor();
-    dataLogger.begin();
     loramodule.setupLora();
+    // NOTE: dataLogger.begin() already called at top of setup()
 
-    // ── Config portal window ──────────────────────────────
-    // Runs for PORTAL_TIMEOUT_MS (15s) every wake.
-    // User can connect to WIMEA-AWS-001 and change the interval.
-    // If nobody connects, it exits automatically and we proceed.
+    // ── Config portal window ────────────────────────────────
     runPortalWindow();
 
-    // ── TON start: mark active window after portal ────────
     unsigned long tonStart = millis();
 
-    // ── Sensor read, log, transmit (unchanged) ────────────
     SensorData currentData = readAllSensors();
     logToSD(currentData);
     transmitData(currentData, tonStart);
