@@ -12,7 +12,8 @@ public:
     bool syncWithNTP(const char* ntpServer, long gmtOffsetSec, int daylightOffsetSec);
     bool syncWithGSM(String gsmTime);
     std::string getDateTime();
-    void printDateTime(); 
+    void printDateTime();
+    RTC_DS3231* getRTCHandle() { return rtcFound ? &rtc : nullptr; }
 
 private:
     RTC_DS3231 rtc;

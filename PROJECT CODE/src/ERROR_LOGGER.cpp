@@ -1,7 +1,7 @@
 #include "ERROR_LOGGER.h"
 
 RTC_DS3231* ErrorLogger::_rtc          = nullptr;
-uint32_t    ErrorLogger::_errorCount   = 0;
+RTC_DATA_ATTR uint32_t ErrorLogger::_errorCount = 0;
 bool        ErrorLogger::_sdAvailable  = false;
 
 void ErrorLogger::begin(RTC_DS3231* rtc) {
@@ -65,7 +65,9 @@ void ErrorLogger::printLast(uint8_t n) {
         return;
     }
 
-    String lines[n];
+    static const uint8_t MAX_PRINT = 20;
+    uint8_t actual = (n > MAX_PRINT) ? MAX_PRINT : n;
+    String lines[MAX_PRINT];
     uint8_t idx = 0;
     uint8_t count = 0;
     String current = "";
@@ -74,7 +76,7 @@ void ErrorLogger::printLast(uint8_t n) {
         char c = f.read();
         if (c == '\n') {
             if (current.length() > 0) {
-                lines[idx % n] = current;
+                lines[idx % actual] = current;
                 idx++;
                 count++;
             }
@@ -85,12 +87,12 @@ void ErrorLogger::printLast(uint8_t n) {
     }
     f.close();
 
-    uint8_t total = (count < n) ? count : n;
-    uint8_t start = (count < n) ? 0 : (idx % n);
+    uint8_t total = (count < actual) ? count : actual;
+    uint8_t start = (count < actual) ? 0 : (idx % actual);
 
     Serial.println("──── Last " + String(total) + " error log entries ────");
     for (uint8_t i = 0; i < total; i++) {
-        Serial.println(lines[(start + i) % n]);
+        Serial.println(lines[(start + i) % actual]);
     }
     Serial.println("──────────────────────────────────────");
 }

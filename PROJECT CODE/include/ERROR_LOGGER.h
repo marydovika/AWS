@@ -142,7 +142,7 @@ public:
 
 private:
     static RTC_DS3231* _rtc;
-    static uint32_t    _errorCount;
+    static RTC_DATA_ATTR uint32_t _errorCount;
     static bool        _sdAvailable;
 
     static String _getTimestamp();

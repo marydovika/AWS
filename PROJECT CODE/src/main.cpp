@@ -370,11 +370,7 @@ void setup() {
 
     Wire.setTimeOut(50);
 
-    // ── Mount SD and start ErrorLogger FIRST ──────────────
-    // So that wake/reset diagnostics below (brownout, watchdog,
-    // panic) are captured to persistent storage, not just Serial.
     dataLogger.begin();
-    ErrorLogger::begin(nullptr);
 
     // ── Wake / reset diagnostics ───────────────────────────
     esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
@@ -436,6 +432,7 @@ void setup() {
     delay(100);
 
     rtc1.setupRTC();
+    ErrorLogger::begin(rtc1.getRTCHandle());
     dhtsensor.getsensor();
     airpressure.sensor_setup();
     davisrain.setupRainGauge();
