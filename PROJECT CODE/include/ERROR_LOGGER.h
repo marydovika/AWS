@@ -26,9 +26,12 @@
 
 // ── Error type identifiers ───────────────────────────────────────────────────
 // RTC
-#define ERR_RTC_NOT_FOUND         "I2C_NOT_FOUND"
-#define ERR_RTC_POWER_LOSS        "POWER_LOSS"
-#define ERR_RTC_NTP_SYNC_FAIL     "NTP_SYNC_FAIL"
+#define ERR_RTC_NOT_FOUND              "I2C_NOT_FOUND"
+#define ERR_RTC_POWER_LOSS             "POWER_LOSS"
+#define ERR_RTC_NTP_SYNC_FAIL          "NTP_SYNC_FAIL"
+#define ERR_RTC_GSM_FORMAT_INVALID     "GSM_TIME_FORMAT_INVALID"
+#define ERR_RTC_GSM_TIME_IMPLAUSIBLE   "GSM_TIME_IMPLAUSIBLE"
+#define ERR_RTC_DRIFT_DETECTED         "CLOCK_DRIFT_DETECTED"
 
 // BME280
 #define ERR_BME_NOT_FOUND         "I2C_NOT_FOUND"
@@ -48,6 +51,8 @@
 // GSM
 #define ERR_GSM_HANDSHAKE_FAIL    "HANDSHAKE_FAIL"
 #define ERR_GSM_CMD_TIMEOUT       "COMMAND_TIMEOUT"
+#define ERR_GSM_TIME_FETCH_FAIL   "NETWORK_TIME_FETCH_FAIL"
+#define ERR_GSM_UPLOAD_FAIL       "UPLOAD_FAIL"
 
 // LoRa
 #define ERR_LORA_SERIAL_INIT_FAIL "SERIAL_INIT_FAIL"

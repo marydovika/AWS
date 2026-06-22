@@ -1,4 +1,5 @@
 #include "DataLogger.h"
+#include "ERROR_LOGGER.h"
 
 // USE IP INSTEAD OF DOMAIN TO FIX ERROR 601
 String THINGSPEAK_IP = "http://184.106.153.149"; 
@@ -13,6 +14,7 @@ DataLogger::DataLogger(int csPin) {
 void DataLogger::begin() {
     if (!SD.begin(_csPin)) {
         Serial.println("SD Card Mount Failed");
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_MOUNT_FAIL, "SD.begin() failed");
         return;
     }
     Serial.println("SD Card Initialized");
@@ -43,6 +45,8 @@ void DataLogger::logSensorData(String timestamp, SensorData data) {
     if (archFile) {
         archFile.println(dataStr);
         archFile.close();
+    } else {
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_ARCHIVE_WRITE_FAIL, "datalog.txt open failed - reading lost");
     }
 
     // 2. Write to Queue (Buffer)
@@ -51,12 +55,13 @@ void DataLogger::logSensorData(String timestamp, SensorData data) {
         queueFile.println(dataStr);
         queueFile.close();
         Serial.println("Queued: " + dataStr);
+    } else {
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_QUEUE_WRITE_FAIL, "queue.txt open failed - reading not queued");
     }
 }
 
 void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs) {
     while (true) {
-        // Check if we still have time in the TON window (leave 45s margin for a full 3-channel upload)
         if (millis() - startTimeMs > (tonLimitMs - 45000)) {
             Serial.println("[Queue] TON limit approaching. Saving remaining for next cycle.");
             break;
@@ -68,25 +73,27 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
         }
 
         File queueFile = SD.open(_queueFileName, FILE_READ);
-        if (!queueFile || queueFile.size() == 0) {
-            if (queueFile) queueFile.close();
+        if (!queueFile) {
+            ErrorLogger::log(COMP_SD_CARD, ERR_SD_QUEUE_READ_FAIL, "queue.txt exists but open failed");
+            break;
+        }
+        if (queueFile.size() == 0) {
+            queueFile.close();
             SD.remove(_queueFileName);
             break;
         }
 
-        // Read the first line (oldest)
         String line = queueFile.readStringUntil('\n');
         line.trim();
         queueFile.close();
 
         if (line == "") {
-            popQueue(); // Remove empty lines
+            popQueue();
             continue;
         }
 
         Serial.println("[Queue] Attempting upload of oldest record...");
         
-        // CHANNEL 1
         String url1 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_1;
         url1 += "&field1=" + getValueFromLog(line, "Temp");
         url1 += "&field2=" + getValueFromLog(line, "Hum");
@@ -100,30 +107,29 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
         bool success = gsmModule.sendThingSpeakRequest(url1);
         
         if (success) {
-            delay(16000); // Rate limit
+            delay(16000);
             
-            // CHANNEL 2
             String url2 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_2;
             url2 += "&field1=" + getValueFromLog(line, "V33");
             url2 += "&field2=" + getValueFromLog(line, "V5");
             url2 += "&field3=" + getValueFromLog(line, "VBatt");
             url2 += "&field4=" + getValueFromLog(line, "VSol");
             url2 += "&field5=" + getValueFromLog(line, "VDC");
-            gsmModule.sendThingSpeakRequest(url2);
+            gsmModule.sendThingSpeakRequest(url2); // failure logged inside GSM.cpp if it occurs
             
-            delay(16000); // Rate limit
+            delay(16000);
 
-            // CHANNEL 3
             String url3 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_3;
             url3 += "&field1=" + getValueFromLog(line, "CBatt");
             url3 += "&field2=" + getValueFromLog(line, "CSol");
-            gsmModule.sendThingSpeakRequest(url3);
+            gsmModule.sendThingSpeakRequest(url3); // failure logged inside GSM.cpp if it occurs
 
             Serial.println("[Queue] Upload successful. Popping from queue.");
             popQueue();
         } else {
+            // Root cause already logged inside GSM::sendThingSpeakRequest()
             Serial.println("[Queue] Upload failed. GSM likely offline. Stopping.");
-            break; // Stop trying if GSM is failing
+            break;
         }
     }
 }
@@ -131,7 +137,6 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
 void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles) {
     File statsFile = SD.open("/gsm_usage.csv", FILE_APPEND);
     if (statsFile) {
-        // Create header if file is new
         if (statsFile.size() == 0) {
             statsFile.println("Timestamp,BytesSent,BytesReceived,TotalCycles,AvgKBPerCycle");
         }
@@ -156,6 +161,7 @@ void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received,
         Serial.println("[SD] GSM usage stats saved to /gsm_usage.csv");
     } else {
         Serial.println("[SD] Failed to open /gsm_usage.csv for writing");
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_STATS_WRITE_FAIL, "gsm_usage.csv open failed");
     }
 }
 
@@ -163,15 +169,18 @@ bool DataLogger::popQueue() {
     if (!SD.exists(_queueFileName)) return false;
 
     File queueFile = SD.open(_queueFileName, FILE_READ);
-    if (!queueFile) return false;
+    if (!queueFile) {
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_QUEUE_READ_FAIL, "popQueue: queue.txt open failed");
+        return false;
+    }
 
     File tempFile = SD.open("/temp_q.txt", FILE_WRITE);
     if (!tempFile) {
         queueFile.close();
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_TEMP_FILE_FAIL, "temp_q.txt open failed during popQueue");
         return false;
     }
 
-    // Skip the first line
     bool skipped = false;
     while (queueFile.available()) {
         String line = queueFile.readStringUntil('\n');
@@ -193,7 +202,10 @@ bool DataLogger::popQueue() {
 String DataLogger::getValueFromLog(String logLine, String label) {
     String searchKey = label + ":";
     int startIndex = logLine.indexOf(searchKey);
-    if (startIndex == -1) return "0"; 
+    if (startIndex == -1) {
+        ErrorLogger::log(COMP_SD_CARD, ERR_SD_PARSE_FAIL, ("Label not found: " + label).c_str());
+        return "0";
+    }
     
     startIndex += searchKey.length();
     int endIndex = logLine.indexOf(",", startIndex);

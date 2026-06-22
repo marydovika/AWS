@@ -1,4 +1,5 @@
 #include "GSM.h"
+#include "ERROR_LOGGER.h"
 #include <SD.h>
 
 // Persistent counters across deep sleep
@@ -57,6 +58,7 @@ void GSM::setupGSM() {
         connectGPRS();
     } else {
         Serial.println("GSM Failure (Check Wiring/Power).");
+        ErrorLogger::log(COMP_GSM, ERR_GSM_HANDSHAKE_FAIL, "No OK response after 10 attempts");
     }
 }
 
@@ -84,7 +86,8 @@ String GSM::getNetworkTime() {
     if (firstQuote != -1 && lastQuote != -1 && lastQuote > firstQuote) {
         return response.substring(firstQuote + 1, lastQuote);
     }
-    
+
+    ErrorLogger::log(COMP_GSM, ERR_GSM_TIME_FETCH_FAIL, "AT+CCLK? response unparseable or timed out");
     return "";
 }
 
@@ -157,6 +160,8 @@ bool GSM::sendThingSpeakRequest(String url) {
         Serial.println("[GSM] Upload Success (200 OK)");
     } else {
         Serial.println("[GSM] Upload Failed or Timed Out");
+        String detail = actionResp.length() > 60 ? actionResp.substring(0, 60) : actionResp;
+        ErrorLogger::log(COMP_GSM, ERR_GSM_UPLOAD_FAIL, detail.c_str());
     }
 
     // Read Response

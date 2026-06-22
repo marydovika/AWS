@@ -39,7 +39,7 @@ void Davis::setupRainGauge(){
   // Note: Some ESP32 pins (like 34, 35, 36, 39) are INPUT ONLY and do not have internal pullups.
   // If using pin 34, make sure you have a physical 10k resistor from Pin 34 to 3.3V.
   // If using a standard GPIO (like 25, 26, 27), INPUT_PULLUP works fine.
-  pinMode(rainfallpin, INPUT_PULLUP); 
+  pinMode(rainfallpin, INPUT_PULLUP);
   
   // Initialize timer
   lastResetTime = millis();

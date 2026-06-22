@@ -425,6 +425,12 @@ void transmitData(SensorData &data, unsigned long tonStart) {
     loraSleep();
 
     gsmPowerOn();
+
+    String netTime = simmodule.getNetworkTime();
+    if (netTime != "") {
+        rtc1.syncWithGSM(netTime);
+    }
+
     dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
 
     Serial.println("\n[GSM] === Data Usage Stats ===");
