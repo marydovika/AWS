@@ -24,6 +24,17 @@ void ErrorLogger::begin(RTC_DS3231* rtc) {
     }
 }
 
+void ErrorLogger::end() {
+    if (!_sdAvailable) return;
+    File f = SD.open(ERROR_LOG_FILE, FILE_APPEND);
+    if (f) {
+        String marker = "SESSION END    " + _getTimestamp() + "\n";
+        marker += "========================================\n";
+        f.print(marker);
+        f.close();
+    }
+}
+
 void ErrorLogger::log(const char* component,
                       const char* errorType,
                       const char* detail) {

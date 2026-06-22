@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "AIR_PRESSURE.h"
+#include "ERROR_LOGGER.h"
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
@@ -18,6 +19,7 @@ void AirPressure::sensor_setup() {
     
     if (!bme.begin(0x77, &Wire)) {
         Serial.println("Could not find a valid BME280 sensor at 0x77, check wiring!");
+        ErrorLogger::log(COMP_BME280, ERR_BME_NOT_FOUND, "I2C address 0x77 not responding");
         initialized_ = false;
     } else {
         Serial.println("BME280 sensor initialized successfully.");
@@ -27,28 +29,45 @@ void AirPressure::sensor_setup() {
 
 float AirPressure::readPressure() {
     if (!initialized_) return NAN;
-    pressure_ = bme.readPressure() / 100.0F; // Convert Pa to hPa
-    delay(50); 
+    float raw = bme.readPressure();
+    if (isnan(raw)) {
+        ErrorLogger::log(COMP_BME280, ERR_BME_NAN_READ, "readPressure() returned NaN");
+        return NAN;
+    }
+    pressure_ = raw / 100.0F;
+    delay(50);
     return pressure_;
 }
 
 float AirPressure::readTemperature() {
     if (!initialized_) return NAN;
     temperature_ = bme.readTemperature();
-    delay(50); 
+    if (isnan(temperature_)) {
+        ErrorLogger::log(COMP_BME280, ERR_BME_NAN_READ, "readTemperature() returned NaN");
+        return NAN;
+    }
+    delay(50);
     return temperature_;
 }
 
 float AirPressure::readHumidity() {
     if (!initialized_) return NAN;
     humidity_ = bme.readHumidity();
-    delay(50); 
+    if (isnan(humidity_)) {
+        ErrorLogger::log(COMP_BME280, ERR_BME_NAN_READ, "readHumidity() returned NaN");
+        return NAN;
+    }
+    delay(50);
     return humidity_;
 }
 
 float AirPressure::readAltitude(float seaLevelhPa) {
     if (!initialized_) return NAN;
     altitude_ = bme.readAltitude(seaLevelhPa);
-    delay(50); 
+    if (isnan(altitude_)) {
+        ErrorLogger::log(COMP_BME280, ERR_BME_NAN_READ, "readAltitude() returned NaN");
+        return NAN;
+    }
+    delay(50);
     return altitude_;
 }

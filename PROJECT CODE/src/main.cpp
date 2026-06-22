@@ -456,6 +456,7 @@ void setup() {
 
     Serial.printf("[DC] Active window closed. Elapsed: %lu ms\n", millis() - tonStart);
 
+    ErrorLogger::end();
     sdCardRelease();
 
     Serial.println("[DC] Sleep phase: entering deep sleep");

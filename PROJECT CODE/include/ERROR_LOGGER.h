@@ -61,9 +61,7 @@
 
 // SD Card / DataLogger
 #define ERR_SD_MOUNT_FAIL         "MOUNT_FAIL"
-#define ERR_SD_WRITE_FAIL         "WRITE_FAIL"
 #define ERR_SD_PARSE_FAIL         "PARSE_FAIL"
-#define ERR_SD_NO_DATA            "NO_DATA"
 #define ERR_SD_ARCHIVE_WRITE_FAIL "ARCHIVE_WRITE_FAIL"
 #define ERR_SD_QUEUE_WRITE_FAIL   "QUEUE_WRITE_FAIL"
 #define ERR_SD_QUEUE_READ_FAIL    "QUEUE_READ_FAIL"
@@ -101,7 +99,6 @@
 #define ERR_VALIDATOR_ABRUPT_CHANGE "VALUE_ABRUPT_CHANGE"
 
 // Main loop / firmware
-#define ERR_MAIN_BME_NAN          "BME280_NAN_SUBSTITUTED"
 #define ERR_MAIN_POWER_FAIL       "POWER_READ_FAIL"
 #define ERR_MAIN_TON_OVERRUN      "ACTIVE_WINDOW_OVERRUN"
 #define ERR_POWER_BROWNOUT        "BROWNOUT_RESET"
@@ -119,6 +116,7 @@ public:
      *             Pass nullptr to use elapsed millis() for timestamps instead.
      */
     static void begin(RTC_DS3231* rtc);
+    static void end();
 
     /**
      * Log an error entry to the SD card.

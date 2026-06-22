@@ -26,12 +26,14 @@ void Lora::sendData(const String& command, int timeout) {
   
     SerialL.println(command);
 
+    String resp = "";
     bool receivedAnyResponse = false;
     unsigned long start = millis();
     while (millis() - start < (unsigned long)timeout) {
         while (SerialL.available()) {
             char c = SerialL.read();
             Serial.write(c);
+            resp += c;
             receivedAnyResponse = true;
         }
         delay(1);
@@ -40,5 +42,7 @@ void Lora::sendData(const String& command, int timeout) {
 
     if (!receivedAnyResponse) {
         ErrorLogger::log(COMP_LORA, ERR_LORA_NO_RESPONSE, ("No reply to: " + command).c_str());
+    } else if (resp.indexOf("+OK") == -1 && resp.indexOf("+ERR") == -1) {
+        ErrorLogger::log(COMP_LORA, ERR_LORA_CMD_TIMEOUT, ("Unterminated response to: " + command).c_str());
     }
 }

@@ -192,9 +192,12 @@ void GSM::sendCommand(const String& command, int timeout, boolean debug) {
         }
         // Early exit if we see common terminators
         if (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1) {
-            break; 
+            break;
         }
         delay(1); // Feed the watchdog
+    }
+    if (resp.indexOf("OK") == -1 && resp.indexOf("ERROR") == -1) {
+        ErrorLogger::log(COMP_GSM, ERR_GSM_CMD_TIMEOUT, ("No terminal response to: " + command).c_str());
     }
     if (debug) Serial.println();
 }
