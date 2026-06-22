@@ -93,6 +93,12 @@
 #define ERR_MAIN_POWER_FAIL       "POWER_READ_FAIL"
 
 
+#define ERR_SD_ARCHIVE_WRITE_FAIL "ARCHIVE_WRITE_FAIL"
+#define ERR_SD_QUEUE_WRITE_FAIL   "QUEUE_WRITE_FAIL"
+#define ERR_SD_QUEUE_READ_FAIL    "QUEUE_READ_FAIL"
+#define ERR_SD_TEMP_FILE_FAIL     "TEMP_FILE_FAIL"
+#define ERR_SD_STATS_WRITE_FAIL   "GSM_STATS_WRITE_FAIL"
+
 // ── ErrorLogger class ────────────────────────────────────────────────────────
 class ErrorLogger {
 public:
