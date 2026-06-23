@@ -110,6 +110,19 @@ std::string Rtc::getDateTime() {
     }
     DateTime now = rtc.now();
 
+    bool plausible =
+        now.year()   >= 2024 && now.year()   <= 2099 &&
+        now.month()  >= 1    && now.month()  <= 12   &&
+        now.day()    >= 1    && now.day()    <= 31   &&
+        now.hour()   <= 23   &&
+        now.minute() <= 59   &&
+        now.second() <= 59;
+
+    if (!plausible) {
+        ErrorLogger::log(COMP_RTC, ERR_RTC_INVALID_READING, "rtc.now() returned implausible values");
+        return "2000-01-01 00:00:00";
+    }
+
     char buf[100];
     snprintf(buf, sizeof(buf), "%s, %04d-%02d-%02d %02d:%02d:%02d",
              daysOfTheWeek[now.dayOfTheWeek()],

@@ -8,7 +8,7 @@ class GSM {
     GSM();
     void setupGSM();
     bool sendThingSpeakRequest(String url);  // ← was void, must be bool
-    void sendCommand(const String& command, int timeout, boolean debug);
+    bool sendCommand(const String& command, int timeout, boolean debug);
     String getNetworkTime();
 
     // ← all of these were missing

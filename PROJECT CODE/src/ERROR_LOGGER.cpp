@@ -112,12 +112,23 @@ String ErrorLogger::_getTimestamp() {
     if (_rtc != nullptr) {
         DateTime now = _rtc->now();
 
-        char buf[24];
-        snprintf(buf, sizeof(buf),
-                 "%04d-%02d-%02d %02d:%02d:%02d",
-                 now.year(), now.month(),  now.day(),
-                 now.hour(), now.minute(), now.second());
-        return String(buf);
+        bool plausible =
+            now.year()   >= 2024 && now.year()   <= 2099 &&
+            now.month()  >= 1    && now.month()  <= 12   &&
+            now.day()    >= 1    && now.day()    <= 31   &&
+            now.hour()   <= 23   &&
+            now.minute() <= 59   &&
+            now.second() <= 59;
+
+        if (plausible) {
+            char buf[24];
+            snprintf(buf, sizeof(buf),
+                     "%04d-%02d-%02d %02d:%02d:%02d",
+                     now.year(), now.month(),  now.day(),
+                     now.hour(), now.minute(), now.second());
+            return String(buf);
+        }
+        // Fall through to uptime fallback below if RTC gave garbage
     }
 
     unsigned long ms = millis();

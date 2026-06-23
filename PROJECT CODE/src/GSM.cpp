@@ -101,7 +101,9 @@ void GSM::connectGPRS() {
     // 2. Start Connection
     sendCommand("AT+SAPBR=3,1,\"Contype\",\"GPRS\"", 1000, true);
     sendCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 1000, true); 
-    sendCommand("AT+SAPBR=1,1", 3000, true); // Enable GPRS
+    if (!sendCommand("AT+SAPBR=1,1", 3000, true)) {
+        ErrorLogger::log(COMP_GSM, ERR_GSM_CMD_TIMEOUT, "AT+SAPBR=1,1 timed out — GPRS bearer not established");
+    }
     
     // 3. Verify IP
     sendCommand("AT+SAPBR=2,1", 3000, true); 
@@ -119,7 +121,9 @@ bool GSM::sendThingSpeakRequest(String url) {
     
     // Set URL
     String cmd = "AT+HTTPPARA=\"URL\",\"" + url + "\"";
-    sendCommand(cmd, 2000, false);
+    if (!sendCommand(cmd, 2000, false)) {
+        ErrorLogger::log(COMP_GSM, ERR_GSM_CMD_TIMEOUT, "AT+HTTPPARA timed out — URL not set");
+    }
 
     // GET Request (Action 0)
     String actionCmd = "AT+HTTPACTION=0";
@@ -173,7 +177,7 @@ bool GSM::sendThingSpeakRequest(String url) {
     return success;
 }
 
-void GSM::sendCommand(const String& command, int timeout, boolean debug) {
+bool GSM::sendCommand(const String& command, int timeout, boolean debug) {
     while(SerialG.available()) {
         char c = SerialG.read();
         countReceived(String(c));
@@ -196,8 +200,6 @@ void GSM::sendCommand(const String& command, int timeout, boolean debug) {
         }
         delay(1); // Feed the watchdog
     }
-    if (resp.indexOf("OK") == -1 && resp.indexOf("ERROR") == -1) {
-        ErrorLogger::log(COMP_GSM, ERR_GSM_CMD_TIMEOUT, ("No terminal response to: " + command).c_str());
-    }
     if (debug) Serial.println();
+    return (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1);
 }
