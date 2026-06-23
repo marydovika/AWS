@@ -1,12 +1,18 @@
-#pragma once
+#ifndef GSM_H
+#define GSM_H
+
 #include <Arduino.h>
-#include <HardwareSerial.h>
 
 class GSM {
 public:
     GSM();
     void setupGSM();
-    void sendData(const String& data, int timeout = 2000);  
+    void connectGPRS(); // New: Setup Internet
+    // Sends data to a specific ThingSpeak URL
+    void sendThingSpeakRequest(String url); 
+
 private:
-    // Add private members if needed
+    void sendCommand(const String& command, int timeout, boolean debug);
 };
+
+#endif
