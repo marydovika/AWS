@@ -26,6 +26,10 @@ public:
     String extractUSSDMessage(const String& cusdResponse);
     float parseBalanceFromUSSD(const String& msg);
 
+    // HTTP POST to Django
+    bool postToDjango(const String& json);
+    const String DJANGO_URL = "http://184.106.153.149/api/weather/"; // Replace with your Django server endpoint
+
 private:
     void sendCommand(const String& command, int timeout, boolean debug);
     String sendCommandWithResponse(const String& command, int timeout, boolean debug);

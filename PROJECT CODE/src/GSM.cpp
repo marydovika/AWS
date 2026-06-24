@@ -407,4 +407,120 @@ float GSM::parseBalanceFromUSSD(const String& msg) {
     return val * multiplier;
 }
 
+bool GSM::postToDjango(const String& json) {
+    // Terminate any stuck previous HTTP sessions just in case
+    sendCommand("AT+HTTPTERM", 500, false);
+    sendCommand("AT+HTTPINIT", 500, false);
+
+    Serial.println("[GSM] Posting to Django: " + DJANGO_URL);
+    
+    // Set URL
+    String cmd = "AT+HTTPPARA=\"URL\",\"" + DJANGO_URL + "\"";
+    sendCommand(cmd, 2000, false);
+
+    // Set Content Type
+    sendCommand("AT+HTTPPARA=\"CONTENT\",\"application/json\"", 2000, false);
+
+    // Set HTTP Data
+    // Format: AT+HTTPDATA=<size>,<timeout>
+    String dataCmd = "AT+HTTPDATA=" + String(json.length()) + ",10000";
+    SerialG.println(dataCmd);
+    countSent(dataCmd + "\r\n");
+    
+    // Wait for "DOWNLOAD" response
+    String resp = "";
+    unsigned long start = millis();
+    bool readyToDownload = false;
+    while (millis() - start < 5000) {
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            resp += c;
+            countReceived(String(c));
+            Serial.write(c);
+        }
+        if (resp.indexOf("DOWNLOAD") != -1) {
+            readyToDownload = true;
+            break;
+        }
+        delay(1);
+    }
+
+    if (!readyToDownload) {
+        Serial.println("[GSM] Failed to receive DOWNLOAD prompt for HTTP DATA.");
+        sendCommand("AT+HTTPTERM", 500, false);
+        return false;
+    }
+
+    // Send the JSON payload
+    SerialG.print(json);
+    countSent(json);
+    
+    // Wait for "OK" response after payload is entered
+    resp = "";
+    start = millis();
+    bool payloadOk = false;
+    while (millis() - start < 5000) {
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            resp += c;
+            countReceived(String(c));
+            Serial.write(c);
+        }
+        if (resp.indexOf("OK") != -1) {
+            payloadOk = true;
+            break;
+        }
+        delay(1);
+    }
+
+    if (!payloadOk) {
+        Serial.println("[GSM] Failed to receive OK after sending JSON payload.");
+        sendCommand("AT+HTTPTERM", 500, false);
+        return false;
+    }
+
+    // Execute POST request (Action 1)
+    String actionCmd = "AT+HTTPACTION=1";
+    SerialG.println(actionCmd);
+    countSent(actionCmd + "\r\n");
+    
+    String actionResp = "";
+    start = millis();
+    bool seenAction = false;
+    
+    while (millis() - start < 45000) { // Wait up to 45s
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            actionResp += c;
+            countReceived(String(c));
+            Serial.write(c);
+        }
+        
+        if (actionResp.indexOf("+HTTPACTION:") != -1) {
+            if (actionResp.endsWith("\n") || actionResp.endsWith("\r")) {
+                seenAction = true;
+                break;
+            }
+        }
+        delay(1);
+    }
+    Serial.println();
+
+    bool success = false;
+    if (actionResp.indexOf(",200,") != -1 || actionResp.indexOf(",201,") != -1) {
+        success = true;
+        Serial.println("[GSM] Django HTTP POST Success (200/201 OK)");
+    } else {
+        Serial.println("[GSM] Django HTTP POST Failed or Timed Out");
+    }
+
+    // Read Response for debugging
+    sendCommand("AT+HTTPREAD", 2000, true);
+    
+    // Close session
+    sendCommand("AT+HTTPTERM", 500, false); 
+
+    return success;
+}
+
 
