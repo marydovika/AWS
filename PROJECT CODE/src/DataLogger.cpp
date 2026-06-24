@@ -200,8 +200,4 @@ String DataLogger::getValueFromLog(String logLine, String label) {
     if (endIndex == -1) endIndex = logLine.length(); 
     
     return logLine.substring(startIndex, endIndex);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/Trevor
