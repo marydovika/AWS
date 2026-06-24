@@ -21,6 +21,9 @@ public:
     // Save GSM usage statistics to SD
     void logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles);
 
+    // Log carrier USSD text response to SD
+    void logUSSDMessage(String timestamp, String message);
+
     private:
     int _csPin;
     String _fileName;      // Archive file (permanent)

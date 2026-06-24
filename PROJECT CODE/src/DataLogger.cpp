@@ -201,3 +201,14 @@ String DataLogger::getValueFromLog(String logLine, String label) {
     
     return logLine.substring(startIndex, endIndex);
 }
+
+void DataLogger::logUSSDMessage(String timestamp, String message) {
+    File f = SD.open("/ussd_log.txt", FILE_APPEND);
+    if (f) {
+        f.println(timestamp + "," + message);
+        f.close();
+        Serial.println("[SD] USSD message logged to /ussd_log.txt");
+    } else {
+        Serial.println("[SD] Failed to open /ussd_log.txt for writing");
+    }
+}

@@ -21,11 +21,17 @@ public:
     uint32_t getCycleCount();
     void resetByteCounters();
 
+    // USSD and Balance Checking
+    String queryUSSD(const String& ussdCode, int timeoutMs);
+    String extractUSSDMessage(const String& cusdResponse);
+    float parseBalanceFromUSSD(const String& msg);
+
 private:
     void sendCommand(const String& command, int timeout, boolean debug);
     String sendCommandWithResponse(const String& command, int timeout, boolean debug);
     void countSent(const String& s);
     void countReceived(const String& s);
+    String decodeUCS2(const String& hexStr);
 };
 
 #endif

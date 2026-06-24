@@ -27,7 +27,14 @@
 #include "SensorData.h"
 #include "LORA.h"
 
-static const uint32_t UPDATE_INTERVAL_MINUTES = 10;
+RTC_DATA_ATTR uint32_t updateIntervalMinutes = 10;
+RTC_DATA_ATTR uint32_t cyclesSinceLastUSSD = 9999; // Initialize to high to force first-time check
+
+// Data Bundle Config (Estimated vs Carrier USSD)
+static const uint32_t TOTAL_BUNDLE_BYTES = 100UL * 1024UL * 1024UL; // 100MB Monthly Bundle (Airtel Uganda)
+static const float USSD_THRESHOLD_PCT = 20.0f; // 20% limit
+static const String USSD_CODE = "*131#"; // Airtel Uganda Balance Code
+
 static const uint64_t TON_MS  = 4ULL  * 60ULL * 1000ULL;
 
 #define GSM_POWER_PIN  32
@@ -98,7 +105,7 @@ void enterDeepSleep(unsigned long tonStart) {
     detachInterrupt(digitalPinToInterrupt(33));
     delay(50); // Let any in-flight ISR finish
 
-    uint64_t totalCycleUs = (uint64_t)UPDATE_INTERVAL_MINUTES * 60ULL * 1000000ULL;
+    uint64_t totalCycleUs = (uint64_t)updateIntervalMinutes * 60ULL * 1000000ULL;
     uint64_t activeUs = (uint64_t)(millis() - tonStart) * 1000ULL;
     uint64_t sleepUs = (totalCycleUs > activeUs) ? (totalCycleUs - activeUs) : (10ULL * 1000000ULL);
 
@@ -156,6 +163,49 @@ void transmitData(SensorData &data, unsigned long tonStart) {
     String networkTime = simmodule.getNetworkTime();
     if (networkTime != "") {
         rtc1.syncWithGSM(networkTime);
+    }
+
+    // Hybrid USSD Balance Check
+    uint32_t totalUsed = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
+    float pctRemaining = (1.0f - ((float)totalUsed / (float)TOTAL_BUNDLE_BYTES)) * 100.0f;
+    if (pctRemaining < 0.0f) pctRemaining = 0.0f;
+
+    Serial.printf("[GSM] Soft-tracked Data Usage: %lu bytes used of %lu (%.2f%% remaining)\n", 
+                  (unsigned long)totalUsed, (unsigned long)TOTAL_BUNDLE_BYTES, pctRemaining);
+
+    // Run USSD check only when remaining drops below threshold AND at most once per 24 hours
+    uint32_t cyclesInADay = (24 * 60) / updateIntervalMinutes;
+    if (cyclesInADay == 0) cyclesInADay = 1; // Prevent division by zero
+
+    if (pctRemaining <= USSD_THRESHOLD_PCT && cyclesSinceLastUSSD >= cyclesInADay) {
+        Serial.printf("[GSM] Data bundle estimate < %.1f%%. Triggering carrier USSD validation...\n", USSD_THRESHOLD_PCT);
+        String ussdResponse = simmodule.queryUSSD(USSD_CODE, 15000);
+        String cleanMsg = simmodule.extractUSSDMessage(ussdResponse);
+        
+        Serial.println("[GSM] Raw USSD Response: " + ussdResponse);
+        Serial.println("[GSM] Cleaned USSD Message: " + cleanMsg);
+        
+        // Log clean message to SD card
+        dataLogger.logUSSDMessage(rtc1.getDateTime().c_str(), cleanMsg);
+        
+        // Self-healing balance reset if recharged
+        float actualMB = simmodule.parseBalanceFromUSSD(cleanMsg);
+        if (actualMB >= 0.0f) {
+            float actualBytes = actualMB * 1024.0f * 1024.0f;
+            float actualPct = (actualBytes / (float)TOTAL_BUNDLE_BYTES) * 100.0f;
+            Serial.printf("[GSM] Carrier Balance: %.2f MB (%.2f%% remaining)\n", actualMB, actualPct);
+            
+            if (actualPct > USSD_THRESHOLD_PCT) {
+                Serial.println("[GSM] Carrier reports data has been replenished. Resetting local counters!");
+                simmodule.resetByteCounters();
+            }
+        }
+        cyclesSinceLastUSSD = 0;
+    } else {
+        cyclesSinceLastUSSD++;
+        Serial.printf("[GSM] Cycles since last USSD check: %lu (Next check in %lu cycles)\n", 
+                      (unsigned long)cyclesSinceLastUSSD, 
+                      (unsigned long)(cyclesSinceLastUSSD >= cyclesInADay ? 0 : cyclesInADay - cyclesSinceLastUSSD));
     }
 
     dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
