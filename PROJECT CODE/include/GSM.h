@@ -4,18 +4,27 @@
 #include <Arduino.h>
 
 class GSM {
-public:
+  public:
+    // ── Constructor ───────────────────────────────────────
     GSM();
-    void setupGSM();
-    void connectGPRS(); // New: Setup Internet
-    bool waitForNetwork(int timeoutMs); // New: Wait for cell signal
-    // Sends data to a specific ThingSpeak URL
-    bool sendThingSpeakRequest(String url); 
 
-    // New: Get network time from GSM module
+    // ── Setup ─────────────────────────────────────────────
+    void setupGSM();
+    void connectGPRS();
+    bool waitForNetwork(int timeoutMs);
+    void initSerial();
+
+    // ── Data sending ──────────────────────────────────────
+    // Old: ThingSpeak (keeping in case needed)
+    bool sendThingSpeakRequest(String url);
+
+    // New: Post raw ESP32 string to Django ingest endpoint
+    void postToDjango(String jsonPayload);
+
+    // ── Network time ──────────────────────────────────────
     String getNetworkTime();
 
-    // Byte counter for data estimation
+    // ── Byte usage tracking ───────────────────────────────
     uint32_t getTotalBytesSent();
     uint32_t getTotalBytesReceived();
     uint32_t getCycleCount();
@@ -30,7 +39,8 @@ public:
     bool postToDjango(const String& json);
     const String DJANGO_URL = "http://184.106.153.149/api/weather/"; // Replace with your Django server endpoint
 
-private:
+  public:
+    // ── Internal helpers ──────────────────────────────────
     void sendCommand(const String& command, int timeout, boolean debug);
     String sendCommandWithResponse(const String& command, int timeout, boolean debug);
     void countSent(const String& s);

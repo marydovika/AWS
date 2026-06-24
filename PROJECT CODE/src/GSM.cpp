@@ -1,6 +1,7 @@
 #include "GSM.h"
 #include <SD.h>
 
+
 // Persistent counters across deep sleep
 RTC_DATA_ATTR uint32_t gsmBytesSent = 0;
 RTC_DATA_ATTR uint32_t gsmBytesReceived = 0;
@@ -26,6 +27,11 @@ uint32_t GSM::getTotalBytesSent() { return gsmBytesSent; }
 uint32_t GSM::getTotalBytesReceived() { return gsmBytesReceived; }
 uint32_t GSM::getCycleCount() { return gsmCycles; }
 void GSM::resetByteCounters() { gsmBytesSent = 0; gsmBytesReceived = 0; gsmCycles = 0; }
+
+void GSM::initSerial() {
+    SerialG.begin(9600, SERIAL_8N1, RX_GSM, TX_GSM);
+    delay(1000);
+}
 
 void GSM::setupGSM() {
     gsmCycles++;
@@ -133,18 +139,34 @@ void GSM::connectGPRS() {
     sendCommand("AT+SAPBR=3,1,\"Contype\",\"GPRS\"", 2000, true);
     sendCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 2000, true); 
     
+    // Use this instead — works on older SIM800 firmware:
+    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 1000, true);  
+
     Serial.println("[GSM] Opening GPRS Bearer (can take 30s)...");
     sendCommand("AT+SAPBR=1,1", 30000, true); // Increase to 30s
     
-    // 3. Verify IP
-    String ipResp = sendCommandWithResponse("AT+SAPBR=2,1", 5000, true); 
-    if (ipResp.indexOf("0.0.0.0") != -1 || ipResp.indexOf("ERROR") != -1) {
-        Serial.println("[GSM] Bearer failed to get IP. Retrying SAPBR=1,1...");
-        sendCommand("AT+SAPBR=1,1", 10000, true);
+    // ── REPLACE the old IP check block with this ──
+    bool gotIP = false;
+    for (int i = 0; i < 10; i++) {
+        String ipResp = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
+        if (ipResp.indexOf("0.0.0.0") == -1 && ipResp.indexOf("1,1") != -1) {
+            Serial.println("[GSM] Got IP!");
+            gotIP = true;
+            break;
+        }
+        Serial.println("[GSM] Waiting for IP...");
+        delay(3000);
     }
-    
-    // 4. Initialize HTTP Service
+
+    if (!gotIP) {
+        Serial.println("[GSM] GPRS failed. Skipping HTTP init.");
+        return; // ← bail early, don't init HTTP on a dead bearer
+    }
+
+    // DNS config AFTER bearer confirmed up
+    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 1000, true);  
     sendCommand("AT+HTTPINIT", 2000, true);  
+
 }
 
 bool GSM::sendThingSpeakRequest(String url) {
@@ -524,3 +546,64 @@ bool GSM::postToDjango(const String& json) {
 }
 
 
+// void GSM::postToDjango(String jsonPayload) {
+//     Serial.println("[GSM] Posting to Django...");
+
+//  // ── Check bearer is alive before attempting POST ──
+//     String bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
+//     if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
+//         Serial.println("[GSM] Bearer down. Reconnecting...");
+//         connectGPRS();  // attempt reconnect
+//         // Re-check after reconnect
+//         bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
+//         if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
+//             Serial.println("[GSM] Bearer still down. Aborting POST.");
+//             return;
+//         }
+//     }
+
+//     // ── Full session teardown and reinit ─────────────────
+//     sendCommand("AT+HTTPTERM", 1000, false);
+//      sendCommand("AT+HTTPINIT", 500, false);
+    
+// // Cloudflare tunnel URL
+//     String url = "https://political-chelsea-subscription-survivor.trycloudflare.com/api/ingest/";
+
+//      String urlCmd = "AT+HTTPPARA=\"URL\",\"" + url + "\"";
+//        sendCommand(urlCmd, 2000, false);
+
+//      // SSL setup (comment out if using HTTP)
+//      sendCommand("AT+HTTPSSL=1", 1000, false); // Enable SSL (if using HTTPS)
+
+//      sendCommand("AT+HTTPPARA=\"CONTENT\",\"application/json\"", 1000, false);
+
+//   int payloadLen = jsonPayload.length();
+//     String dataCmd = "AT+HTTPDATA=" + String(payloadLen) + ",10000";
+
+//       // ── Wait for "DOWNLOAD" prompt before sending payload ──
+//     SerialG.println(dataCmd);
+//     countSent(dataCmd + "\r\n");
+//     unsigned long start = millis();
+//     String dataResp = "";
+//     while (millis() - start < 5000) {
+//         while (SerialG.available()) dataResp += (char)SerialG.read();
+//         if (dataResp.indexOf("DOWNLOAD") != -1) break;
+//         delay(1);
+//     }
+//     Serial.println("[GSM] HTTPDATA resp: " + dataResp);
+
+
+
+//     // Send payload once
+//     SerialG.print(jsonPayload);
+//     countSent(jsonPayload);
+//     delay(2000);
+
+
+//     sendCommand("AT+HTTPACTION=1", 15000, true);
+//     sendCommand("AT+HTTPREAD", 3000, true);
+//     sendCommand("AT+HTTPTERM", 1000, false);
+
+//     Serial.println("[GSM] Post complete.");
+
+// }
