@@ -20,6 +20,7 @@ class GSM {
 
     // New: Post raw ESP32 string to Django ingest endpoint
     void postToDjango(String jsonPayload);
+    const String DJANGO_URL = "https://aws-web-app-lsix.onrender.com/api/ingest/";
 
     // ── Network time ──────────────────────────────────────
     String getNetworkTime();
@@ -34,10 +35,6 @@ class GSM {
     String queryUSSD(const String& ussdCode, int timeoutMs);
     String extractUSSDMessage(const String& cusdResponse);
     float parseBalanceFromUSSD(const String& msg);
-
-    // HTTP POST to Django
-    bool postToDjango(const String& json);
-    const String DJANGO_URL = "http://184.106.153.149/api/weather/"; // Replace with your Django server endpoint
 
   public:
     // ── Internal helpers ──────────────────────────────────

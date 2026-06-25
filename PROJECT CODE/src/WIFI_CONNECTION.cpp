@@ -6,7 +6,6 @@ using namespace std;
 WIFI_CONNECTION::WIFI_CONNECTION(const string& ssid, const string& password) : ssid_(ssid), password_(password), connected_(false) {}
 
 bool WIFI_CONNECTION::connect() {
-    Serial.begin(9600);
     WiFi.begin(ssid_.c_str(), password_.c_str());
     while (WiFi.status() != WL_CONNECTED) {
         Serial.print(".");
@@ -17,7 +16,6 @@ bool WIFI_CONNECTION::connect() {
 }
 
 void WIFI_CONNECTION::disconnect() {
-    Serial.begin(9600);
     WiFi.disconnect();
     Serial.println("Disconnected from WiFi.");
     connected_ = false;

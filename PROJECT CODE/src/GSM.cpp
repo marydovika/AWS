@@ -429,66 +429,83 @@ float GSM::parseBalanceFromUSSD(const String& msg) {
     return val * multiplier;
 }
 
-bool GSM::postToDjango(const String& json) {
-    // Terminate any stuck previous HTTP sessions just in case
-    sendCommand("AT+HTTPTERM", 500, false);
-    sendCommand("AT+HTTPINIT", 500, false);
+void GSM::postToDjango(String jsonPayload) {
+    Serial.println("[GSM] Posting to Django...");
 
-    Serial.println("[GSM] Posting to Django: " + DJANGO_URL);
+    // ── Check bearer is alive before attempting POST ──
+    String bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
+    if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
+        Serial.println("[GSM] Bearer down. Reconnecting...");
+        connectGPRS();  // attempt reconnect
+        // Re-check after reconnect
+        bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
+        if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
+            Serial.println("[GSM] Bearer still down. Aborting POST.");
+            return;
+        }
+    }
+
+    // ── Full session teardown and reinit ─────────────────
+    sendCommand("AT+HTTPTERM", 1000, false);
+    sendCommand("AT+HTTPINIT", 500, false);
     
     // Set URL
-    String cmd = "AT+HTTPPARA=\"URL\",\"" + DJANGO_URL + "\"";
-    sendCommand(cmd, 2000, false);
+    String urlCmd = "AT+HTTPPARA=\"URL\",\"" + DJANGO_URL + "\"";
+    sendCommand(urlCmd, 2000, false);
 
-    // Set Content Type
-    sendCommand("AT+HTTPPARA=\"CONTENT\",\"application/json\"", 2000, false);
+    // SSL setup: Enable SSL (1) for HTTPS, otherwise disable (0)
+    if (DJANGO_URL.startsWith("https://")) {
+        sendCommand("AT+HTTPSSL=1", 1000, false);
+    } else {
+        sendCommand("AT+HTTPSSL=0", 1000, false);
+    }
 
-    // Set HTTP Data
-    // Format: AT+HTTPDATA=<size>,<timeout>
-    String dataCmd = "AT+HTTPDATA=" + String(json.length()) + ",10000";
+    sendCommand("AT+HTTPPARA=\"CONTENT\",\"application/json\"", 1000, false);
+
+    int payloadLen = jsonPayload.length();
+    String dataCmd = "AT+HTTPDATA=" + String(payloadLen) + ",10000";
+
+    // ── Wait for "DOWNLOAD" prompt before sending payload ──
     SerialG.println(dataCmd);
     countSent(dataCmd + "\r\n");
-    
-    // Wait for "DOWNLOAD" response
-    String resp = "";
     unsigned long start = millis();
+    String dataResp = "";
     bool readyToDownload = false;
     while (millis() - start < 5000) {
         while (SerialG.available()) {
             char c = SerialG.read();
-            resp += c;
+            dataResp += c;
             countReceived(String(c));
-            Serial.write(c);
         }
-        if (resp.indexOf("DOWNLOAD") != -1) {
+        if (dataResp.indexOf("DOWNLOAD") != -1) {
             readyToDownload = true;
             break;
         }
         delay(1);
     }
+    Serial.println("[GSM] HTTPDATA resp: " + dataResp);
 
     if (!readyToDownload) {
-        Serial.println("[GSM] Failed to receive DOWNLOAD prompt for HTTP DATA.");
+        Serial.println("[GSM] Failed to receive DOWNLOAD prompt for HTTP DATA. Aborting.");
         sendCommand("AT+HTTPTERM", 500, false);
-        return false;
+        return;
     }
 
-    // Send the JSON payload
-    SerialG.print(json);
-    countSent(json);
+    // Send payload
+    SerialG.print(jsonPayload);
+    countSent(jsonPayload);
     
-    // Wait for "OK" response after payload is entered
-    resp = "";
+    // Wait for "OK" response after payload input
+    String okResp = "";
     start = millis();
     bool payloadOk = false;
     while (millis() - start < 5000) {
         while (SerialG.available()) {
             char c = SerialG.read();
-            resp += c;
+            okResp += c;
             countReceived(String(c));
-            Serial.write(c);
         }
-        if (resp.indexOf("OK") != -1) {
+        if (okResp.indexOf("OK") != -1) {
             payloadOk = true;
             break;
         }
@@ -496,114 +513,15 @@ bool GSM::postToDjango(const String& json) {
     }
 
     if (!payloadOk) {
-        Serial.println("[GSM] Failed to receive OK after sending JSON payload.");
+        Serial.println("[GSM] Failed to receive OK after sending JSON payload. Aborting.");
         sendCommand("AT+HTTPTERM", 500, false);
-        return false;
+        return;
     }
 
-    // Execute POST request (Action 1)
-    String actionCmd = "AT+HTTPACTION=1";
-    SerialG.println(actionCmd);
-    countSent(actionCmd + "\r\n");
-    
-    String actionResp = "";
-    start = millis();
-    bool seenAction = false;
-    
-    while (millis() - start < 45000) { // Wait up to 45s
-        while (SerialG.available()) {
-            char c = SerialG.read();
-            actionResp += c;
-            countReceived(String(c));
-            Serial.write(c);
-        }
-        
-        if (actionResp.indexOf("+HTTPACTION:") != -1) {
-            if (actionResp.endsWith("\n") || actionResp.endsWith("\r")) {
-                seenAction = true;
-                break;
-            }
-        }
-        delay(1);
-    }
-    Serial.println();
+    // Execute POST request and read response
+    sendCommand("AT+HTTPACTION=1", 15000, true);
+    sendCommand("AT+HTTPREAD", 3000, true);
+    sendCommand("AT+HTTPTERM", 1000, false);
 
-    bool success = false;
-    if (actionResp.indexOf(",200,") != -1 || actionResp.indexOf(",201,") != -1) {
-        success = true;
-        Serial.println("[GSM] Django HTTP POST Success (200/201 OK)");
-    } else {
-        Serial.println("[GSM] Django HTTP POST Failed or Timed Out");
-    }
-
-    // Read Response for debugging
-    sendCommand("AT+HTTPREAD", 2000, true);
-    
-    // Close session
-    sendCommand("AT+HTTPTERM", 500, false); 
-
-    return success;
+    Serial.println("[GSM] Post complete.");
 }
-
-
-// void GSM::postToDjango(String jsonPayload) {
-//     Serial.println("[GSM] Posting to Django...");
-
-//  // ── Check bearer is alive before attempting POST ──
-//     String bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
-//     if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
-//         Serial.println("[GSM] Bearer down. Reconnecting...");
-//         connectGPRS();  // attempt reconnect
-//         // Re-check after reconnect
-//         bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
-//         if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
-//             Serial.println("[GSM] Bearer still down. Aborting POST.");
-//             return;
-//         }
-//     }
-
-//     // ── Full session teardown and reinit ─────────────────
-//     sendCommand("AT+HTTPTERM", 1000, false);
-//      sendCommand("AT+HTTPINIT", 500, false);
-    
-// // Cloudflare tunnel URL
-//     String url = "https://political-chelsea-subscription-survivor.trycloudflare.com/api/ingest/";
-
-//      String urlCmd = "AT+HTTPPARA=\"URL\",\"" + url + "\"";
-//        sendCommand(urlCmd, 2000, false);
-
-//      // SSL setup (comment out if using HTTP)
-//      sendCommand("AT+HTTPSSL=1", 1000, false); // Enable SSL (if using HTTPS)
-
-//      sendCommand("AT+HTTPPARA=\"CONTENT\",\"application/json\"", 1000, false);
-
-//   int payloadLen = jsonPayload.length();
-//     String dataCmd = "AT+HTTPDATA=" + String(payloadLen) + ",10000";
-
-//       // ── Wait for "DOWNLOAD" prompt before sending payload ──
-//     SerialG.println(dataCmd);
-//     countSent(dataCmd + "\r\n");
-//     unsigned long start = millis();
-//     String dataResp = "";
-//     while (millis() - start < 5000) {
-//         while (SerialG.available()) dataResp += (char)SerialG.read();
-//         if (dataResp.indexOf("DOWNLOAD") != -1) break;
-//         delay(1);
-//     }
-//     Serial.println("[GSM] HTTPDATA resp: " + dataResp);
-
-
-
-//     // Send payload once
-//     SerialG.print(jsonPayload);
-//     countSent(jsonPayload);
-//     delay(2000);
-
-
-//     sendCommand("AT+HTTPACTION=1", 15000, true);
-//     sendCommand("AT+HTTPREAD", 3000, true);
-//     sendCommand("AT+HTTPTERM", 1000, false);
-
-//     Serial.println("[GSM] Post complete.");
-
-// }

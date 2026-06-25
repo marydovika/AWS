@@ -23,10 +23,11 @@ static const uint32_t TOTAL_BUNDLE_BYTES = 100UL * 1024UL * 1024UL; // 100MB Mon
 static const float USSD_THRESHOLD_PCT = 20.0f; // 20% limit
 static const String USSD_CODE = "*131#"; // Airtel Uganda Balance Code
 
-static const uint64_t TON_MS  = 4ULL  * 60ULL * 1000ULL;
+static const uint64_t TON_MS  = 4ULL * 60ULL * 1000ULL; // max active window
 
-unsigned long lastUploadTime = 0;
-const unsigned long uploadInterval = 15000; // 15 seconds for Django uploads
+// Deep sleep schedule uses UPDATE_INTERVAL_MINUTES as total cycle time.
+// TON itself is dynamically shortened inside uploadPendingData() when the queue is empty.
+
 
 #define GSM_POWER_PIN  32
 static const uint32_t GSM_WARMUP_MS = 3000;
@@ -110,26 +111,54 @@ void enterDeepSleep(unsigned long tonStart) {
 
 SensorData readAllSensors() {
     SensorData data;
+    //Serial.println("[DC] readAllSensors: before airPressure.readPressure");
     data.airPressure = airpressure.readPressure();
-    data.altitude = airpressure.readAltitude(1013.25);
-    data.temperature = airpressure.readTemperature();
-    data.humidity = airpressure.readHumidity();
+    //Serial.println("[DC] readAllSensors: after airPressure.readPressure");
 
+    //Serial.println("[DC] readAllSensors: before airPressure.readAltitude");
+    data.altitude = airpressure.readAltitude(1013.25);
+    //Serial.println("[DC] readAllSensors: after airPressure.readAltitude");
+
+    //Serial.println("[DC] readAllSensors: before airPressure.readTemperature");
+    data.temperature = airpressure.readTemperature();
+    //Serial.println("[DC] readAllSensors: after airPressure.readTemperature");
+
+    //Serial.println("[DC] readAllSensors: before airPressure.readHumidity");
+    data.humidity = airpressure.readHumidity();
+    //Serial.println("[DC] readAllSensors: after airPressure.readHumidity");
+
+    //Serial.println("[DC] readAllSensors: before powermonitoring.readData");
     if (powermonitoring.readData()) {
+        Serial.println("[DC] readAllSensors: power monitoring ok");
         VoltageData v = powermonitoring.getData();
         data.volt_3v3   = v.v1; data.volt_5v = v.v2; data.volt_batt = v.v3;
         data.volt_solar = v.v4; data.volt_dc = v.v5; data.curr_batt = v.v6;
         data.curr_solar = v.v7;
     } else {
+        Serial.println("[DC] readAllSensors: power monitoring failed");
         data.volt_3v3 = data.volt_5v = data.volt_batt = 0.0f;
         data.volt_solar = data.volt_dc = data.curr_batt = data.curr_solar = 0.0f;
     }
 
+    //Serial.println("[DC] readAllSensors: before lightsensor.readLightLevel");
     data.lightLevel    = lightsensor.readLightLevel();
+    //Serial.println("[DC] readAllSensors: after lightsensor.readLightLevel");
+
+    //Serial.println("[DC] readAllSensors: before soilmoisture.readSoilMoisture");
     data.soilMoisture  = soilmoisture.readSoilMoisture();
+    //Serial.println("[DC] readAllSensors: after soilmoisture.readSoilMoisture");
+
+    //Serial.println("[DC] readAllSensors: before davisrain.readRainGauge");
     data.rainCount     = davisrain.readRainGauge();
+    //Serial.println("[DC] readAllSensors: after davisrain.readRainGauge");
+
+    //Serial.println("[DC] readAllSensors: before windspeedsensor.readWindSpeedKPH");
     data.windSpeed     = windspeedsensor.readWindSpeedKPH();
+    //Serial.println("[DC] readAllSensors: after windspeedsensor.readWindSpeedKPH");
+
+    //Serial.println("[DC] readAllSensors: before winddirectionsensor.readWindDirectionDeg");
     data.windDirection = winddirectionsensor.readWindDirectionDeg();
+    //Serial.println("[DC] readAllSensors: after winddirectionsensor.readWindDirectionDeg");
 
     return data;
 }
@@ -224,12 +253,49 @@ void transmitData(SensorData &data, unsigned long tonStart) {
 }
 
 void setup() {
-    Serial.begin(115200); // ← changed from 9600 to match your GSM debug work
+    Serial.begin(115200);
+    delay(200);
+    
+    Wire.setTimeOut(50); // Set global I2C timeout to prevent hangs
+    
+    esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
+    esp_reset_reason_t reset_reason = esp_reset_reason();
 
-    // 1. Initialize RTC
+    Serial.println("\n[DC] ================================");
+    Serial.print("[DC] Wakeup reason: ");
+    switch (wakeup_reason) {
+        case ESP_SLEEP_WAKEUP_EXT0:     Serial.println("External signal using RTC_IO"); break;
+        case ESP_SLEEP_WAKEUP_EXT1:     Serial.println("External signal using RTC_CNTL"); break;
+        case ESP_SLEEP_WAKEUP_TIMER:    Serial.println("Timer"); break;
+        case ESP_SLEEP_WAKEUP_TOUCHPAD: Serial.println("Touchpad"); break;
+        case ESP_SLEEP_WAKEUP_ULP:      Serial.println("ULP program"); break;
+        default:                        Serial.printf("Not caused by deep sleep (%d)\n", wakeup_reason); break;
+    }
+
+    Serial.print("[DC] Reset reason: ");
+    switch (reset_reason) {
+        case ESP_RST_POWERON:   Serial.println("Power-on"); break;
+        case ESP_RST_EXT:       Serial.println("External pin"); break;
+        case ESP_RST_SW:        Serial.println("Software"); break;
+        case ESP_RST_PANIC:     Serial.println("Exception/Panic"); break;
+        case ESP_RST_INT_WDT:   Serial.println("Interrupt Watchdog"); break;
+        case ESP_RST_TASK_WDT:  Serial.println("Task Watchdog"); break;
+        case ESP_RST_WDT:       Serial.println("Other Watchdog"); break;
+        case ESP_RST_DEEPSLEEP: Serial.println("Deep Sleep"); break;
+        case ESP_RST_BROWNOUT:  Serial.println("Brownout"); break;
+        case ESP_RST_SDIO:      Serial.println("SDIO"); break;
+        default:                Serial.println("Unknown"); break;
+    }
+    Serial.println("[DC] ================================");
+    
+    pinMode(GSM_POWER_PIN, OUTPUT);
+    digitalWrite(GSM_POWER_PIN, LOW);
+
+    powermonitoring.begin(21, 22);
+    delay(100);
+
     rtc1.setupRTC();
 
-    // 2. Initialize Sensors
     dhtsensor.getsensor();
     airpressure.sensor_setup();
     davisrain.setupRainGauge();
@@ -237,94 +303,33 @@ void setup() {
     winddirectionsensor.setupSensor();
     lightsensor.setupSensor();
     soilmoisture.setupSensor();
-    powermonitoring.begin(21, 22);
 
-    // 3. Initialize SD and GSM
     dataLogger.begin();
-    pinMode(GSM_POWER_PIN, OUTPUT);
-    gsmPowerOn();
+    loramodule.setupLora();   
+    Serial.println("[DC] after LoRa setup");
 
-    Serial.println("Setup complete.");
+    unsigned long tonStart = millis();
+    Serial.println("[DC] before readAllSensors");
+    SensorData currentData = readAllSensors();
+    Serial.println("[DC] after readAllSensors");
+
+    Serial.println("[DC] before logToSD");
+    logToSD(currentData);
+    Serial.println("[DC] after logToSD");
+
+    Serial.println("[DC] before transmitData");
+    transmitData(currentData, tonStart);
+    Serial.println("[DC] after transmitData");
+
+    Serial.printf("[DC] Active window closed. Elapsed: %lu ms\n", millis() - tonStart);
+    
+    sdCardRelease();
+
+    Serial.println("[DC] Sleep phase: entering deep sleep");
+    enterDeepSleep(tonStart);
 }
 
 void loop() {
-    SensorData currentData;
-
-    // ── 1. Air Pressure / BME280 ──────────────────────────
-    float p = airpressure.readPressure();
-    currentData.airPressure = isnan(p) ? 0.0 : p;
-
-    float alt = airpressure.readAltitude(1013.25);
-    currentData.altitude = isnan(alt) ? 0.0 : alt;
-
-    float t = airpressure.readTemperature();
-    currentData.temperature = isnan(t) ? 0.0 : t;
-
-    float h = airpressure.readHumidity();
-    currentData.humidity = isnan(h) ? 0.0 : h;
-
-    // ── 2. Power Monitoring ───────────────────────────────
-    if (powermonitoring.readData()) {
-        VoltageData v = powermonitoring.getData();
-        currentData.volt_3v3   = v.v1;
-        currentData.volt_5v    = v.v2;
-        currentData.volt_batt  = v.v3;
-        currentData.volt_solar = v.v4;
-        currentData.volt_dc    = v.v5;
-        currentData.curr_batt  = v.v6;
-        currentData.curr_solar = v.v7;
-    } else {
-        currentData.volt_3v3   = 0.0;
-        currentData.volt_5v    = 0.0;
-        currentData.volt_batt  = 0.0;
-        currentData.volt_solar = 0.0;
-        currentData.volt_dc    = 0.0;
-        currentData.curr_batt  = 0.0;
-        currentData.curr_solar = 0.0;
-    }
-
-    // ── 3. Other Sensors ──────────────────────────────────
-    currentData.lightLevel     = lightsensor.readLightLevel();
-    currentData.soilMoisture   = soilmoisture.readSoilMoisture();
-    currentData.rainCount      = davisrain.readRainGauge();
-    currentData.windSpeed      = windspeedsensor.readWindSpeedKPH();
-    currentData.windDirection  = winddirectionsensor.readWindDirectionDeg();
-
-    // ── 4. Timestamp & SD Logging ─────────────────────────
-    String timeStr = String(rtc1.getDateTime().c_str());
-    dataLogger.logSensorData(timeStr, currentData);
-
-    // ── 5. Upload every 15 seconds ────────────────────────
-    if (millis() - lastUploadTime >= uploadInterval) {
-        lastUploadTime = millis();
-
-        Serial.println("Triggering Upload Sequence...");
-
-        String json = "{";
-        json += "\"station_id\":\"AWS-UG-001\",";
-        json += "\"raw\":\"";
-        json += "Time:"  + timeStr                              + ",";
-        json += "Press:" + String(currentData.airPressure,  2) + ",";
-        json += "Alt:"   + String(currentData.altitude,     2) + ",";
-        json += "Temp:"  + String(currentData.temperature,  2) + ",";
-        json += "Hum:"   + String(currentData.humidity,     2) + ",";
-        json += "Light:" + String(currentData.lightLevel,   2) + ",";
-        json += "SoilM:" + String(currentData.soilMoisture, 2) + ",";
-        json += "Rain:"  + String(currentData.rainCount)       + ",";
-        json += "WSpd:"  + String(currentData.windSpeed,    2) + ",";
-        json += "WDir:"  + String(currentData.windDirection)   + ",";
-        json += "V33:"   + String(currentData.volt_3v3,     2) + ",";
-        json += "V5:"    + String(currentData.volt_5v,      2) + ",";
-        json += "VBatt:" + String(currentData.volt_batt,    2) + ",";
-        json += "VSol:"  + String(currentData.volt_solar,   2) + ",";
-        json += "VDC:"   + String(currentData.volt_dc,      2) + ",";
-        json += "CBatt:" + String(currentData.curr_batt,    2) + ",";
-        json += "CSol:"  + String(currentData.curr_solar,   2);
-        json += "\"}";
-
-        Serial.println("[GSM] Payload: " + json);
-        simmodule.postToDjango(json);
-    }
-
-    delay(1000); // 1 second loop delay
+    // deep sleep happens in setup(); nothing to do here
 }
+

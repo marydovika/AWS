@@ -9,7 +9,6 @@ const int chipSelectPin = 4;
 Memory::Memory() {}
 
 void Memory::setupMemory() {
-  Serial.begin(9600);
   if (!SD.begin(chipSelectPin)) {
     Serial.println("Card failed, or not present");
     return;
