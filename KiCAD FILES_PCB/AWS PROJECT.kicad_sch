@@ -50,7 +50,7 @@
 			)
 		)
 		(instances
-			(project "aws"
+			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3"
 					(page "3")
 				)
@@ -96,7 +96,7 @@
 			)
 		)
 		(instances
-			(project "aws"
+			(project "AWS PROJECT"
 				(path "/28dd5718-f0db-4cd1-9b2d-c2f5533a75a3"
 					(page "2")
 				)
