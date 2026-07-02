@@ -1,5 +1,8 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include <WiFi.h>
+#include <WebServer.h>
+#include <Preferences.h>
 #include "WIFI_CONNECTION.h"
 #include "DHT22.h"
 #include "AIR_PRESSURE.h"
@@ -14,6 +17,7 @@
 #include "DataLogger.h"
 #include "SensorData.h"
 #include "LORA.h"
+
 
 RTC_DATA_ATTR uint32_t updateIntervalMinutes = 10;
 RTC_DATA_ATTR uint32_t cyclesSinceLastUSSD = 9999; // Initialize to high to force first-time check
@@ -252,14 +256,339 @@ void transmitData(SensorData &data, unsigned long tonStart) {
     Serial.println("[DC] TX Phase complete.");
 }
 
+WebServer configServer(80);
+
+void handleRoot() {
+    Preferences preferences;
+    preferences.begin("weather_station", true);
+    uint32_t currentInterval = preferences.getUInt("interval", 10);
+    preferences.end();
+
+    String html = R"rawliteral(<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Station Configuration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-grad: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --accent-hover: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-grad);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(99, 102, 241, 0.15);
+            border-radius: 50%;
+            top: -50px;
+            left: -50px;
+            filter: blur(80px);
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(168, 85, 247, 0.15);
+            border-radius: 50%;
+            bottom: -50px;
+            right: -50px;
+            filter: blur(80px);
+            z-index: 0;
+        }
+        .container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+        }
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        input[type="number"] {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-main);
+            outline: none;
+            transition: all 0.3s;
+        }
+        input[type="number"]:focus {
+            border-color: #6366f1;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+        }
+        .unit {
+            position: absolute;
+            right: 16px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+        button {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3);
+            margin-top: 8px;
+        }
+        button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -3px rgba(99, 102, 241, 0.4);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        .footer {
+            margin-top: 32px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">AURA</div>
+        <div class="subtitle">Weather Station Control Center</div>
+        <form action="/save" method="GET">
+            <div class="form-group">
+                <label for="interval">Sleeping Interval</label>
+                <div class="input-wrapper">
+                    <input type="number" id="interval" name="interval" min="1" max="1440" value="%CURRENT_INTERVAL%" required>
+                    <span class="unit">min</span>
+                </div>
+            </div>
+            <button type="submit">Apply & Reboot</button>
+        </form>
+        <div class="footer">Connected to Local AP • Changes persist across power cycles</div>
+    </div>
+</body>
+</html>)rawliteral";
+
+    html.replace("%CURRENT_INTERVAL%", String(currentInterval));
+    configServer.send(200, "text/html", html);
+}
+
+void handleSave() {
+    if (configServer.hasArg("interval")) {
+        uint32_t newInterval = configServer.arg("interval").toInt();
+        if (newInterval > 0 && newInterval <= 1440) {
+            Preferences preferences;
+            preferences.begin("weather_station", false);
+            preferences.putUInt("interval", newInterval);
+            preferences.end();
+
+            String html = R"rawliteral(<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updating Station...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-grad: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-grad);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border-top-color: #6366f1;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 24px auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        h2 { font-weight: 600; margin-bottom: 12px; }
+        p { color: var(--text-muted); font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="spinner"></div>
+        <h2>Applying Settings</h2>
+        <p>Interval updated to %NEW_INTERVAL% minutes. The station is rebooting now...</p>
+    </div>
+</body>
+</html>)rawliteral";
+
+            html.replace("%NEW_INTERVAL%", String(newInterval));
+            configServer.send(200, "text/html", html);
+            delay(2000);
+            ESP.restart();
+            return;
+        }
+    }
+    configServer.send(400, "text/plain", "Bad Request");
+}
+
+void runConfigPortal(unsigned long tonStart, bool isManualBoot) {
+    Serial.println("[WiFi AP] Initializing WiFi Access Point...");
+    WiFi.mode(WIFI_AP);
+    
+    if (WiFi.softAP("ESP32_Weather_Config")) {
+        Serial.println("[WiFi AP] AP Started successfully!");
+        Serial.print("[WiFi AP] IP Address: ");
+        Serial.println(WiFi.softAPIP());
+    } else {
+        Serial.println("[WiFi AP] AP Failed to start.");
+        return;
+    }
+
+    configServer.on("/", handleRoot);
+    configServer.on("/save", handleSave);
+    configServer.begin();
+    Serial.println("[WiFi AP] HTTP server started on port 80");
+
+    unsigned long apStart = millis();
+    // 3 minutes (180s) for manual boot/reset, 15s for scheduled timer wakeups
+    const unsigned long AP_WAIT_TIMEOUT = isManualBoot ? 180000 : 15000;
+    // 10 minutes max configuration window for manual boot, normal TON_MS for scheduled wakes
+    unsigned long activeWindowLimit = isManualBoot ? (10ULL * 60ULL * 1000ULL) : TON_MS;
+
+    Serial.printf("[WiFi AP] Config Portal ready. Timeout: %lu ms. Max active window: %lu ms.\n", 
+                  AP_WAIT_TIMEOUT, activeWindowLimit);
+
+    while (millis() - tonStart < activeWindowLimit) {
+        configServer.handleClient();
+
+        int numStations = WiFi.softAPgetStationNum();
+        if (numStations > 0) {
+            apStart = millis(); // Reset timeout as long as client is connected
+        } else {
+            if (millis() - apStart > AP_WAIT_TIMEOUT) {
+                Serial.println("[WiFi AP] No clients connected within timeout. Shutting down portal.");
+                break;
+            }
+        }
+        delay(10);
+    }
+
+    configServer.close();
+    WiFi.softAPdisconnect(true);
+    WiFi.mode(WIFI_OFF);
+    Serial.println("[WiFi AP] Portal shut down.");
+}
+
+
 void setup() {
     Serial.begin(115200);
     delay(200);
+    
+    // Load config from preferences
+    Preferences preferences;
+    preferences.begin("weather_station", true);
+    updateIntervalMinutes = preferences.getUInt("interval", 10);
+    preferences.end();
     
     Wire.setTimeOut(50); // Set global I2C timeout to prevent hangs
     
     esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
     esp_reset_reason_t reset_reason = esp_reset_reason();
+    bool isManualBoot = (wakeup_reason != ESP_SLEEP_WAKEUP_TIMER);
 
     Serial.println("\n[DC] ================================");
     Serial.print("[DC] Wakeup reason: ");
@@ -320,6 +649,9 @@ void setup() {
     Serial.println("[DC] before transmitData");
     transmitData(currentData, tonStart);
     Serial.println("[DC] after transmitData");
+
+    // Run WiFi Configuration Portal
+    runConfigPortal(tonStart, isManualBoot);
 
     Serial.printf("[DC] Active window closed. Elapsed: %lu ms\n", millis() - tonStart);
     
