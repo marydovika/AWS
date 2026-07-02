@@ -1,82 +1,102 @@
 #include "GSM.h"
 #include <SD.h>
 
-
 // Persistent counters across deep sleep
 RTC_DATA_ATTR uint32_t gsmBytesSent = 0;
 RTC_DATA_ATTR uint32_t gsmBytesReceived = 0;
 RTC_DATA_ATTR uint32_t gsmCycles = 0;
 
 // ESP32 WROVER: Use 26/27 or 4/13. DO NOT use 16/17 if using PSRAM.
-#define RX_GSM 16 
+#define RX_GSM 16
 #define TX_GSM 17
 
 HardwareSerial SerialG = Serial2;
 
 GSM::GSM() {}
 
-void GSM::countSent(const String& s) {
+void GSM::countSent(const String &s)
+{
     gsmBytesSent += s.length();
 }
 
-void GSM::countReceived(const String& s) {
+void GSM::countReceived(const String &s)
+{
     gsmBytesReceived += s.length();
 }
 
 uint32_t GSM::getTotalBytesSent() { return gsmBytesSent; }
 uint32_t GSM::getTotalBytesReceived() { return gsmBytesReceived; }
 uint32_t GSM::getCycleCount() { return gsmCycles; }
-void GSM::resetByteCounters() { gsmBytesSent = 0; gsmBytesReceived = 0; gsmCycles = 0; }
+void GSM::resetByteCounters()
+{
+    gsmBytesSent = 0;
+    gsmBytesReceived = 0;
+    gsmCycles = 0;
+}
 
-void GSM::initSerial() {
+void GSM::initSerial()
+{
     SerialG.begin(9600, SERIAL_8N1, RX_GSM, TX_GSM);
     delay(1000);
 }
 
-void GSM::setupGSM() {
+void GSM::setupGSM()
+{
     gsmCycles++;
-    SerialG.begin(9600, SERIAL_8N1, RX_GSM, TX_GSM); 
+    SerialG.begin(9600, SERIAL_8N1, RX_GSM, TX_GSM);
     delay(1000);
     Serial.println("Initializing GSM...");
 
     // Handshake (log responses for debugging)
     bool gsmReady = false;
     int attempts = 0;
-    while (!gsmReady && attempts < 10) {
+    while (!gsmReady && attempts < 10)
+    {
         String cmd = "AT";
-        SerialG.println(cmd); 
+        SerialG.println(cmd);
         countSent(cmd + "\r\n");
         delay(500);
-        if (SerialG.available()) {
+        if (SerialG.available())
+        {
             String response = SerialG.readString();
             countReceived(response);
-            if (response.indexOf("OK") != -1) {
+            if (response.indexOf("OK") != -1)
+            {
                 gsmReady = true;
                 Serial.println("GSM Ready.");
             }
         }
         attempts++;
     }
-    
-    if(gsmReady) {
+
+    if (gsmReady)
+    {
         sendCommand("AT+CLTS=1", 500, false); // Enable network time sync
-        if (waitForNetwork(40000)) { // Wait up to 40 seconds
+        if (waitForNetwork(40000))
+        { // Wait up to 40 seconds
             connectGPRS();
-        } else {
+        }
+        else
+        {
             Serial.println("Network Registration Failed (Timeout).");
         }
-    } else {
+    }
+    else
+    {
         Serial.println("GSM Failure (Check Wiring/Power).");
     }
 }
 
-bool GSM::waitForNetwork(int timeoutMs) {
+bool GSM::waitForNetwork(int timeoutMs)
+{
     Serial.print("Waiting for network registration...");
     unsigned long start = millis();
-    while (millis() - start < (unsigned long)timeoutMs) {
+    while (millis() - start < (unsigned long)timeoutMs)
+    {
         String resp = sendCommandWithResponse("AT+CREG?", 1000, false);
         // Look for +CREG: 0,1 (Home) or 0,5 (Roaming)
-        if (resp.indexOf(",1") != -1 || resp.indexOf(",5") != -1) {
+        if (resp.indexOf(",1") != -1 || resp.indexOf(",5") != -1)
+        {
             Serial.println(" Registered!");
             return true;
         }
@@ -87,38 +107,47 @@ bool GSM::waitForNetwork(int timeoutMs) {
     return false;
 }
 
-String GSM::getNetworkTime() {
+String GSM::getNetworkTime()
+{
     // 1. Force the module to update its clock from the network
     sendCommand("AT+CLTS=1", 500, false);
-    
-    for (int retry = 0; retry < 3; retry++) {
+
+    for (int retry = 0; retry < 3; retry++)
+    {
         // Try GSMLOC (uses tower location to get very accurate time)
         // Format: +CIPGSMLOC: 0,2026/06/17,09:42:30
         String response = sendCommandWithResponse("AT+CIPGSMLOC=2,1", 10000, true);
-        
-        if (response.indexOf("601") != -1) {
+
+        if (response.indexOf("601") != -1)
+        {
             Serial.println("[GSM] Bearer error, skipping GSMLOC.");
-        } else {
+        }
+        else
+        {
             int firstComma = response.indexOf(',');
             int secondComma = response.indexOf(',', firstComma + 1);
-            if (firstComma != -1 && secondComma != -1) {
+            if (firstComma != -1 && secondComma != -1)
+            {
                 String fullDate = response.substring(secondComma + 1);
                 fullDate.trim();
-                if (fullDate.startsWith("20")) {
+                if (fullDate.startsWith("20"))
+                {
                     return fullDate.substring(2); // "26/06/17,09:42:30"
                 }
             }
         }
-        
+
         // 2. Fallback to CCLK
         // Format: +CCLK: "yy/mm/dd,hh:mm:ss+zz"
         response = sendCommandWithResponse("AT+CCLK?", 2000, true);
         int firstQuote = response.indexOf('\"');
         int lastQuote = response.lastIndexOf('\"');
-        if (firstQuote != -1 && lastQuote != -1) {
+        if (firstQuote != -1 && lastQuote != -1)
+        {
             String timeStr = response.substring(firstQuote + 1, lastQuote);
-            if (!timeStr.startsWith("04")) { // Not the factory default
-                 return timeStr;
+            if (!timeStr.startsWith("04"))
+            { // Not the factory default
+                return timeStr;
             }
         }
 
@@ -128,28 +157,31 @@ String GSM::getNetworkTime() {
     return "";
 }
 
-void GSM::connectGPRS() {
+void GSM::connectGPRS()
+{
     Serial.println("Configuring GPRS...");
-    
+
     // 1. CLEAN UP START: Close previous connections to stop "ERROR"
-    sendCommand("AT+HTTPTERM", 1000, true); 
-    sendCommand("AT+SAPBR=0,1", 1000, true); 
+    sendCommand("AT+HTTPTERM", 1000, true);
+    sendCommand("AT+SAPBR=0,1", 1000, true);
 
     // 2. Start Connection
     sendCommand("AT+SAPBR=3,1,\"Contype\",\"GPRS\"", 2000, true);
-    sendCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 2000, true); 
-    
+    sendCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 2000, true);
+
     // Use this instead — works on older SIM800 firmware:
-    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 1000, true);  
+    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 1000, true);
 
     Serial.println("[GSM] Opening GPRS Bearer (can take 30s)...");
     sendCommand("AT+SAPBR=1,1", 30000, true); // Increase to 30s
-    
+
     // ── REPLACE the old IP check block with this ──
     bool gotIP = false;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         String ipResp = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
-        if (ipResp.indexOf("0.0.0.0") == -1 && ipResp.indexOf("1,1") != -1) {
+        if (ipResp.indexOf("0.0.0.0") == -1 && ipResp.indexOf("1,1") != -1)
+        {
             Serial.println("[GSM] Got IP!");
             gotIP = true;
             break;
@@ -158,24 +190,29 @@ void GSM::connectGPRS() {
         delay(3000);
     }
 
-    if (!gotIP) {
+    if (!gotIP)
+    {
         Serial.println("[GSM] GPRS failed. Skipping HTTP init.");
         return; // ← bail early, don't init HTTP on a dead bearer
     }
 
     // DNS config AFTER bearer confirmed up
-    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 1000, true);  
-    sendCommand("AT+HTTPINIT", 2000, true);  
+    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 1000, true);
+    // Force-close any stuck HTTP session before opening a new one
+    sendCommand("AT+HTTPTERM", 2000, true);
+    delay(500);
+    sendCommand("AT+HTTPINIT", 2000, true);
 
 }
 
-bool GSM::sendThingSpeakRequest(String url) {
+bool GSM::sendThingSpeakRequest(String url)
+{
     // Terminate any stuck previous sessions just in case
     sendCommand("AT+HTTPTERM", 500, false);
     sendCommand("AT+HTTPINIT", 500, false);
 
     Serial.println("Uploading: " + url);
-    
+
     // Set URL
     String cmd = "AT+HTTPPARA=\"URL\",\"" + url + "\"";
     sendCommand(cmd, 2000, false);
@@ -184,54 +221,64 @@ bool GSM::sendThingSpeakRequest(String url) {
     String actionCmd = "AT+HTTPACTION=0";
     SerialG.println(actionCmd);
     countSent(actionCmd + "\r\n");
-    
+
     String actionResp = "";
     unsigned long start = millis();
     // Wait for BOTH "OK" (immediate) and then "+HTTPACTION:" (async)
     bool seenOK = false;
     bool seenAction = false;
-    
-    while (millis() - start < 45000) { // Increase timeout to 45s for slow GPRS
-        while (SerialG.available()) {
+
+    while (millis() - start < 45000)
+    { // Increase timeout to 45s for slow GPRS
+        while (SerialG.available())
+        {
             char c = SerialG.read();
             actionResp += c;
             countReceived(String(c));
             Serial.write(c);
         }
-        
-        if (actionResp.indexOf("OK") != -1) seenOK = true;
-        
+
+        if (actionResp.indexOf("OK") != -1)
+            seenOK = true;
+
         // We need the code after HTTPACTION: 0,200,length
         // So we wait until we see a newline after the action string
-        if (actionResp.indexOf("+HTTPACTION:") != -1) {
-            if (actionResp.endsWith("\n") || actionResp.endsWith("\r")) {
+        if (actionResp.indexOf("+HTTPACTION:") != -1)
+        {
+            if (actionResp.endsWith("\n") || actionResp.endsWith("\r"))
+            {
                 seenAction = true;
                 break;
             }
         }
-        delay(1); 
+        delay(1);
     }
     Serial.println();
 
     bool success = false;
-    if (actionResp.indexOf(",200,") != -1) { // More specific check for 200 OK
+    if (actionResp.indexOf(",200,") != -1)
+    { // More specific check for 200 OK
         success = true;
         Serial.println("[GSM] Upload Success (200 OK)");
-    } else {
+    }
+    else
+    {
         Serial.println("[GSM] Upload Failed or Timed Out");
     }
 
     // Read Response
     sendCommand("AT+HTTPREAD", 2000, true);
-    
+
     // Close session
-    sendCommand("AT+HTTPTERM", 500, false); 
+    sendCommand("AT+HTTPTERM", 500, false);
 
     return success;
 }
 
-void GSM::sendCommand(const String& command, int timeout, boolean debug) {
-    while(SerialG.available()) {
+void GSM::sendCommand(const String &command, int timeout, boolean debug)
+{
+    while (SerialG.available())
+    {
         char c = SerialG.read();
         countReceived(String(c));
     }
@@ -240,24 +287,31 @@ void GSM::sendCommand(const String& command, int timeout, boolean debug) {
 
     String resp = "";
     unsigned long start = millis();
-    while (millis() - start < (unsigned long)timeout) {
-        while (SerialG.available()) {
+    while (millis() - start < (unsigned long)timeout)
+    {
+        while (SerialG.available())
+        {
             char c = SerialG.read();
             resp += c;
             countReceived(String(c));
-            if (debug) Serial.write(c);
+            if (debug)
+                Serial.write(c);
         }
         // Early exit if we see common terminators
-        if (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1) {
-            break; 
+        if (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1)
+        {
+            break;
         }
         delay(1); // Feed the watchdog
     }
-    if (debug) Serial.println();
+    if (debug)
+        Serial.println();
 }
 
-String GSM::sendCommandWithResponse(const String& command, int timeout, boolean debug) {
-    while(SerialG.available()) {
+String GSM::sendCommandWithResponse(const String &command, int timeout, boolean debug)
+{
+    while (SerialG.available())
+    {
         char c = SerialG.read();
         countReceived(String(c));
     }
@@ -266,33 +320,45 @@ String GSM::sendCommandWithResponse(const String& command, int timeout, boolean 
 
     String resp = "";
     unsigned long start = millis();
-    while (millis() - start < (unsigned long)timeout) {
-        while (SerialG.available()) {
+    while (millis() - start < (unsigned long)timeout)
+    {
+        while (SerialG.available())
+        {
             char c = SerialG.read();
             resp += c;
             countReceived(String(c));
-            if (debug) Serial.write(c);
+            if (debug)
+                Serial.write(c);
         }
-        if (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1) {
-            break; 
+        if (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1)
+        {
+            break;
         }
         delay(1);
     }
-    if (debug) Serial.println();
+    if (debug)
+        Serial.println();
     return resp;
 }
 
-void GSM::postToDjango(String jsonPayload) {
+void GSM::postToDjango(String jsonPayload)
+{
     Serial.println("[GSM] Posting to Django...");
 
- // ── Check bearer is alive before attempting POST ──
+// ← Clear any leftover serial garbage first
+    while (SerialG.available()) SerialG.read();
+    delay(100);
+
+    // ── Check bearer is alive before attempting POST ──
     String bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
-    if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
+    if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1)
+    {
         Serial.println("[GSM] Bearer down. Reconnecting...");
-        connectGPRS();  // attempt reconnect
+        connectGPRS(); // attempt reconnect
         // Re-check after reconnect
         bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
-        if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
+        if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1)
+        {
             Serial.println("[GSM] Bearer still down. Aborting POST.");
             return;
         }
@@ -300,46 +366,79 @@ void GSM::postToDjango(String jsonPayload) {
 
     // ── Full session teardown and reinit ─────────────────
     sendCommand("AT+HTTPTERM", 1000, false);
-     sendCommand("AT+HTTPINIT", 500, false);
-    
-// Cloudflare tunnel URL
-    String url = "https://political-chelsea-subscription-survivor.trycloudflare.com/api/ingest/";
+    sendCommand("AT+HTTPINIT", 500, false);
+    sendCommand("AT+HTTPSSL=0", 500, false);  // reset first
+    sendCommand("AT+HTTPSSL=1", 1000, false);  // ← SSL BEFORE URL param
+    sendCommand("AT+HTTPPARA=\"CID\",1", 1000, false);
 
-     String urlCmd = "AT+HTTPPARA=\"URL\",\"" + url + "\"";
-       sendCommand(urlCmd, 2000, false);
+    // 
+   String url = "https://unnecessary-crawford-floors-indicators.trycloudflare.com/api/ingest/";
 
-     // SSL setup (comment out if using HTTP)
-     sendCommand("AT+HTTPSSL=1", 1000, false); // Enable SSL (if using HTTPS)
 
-     sendCommand("AT+HTTPPARA=\"CONTENT\",\"application/json\"", 1000, false);
+    String urlCmd = "AT+HTTPPARA=\"URL\",\"" + url + "\"";
+    sendCommand(urlCmd, 2000, false);
 
-  int payloadLen = jsonPayload.length();
-    String dataCmd = "AT+HTTPDATA=" + String(payloadLen) + ",10000";
+    sendCommand("AT+HTTPPARA=\"CONTENT\",\"application/json\"", 1000, false);
 
-      // ── Wait for "DOWNLOAD" prompt before sending payload ──
+    int payloadLen = jsonPayload.length();
+    String dataCmd = "AT+HTTPDATA=" + String(payloadLen) + ",60000";
+
+    // ── Wait for "DOWNLOAD" prompt before sending payload ──
     SerialG.println(dataCmd);
     countSent(dataCmd + "\r\n");
-    unsigned long start = millis();
+    unsigned long downloadStart = millis();
     String dataResp = "";
-    while (millis() - start < 5000) {
-        while (SerialG.available()) dataResp += (char)SerialG.read();
-        if (dataResp.indexOf("DOWNLOAD") != -1) break;
+    while (millis() - downloadStart < 5000)
+    {
+        while (SerialG.available())
+            dataResp += (char)SerialG.read();
+        if (dataResp.indexOf("DOWNLOAD") != -1)
+            break;
         delay(1);
     }
     Serial.println("[GSM] HTTPDATA resp: " + dataResp);
-
-
 
     // Send payload once
     SerialG.print(jsonPayload);
     countSent(jsonPayload);
     delay(2000);
 
+    // Send HTTPACTION and wait for async +HTTPACTION: response
+    SerialG.println("AT+HTTPACTION=1");
+    countSent("AT+HTTPACTION=1\r\n");
 
-    sendCommand("AT+HTTPACTION=1", 15000, true);
-    sendCommand("AT+HTTPREAD", 3000, true);
-    sendCommand("AT+HTTPTERM", 1000, false);
+    String actionResp = "";
+    unsigned long httpActionStart = millis();
+    bool gotAction = false;
 
-    Serial.println("[GSM] Post complete.");
-
+while (millis() - httpActionStart < 60000) {
+    while (SerialG.available()) {
+        char c = SerialG.read();
+        actionResp += c;
+        Serial.write(c);
+    }
+    // Wait for full line: +HTTPACTION: 1,XXX,YYY\n
+    if (actionResp.indexOf("+HTTPACTION:") != -1 &&
+        (actionResp.endsWith("\n") || actionResp.endsWith("\r"))) {
+        gotAction = true;
+        break;
+    }
+    delay(10);
 }
+
+Serial.println();
+Serial.println("[GSM] Action response: " + actionResp);
+
+if (actionResp.indexOf(",201,") != -1 || actionResp.indexOf(",200,") != -1) {
+    Serial.println("[GSM] POST successful!");
+} else if (actionResp.indexOf(",606,") != -1) {
+    Serial.println("[GSM] SSL failed (606) - server TLS not compatible");
+} else if (actionResp.indexOf(",601,") != -1) {
+    Serial.println("[GSM] DNS failed (601)");
+} else if (actionResp.indexOf(",603,") != -1) {
+    Serial.println("[GSM] Connection refused (603)");
+} else {
+    Serial.println("[GSM] POST failed: " + actionResp);
+}
+}
+

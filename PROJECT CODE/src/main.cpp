@@ -33,29 +33,42 @@ unsigned long lastUploadTime = 0;
 const long uploadInterval = 15000; // 15 seconds
 
 void setup() {
-    Serial.begin(115200); // ← changed from 9600 to match your GSM debug work
+    Serial.begin(9600); // ← changed from 9600 to match your GSM debug work
 
     // 1. Initialize RTC
+    Serial.println(">> before RTC");
     rtc1.setupRTC();
 
     // 2. Initialize Sensors
+     Serial.println("Init sensors...");
+    Serial.println(">> before dhtsensor");
     dhtsensor.getsensor();
+    Serial.println(">> before airpressure");
     airpressure.sensor_setup();
+    Serial.println(">> before davisrain");
     davisrain.setupRainGauge();
+    Serial.println(">> before windspeedsensor");
     windspeedsensor.setupSensor();
+    Serial.println(">> before winddirectionsensor");
     winddirectionsensor.setupSensor();
+    Serial.println(">> before lightsensor");
     lightsensor.setupSensor();
+    Serial.println(">> before soil");
     soilmoisture.setupSensor();
+    Serial.println(">> before power");
     powermonitoring.begin(21, 22);
-
+    Serial.println(">> before datalogger");
     // 3. Initialize SD and GSM
     dataLogger.begin();
+    Serial.println(">> before GSM");
     simmodule.setupGSM();
-
+    Serial.println(">> after GSM");
     Serial.println("Setup complete.");
+    Serial.println(">>> Entering loop now");
 }
 
 void loop() {
+    Serial.println(">>> loop tick");
     SensorData currentData;
 
     // ── 1. Air Pressure / BME280 ──────────────────────────
