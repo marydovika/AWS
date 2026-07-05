@@ -7,12 +7,17 @@ class GSM {
 public:
     GSM();
     void setupGSM();
-    void connectGPRS(); // New: Setup Internet
-    // Sends data to a specific ThingSpeak URL
-    void sendThingSpeakRequest(String url); 
+    void connectGPRS();
+    void sendThingSpeakRequest(String url);
+    void checkNetworkHealth();
 
 private:
-    void sendCommand(const String& command, int timeout, boolean debug);
+    bool sendCommand(const String& command, int timeout, bool debug, const String& expectedResponse = "OK");
+    String readResponse(int timeout, bool debug);
+    bool verifyGSMCommunication();
+    bool verifyNetworkRegistration();
+
+    unsigned long networkLossStart;
 };
 
 #endif

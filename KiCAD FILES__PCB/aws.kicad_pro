@@ -211,8 +211,8 @@
       ],
       "track_widths": [
         0.0,
-        0.5,
-        1.0,
+        0.25,
+        1.5,
         2.0,
         3.0,
         4.0,
@@ -1024,7 +1024,7 @@
         "uuid": "28dd5718-f0db-4cd1-9b2d-c2f5533a75a3"
       }
     ],
-    "used_designators": "",
+    "used_designators": "12.6V1,U1,U4-5,J11,J16,J22-23,J25-27,J30-48,IN\\-1,8.4V1-4,4.2V1,#PWR1-51,#PWR54,#PWR97,#PWR101,#PWR152,#PWR155-158,SW2-4,IN+1,OUT+1,OUT\\-1,OV1,P+1,P\\-1,D1-7,#FLG1-3,R1-17,R48,R66,C1-2",
     "variants": []
   },
   "sheets": [

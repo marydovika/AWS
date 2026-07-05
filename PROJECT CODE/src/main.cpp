@@ -32,9 +32,11 @@ DataLogger dataLogger(4); // CS pin 4 for SD card
 // Timer variables
 unsigned long lastUploadTime = 0;
 const long uploadInterval = 15000; // 15 seconds
+unsigned long lastNetworkCheckTime = 0;
+const unsigned long networkCheckInterval = 180000; // 3 minutes
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     
     // 1. Initialize RTC
     rtc1.setupRTC();
@@ -118,6 +120,11 @@ void loop() {
         // This function retrieves the last logged line, 
         // deconstructs it, and sends it to the GSM module
         dataLogger.uploadLastDataToThingspeak(simmodule);
+    }
+
+    if (millis() - lastNetworkCheckTime >= networkCheckInterval) {
+        lastNetworkCheckTime = millis();
+        simmodule.checkNetworkHealth();
     }
     
     delay(1000); // 1 sec loop delay
