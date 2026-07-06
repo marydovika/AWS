@@ -5,9 +5,10 @@
 	(uuid "28dd5718-f0db-4cd1-9b2d-c2f5533a75a3")
 	(paper "A4")
 	(title_block
-		(title "GENERAL  DESIGN SHEET")
+		(title "POWER SCHEMATIC")
+		(date "2026-07-05")
 		(company "AdeMNEA IoT-ra")
-		(comment 1 "Designed By TN Muhanguzi")
+		(comment 1 "Designed By Edrine Ssennungi")
 		(comment 2 "For MPSE Research at Makerere University")
 	)
 	(lib_symbols)
