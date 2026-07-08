@@ -13337,7 +13337,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_THT:LED_D3.0mm"
 			(at 152.4 330.2 0)
 			(hide yes)
 			(show_name no)
@@ -25226,7 +25226,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "LED_SMD:LED_0402_1005Metric"
+		(property "Footprint" "LED_THT:LED_D3.0mm"
 			(at 240.03 328.93 0)
 			(hide yes)
 			(show_name no)

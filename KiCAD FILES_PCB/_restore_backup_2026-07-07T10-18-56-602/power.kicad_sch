@@ -1,0 +1,16 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "7e4d0895-b513-43e4-a42e-74e1add59c50")
+	(paper "A2")
+	(title_block
+		(title "POWER SCHEMATIC")
+		(date "2025-11-03")
+		(rev "V-1.1")
+		(company "AdeMNEA IoT-ra")
+		(comment 1 "Designed By TN Muhanguzi")
+		(comment 2 "For MPSE Research at Makerere University")
+	)
+	(lib_symbols)
+)

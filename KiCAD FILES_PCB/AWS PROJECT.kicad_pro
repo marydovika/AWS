@@ -569,7 +569,7 @@
       "method": 0,
       "sort_order": 0
     },
-    "bom_export_filename": "..\\bom\\AWS PROJECT.csv",
+    "bom_export_filename": "..\\bom\\AWS PROJECT-Edrine.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -582,18 +582,12 @@
     },
     "bom_presets": [],
     "bom_settings": {
-      "exclude_dnp": true,
+      "exclude_dnp": false,
       "fields_ordered": [
         {
           "group_by": false,
           "label": "Reference",
           "name": "Reference",
-          "show": true
-        },
-        {
-          "group_by": false,
-          "label": "Qty",
-          "name": "${QUANTITY}",
           "show": true
         },
         {
@@ -603,27 +597,9 @@
           "show": true
         },
         {
-          "group_by": true,
-          "label": "DNP",
-          "name": "${DNP}",
-          "show": true
-        },
-        {
-          "group_by": true,
-          "label": "Exclude from BOM",
-          "name": "${EXCLUDE_FROM_BOM}",
-          "show": true
-        },
-        {
-          "group_by": true,
-          "label": "Exclude from Board",
-          "name": "${EXCLUDE_FROM_BOARD}",
-          "show": true
-        },
-        {
-          "group_by": true,
-          "label": "LCSC",
-          "name": "LCSC",
+          "group_by": false,
+          "label": "Datasheet",
+          "name": "Datasheet",
           "show": true
         },
         {
@@ -634,9 +610,33 @@
         },
         {
           "group_by": false,
-          "label": "Datasheet",
-          "name": "Datasheet",
+          "label": "Qty",
+          "name": "${QUANTITY}",
           "show": true
+        },
+        {
+          "group_by": true,
+          "label": "DNP",
+          "name": "${DNP}",
+          "show": true
+        },
+        {
+          "group_by": false,
+          "label": "LCSC",
+          "name": "LCSC",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Exclude from Board",
+          "name": "${EXCLUDE_FROM_BOARD}",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Exclude from BOM",
+          "name": "${EXCLUDE_FROM_BOM}",
+          "show": false
         },
         {
           "group_by": false,
@@ -646,7 +646,7 @@
         },
         {
           "group_by": false,
-          "label": "Availability",
+          "label": "AVAILABILITY",
           "name": "Availability",
           "show": false
         },
@@ -678,12 +678,6 @@
           "group_by": false,
           "label": "Continuous Drain Current (Id)",
           "name": "Continuous Drain Current (Id)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "DESCRIPTION",
-          "name": "DESCRIPTION",
           "show": false
         },
         {
@@ -730,7 +724,7 @@
         },
         {
           "group_by": false,
-          "label": "MANUFACTURER",
+          "label": "Manufacturer",
           "name": "MANUFACTURER",
           "show": false
         },
@@ -772,12 +766,6 @@
         },
         {
           "group_by": false,
-          "label": "Manufacturer",
-          "name": "Manufacturer",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "Maximum Clamping Voltage",
           "name": "Maximum Clamping Voltage",
           "show": false
@@ -814,20 +802,8 @@
         },
         {
           "group_by": false,
-          "label": "PACKAGE",
-          "name": "PACKAGE",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "PARTREV",
           "name": "PARTREV",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PRICE",
-          "name": "PRICE",
           "show": false
         },
         {
@@ -952,12 +928,6 @@
         },
         {
           "group_by": false,
-          "label": "AVAILABILITY",
-          "name": "AVAILABILITY",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "Description",
           "name": "Description",
           "show": false
@@ -1033,7 +1003,7 @@
         "uuid": "28dd5718-f0db-4cd1-9b2d-c2f5533a75a3"
       }
     ],
-    "used_designators": "D1-2,#PWR1-26,#PWR43-52,#PWR54,#PWR152-159,C1-8,GSM2,R1-11,J1-18,SW1,SW3-4,U1,U10",
+    "used_designators": "D1-7,#PWR1-54,#PWR152-159,C1-8,GSM2,#FLG1-3,R1-25,J1-47,SW1-4,U1,U10",
     "variants": []
   },
   "sheets": [
