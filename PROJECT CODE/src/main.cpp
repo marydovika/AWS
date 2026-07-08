@@ -252,6 +252,7 @@ void transmitData(SensorData &data, unsigned long tonStart) {
                            simmodule.getTotalBytesReceived(), 
                            simmodule.getCycleCount());
 
+    simmodule.disconnectGPRS();
     gsmPowerOff();
     Serial.println("[DC] TX Phase complete.");
 }
@@ -544,8 +545,8 @@ void runConfigPortal(unsigned long tonStart, bool isManualBoot) {
     Serial.println("[WiFi AP] HTTP server started on port 80");
 
     unsigned long apStart = millis();
-    // 3 minutes (180s) for manual boot/reset, 15s for scheduled timer wakeups
-    const unsigned long AP_WAIT_TIMEOUT = isManualBoot ? 180000 : 15000;
+    // 1.5 minutes (90s) for manual boot/reset, 15s for scheduled timer wakeups
+    const unsigned long AP_WAIT_TIMEOUT = isManualBoot ? 90000 : 15000;
     // 10 minutes max configuration window for manual boot, normal TON_MS for scheduled wakes
     unsigned long activeWindowLimit = isManualBoot ? (10ULL * 60ULL * 1000ULL) : TON_MS;
 

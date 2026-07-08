@@ -11,6 +11,7 @@ class GSM {
     // ── Setup ─────────────────────────────────────────────
     void setupGSM();
     void connectGPRS();
+    void disconnectGPRS();
     bool waitForNetwork(int timeoutMs);
     void initSerial();
 
@@ -36,13 +37,20 @@ class GSM {
     String extractUSSDMessage(const String& cusdResponse);
     float parseBalanceFromUSSD(const String& msg);
 
-  public:
     // ── Internal helpers ──────────────────────────────────
     void sendCommand(const String& command, int timeout, boolean debug);
+    bool sendCommand(const String& command, int timeout, bool debug, const String& expectedResponse);
     String sendCommandWithResponse(const String& command, int timeout, boolean debug);
+    String readResponse(int timeout, bool debug, const String& expectedResponse = "");
     void countSent(const String& s);
     void countReceived(const String& s);
     String decodeUCS2(const String& hexStr);
+    void checkNetworkHealth();
+    bool verifyGSMCommunication();
+    bool verifyNetworkRegistration();
+
+  private:
+    unsigned long networkLossStart;
 };
 
 #endif

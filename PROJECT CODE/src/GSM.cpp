@@ -1,19 +1,21 @@
 #include "GSM.h"
 #include <SD.h>
 
-
 // Persistent counters across deep sleep
 RTC_DATA_ATTR uint32_t gsmBytesSent = 0;
 RTC_DATA_ATTR uint32_t gsmBytesReceived = 0;
 RTC_DATA_ATTR uint32_t gsmCycles = 0;
 
 // ESP32 WROVER: Use 26/27 or 4/13. DO NOT use 16/17 if using PSRAM.
-#define RX_GSM 16 
+#define RX_GSM 16
 #define TX_GSM 17
+
+#define GSM_BAUD 115200
+#define GPRS_APN "internet"
 
 HardwareSerial SerialG = Serial2;
 
-GSM::GSM() {}
+GSM::GSM() : networkLossStart(0) {}
 
 void GSM::countSent(const String& s) {
     gsmBytesSent += s.length();
@@ -29,44 +31,55 @@ uint32_t GSM::getCycleCount() { return gsmCycles; }
 void GSM::resetByteCounters() { gsmBytesSent = 0; gsmBytesReceived = 0; gsmCycles = 0; }
 
 void GSM::initSerial() {
-    SerialG.begin(9600, SERIAL_8N1, RX_GSM, TX_GSM);
+    SerialG.begin(GSM_BAUD, SERIAL_8N1, RX_GSM, TX_GSM);
     delay(1000);
 }
 
 void GSM::setupGSM() {
     gsmCycles++;
-    SerialG.begin(9600, SERIAL_8N1, RX_GSM, TX_GSM); 
-    delay(1000);
-    Serial.println("Initializing GSM...");
+    SerialG.begin(GSM_BAUD, SERIAL_8N1, RX_GSM, TX_GSM);
 
-    // Handshake (log responses for debugging)
+    Serial.println("Waiting for SIM800C/SIM800X hardware auto-boot...");
+    delay(5000);
+
+    // Clear serial buffer and reset SIM800 AT parser
+    SerialG.println();
+    delay(100);
+    while (SerialG.available()) {
+        SerialG.read();
+    }
+
+    Serial.println("Initializing GSM at 115200...");
+
     bool gsmReady = false;
     int attempts = 0;
     while (!gsmReady && attempts < 10) {
-        String cmd = "AT";
-        SerialG.println(cmd); 
-        countSent(cmd + "\r\n");
-        delay(500);
-        if (SerialG.available()) {
-            String response = SerialG.readString();
-            countReceived(response);
-            if (response.indexOf("OK") != -1) {
-                gsmReady = true;
-                Serial.println("GSM Ready.");
-            }
+        if (sendCommand("AT", 1500, true, "OK")) {
+            gsmReady = true;
+            Serial.println("GSM Ready.");
+            break;
         }
         attempts++;
+        Serial.println("Waiting for GSM response...");
+        delay(1000);
     }
-    
-    if(gsmReady) {
-        sendCommand("AT+CLTS=1", 500, false); // Enable network time sync
-        if (waitForNetwork(40000)) { // Wait up to 40 seconds
-            connectGPRS();
-        } else {
-            Serial.println("Network Registration Failed (Timeout).");
-        }
+
+    if (!gsmReady) {
+        Serial.println("GSM Failure (No AT response at 115200). Ensure SIM800C/SIM800X is awake and RX/TX pins are correct.");
+        return;
+    }
+
+    // Check signal quality
+    sendCommand("AT+CSQ", 1500, true, "OK");
+
+    // Enable network time sync
+    sendCommand("AT+CLTS=1", 500, false);
+
+    // Wait for network registration (up to 40 seconds)
+    if (waitForNetwork(40000)) {
+        connectGPRS();
     } else {
-        Serial.println("GSM Failure (Check Wiring/Power).");
+        Serial.println("Network Registration Failed (Timeout).");
     }
 }
 
@@ -81,19 +94,250 @@ bool GSM::waitForNetwork(int timeoutMs) {
             return true;
         }
         Serial.print(".");
-        delay(2000); // Wait 2s between checks
+        delay(2000);
     }
     Serial.println(" Failed (Timeout)");
     return false;
 }
 
+void GSM::connectGPRS() {
+    Serial.println("Configuring GPRS...");
+    
+    // 1. Terminate any stuck HTTP session
+    sendCommand("AT+HTTPTERM", 1500, true); 
+    
+    // 2. Close GPRS bearer cleanly. We give it 5 seconds to finish.
+    // Early-exit will return immediately when OK or ERROR is received.
+    sendCommand("AT+SAPBR=0,1", 5000, true); 
+
+    // 3. Configure the bearer profile
+    sendCommand("AT+SAPBR=3,1,\"Contype\",\"GPRS\"", 3000, true);
+    sendCommand(String("AT+SAPBR=3,1,\"APN\",\"") + GPRS_APN + "\"", 3000, true); 
+    
+    // DNS config
+    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 2000, true);  
+
+    Serial.println("[GSM] Opening GPRS Bearer (can take 30s)...");
+    // Wait up to 30 seconds for GPRS bearer to open.
+    // Early-exit will return immediately when OK is received.
+    sendCommand("AT+SAPBR=1,1", 30000, true); 
+    
+    // Wait for IP to be assigned
+    bool gotIP = false;
+    String ipResp = "";
+    for (int i = 0; i < 10; i++) {
+        ipResp = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
+        if (ipResp.indexOf("0.0.0.0") == -1 && ipResp.indexOf("1,1") != -1) {
+            Serial.println("[GSM] Got IP!");
+            gotIP = true;
+            break;
+        }
+        Serial.println("[GSM] Waiting for IP...");
+        delay(3000);
+    }
+
+    if (!gotIP) {
+        Serial.println("[GSM] GPRS failed. Skipping HTTP init.");
+        return; 
+    }
+
+    // DNS config after bearer confirmed up
+    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 2000, true);  
+    sendCommand("AT+HTTPINIT", 3000, true);  
+}
+
+void GSM::disconnectGPRS() {
+    Serial.println("[GSM] Disconnecting GPRS and terminating HTTP before sleep...");
+    sendCommand("AT+HTTPTERM", 1500, true); 
+    sendCommand("AT+SAPBR=0,1", 5000, true); 
+}
+
+bool GSM::sendThingSpeakRequest(String url) {
+    sendCommand("AT+HTTPTERM", 500, false);
+    sendCommand("AT+HTTPINIT", 500, false);
+
+    Serial.println("Uploading: " + url);
+    
+    String cmd = "AT+HTTPPARA=\"URL\",\"" + url + "\"";
+    sendCommand(cmd, 2000, false);
+
+    String actionCmd = "AT+HTTPACTION=0";
+    SerialG.println(actionCmd);
+    countSent(actionCmd + "\r\n");
+    
+    String actionResp = "";
+    unsigned long start = millis();
+    bool seenOK = false;
+    bool seenAction = false;
+    
+    while (millis() - start < 45000) { 
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            actionResp += c;
+            countReceived(String(c));
+            Serial.write(c);
+        }
+        
+        if (actionResp.indexOf("OK") != -1) seenOK = true;
+        
+        if (actionResp.indexOf("+HTTPACTION:") != -1) {
+            if (actionResp.endsWith("\n") || actionResp.endsWith("\r")) {
+                seenAction = true;
+                break;
+            }
+        }
+        delay(1); 
+    }
+    Serial.println();
+
+    bool success = false;
+    if (actionResp.indexOf(",200,") != -1) { 
+        success = true;
+        Serial.println("[GSM] Upload Success (200 OK)");
+    } else {
+        Serial.println("[GSM] Upload Failed or Timed Out");
+    }
+
+    sendCommand("AT+HTTPREAD", 2000, true);
+    sendCommand("AT+HTTPTERM", 500, false); 
+
+    return success;
+}
+
+void GSM::checkNetworkHealth() {
+    bool registered = verifyNetworkRegistration();
+    if (registered) {
+        if (networkLossStart != 0) {
+            Serial.println("Network restored.");
+        }
+        networkLossStart = 0;
+        return;
+    }
+
+    if (networkLossStart == 0) {
+        networkLossStart = millis();
+        Serial.println("Network not registered. Starting hold timer.");
+    }
+
+    unsigned long badDuration = millis() - networkLossStart;
+    if (badDuration >= 300000) {
+        Serial.println("Network lost >5 minutes; attempting recovery...");
+        delay(8000);
+        if (verifyGSMCommunication()) {
+            connectGPRS();
+            networkLossStart = 0;
+        } else {
+            Serial.println("SIM800X still unresponsive.");
+        }
+    } else {
+        Serial.print("Network still bad for ");
+        Serial.print(badDuration / 1000);
+        Serial.println(" seconds.");
+    }
+}
+
+// ── Overloaded Send Commands to support older caller logic ──
+
+bool GSM::sendCommand(const String& command, int timeout, bool debug, const String& expectedResponse) {
+    while (SerialG.available()) {
+        SerialG.read();
+    }
+    SerialG.println(command);
+    countSent(command + "\r\n");
+
+    if (debug) {
+        Serial.print("Command: ");
+        Serial.println(command);
+    }
+
+    String response = readResponse(timeout, debug, expectedResponse);
+
+    if (debug) {
+        Serial.print("Response: ");
+        Serial.println(response);
+    }
+
+    if (expectedResponse.length() == 0) {
+        return true;
+    }
+    return response.indexOf(expectedResponse) != -1;
+}
+
+void GSM::sendCommand(const String& command, int timeout, bool debug) {
+    sendCommand(command, timeout, debug, "");
+}
+
+String GSM::sendCommandWithResponse(const String& command, int timeout, bool debug) {
+    while (SerialG.available()) {
+        SerialG.read();
+    }
+    SerialG.println(command);
+    countSent(command + "\r\n");
+
+    if (debug) {
+        Serial.print("Command: ");
+        Serial.println(command);
+    }
+
+    String response = readResponse(timeout, debug);
+
+    if (debug) {
+        Serial.print("Response: ");
+        Serial.println(response);
+    }
+    return response;
+}
+
+String GSM::readResponse(int timeout, bool debug, const String& expectedResponse) {
+    String response;
+    unsigned long deadline = millis() + timeout;
+
+    while (millis() < deadline) {
+        while (SerialG.available()) {
+            char c = SerialG.read();
+            response += c;
+            countReceived(String(c));
+            if (debug) {
+                Serial.write(c);
+            }
+        }
+        
+        // Early exit if we find the expected response
+        if (expectedResponse.length() > 0 && response.indexOf(expectedResponse) != -1) {
+            break;
+        }
+        
+        // Early exit on standard terminators
+        if (response.indexOf("OK\r\n") != -1 || response.indexOf("ERROR\r\n") != -1 || response.indexOf("OK\n") != -1 || response.indexOf("ERROR\n") != -1) {
+            break;
+        }
+        
+        delay(10);
+    }
+    return response;
+}
+
+bool GSM::verifyGSMCommunication() {
+    return sendCommand("AT", 1500, true, "OK");
+}
+
+bool GSM::verifyNetworkRegistration() {
+    while (SerialG.available()) {
+        SerialG.read();
+    }
+    SerialG.println("AT+CREG?");
+    delay(200);
+
+    String response = readResponse(1500, true);
+    return (response.indexOf("+CREG: 0,1") != -1 || response.indexOf("+CREG: 0,5") != -1);
+}
+
+// ── Restore deleted helper methods ──
+
 String GSM::getNetworkTime() {
-    // 1. Force the module to update its clock from the network
     sendCommand("AT+CLTS=1", 500, false);
     
     for (int retry = 0; retry < 3; retry++) {
-        // Try GSMLOC (uses tower location to get very accurate time)
-        // Format: +CIPGSMLOC: 0,2026/06/17,09:42:30
         String response = sendCommandWithResponse("AT+CIPGSMLOC=2,1", 10000, true);
         
         if (response.indexOf("601") != -1) {
@@ -110,14 +354,12 @@ String GSM::getNetworkTime() {
             }
         }
         
-        // 2. Fallback to CCLK
-        // Format: +CCLK: "yy/mm/dd,hh:mm:ss+zz"
         response = sendCommandWithResponse("AT+CCLK?", 2000, true);
         int firstQuote = response.indexOf('\"');
         int lastQuote = response.lastIndexOf('\"');
         if (firstQuote != -1 && lastQuote != -1) {
             String timeStr = response.substring(firstQuote + 1, lastQuote);
-            if (!timeStr.startsWith("04")) { // Not the factory default
+            if (!timeStr.startsWith("04")) { // Not factory default
                  return timeStr;
             }
         }
@@ -128,170 +370,13 @@ String GSM::getNetworkTime() {
     return "";
 }
 
-void GSM::connectGPRS() {
-    Serial.println("Configuring GPRS...");
-    
-    // 1. CLEAN UP START: Close previous connections to stop "ERROR"
-    sendCommand("AT+HTTPTERM", 1000, true); 
-    sendCommand("AT+SAPBR=0,1", 1000, true); 
-
-    // 2. Start Connection
-    sendCommand("AT+SAPBR=3,1,\"Contype\",\"GPRS\"", 2000, true);
-    sendCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 2000, true); 
-    
-    // Use this instead — works on older SIM800 firmware:
-    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 1000, true);  
-
-    Serial.println("[GSM] Opening GPRS Bearer (can take 30s)...");
-    sendCommand("AT+SAPBR=1,1", 30000, true); // Increase to 30s
-    
-    // ── REPLACE the old IP check block with this ──
-    bool gotIP = false;
-    for (int i = 0; i < 10; i++) {
-        String ipResp = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
-        if (ipResp.indexOf("0.0.0.0") == -1 && ipResp.indexOf("1,1") != -1) {
-            Serial.println("[GSM] Got IP!");
-            gotIP = true;
-            break;
-        }
-        Serial.println("[GSM] Waiting for IP...");
-        delay(3000);
-    }
-
-    if (!gotIP) {
-        Serial.println("[GSM] GPRS failed. Skipping HTTP init.");
-        return; // ← bail early, don't init HTTP on a dead bearer
-    }
-
-    // DNS config AFTER bearer confirmed up
-    sendCommand("AT+CDNSCFG=\"8.8.8.8\",\"8.8.4.4\"", 1000, true);  
-    sendCommand("AT+HTTPINIT", 2000, true);  
-
-}
-
-bool GSM::sendThingSpeakRequest(String url) {
-    // Terminate any stuck previous sessions just in case
-    sendCommand("AT+HTTPTERM", 500, false);
-    sendCommand("AT+HTTPINIT", 500, false);
-
-    Serial.println("Uploading: " + url);
-    
-    // Set URL
-    String cmd = "AT+HTTPPARA=\"URL\",\"" + url + "\"";
-    sendCommand(cmd, 2000, false);
-
-    // GET Request (Action 0)
-    String actionCmd = "AT+HTTPACTION=0";
-    SerialG.println(actionCmd);
-    countSent(actionCmd + "\r\n");
-    
-    String actionResp = "";
-    unsigned long start = millis();
-    // Wait for BOTH "OK" (immediate) and then "+HTTPACTION:" (async)
-    bool seenOK = false;
-    bool seenAction = false;
-    
-    while (millis() - start < 45000) { // Increase timeout to 45s for slow GPRS
-        while (SerialG.available()) {
-            char c = SerialG.read();
-            actionResp += c;
-            countReceived(String(c));
-            Serial.write(c);
-        }
-        
-        if (actionResp.indexOf("OK") != -1) seenOK = true;
-        
-        // We need the code after HTTPACTION: 0,200,length
-        // So we wait until we see a newline after the action string
-        if (actionResp.indexOf("+HTTPACTION:") != -1) {
-            if (actionResp.endsWith("\n") || actionResp.endsWith("\r")) {
-                seenAction = true;
-                break;
-            }
-        }
-        delay(1); 
-    }
-    Serial.println();
-
-    bool success = false;
-    if (actionResp.indexOf(",200,") != -1) { // More specific check for 200 OK
-        success = true;
-        Serial.println("[GSM] Upload Success (200 OK)");
-    } else {
-        Serial.println("[GSM] Upload Failed or Timed Out");
-    }
-
-    // Read Response
-    sendCommand("AT+HTTPREAD", 2000, true);
-    
-    // Close session
-    sendCommand("AT+HTTPTERM", 500, false); 
-
-    return success;
-}
-
-void GSM::sendCommand(const String& command, int timeout, boolean debug) {
-    while(SerialG.available()) {
-        char c = SerialG.read();
-        countReceived(String(c));
-    }
-    SerialG.println(command);
-    countSent(command + "\r\n");
-
-    String resp = "";
-    unsigned long start = millis();
-    while (millis() - start < (unsigned long)timeout) {
-        while (SerialG.available()) {
-            char c = SerialG.read();
-            resp += c;
-            countReceived(String(c));
-            if (debug) Serial.write(c);
-        }
-        // Early exit if we see common terminators
-        if (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1) {
-            break; 
-        }
-        delay(1); // Feed the watchdog
-    }
-    if (debug) Serial.println();
-}
-
-String GSM::sendCommandWithResponse(const String& command, int timeout, boolean debug) {
-    while(SerialG.available()) {
-        char c = SerialG.read();
-        countReceived(String(c));
-    }
-    SerialG.println(command);
-    countSent(command + "\r\n");
-
-    String resp = "";
-    unsigned long start = millis();
-    while (millis() - start < (unsigned long)timeout) {
-        while (SerialG.available()) {
-            char c = SerialG.read();
-            resp += c;
-            countReceived(String(c));
-            if (debug) Serial.write(c);
-        }
-        if (resp.indexOf("OK") != -1 || resp.indexOf("ERROR") != -1) {
-            break; 
-        }
-        delay(1);
-    }
-    if (debug) Serial.println();
-    return resp;
-}
-
 String GSM::queryUSSD(const String& ussdCode, int timeoutMs) {
-    // 1. Clear any serial garbage
-    while(SerialG.available()) {
+    while (SerialG.available()) {
         SerialG.read();
     }
     
-    // Ensure USSD presentation is enabled (GSM/7-bit format)
     sendCommand("AT+CUSD=1", 1000, false);
     
-    // Send the query command
     String cmd = "AT+CUSD=1,\"" + ussdCode + "\"";
     SerialG.println(cmd);
     countSent(cmd + "\r\n");
@@ -305,14 +390,13 @@ String GSM::queryUSSD(const String& ussdCode, int timeoutMs) {
             char c = SerialG.read();
             response += c;
             countReceived(String(c));
-            Serial.write(c); // Print to debug console
+            Serial.write(c);
         }
         
         if (response.indexOf("+CUSD:") != -1) {
             seenCUSD = true;
         }
         
-        // Wait for the full USSD output line (usually ends with a newline after the DCS field)
         if (seenCUSD && (response.endsWith("\n") || response.endsWith("\r"))) {
             delay(100);
             while (SerialG.available()) {
@@ -322,10 +406,8 @@ String GSM::queryUSSD(const String& ussdCode, int timeoutMs) {
             }
             break;
         }
-        
-        delay(1); // Feed ESP32 watchdog
+        delay(1);
     }
-    
     return response;
 }
 
@@ -341,8 +423,6 @@ String GSM::extractUSSDMessage(const String& cusdResponse) {
     
     String rawMsg = cusdResponse.substring(firstQuote + 1, secondQuote);
     
-    // Check if it's hex-encoded (UCS2)
-    // UCS2 hex string length must be a multiple of 4, and only contain hex chars
     bool isHex = (rawMsg.length() > 0) && (rawMsg.length() % 4 == 0);
     if (isHex) {
         for (unsigned int i = 0; i < rawMsg.length(); i++) {
@@ -357,18 +437,15 @@ String GSM::extractUSSDMessage(const String& cusdResponse) {
     if (isHex) {
         return decodeUCS2(rawMsg);
     }
-    
     return rawMsg;
 }
 
 String GSM::decodeUCS2(const String& hexStr) {
     String decoded = "";
     for (unsigned int i = 0; i + 3 < hexStr.length(); i += 4) {
-        // Convert 4 hex chars to uint16_t code point
         String chunk = hexStr.substring(i, i + 4);
         uint32_t val = strtoul(chunk.c_str(), NULL, 16);
         
-        // Convert code point to UTF-8
         if (val <= 0x7F) {
             decoded += (char)val;
         } else if (val <= 0x7FF) {
@@ -384,13 +461,11 @@ String GSM::decodeUCS2(const String& hexStr) {
 }
 
 float GSM::parseBalanceFromUSSD(const String& msg) {
-    // Convert to lowercase for case-insensitive matching
     String lower = msg;
     lower.toLowerCase();
     
-    // Find unit indicators
     int unitIdx = -1;
-    float multiplier = 1.0f; // Default unit: MB
+    float multiplier = 1.0f;
     
     if ((unitIdx = lower.indexOf("gb")) != -1) {
         multiplier = 1024.0f;
@@ -401,29 +476,24 @@ float GSM::parseBalanceFromUSSD(const String& msg) {
     } else if ((unitIdx = lower.indexOf("bytes")) != -1) {
         multiplier = 1.0f / (1024.0f * 1024.0f);
     } else {
-        // No recognizable data units, return -1.0 to indicate parsing failure
         return -1.0f;
     }
     
-    // Walk backward from the unit index to find the start of the number
     int startIdx = unitIdx - 1;
-    // Skip spaces
     while (startIdx >= 0 && (lower[startIdx] == ' ' || lower[startIdx] == '\t' || lower[startIdx] == '\r' || lower[startIdx] == '\n')) {
         startIdx--;
     }
     
-    // Now extract digits, decimal points, and commas
     int numEndIdx = startIdx;
     while (startIdx >= 0 && ((lower[startIdx] >= '0' && lower[startIdx] <= '9') || lower[startIdx] == '.' || lower[startIdx] == ',')) {
         startIdx--;
     }
-    // startIdx is now one character before the number starts
-    startIdx++; 
+    startIdx++;
     
-    if (startIdx > numEndIdx) return -1.0f; // No number found
+    if (startIdx > numEndIdx) return -1.0f;
     
     String numStr = lower.substring(startIdx, numEndIdx + 1);
-    numStr.replace(",", ""); // Remove commas if any
+    numStr.replace(",", "");
     
     float val = numStr.toFloat();
     return val * multiplier;
@@ -432,12 +502,10 @@ float GSM::parseBalanceFromUSSD(const String& msg) {
 void GSM::postToDjango(String jsonPayload) {
     Serial.println("[GSM] Posting to Django...");
 
-    // ── Check bearer is alive before attempting POST ──
     String bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
     if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
         Serial.println("[GSM] Bearer down. Reconnecting...");
-        connectGPRS();  // attempt reconnect
-        // Re-check after reconnect
+        connectGPRS();
         bearerCheck = sendCommandWithResponse("AT+SAPBR=2,1", 3000, true);
         if (bearerCheck.indexOf("0.0.0.0") != -1 || bearerCheck.indexOf("ERROR") != -1) {
             Serial.println("[GSM] Bearer still down. Aborting POST.");
@@ -445,15 +513,12 @@ void GSM::postToDjango(String jsonPayload) {
         }
     }
 
-    // ── Full session teardown and reinit ─────────────────
     sendCommand("AT+HTTPTERM", 1000, false);
     sendCommand("AT+HTTPINIT", 500, false);
     
-    // Set URL
     String urlCmd = "AT+HTTPPARA=\"URL\",\"" + DJANGO_URL + "\"";
     sendCommand(urlCmd, 2000, false);
 
-    // SSL setup: Enable SSL (1) for HTTPS, otherwise disable (0)
     if (DJANGO_URL.startsWith("https://")) {
         sendCommand("AT+HTTPSSL=1", 1000, false);
     } else {
@@ -465,7 +530,6 @@ void GSM::postToDjango(String jsonPayload) {
     int payloadLen = jsonPayload.length();
     String dataCmd = "AT+HTTPDATA=" + String(payloadLen) + ",10000";
 
-    // ── Wait for "DOWNLOAD" prompt before sending payload ──
     SerialG.println(dataCmd);
     countSent(dataCmd + "\r\n");
     unsigned long start = millis();
@@ -491,11 +555,9 @@ void GSM::postToDjango(String jsonPayload) {
         return;
     }
 
-    // Send payload
     SerialG.print(jsonPayload);
     countSent(jsonPayload);
     
-    // Wait for "OK" response after payload input
     String okResp = "";
     start = millis();
     bool payloadOk = false;
@@ -518,7 +580,6 @@ void GSM::postToDjango(String jsonPayload) {
         return;
     }
 
-    // Execute POST request and read response
     sendCommand("AT+HTTPACTION=1", 15000, true);
     sendCommand("AT+HTTPREAD", 3000, true);
     sendCommand("AT+HTTPTERM", 1000, false);
