@@ -1,4 +1,6 @@
 #include "DataLogger.h"
+#include <WiFi.h>
+#include <HTTPClient.h>
 
 // USE IP INSTEAD OF DOMAIN TO FIX ERROR 601
 String THINGSPEAK_IP = "http://184.106.153.149"; 
@@ -126,6 +128,103 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
             break; // Stop trying if GSM is failing
         }
     }
+}
+
+bool DataLogger::uploadPendingDataWiFi(unsigned long startTimeMs, unsigned long tonLimitMs) {
+    if (!SD.exists(_queueFileName)) {
+        Serial.println("[Queue WiFi] No pending data.");
+        return true;
+    }
+
+    HTTPClient http;
+    bool anyFailure = false;
+
+    while (true) {
+        // Check if we still have time in the TON window (leave 45s margin for a full 3-channel upload)
+        if (millis() - startTimeMs > (tonLimitMs - 45000)) {
+            Serial.println("[Queue WiFi] TON limit approaching. Saving remaining for next cycle.");
+            break;
+        }
+
+        if (!SD.exists(_queueFileName)) {
+            Serial.println("[Queue WiFi] No pending data.");
+            break;
+        }
+
+        File queueFile = SD.open(_queueFileName, FILE_READ);
+        if (!queueFile || queueFile.size() == 0) {
+            if (queueFile) queueFile.close();
+            SD.remove(_queueFileName);
+            break;
+        }
+
+        // Read the first line (oldest)
+        String line = queueFile.readStringUntil('\n');
+        line.trim();
+        queueFile.close();
+
+        if (line == "") {
+            popQueue(); // Remove empty lines
+            continue;
+        }
+
+        Serial.println("[Queue WiFi] Attempting upload of oldest record...");
+        
+        // CHANNEL 1
+        String url1 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_1;
+        url1 += "&field1=" + getValueFromLog(line, "Temp");
+        url1 += "&field2=" + getValueFromLog(line, "Hum");
+        url1 += "&field3=" + getValueFromLog(line, "Press");
+        url1 += "&field4=" + getValueFromLog(line, "Rain");
+        url1 += "&field5=" + getValueFromLog(line, "WSpd");
+        url1 += "&field6=" + getValueFromLog(line, "WDir");
+        url1 += "&field7=" + getValueFromLog(line, "Light");
+        url1 += "&field8=" + getValueFromLog(line, "SoilM");
+
+        Serial.println("[Queue WiFi] Uploading Channel 1: " + url1);
+        http.begin(url1);
+        int httpCode = http.GET();
+        bool success = (httpCode == 200 || httpCode == 302);
+        http.end();
+
+        if (success) {
+            delay(16000); // Rate limit
+            
+            // CHANNEL 2
+            String url2 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_2;
+            url2 += "&field1=" + getValueFromLog(line, "V33");
+            url2 += "&field2=" + getValueFromLog(line, "V5");
+            url2 += "&field3=" + getValueFromLog(line, "VBatt");
+            url2 += "&field4=" + getValueFromLog(line, "VSol");
+            url2 += "&field5=" + getValueFromLog(line, "VDC");
+            
+            Serial.println("[Queue WiFi] Uploading Channel 2: " + url2);
+            http.begin(url2);
+            http.GET();
+            http.end();
+            
+            delay(16000); // Rate limit
+
+            // CHANNEL 3
+            String url3 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_3;
+            url3 += "&field1=" + getValueFromLog(line, "CBatt");
+            url3 += "&field2=" + getValueFromLog(line, "CSol");
+            
+            Serial.println("[Queue WiFi] Uploading Channel 3: " + url3);
+            http.begin(url3);
+            http.GET();
+            http.end();
+
+            Serial.println("[Queue WiFi] Upload successful. Popping from queue.");
+            popQueue();
+        } else {
+            Serial.printf("[Queue WiFi] Upload failed, HTTP code: %d. Stopping WiFi upload.\n", httpCode);
+            anyFailure = true;
+            break; // Stop trying if WiFi is failing
+        }
+    }
+
+    return !anyFailure;
 }
 
 void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles) {

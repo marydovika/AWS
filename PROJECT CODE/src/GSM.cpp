@@ -1,10 +1,11 @@
 #include "GSM.h"
 #include <SD.h>
+#include <Preferences.h>
 
-// Persistent counters across deep sleep
-RTC_DATA_ATTR uint32_t gsmBytesSent = 0;
-RTC_DATA_ATTR uint32_t gsmBytesReceived = 0;
-RTC_DATA_ATTR uint32_t gsmCycles = 0;
+// Persistent counters across power cuts
+uint32_t gsmBytesSent = 0;
+uint32_t gsmBytesReceived = 0;
+uint32_t gsmCycles = 0;
 
 // ESP32 WROVER: Use 26/27 or 4/13. DO NOT use 16/17 if using PSRAM.
 #define RX_GSM 16
@@ -28,7 +29,18 @@ void GSM::countReceived(const String& s) {
 uint32_t GSM::getTotalBytesSent() { return gsmBytesSent; }
 uint32_t GSM::getTotalBytesReceived() { return gsmBytesReceived; }
 uint32_t GSM::getCycleCount() { return gsmCycles; }
-void GSM::resetByteCounters() { gsmBytesSent = 0; gsmBytesReceived = 0; gsmCycles = 0; }
+void GSM::resetByteCounters() {
+    gsmBytesSent = 0;
+    gsmBytesReceived = 0;
+    gsmCycles = 0;
+    
+    Preferences prefs;
+    prefs.begin("gsm_stats", false);
+    prefs.putUInt("sent", 0);
+    prefs.putUInt("received", 0);
+    prefs.putUInt("cycles", 0);
+    prefs.end();
+}
 
 void GSM::initSerial() {
     SerialG.begin(GSM_BAUD, SERIAL_8N1, RX_GSM, TX_GSM);
@@ -36,7 +48,16 @@ void GSM::initSerial() {
 }
 
 void GSM::setupGSM() {
+    Preferences prefs;
+    prefs.begin("gsm_stats", false);
+    gsmBytesSent = prefs.getUInt("sent", 0);
+    gsmBytesReceived = prefs.getUInt("received", 0);
+    gsmCycles = prefs.getUInt("cycles", 0);
+    
     gsmCycles++;
+    prefs.putUInt("cycles", gsmCycles);
+    prefs.end();
+
     SerialG.begin(GSM_BAUD, SERIAL_8N1, RX_GSM, TX_GSM);
 
     Serial.println("Waiting for SIM800C/SIM800X hardware auto-boot...");
@@ -150,6 +171,13 @@ void GSM::disconnectGPRS() {
     Serial.println("[GSM] Disconnecting GPRS and terminating HTTP before sleep...");
     sendCommand("AT+HTTPTERM", 1500, true); 
     sendCommand("AT+SAPBR=0,1", 5000, true); 
+
+    Preferences prefs;
+    prefs.begin("gsm_stats", false);
+    prefs.putUInt("sent", gsmBytesSent);
+    prefs.putUInt("received", gsmBytesReceived);
+    prefs.end();
+    Serial.println("[GSM] Stats saved to preferences.");
 }
 
 bool GSM::sendThingSpeakRequest(String url) {

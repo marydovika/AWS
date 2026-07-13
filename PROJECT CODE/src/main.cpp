@@ -19,8 +19,12 @@
 #include "LORA.h"
 
 
-RTC_DATA_ATTR uint32_t updateIntervalMinutes = 10;
-RTC_DATA_ATTR uint32_t cyclesSinceLastUSSD = 9999; // Initialize to high to force first-time check
+uint32_t updateIntervalMinutes = 10;
+uint32_t cyclesSinceLastUSSD = 9999; // Initialize to high to force first-time check
+
+// Hardcoded WiFi credentials for testing
+static const char* WIFI_SSID = "AWS_MIFI";
+static const char* WIFI_PASSWORD = "A2208554";
 
 // Data Bundle Config (Estimated vs Carrier USSD)
 static const uint32_t TOTAL_BUNDLE_BYTES = 100UL * 1024UL * 1024UL; // 100MB Monthly Bundle (Airtel Uganda)
@@ -35,6 +39,8 @@ static const uint64_t TON_MS  = 4ULL * 60ULL * 1000ULL; // max active window
 
 #define GSM_POWER_PIN  32
 static const uint32_t GSM_WARMUP_MS = 3000;
+
+#define POWER_BOARD_SYNC_PIN 13 // Sync GPIO pin connected to STM32
 
 extern HardwareSerial SerialL;
 
@@ -105,8 +111,46 @@ void enterDeepSleep(unsigned long tonStart) {
     uint64_t activeUs = (uint64_t)(millis() - tonStart) * 1000ULL;
     uint64_t sleepUs = (totalCycleUs > activeUs) ? (totalCycleUs - activeUs) : (10ULL * 1000000ULL);
 
+    // Convert to milliseconds for STM32
+    uint32_t sleepMs = (uint32_t)(sleepUs / 1000ULL);
+
     Serial.printf("[DC] Total Active Time: %lu ms\n", (unsigned long)(activeUs / 1000ULL));
-    Serial.printf("[DC] Deep Sleep Duration: %lu ms\n", (unsigned long)(sleepUs / 1000ULL));
+    Serial.printf("[DC] Calculated Sleep Duration: %u ms\n", sleepMs);
+
+    // Re-initialize I2C bus cleanly before sending sleep duration
+    Serial.println("[DC] Re-initializing I2C bus before transmission...");
+    Wire.end();
+    delay(50);
+    Wire.begin(21, 22);
+    Wire.setClock(100000); // 100kHz — more reliable than 400kHz for long wires
+    Wire.setTimeOut(200);
+    delay(100);
+
+    // Send sleep duration to STM32 (address 0x08) via I2C, up to 3 attempts
+    Serial.println("[DC] Sending sleep duration to STM32 via I2C...");
+    byte err = 255;
+    for (int attempt = 0; attempt < 3; attempt++) {
+        Wire.beginTransmission(0x08);
+        Wire.write((uint8_t*)&sleepMs, sizeof(sleepMs));
+        err = Wire.endTransmission();
+        if (err == 0) {
+            Serial.println("[DC] Sleep duration sent successfully.");
+            break;
+        }
+        Serial.printf("[DC] I2C attempt %d failed, error: %d. Retrying...\n", attempt + 1, err);
+        delay(50);
+    }
+    if (err != 0) {
+        Serial.printf("[DC] Failed to send sleep duration after 3 attempts (error: %d). STM32 will use default.\n", err);
+    }
+    delay(50); // Let I2C transaction complete
+
+    // Put STM32 power board to sleep and lock pin state
+    pinMode(POWER_BOARD_SYNC_PIN, OUTPUT);
+    digitalWrite(POWER_BOARD_SYNC_PIN, LOW);
+    gpio_hold_en((gpio_num_t)POWER_BOARD_SYNC_PIN);
+    gpio_deep_sleep_hold_en();
+
     Serial.flush(); // Ensure serial output completes before sleep
 
     esp_sleep_enable_timer_wakeup(sleepUs);
@@ -175,85 +219,142 @@ void logToSD(SensorData &data) {
 
 void transmitData(SensorData &data, unsigned long tonStart) {
     Serial.println("[DC] === TX Phase ===");
+    
+    // LoRa Transmission
     loraWake();
     String payload = "T:" + String(data.temperature, 1) + ",H:" + String(data.humidity, 1);
     String atCmd = "AT+DTRX=0,1," + String(payload.length()) + "," + payload;
     loramodule.sendData(atCmd, 3000);
     loraSleep();
 
-    gsmPowerOn();
+    bool wifiSuccess = false;
+    Serial.println("[WiFi] Setting up WiFi (AP_STA mode) for transmission...");
+    WiFi.mode(WIFI_AP_STA);
     
-    // SYNC EARLY: Get network time as soon as GPRS is connected
-    String networkTime = simmodule.getNetworkTime();
-    if (networkTime != "") {
-        rtc1.syncWithGSM(networkTime);
-    }
-
-    // Hybrid USSD Balance Check
-    uint32_t totalUsed = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
-    float pctRemaining = (1.0f - ((float)totalUsed / (float)TOTAL_BUNDLE_BYTES)) * 100.0f;
-    if (pctRemaining < 0.0f) pctRemaining = 0.0f;
-
-    Serial.printf("[GSM] Soft-tracked Data Usage: %lu bytes used of %lu (%.2f%% remaining)\n", 
-                  (unsigned long)totalUsed, (unsigned long)TOTAL_BUNDLE_BYTES, pctRemaining);
-
-    // Run USSD check only when remaining drops below threshold AND at most once per 24 hours
-    uint32_t cyclesInADay = (24 * 60) / updateIntervalMinutes;
-    if (cyclesInADay == 0) cyclesInADay = 1; // Prevent division by zero
-
-    if (pctRemaining <= USSD_THRESHOLD_PCT && cyclesSinceLastUSSD >= cyclesInADay) {
-        Serial.printf("[GSM] Data bundle estimate < %.1f%%. Triggering carrier USSD validation...\n", USSD_THRESHOLD_PCT);
-        String ussdResponse = simmodule.queryUSSD(USSD_CODE, 15000);
-        String cleanMsg = simmodule.extractUSSDMessage(ussdResponse);
-        
-        Serial.println("[GSM] Raw USSD Response: " + ussdResponse);
-        Serial.println("[GSM] Cleaned USSD Message: " + cleanMsg);
-        
-        // Log clean message to SD card
-        dataLogger.logUSSDMessage(rtc1.getDateTime().c_str(), cleanMsg);
-        
-        // Self-healing balance reset if recharged
-        float actualMB = simmodule.parseBalanceFromUSSD(cleanMsg);
-        if (actualMB >= 0.0f) {
-            float actualBytes = actualMB * 1024.0f * 1024.0f;
-            float actualPct = (actualBytes / (float)TOTAL_BUNDLE_BYTES) * 100.0f;
-            Serial.printf("[GSM] Carrier Balance: %.2f MB (%.2f%% remaining)\n", actualMB, actualPct);
-            
-            if (actualPct > USSD_THRESHOLD_PCT) {
-                Serial.println("[GSM] Carrier reports data has been replenished. Resetting local counters!");
-                simmodule.resetByteCounters();
-            }
-        }
-        cyclesSinceLastUSSD = 0;
+    // Start Config AP early so it runs concurrently
+    if (WiFi.softAP("ESP32_Weather_Config")) {
+        Serial.println("[WiFi AP] Config AP Started successfully!");
+        Serial.print("[WiFi AP] AP IP Address: ");
+        Serial.println(WiFi.softAPIP());
     } else {
-        cyclesSinceLastUSSD++;
-        Serial.printf("[GSM] Cycles since last USSD check: %lu (Next check in %lu cycles)\n", 
-                      (unsigned long)cyclesSinceLastUSSD, 
-                      (unsigned long)(cyclesSinceLastUSSD >= cyclesInADay ? 0 : cyclesInADay - cyclesSinceLastUSSD));
+        Serial.println("[WiFi AP] AP Failed to start.");
     }
 
-    dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
-
-    // Display Byte Usage
-    Serial.println("\n[GSM] === Data Usage Stats ===");
-    Serial.printf("[GSM] Total Sent: %u bytes\n", simmodule.getTotalBytesSent());
-    Serial.printf("[GSM] Total Received: %u bytes\n", simmodule.getTotalBytesReceived());
-    uint32_t total = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
-    Serial.printf("[GSM] Total Traffic: %u bytes (%.2f KB)\n", total, total / 1024.0);
-    Serial.printf("[GSM] Total Cycles: %u\n", simmodule.getCycleCount());
-    if (simmodule.getCycleCount() > 0) {
-        Serial.printf("[GSM] Avg per Cycle: %.2f KB\n", (total / 1024.0) / simmodule.getCycleCount());
+    // Try connecting to router
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    Serial.printf("[WiFi STA] Connecting to router SSID: %s ", WIFI_SSID);
+    
+    int elapsed = 0;
+    while (WiFi.status() != WL_CONNECTED && elapsed < 15) {
+        Serial.print(".");
+        delay(1000);
+        elapsed++;
     }
-    Serial.println("[GSM] ========================\n");
+    Serial.println();
 
-    // Log to SD
-    dataLogger.logGSMStats(rtc1.getDateTime().c_str(), 
-                           simmodule.getTotalBytesSent(), 
-                           simmodule.getTotalBytesReceived(), 
-                           simmodule.getCycleCount());
+    if (WiFi.status() == WL_CONNECTED) {
+        Serial.println("[WiFi STA] Connected successfully!");
+        Serial.print("[WiFi STA] IP Address: ");
+        Serial.println(WiFi.localIP());
 
-    simmodule.disconnectGPRS();
-    gsmPowerOff();
+        // Sync RTC using NTP
+        rtc1.syncWithNTP("pool.ntp.org", 3 * 3600, 0); // EAT (GMT+3)
+
+        // Upload queue data over WiFi
+        wifiSuccess = dataLogger.uploadPendingDataWiFi(tonStart, TON_MS);
+        if (wifiSuccess) {
+            Serial.println("[WiFi] Queue upload completed successfully over WiFi.");
+        } else {
+            Serial.println("[WiFi] Queue upload failed over WiFi.");
+        }
+    } else {
+        Serial.println("[WiFi STA] Failed to connect to router (timeout).");
+    }
+
+    // Fallback to GSM if WiFi failed
+    if (!wifiSuccess) {
+        Serial.println("[Fallback] WiFi failed. Powering on GSM...");
+        gsmPowerOn();
+        
+        // SYNC EARLY: Get network time as soon as GPRS is connected
+        String networkTime = simmodule.getNetworkTime();
+        if (networkTime != "") {
+            rtc1.syncWithGSM(networkTime);
+        }
+
+        // Hybrid USSD Balance Check
+        uint32_t totalUsed = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
+        float pctRemaining = (1.0f - ((float)totalUsed / (float)TOTAL_BUNDLE_BYTES)) * 100.0f;
+        if (pctRemaining < 0.0f) pctRemaining = 0.0f;
+
+        Serial.printf("[GSM] Soft-tracked Data Usage: %lu bytes used of %lu (%.2f%% remaining)\n", 
+                      (unsigned long)totalUsed, (unsigned long)TOTAL_BUNDLE_BYTES, pctRemaining);
+
+        // Run USSD check only when remaining drops below threshold AND at most once per 24 hours
+        uint32_t cyclesInADay = (24 * 60) / updateIntervalMinutes;
+        if (cyclesInADay == 0) cyclesInADay = 1; // Prevent division by zero
+
+        if (pctRemaining <= USSD_THRESHOLD_PCT && cyclesSinceLastUSSD >= cyclesInADay) {
+            Serial.printf("[GSM] Data bundle estimate < %.1f%%. Triggering carrier USSD validation...\n", USSD_THRESHOLD_PCT);
+            String ussdResponse = simmodule.queryUSSD(USSD_CODE, 15000);
+            String cleanMsg = simmodule.extractUSSDMessage(ussdResponse);
+            
+            Serial.println("[GSM] Raw USSD Response: " + ussdResponse);
+            Serial.println("[GSM] Cleaned USSD Message: " + cleanMsg);
+            
+            // Log clean message to SD card
+            dataLogger.logUSSDMessage(rtc1.getDateTime().c_str(), cleanMsg);
+            
+            // Self-healing balance reset if recharged
+            float actualMB = simmodule.parseBalanceFromUSSD(cleanMsg);
+            if (actualMB >= 0.0f) {
+                float actualBytes = actualMB * 1024.0f * 1024.0f;
+                float actualPct = (actualBytes / (float)TOTAL_BUNDLE_BYTES) * 100.0f;
+                Serial.printf("[GSM] Carrier Balance: %.2f MB (%.2f%% remaining)\n", actualMB, actualPct);
+                
+                if (actualPct > USSD_THRESHOLD_PCT) {
+                    Serial.println("[GSM] Carrier reports data has been replenished. Resetting local counters!");
+                    simmodule.resetByteCounters();
+                }
+            }
+            cyclesSinceLastUSSD = 0;
+        } else {
+            cyclesSinceLastUSSD++;
+            Serial.printf("[GSM] Cycles since last USSD check: %lu (Next check in %lu cycles)\n", 
+                          (unsigned long)cyclesSinceLastUSSD, 
+                          (unsigned long)(cyclesSinceLastUSSD >= cyclesInADay ? 0 : cyclesInADay - cyclesSinceLastUSSD));
+        }
+
+        // Save USSD cycles to preferences
+        Preferences preferences;
+        preferences.begin("weather_station", false);
+        preferences.putUInt("ussd_cycles", cyclesSinceLastUSSD);
+        preferences.end();
+
+        dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
+
+        // Display Byte Usage
+        Serial.println("\n[GSM] === Data Usage Stats ===");
+        Serial.printf("[GSM] Total Sent: %u bytes\n", simmodule.getTotalBytesSent());
+        Serial.printf("[GSM] Total Received: %u bytes\n", simmodule.getTotalBytesReceived());
+        uint32_t total = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
+        Serial.printf("[GSM] Total Traffic: %u bytes (%.2f KB)\n", total, total / 1024.0);
+        Serial.printf("[GSM] Total Cycles: %u\n", simmodule.getCycleCount());
+        if (simmodule.getCycleCount() > 0) {
+            Serial.printf("[GSM] Avg per Cycle: %.2f KB\n", (total / 1024.0) / simmodule.getCycleCount());
+        }
+        Serial.println("[GSM] ========================\n");
+
+        // Log to SD
+        dataLogger.logGSMStats(rtc1.getDateTime().c_str(), 
+                               simmodule.getTotalBytesSent(), 
+                               simmodule.getTotalBytesReceived(), 
+                               simmodule.getCycleCount());
+
+        simmodule.disconnectGPRS();
+        gsmPowerOff();
+    }
+
     Serial.println("[DC] TX Phase complete.");
 }
 
@@ -527,16 +628,23 @@ void handleSave() {
 }
 
 void runConfigPortal(unsigned long tonStart, bool isManualBoot) {
-    Serial.println("[WiFi AP] Initializing WiFi Access Point...");
-    WiFi.mode(WIFI_AP);
+    Serial.println("[WiFi AP] Reusing WiFi Access Point...");
     
-    if (WiFi.softAP("ESP32_Weather_Config")) {
-        Serial.println("[WiFi AP] AP Started successfully!");
-        Serial.print("[WiFi AP] IP Address: ");
-        Serial.println(WiFi.softAPIP());
-    } else {
-        Serial.println("[WiFi AP] AP Failed to start.");
-        return;
+    // Ensure we are in WIFI_AP_STA mode and AP is started
+    if (WiFi.getMode() != WIFI_AP_STA) {
+        WiFi.mode(WIFI_AP_STA);
+    }
+    
+    // If soft AP IP is zero, it means soft AP is not running, so start it
+    if (WiFi.softAPIP() == IPAddress(0, 0, 0, 0)) {
+        WiFi.softAP("ESP32_Weather_Config");
+    }
+    
+    Serial.print("[WiFi AP] AP IP Address: ");
+    Serial.println(WiFi.softAPIP());
+    if (WiFi.status() == WL_CONNECTED) {
+        Serial.print("[WiFi STA] Connected IP Address: ");
+        Serial.println(WiFi.localIP());
     }
 
     configServer.on("/", handleRoot);
@@ -579,10 +687,16 @@ void setup() {
     Serial.begin(115200);
     delay(200);
     
+    // Wake up the STM32 power board immediately
+    gpio_hold_dis((gpio_num_t)POWER_BOARD_SYNC_PIN);
+    pinMode(POWER_BOARD_SYNC_PIN, OUTPUT);
+    digitalWrite(POWER_BOARD_SYNC_PIN, HIGH);
+    
     // Load config from preferences
     Preferences preferences;
     preferences.begin("weather_station", true);
     updateIntervalMinutes = preferences.getUInt("interval", 10);
+    cyclesSinceLastUSSD = preferences.getUInt("ussd_cycles", 9999);
     preferences.end();
     
     Wire.setTimeOut(50); // Set global I2C timeout to prevent hangs

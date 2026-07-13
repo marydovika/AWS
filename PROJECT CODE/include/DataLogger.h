@@ -20,6 +20,9 @@ public:
   // Processes the queue, sending oldest data first
   void uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs);
 
+  // Processes the queue over WiFi, sending oldest data first. Returns true if successful or nothing to send.
+  bool uploadPendingDataWiFi(unsigned long startTimeMs, unsigned long tonLimitMs);
+
   // Save GSM usage statistics to SD
   void logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles);
 
