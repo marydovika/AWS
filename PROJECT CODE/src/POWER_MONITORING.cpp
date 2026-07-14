@@ -17,15 +17,11 @@ bool PowerMonitoring::readData() {
   uint8_t bytesReceived = Wire.requestFrom(_slaveAddress, _payloadSize);
 
   if (bytesReceived == _payloadSize) {
-    // Read directly into struct memory
     Wire.readBytes((uint8_t*)&_storedData, _payloadSize);
     return true;
-  } 
+  }
   else {
-    // Flush buffer on error
-    while (Wire.available()) {
-      Wire.read();
-    }
+    while (Wire.available()) Wire.read();
     return false;
   }
 }

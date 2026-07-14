@@ -111,41 +111,24 @@ void enterDeepSleep(unsigned long tonStart) {
     uint64_t activeUs = (uint64_t)(millis() - tonStart) * 1000ULL;
     uint64_t sleepUs = (totalCycleUs > activeUs) ? (totalCycleUs - activeUs) : (10ULL * 1000000ULL);
 
-    // Convert to milliseconds for STM32
     uint32_t sleepMs = (uint32_t)(sleepUs / 1000ULL);
-
     Serial.printf("[DC] Total Active Time: %lu ms\n", (unsigned long)(activeUs / 1000ULL));
     Serial.printf("[DC] Calculated Sleep Duration: %u ms\n", sleepMs);
 
-    // Re-initialize I2C bus cleanly before sending sleep duration
-    Serial.println("[DC] Re-initializing I2C bus before transmission...");
-    Wire.end();
-    delay(50);
-    Wire.begin(21, 22);
-    Wire.setClock(100000); // 100kHz — more reliable than 400kHz for long wires
-    Wire.setTimeOut(200);
-    delay(100);
+    // Send sleep duration to STM32 via UART (GPIO2 TX → STM32 PA10 RX)
+    // GSM is already off so UART2 hardware is free to repurpose
+    HardwareSerial SerialSTM32(2);
+    SerialSTM32.begin(115200, SERIAL_8N1, -1, 2); // RX=-1 unused, TX=GPIO2
+    delay(50); // Let UART hardware settle before transmitting
+    // Preamble 0xAB 0xCD allows STM32 to find this packet even if boot noise is in the buffer
+    uint8_t preamble[2] = {0xAB, 0xCD};
+    SerialSTM32.write(preamble, 2);
+    SerialSTM32.write((uint8_t*)&sleepMs, sizeof(sleepMs));
+    SerialSTM32.flush();
+    SerialSTM32.end();
+    Serial.println("[DC] Sleep duration sent to STM32 via UART.");
 
-    // Send sleep duration to STM32 (address 0x08) via I2C, up to 3 attempts
-    Serial.println("[DC] Sending sleep duration to STM32 via I2C...");
-    byte err = 255;
-    for (int attempt = 0; attempt < 3; attempt++) {
-        Wire.beginTransmission(0x08);
-        Wire.write((uint8_t*)&sleepMs, sizeof(sleepMs));
-        err = Wire.endTransmission();
-        if (err == 0) {
-            Serial.println("[DC] Sleep duration sent successfully.");
-            break;
-        }
-        Serial.printf("[DC] I2C attempt %d failed, error: %d. Retrying...\n", attempt + 1, err);
-        delay(50);
-    }
-    if (err != 0) {
-        Serial.printf("[DC] Failed to send sleep duration after 3 attempts (error: %d). STM32 will use default.\n", err);
-    }
-    delay(50); // Let I2C transaction complete
-
-    // Put STM32 power board to sleep and lock pin state
+    // Signal STM32 to cut power (sync pin LOW)
     pinMode(POWER_BOARD_SYNC_PIN, OUTPUT);
     digitalWrite(POWER_BOARD_SYNC_PIN, LOW);
     gpio_hold_en((gpio_num_t)POWER_BOARD_SYNC_PIN);
@@ -176,14 +159,23 @@ SensorData readAllSensors() {
     //Serial.println("[DC] readAllSensors: after airPressure.readHumidity");
 
     //Serial.println("[DC] readAllSensors: before powermonitoring.readData");
-    if (powermonitoring.readData()) {
+    bool pmOk = false;
+    for (int attempt = 0; attempt < 3; attempt++) {
+        if (powermonitoring.readData()) {
+            pmOk = true;
+            break;
+        }
+        Serial.printf("[DC] Power monitoring attempt %d failed. Retrying...\n", attempt + 1);
+        delay(100);
+    }
+    if (pmOk) {
         Serial.println("[DC] readAllSensors: power monitoring ok");
         VoltageData v = powermonitoring.getData();
         data.volt_3v3   = v.v1; data.volt_5v = v.v2; data.volt_batt = v.v3;
         data.volt_solar = v.v4; data.volt_dc = v.v5; data.curr_batt = v.v6;
         data.curr_solar = v.v7;
     } else {
-        Serial.println("[DC] readAllSensors: power monitoring failed");
+        Serial.println("[DC] readAllSensors: power monitoring failed after 3 attempts");
         data.volt_3v3 = data.volt_5v = data.volt_batt = 0.0f;
         data.volt_solar = data.volt_dc = data.curr_batt = data.curr_solar = 0.0f;
     }
@@ -736,7 +728,8 @@ void setup() {
     digitalWrite(GSM_POWER_PIN, LOW);
 
     powermonitoring.begin(21, 22);
-    delay(100);
+    Wire.setClock(100000);
+    delay(200);
 
     rtc1.setupRTC();
 
