@@ -20,8 +20,10 @@ public:
   // Processes the queue, sending oldest data first
   void uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs);
 
+  bool uploadPendingDataWiFi(unsigned long startTimeMs, unsigned long tonLimitMs);
   // Save GSM usage statistics to SD
   void logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles);
+  void logUSSDMessage(String timestamp, String message);
 
 private:
   int _csPin;
@@ -31,14 +33,16 @@ private:
 
   // Helper to extract value from "Label:Value" string
   String getValueFromLog(String logLine, String label);
+  String jsonField(String key, String value);
+  String getTimestampFromLog(String logLine);
 
   // New: Removes the first line from the queue file
   bool popQueue();
 
   // ThingSpeak Config
-  const String API_KEY_1 = "0UOU523VQPM2FZXJ";
-  const String API_KEY_2 = "5N37KH8M7FCF5PU2";
-  const String API_KEY_3 = "XH83XCG9LMURW45L";
+  // const String API_KEY_1 = "0UOU523VQPM2FZXJ";
+  // const String API_KEY_2 = "5N37KH8M7FCF5PU2";
+  // const String API_KEY_3 = "XH83XCG9LMURW45L";
 };
 
 #endif

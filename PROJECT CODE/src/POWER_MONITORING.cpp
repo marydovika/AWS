@@ -23,10 +23,9 @@ bool PowerMonitoring::readData() {
   } 
   else {
     // Flush buffer on error
-    while (Wire.available()) {
-      Wire.read();
-    }
+    while (Wire.available()) Wire.read();
     return false;
+    
   }
 }
 

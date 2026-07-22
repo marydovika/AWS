@@ -5,6 +5,13 @@
  *   UPDATE_INTERVAL_MINUTES = 10 minutes default (configurable via web portal)
  *   TON  = 2 minutes  (active window: sensors + log + transmit)
  *   TOFF = Dynamic (Total Cycle - Active Time)
+ *
+ * Transmission: WiFi (primary, via Cloudflare Tunnel to Django) with
+ * GSM (SIM800) fallback if WiFi fails to connect or upload.
+ *
+ * STM32 power-board handshake: UART packet (0xAB 0xCD + 4-byte sleep ms)
+ * sent on GPIO2 (TX) -> STM32 Serial1 RX, followed by sync pin LOW to
+ * signal the STM32 to cut relay power and enter its own low-power sleep.
  */
 
 #include <Arduino.h>
@@ -15,6 +22,8 @@
 #include <WiFi.h>
 #include <WebServer.h>
 #include <Preferences.h>
+#include <HTTPClient.h>
+#include <WiFiClientSecure.h>
 
 #include "DHT22.h"
 #include "AIR_PRESSURE.h"
@@ -29,6 +38,10 @@
 #include "DataLogger.h"
 #include "SensorData.h"
 #include "LORA.h"
+
+// ── WiFi credentials (primary transmission path) ──────────
+static const char* WIFI_SSID     = "AWS_MIFI";
+static const char* WIFI_PASSWORD = "A2208554";
 
 // ── Duty cycle config (defaults match original code) ─────
 static uint32_t UPDATE_INTERVAL_MINUTES = 10; // overwritten from flash if set
@@ -45,6 +58,9 @@ uint32_t savedInterval = 10; // loaded from flash
 // ── Hardware ──────────────────────────────────────────────
 #define GSM_POWER_PIN  32
 static const uint32_t GSM_WARMUP_MS = 3000;
+
+// ── STM32 power-board sync (confirmed wiring) ─────────────
+#define POWER_BOARD_SYNC_PIN 13   // ESP32 GPIO13 -> STM32 PB0
 
 extern HardwareSerial SerialL;
 
@@ -237,7 +253,7 @@ String buildPage(String message) {
     The station will sleep after this portal window closes.
   </div>
 
-  <p class="station-id">Station ID: AWS-UG-001 &nbsp;&middot;&nbsp; Firmware v1.1</p>
+  <p class="station-id">Station ID: AWS-UG-001 &nbsp;&middot;&nbsp; Firmware v1.2</p>
 </div>
 </body>
 </html>
@@ -314,6 +330,24 @@ void runPortalWindow() {
   WiFi.softAPdisconnect(true);
   WiFi.mode(WIFI_OFF);
   Serial.println("[Portal] Window closed, WiFi off.");
+
+  // ── I2C bus recovery — WiFi teardown can leave it wedged ──
+  Wire.end();
+  delay(30);
+  Wire.begin(21, 22);      // confirmed SDA/SCL pins
+  Wire.setClock(100000);
+  delay(50);
+
+  Serial.println("[I2C] Post-portal bus scan...");
+  bool found = false;
+  for (uint8_t addr = 1; addr < 127; addr++) {
+      Wire.beginTransmission(addr);
+      if (Wire.endTransmission() == 0) {
+          Serial.printf("[I2C] Device found at 0x%02X\n", addr);
+          found = true;
+      }
+  }
+  if (!found) Serial.println("[I2C] No devices found — bus may still be wedged!");
 }
 
 // ─────────────────────────────────────────────────────────
@@ -363,6 +397,9 @@ void sdCardRelease() {
     Serial.println("[DC] SD SPI bus released");
 }
 
+// ─────────────────────────────────────────────────────────
+// Deep sleep entry — includes STM32 UART handshake
+// ─────────────────────────────────────────────────────────
 void enterDeepSleep(unsigned long tonStart) {
     detachInterrupt(digitalPinToInterrupt(25));
     detachInterrupt(digitalPinToInterrupt(33));
@@ -376,9 +413,34 @@ void enterDeepSleep(unsigned long tonStart) {
                        ? (totalCycleUs - activeUs)
                        : (10ULL * 1000000ULL);
 
+    uint32_t sleepMs = (uint32_t)(sleepUs / 1000ULL);
+
     Serial.printf("[DC] Total Active Time : %lu ms\n", (unsigned long)(activeUs  / 1000ULL));
     Serial.printf("[DC] Deep Sleep Duration: %lu ms\n", (unsigned long)(sleepUs / 1000ULL));
-    Serial.flush();
+
+    // ── Send sleep duration to STM32 via UART (GPIO2 TX -> STM32 Serial1 RX) ──
+    // GSM (Serial2/SIM800) is already powered off by this point, so UART2
+    // hardware is free to repurpose for this one-shot handshake.
+    HardwareSerial SerialSTM32(2);
+    SerialSTM32.begin(115200, SERIAL_8N1, -1, 2); // RX unused, TX=GPIO2
+    delay(50); // let UART hardware settle before transmitting
+
+    uint8_t preamble[2] = {0xAB, 0xCD};
+    SerialSTM32.write(preamble, 2);
+    SerialSTM32.write((uint8_t*)&sleepMs, sizeof(sleepMs));
+    SerialSTM32.flush();
+    SerialSTM32.end();
+    Serial.println("[DC] Sleep duration sent to STM32 via UART.");
+
+    delay(50); // give the packet time to land before pulling sync low
+
+    // ── Signal STM32 to cut relay power (sync pin LOW) ──
+    pinMode(POWER_BOARD_SYNC_PIN, OUTPUT);
+    digitalWrite(POWER_BOARD_SYNC_PIN, LOW);
+    gpio_hold_en((gpio_num_t)POWER_BOARD_SYNC_PIN);
+    gpio_deep_sleep_hold_en();
+
+    Serial.flush(); // ensure serial output completes before sleep
 
     esp_sleep_enable_timer_wakeup(sleepUs);
     esp_deep_sleep_start();
@@ -391,12 +453,24 @@ SensorData readAllSensors() {
     data.temperature = airpressure.readTemperature();
     data.humidity    = airpressure.readHumidity();
 
-    if (powermonitoring.readData()) {
+    bool pmOk = false;
+    for (int attempt = 0; attempt < 8; attempt++) {
+        if (powermonitoring.readData()) {
+            pmOk = true;
+            break;
+        }
+        Serial.printf("[DC] Power monitoring attempt %d failed. Retrying...\n", attempt + 1);
+        delay(300);
+    }
+
+    if (pmOk) {
+        Serial.println("[DC] Power monitoring: read succeeded.");
         VoltageData v    = powermonitoring.getData();
         data.volt_3v3    = v.v1; data.volt_5v    = v.v2; data.volt_batt  = v.v3;
         data.volt_solar  = v.v4; data.volt_dc     = v.v5; data.curr_batt  = v.v6;
         data.curr_solar  = v.v7;
     } else {
+        Serial.println("[DC] Power monitoring: failed after 8 attempts.");
         data.volt_3v3 = data.volt_5v   = data.volt_batt  = 0.0f;
         data.volt_solar = data.volt_dc = data.curr_batt  = data.curr_solar = 0.0f;
     }
@@ -416,6 +490,9 @@ void logToSD(SensorData &data) {
     dataLogger.logSensorData(timeStr, data);
 }
 
+// ─────────────────────────────────────────────────────────
+// Transmission — WiFi (primary) with GSM fallback
+// ─────────────────────────────────────────────────────────
 void transmitData(SensorData &data, unsigned long tonStart) {
     Serial.println("[DC] === TX Phase ===");
     loraWake();
@@ -424,24 +501,74 @@ void transmitData(SensorData &data, unsigned long tonStart) {
     loramodule.sendData(atCmd, 3000);
     loraSleep();
 
-    gsmPowerOn();
-    dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
+    // ── WiFi attempt (primary) ──
+    bool wifiSuccess = false;
+    Serial.println("[WiFi] Setting up WiFi for transmission...");
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+    Serial.printf("[WiFi STA] Connecting to router SSID: %s ", WIFI_SSID);
 
-    Serial.println("\n[GSM] === Data Usage Stats ===");
-    Serial.printf("[GSM] Total Sent    : %u bytes\n",  simmodule.getTotalBytesSent());
-    Serial.printf("[GSM] Total Received: %u bytes\n",  simmodule.getTotalBytesReceived());
-    uint32_t total = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
-    Serial.printf("[GSM] Total Traffic : %u bytes (%.2f KB)\n", total, total / 1024.0);
-    Serial.printf("[GSM] Total Cycles  : %u\n", simmodule.getCycleCount());
-    if (simmodule.getCycleCount() > 0)
-        Serial.printf("[GSM] Avg per Cycle : %.2f KB\n", (total / 1024.0) / simmodule.getCycleCount());
-    Serial.println("[GSM] ========================\n");
+    int elapsed = 0;
+    while (WiFi.status() != WL_CONNECTED && elapsed < 15) {
+        Serial.print(".");
+        delay(1000);
+        elapsed++;
+    }
+    Serial.println();
 
-    dataLogger.logGSMStats(rtc1.getDateTime().c_str(),
-                           simmodule.getTotalBytesSent(),
-                           simmodule.getTotalBytesReceived(),
-                           simmodule.getCycleCount());
-    gsmPowerOff();
+    if (WiFi.status() == WL_CONNECTED) {
+        Serial.println("[WiFi] Connected successfully!");
+        Serial.print("[WiFi] IP Address: ");
+        Serial.println(WiFi.localIP());
+
+        // Sync RTC using NTP
+        rtc1.syncWithNTP("pool.ntp.org", 3 * 3600, 0); // EAT (GMT+3)
+
+        // Upload queue data over WiFi
+        wifiSuccess = dataLogger.uploadPendingDataWiFi(tonStart, TON_MS);
+        if (wifiSuccess) {
+            Serial.println("[WiFi] Queue upload completed successfully over WiFi.");
+        } else {
+            Serial.println("[WiFi] Queue upload failed over WiFi.");
+        }
+
+        WiFi.disconnect(true);
+        WiFi.mode(WIFI_OFF);
+    } else {
+        Serial.println("[WiFi STA] Failed to connect to router (timeout).");
+        WiFi.mode(WIFI_OFF);
+    }
+
+    // ── Fallback to GSM if WiFi failed ──
+    if (!wifiSuccess) {
+        Serial.println("[Fallback] WiFi failed. Powering on GSM...");
+        gsmPowerOn();
+
+        // SYNC EARLY: Get network time as soon as GPRS is connected
+        String networkTime = simmodule.getNetworkTime();
+        if (networkTime != "") {
+            rtc1.syncWithGSM(networkTime);
+        }
+
+        dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
+
+        Serial.println("\n[GSM] === Data Usage Stats ===");
+        Serial.printf("[GSM] Total Sent    : %u bytes\n",  simmodule.getTotalBytesSent());
+        Serial.printf("[GSM] Total Received: %u bytes\n",  simmodule.getTotalBytesReceived());
+        uint32_t total = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
+        Serial.printf("[GSM] Total Traffic : %u bytes (%.2f KB)\n", total, total / 1024.0);
+        Serial.printf("[GSM] Total Cycles  : %u\n", simmodule.getCycleCount());
+        if (simmodule.getCycleCount() > 0)
+            Serial.printf("[GSM] Avg per Cycle : %.2f KB\n", (total / 1024.0) / simmodule.getCycleCount());
+        Serial.println("[GSM] ========================\n");
+
+        dataLogger.logGSMStats(rtc1.getDateTime().c_str(),
+                               simmodule.getTotalBytesSent(),
+                               simmodule.getTotalBytesReceived(),
+                               simmodule.getCycleCount());
+        gsmPowerOff();
+    }
+
     Serial.println("[DC] TX Phase complete.");
 }
 
@@ -449,8 +576,13 @@ void transmitData(SensorData &data, unsigned long tonStart) {
 // Setup — everything happens here, loop() is empty
 // ─────────────────────────────────────────────────────────
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(115200);
     delay(200);
+
+    // ── Wake up the STM32 power board immediately ─────────
+    gpio_hold_dis((gpio_num_t)POWER_BOARD_SYNC_PIN);
+    pinMode(POWER_BOARD_SYNC_PIN, OUTPUT);
+    digitalWrite(POWER_BOARD_SYNC_PIN, HIGH);
 
     Wire.setTimeOut(50);
 
@@ -523,7 +655,7 @@ void setup() {
     // ── TON start: mark active window after portal ────────
     unsigned long tonStart = millis();
 
-    // ── Sensor read, log, transmit (unchanged) ────────────
+    // ── Sensor read, log, transmit ─────────────────────────
     SensorData currentData = readAllSensors();
     logToSD(currentData);
     transmitData(currentData, tonStart);

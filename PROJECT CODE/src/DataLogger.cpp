@@ -1,7 +1,16 @@
 #include "DataLogger.h"
+#include <HTTPClient.h>
+#include <WiFi.h>
+#include <WiFiClientSecure.h>  
 
 // USE IP INSTEAD OF DOMAIN TO FIX ERROR 601
 String THINGSPEAK_IP = "http://184.106.153.149"; 
+// NOTE: ThingSpeak upload no longer used in uploadPendingData() below,
+// left here in case you want to re-enable dual-upload later.
+
+#ifndef STATION_CODE
+#define STATION_CODE "AWS-UG-001"  // TODO: confirm/replace with your actual station code
+#endif
 
 DataLogger::DataLogger(int csPin) {
     _csPin = csPin;
@@ -40,12 +49,8 @@ void DataLogger::logSensorData(String timestamp, SensorData data) {
 
     // 1. Write to Archive (Permanent)
     File archFile = SD.open(_fileName, FILE_APPEND);
-    if (archFile) {
-        archFile.println(dataStr);
-        archFile.close();
-    }
+    if (archFile) { archFile.println(dataStr); archFile.close(); }
 
-    // 2. Write to Queue (Buffer)
     File queueFile = SD.open(_queueFileName, FILE_APPEND);
     if (queueFile) {
         queueFile.println(dataStr);
@@ -54,6 +59,7 @@ void DataLogger::logSensorData(String timestamp, SensorData data) {
     }
 }
 
+// ── GSM (fallback) upload path ──
 void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs) {
     while (true) {
         // Check if we still have time in the TON window (leave 45s margin for a full 3-channel upload)
@@ -79,45 +85,54 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
         line.trim();
         queueFile.close();
 
-        if (line == "") {
-            popQueue(); // Remove empty lines
-            continue;
-        }
+        if (line == "") {  popQueue();   continue; }
 
         Serial.println("[Queue] Attempting upload of oldest record...");
-        
-        // CHANNEL 1
-        String url1 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_1;
-        url1 += "&field1=" + getValueFromLog(line, "Temp");
-        url1 += "&field2=" + getValueFromLog(line, "Hum");
-        url1 += "&field3=" + getValueFromLog(line, "Press");
-        url1 += "&field4=" + getValueFromLog(line, "Rain");
-        url1 += "&field5=" + getValueFromLog(line, "WSpd");
-        url1 += "&field6=" + getValueFromLog(line, "WDir");
-        url1 += "&field7=" + getValueFromLog(line, "Light");
-        url1 += "&field8=" + getValueFromLog(line, "SoilM");
 
-        bool success = gsmModule.sendThingSpeakRequest(url1);
-        
+        String isoTimestamp = getTimestampFromLog(line);
+
+        // CHANNEL 1 - Weather
+        String json1 = "{";
+        json1 += "\"station_id\":\"" + String(STATION_CODE) + "\",";
+        json1 += "\"timestamp\":\"" + isoTimestamp + "\",";
+        json1 += jsonField("pressure", getValueFromLog(line, "Press")) + ",";
+        json1 += jsonField("altitude", getValueFromLog(line, "Alt")) + ",";
+        json1 += jsonField("temperature", getValueFromLog(line, "Temp")) + ",";
+        json1 += jsonField("humidity", getValueFromLog(line, "Hum")) + ",";
+        json1 += "\"light\":" + getValueFromLog(line, "Light") + ",";
+        json1 += "\"soil_moisture\":" + getValueFromLog(line, "SoilM") + ",";
+        json1 += "\"rain\":" + getValueFromLog(line, "Rain") + ",";
+        json1 += "\"wind_speed\":" + getValueFromLog(line, "WSpd") + ",";
+        json1 += "\"wind_direction\":" + getValueFromLog(line, "WDir");
+        json1 += "}";
+
+        bool success = gsmModule.postToDjango(DJANGO_WEATHER_URL, json1);
+
         if (success) {
-            delay(16000); // Rate limit
-            
-            // CHANNEL 2
-            String url2 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_2;
-            url2 += "&field1=" + getValueFromLog(line, "V33");
-            url2 += "&field2=" + getValueFromLog(line, "V5");
-            url2 += "&field3=" + getValueFromLog(line, "VBatt");
-            url2 += "&field4=" + getValueFromLog(line, "VSol");
-            url2 += "&field5=" + getValueFromLog(line, "VDC");
-            gsmModule.sendThingSpeakRequest(url2);
-            
-            delay(16000); // Rate limit
+            delay(2000); // short pause for GSM stability — no per-channel rate limit like ThingSpeak had
 
-            // CHANNEL 3
-            String url3 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_3;
-            url3 += "&field1=" + getValueFromLog(line, "CBatt");
-            url3 += "&field2=" + getValueFromLog(line, "CSol");
-            gsmModule.sendThingSpeakRequest(url3);
+            // CHANNEL 2 - Voltage
+            String json2 = "{";
+            json2 += "\"station_id\":\"" + String(STATION_CODE) + "\",";
+            json2 += "\"timestamp\":\"" + isoTimestamp + "\",";
+            json2 += "\"volt_3v3\":" + getValueFromLog(line, "V33") + ",";
+            json2 += "\"volt_5v\":" + getValueFromLog(line, "V5") + ",";
+            json2 += "\"volt_batt\":" + getValueFromLog(line, "VBatt") + ",";
+            json2 += "\"volt_solar\":" + getValueFromLog(line, "VSol") + ",";
+            json2 += "\"volt_dc\":" + getValueFromLog(line, "VDC");
+            json2 += "}";
+            gsmModule.postToDjango(DJANGO_VOLTAGE_URL, json2);
+
+            delay(2000);
+
+            // CHANNEL 3 - Current
+            String json3 = "{";
+            json3 += "\"station_id\":\"" + String(STATION_CODE) + "\",";
+            json3 += "\"timestamp\":\"" + isoTimestamp + "\",";
+            json3 += "\"curr_batt\":" + getValueFromLog(line, "CBatt") + ",";
+            json3 += "\"curr_solar\":" + getValueFromLog(line, "CSol");
+            json3 += "}";
+            gsmModule.postToDjango(DJANGO_CURRENT_URL, json3);
 
             Serial.println("[Queue] Upload successful. Popping from queue.");
             popQueue();
@@ -126,6 +141,107 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
             break; // Stop trying if GSM is failing
         }
     }
+}
+
+// ── WiFi (primary) upload path ──
+bool DataLogger::uploadPendingDataWiFi(unsigned long startTimeMs, unsigned long tonLimitMs) {
+    if (!SD.exists(_queueFileName)) {
+        Serial.println("[Queue WiFi] No pending data.");
+        return true;
+    }
+
+    HTTPClient httpClient;
+    WiFiClientSecure secureClient;      // add this
+    secureClient.setInsecure();
+    bool anyFailure = false;
+
+    while (true) {
+        if (millis() - startTimeMs > (tonLimitMs - 45000)) {
+            Serial.println("[Queue WiFi] TON limit approaching. Saving remaining for next cycle.");
+            break;
+        }
+        if (!SD.exists(_queueFileName)) {
+            Serial.println("[Queue WiFi] No pending data.");
+            break;
+        }
+        File queueFile = SD.open(_queueFileName, FILE_READ);
+        if (!queueFile || queueFile.size() == 0) {
+            if (queueFile) queueFile.close();
+            SD.remove(_queueFileName);
+            break;
+        }
+        String line = queueFile.readStringUntil('\n');
+        line.trim();
+        queueFile.close();
+
+        if (line == "") { popQueue(); continue; }
+
+        Serial.println("[Queue WiFi] Attempting upload of oldest record...");
+        String isoTimestamp = getTimestampFromLog(line);
+
+        // CHANNEL 1 - Weather
+        String json1 = "{";
+        json1 += "\"station_id\":\"" + String(STATION_CODE) + "\",";
+        json1 += "\"timestamp\":\"" + isoTimestamp + "\",";
+        json1 += jsonField("pressure", getValueFromLog(line, "Press")) + ",";
+        json1 += jsonField("altitude", getValueFromLog(line, "Alt")) + ",";
+        json1 += jsonField("temperature", getValueFromLog(line, "Temp")) + ",";
+        json1 += jsonField("humidity", getValueFromLog(line, "Hum")) + ",";
+        json1 += "\"light\":" + getValueFromLog(line, "Light") + ",";
+        json1 += "\"soil_moisture\":" + getValueFromLog(line, "SoilM") + ",";
+        json1 += "\"rain\":" + getValueFromLog(line, "Rain") + ",";
+        json1 += "\"wind_speed\":" + getValueFromLog(line, "WSpd") + ",";
+        json1 += "\"wind_direction\":" + getValueFromLog(line, "WDir");
+        json1 += "}";
+
+        httpClient.begin(secureClient, DJANGO_WEATHER_URL);
+        httpClient.addHeader("Content-Type", "application/json");
+        int code1 = httpClient.POST(json1);
+        httpClient.end();
+        Serial.printf("[Queue WiFi] Weather POST code: %d\n", code1);
+        bool success = (code1 == 200 || code1 == 201);
+
+        if (success) {
+            // CHANNEL 2 - Voltage
+            String json2 = "{";
+            json2 += "\"station_id\":\"" + String(STATION_CODE) + "\",";
+            json2 += "\"timestamp\":\"" + isoTimestamp + "\",";
+            json2 += "\"volt_3v3\":" + getValueFromLog(line, "V33") + ",";
+            json2 += "\"volt_5v\":" + getValueFromLog(line, "V5") + ",";
+            json2 += "\"volt_batt\":" + getValueFromLog(line, "VBatt") + ",";
+            json2 += "\"volt_solar\":" + getValueFromLog(line, "VSol") + ",";
+            json2 += "\"volt_dc\":" + getValueFromLog(line, "VDC");
+            json2 += "}";
+
+            httpClient.begin(secureClient, DJANGO_VOLTAGE_URL);
+            httpClient.addHeader("Content-Type", "application/json");
+            int code2 = httpClient.POST(json2);
+            httpClient.end();
+            Serial.printf("[Queue WiFi] Voltage POST code: %d\n", code2);
+
+            // CHANNEL 3 - Current
+            String json3 = "{";
+            json3 += "\"station_id\":\"" + String(STATION_CODE) + "\",";
+            json3 += "\"timestamp\":\"" + isoTimestamp + "\",";
+            json3 += "\"curr_batt\":" + getValueFromLog(line, "CBatt") + ",";
+            json3 += "\"curr_solar\":" + getValueFromLog(line, "CSol");
+            json3 += "}";
+
+            httpClient.begin(secureClient, DJANGO_CURRENT_URL);
+            httpClient.addHeader("Content-Type", "application/json");
+            int code3 = httpClient.POST(json3);
+            httpClient.end();
+            Serial.printf("[Queue WiFi] Current POST code: %d\n", code3);
+
+            Serial.println("[Queue WiFi] Upload successful. Popping from queue.");
+            popQueue();
+        } else {
+            Serial.printf("[Queue WiFi] Weather upload failed (code %d). Stopping WiFi upload.\n", code1);
+            anyFailure = true;
+            break;
+        }
+    }
+    return !anyFailure;
 }
 
 void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles) {
@@ -161,33 +277,22 @@ void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received,
 
 bool DataLogger::popQueue() {
     if (!SD.exists(_queueFileName)) return false;
-
     File queueFile = SD.open(_queueFileName, FILE_READ);
     if (!queueFile) return false;
-
     File tempFile = SD.open("/temp_q.txt", FILE_WRITE);
-    if (!tempFile) {
-        queueFile.close();
-        return false;
-    }
-
-    // Skip the first line
+    if (!tempFile) { queueFile.close(); return false; }
     bool skipped = false;
     while (queueFile.available()) {
         String line = queueFile.readStringUntil('\n');
-        if (!skipped) {
-            skipped = true;
-            continue;
-        }
+        if (!skipped) { skipped = true; continue; }
         tempFile.println(line);
     }
-
     queueFile.close();
     tempFile.close();
-
     SD.remove(_queueFileName);
     SD.rename("/temp_q.txt", _queueFileName);
     return true;
+    
 }
 
 String DataLogger::getValueFromLog(String logLine, String label) {
@@ -200,4 +305,32 @@ String DataLogger::getValueFromLog(String logLine, String label) {
     if (endIndex == -1) endIndex = logLine.length(); 
     
     return logLine.substring(startIndex, endIndex);
+}
+
+String DataLogger::getTimestampFromLog(String logLine) {
+    int startIndex = logLine.indexOf("Time:");
+    if (startIndex == -1) return "";
+    startIndex += 5; // length of "Time:"
+
+    // Timestamp format: "Wednesday, 2026-07-02 14:11:12" - skip past the day name and its comma
+    int firstComma = logLine.indexOf(",", startIndex);
+    int secondComma = logLine.indexOf(",", firstComma + 1);
+    if (firstComma == -1 || secondComma == -1) return "";
+
+    String ts = logLine.substring(firstComma + 1, secondComma);
+    ts.trim(); // "2026-07-02 14:11:12"
+
+    // Convert to ISO 8601 so Django's parse_datetime() accepts it: "2026-07-02T14:11:12"
+    ts.replace(" ", "T");
+    return ts;
+}
+
+String DataLogger::jsonField(String key, String value) {
+    // Sensors not yet wired (e.g. BME280) report "nan" — wrap it in quotes
+    // so it's valid JSON. Django's safe_float() already treats the string
+    // "nan" as null, so no backend changes needed.
+    if (value == "nan") {
+        return "\"" + key + "\":\"nan\"";
+    }
+    return "\"" + key + "\":" + value;
 }
