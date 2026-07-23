@@ -7,7 +7,6 @@
 Soilmoisture::Soilmoisture() : _pin(ANALOG_PIN) {}
 
 float Soilmoisture::readSoilMoisture() {
-    Serial.begin(115200);
     int adc = analogRead(_pin);
     moisture_voltage_ = 3.3 - ((adc/4095.0) * 3.25); // Convert ADC value to voltage
     delay(100); // brief delay to ensure sensor stability

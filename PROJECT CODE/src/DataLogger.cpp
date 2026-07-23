@@ -1,7 +1,7 @@
 #include "DataLogger.h"
-#include <HTTPClient.h>
 #include <WiFi.h>
-#include <WiFiClientSecure.h>  
+#include <HTTPClient.h>
+#include <WiFiClientSecure.h>
 
 // USE IP INSTEAD OF DOMAIN TO FIX ERROR 601
 String THINGSPEAK_IP = "http://184.106.153.149"; 
@@ -9,7 +9,7 @@ String THINGSPEAK_IP = "http://184.106.153.149";
 // left here in case you want to re-enable dual-upload later.
 
 #ifndef STATION_CODE
-#define STATION_CODE "AWS-UG-001"  // TODO: confirm/replace with your actual station code
+#define STATION_CODE "AWS-UG-001"  // confirm/replace with your actual station code
 #endif
 
 DataLogger::DataLogger(int csPin) {
@@ -85,7 +85,7 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
         line.trim();
         queueFile.close();
 
-        if (line == "") {  popQueue();   continue; }
+        if (line == "") { popQueue(); continue; }
 
         Serial.println("[Queue] Attempting upload of oldest record...");
 
@@ -109,7 +109,7 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
         bool success = gsmModule.postToDjango(DJANGO_WEATHER_URL, json1);
 
         if (success) {
-            delay(2000); // short pause for GSM stability — no per-channel rate limit like ThingSpeak had
+            delay(2000); // short pause for GSM stability
 
             // CHANNEL 2 - Voltage
             String json2 = "{";
@@ -151,25 +151,30 @@ bool DataLogger::uploadPendingDataWiFi(unsigned long startTimeMs, unsigned long 
     }
 
     HTTPClient httpClient;
-    WiFiClientSecure secureClient;      // add this
+    WiFiClientSecure secureClient;
     secureClient.setInsecure();
     bool anyFailure = false;
 
     while (true) {
+        // Check if we still have time in the TON window (leave 45s margin for a full 3-channel upload)
         if (millis() - startTimeMs > (tonLimitMs - 45000)) {
             Serial.println("[Queue WiFi] TON limit approaching. Saving remaining for next cycle.");
             break;
         }
+
         if (!SD.exists(_queueFileName)) {
             Serial.println("[Queue WiFi] No pending data.");
             break;
         }
+
         File queueFile = SD.open(_queueFileName, FILE_READ);
         if (!queueFile || queueFile.size() == 0) {
             if (queueFile) queueFile.close();
             SD.remove(_queueFileName);
             break;
         }
+
+        // Read the first line (oldest)
         String line = queueFile.readStringUntil('\n');
         line.trim();
         queueFile.close();
@@ -247,7 +252,6 @@ bool DataLogger::uploadPendingDataWiFi(unsigned long startTimeMs, unsigned long 
 void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles) {
     File statsFile = SD.open("/gsm_usage.csv", FILE_APPEND);
     if (statsFile) {
-        // Create header if file is new
         if (statsFile.size() == 0) {
             statsFile.println("Timestamp,BytesSent,BytesReceived,TotalCycles,AvgKBPerCycle");
         }
@@ -275,6 +279,17 @@ void DataLogger::logGSMStats(String timestamp, uint32_t sent, uint32_t received,
     }
 }
 
+void DataLogger::logUSSDMessage(String timestamp, String message) {
+    File f = SD.open("/ussd_log.txt", FILE_APPEND);
+    if (f) {
+        f.println(timestamp + "," + message);
+        f.close();
+        Serial.println("[SD] USSD message logged to /ussd_log.txt");
+    } else {
+        Serial.println("[SD] Failed to open /ussd_log.txt for writing");
+    }
+}
+
 bool DataLogger::popQueue() {
     if (!SD.exists(_queueFileName)) return false;
     File queueFile = SD.open(_queueFileName, FILE_READ);
@@ -292,7 +307,6 @@ bool DataLogger::popQueue() {
     SD.remove(_queueFileName);
     SD.rename("/temp_q.txt", _queueFileName);
     return true;
-    
 }
 
 String DataLogger::getValueFromLog(String logLine, String label) {
@@ -312,7 +326,6 @@ String DataLogger::getTimestampFromLog(String logLine) {
     if (startIndex == -1) return "";
     startIndex += 5; // length of "Time:"
 
-    // Timestamp format: "Wednesday, 2026-07-02 14:11:12" - skip past the day name and its comma
     int firstComma = logLine.indexOf(",", startIndex);
     int secondComma = logLine.indexOf(",", firstComma + 1);
     if (firstComma == -1 || secondComma == -1) return "";
@@ -326,9 +339,6 @@ String DataLogger::getTimestampFromLog(String logLine) {
 }
 
 String DataLogger::jsonField(String key, String value) {
-    // Sensors not yet wired (e.g. BME280) report "nan" — wrap it in quotes
-    // so it's valid JSON. Django's safe_float() already treats the string
-    // "nan" as null, so no backend changes needed.
     if (value == "nan") {
         return "\"" + key + "\":\"nan\"";
     }

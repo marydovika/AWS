@@ -6,8 +6,6 @@
 #include "SensorData.h"
 #include "GSM.h"
 
-// ThingSpeak API keys are defined in the DataLogger class
-
 class DataLogger
 {
 public:
@@ -20,9 +18,13 @@ public:
   // Processes the queue, sending oldest data first
   void uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, unsigned long tonLimitMs);
 
+  // Processes the queue over WiFi, sending oldest data first. Returns true if successful or nothing to send.
   bool uploadPendingDataWiFi(unsigned long startTimeMs, unsigned long tonLimitMs);
+
   // Save GSM usage statistics to SD
   void logGSMStats(String timestamp, uint32_t sent, uint32_t received, uint32_t cycles);
+
+  // Log carrier USSD text response to SD
   void logUSSDMessage(String timestamp, String message);
 
 private:
@@ -38,11 +40,6 @@ private:
 
   // New: Removes the first line from the queue file
   bool popQueue();
-
-  // ThingSpeak Config
-  // const String API_KEY_1 = "0UOU523VQPM2FZXJ";
-  // const String API_KEY_2 = "5N37KH8M7FCF5PU2";
-  // const String API_KEY_3 = "XH83XCG9LMURW45L";
 };
 
 #endif

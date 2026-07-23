@@ -18,7 +18,7 @@ class GSM {
     // ── Setup ─────────────────────────────────────────────
     void setupGSM();
     void connectGPRS();
-     void disconnectGPRS();
+    void disconnectGPRS();
     bool waitForNetwork(int timeoutMs);
     void initSerial();
 
@@ -28,14 +28,18 @@ class GSM {
 
     // New: Post raw ESP32 string to Django ingest endpoint
     bool postToDjango(String url, String jsonPayload);
-    
+    void postToDjango(String jsonPayload);
+    const String DJANGO_URL = "https://aws-web-app-lsix.onrender.com/api/ingest/";
+
     void checkNetworkHealth();
     bool verifyGSMCommunication();
     bool verifyNetworkRegistration();
-   
+
     // ── Network time ──────────────────────────────────────
     String getNetworkTime();
-     String queryUSSD(const String& ussdCode, int timeoutMs);
+
+    // ── USSD and Balance Checking ─────────────────────────
+    String queryUSSD(const String& ussdCode, int timeoutMs);
     String extractUSSDMessage(const String& cusdResponse);
     String decodeUCS2(const String& hexStr);
     float parseBalanceFromUSSD(const String& msg);
@@ -46,7 +50,6 @@ class GSM {
     uint32_t getCycleCount();
     void resetByteCounters();
 
-  
     // ── Internal helpers ──────────────────────────────────
     bool sendCommand(const String& command, int timeout, bool debug, const String& expectedResponse);
     void sendCommand(const String& command, int timeout, bool debug);

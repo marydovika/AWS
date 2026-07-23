@@ -16,12 +16,15 @@ AirPressure::AirPressure() : pressure_(0.0), temperature_(0.0), humidity_(0.0), 
 void AirPressure::sensor_setup() {
     Wire.setTimeOut(50); // Set 50ms timeout for I2C to prevent hangs
     
-    if (!bme.begin(0x77, &Wire)) {
-        Serial.println("Could not find a valid BME280 sensor at 0x77, check wiring!");
-        initialized_ = false;
-    } else {
-        Serial.println("BME280 sensor initialized successfully.");
+    if (bme.begin(0x76, &Wire)) {
+        Serial.println("BME280 sensor initialized at 0x76.");
         initialized_ = true;
+    } else if (bme.begin(0x77, &Wire)) {
+        Serial.println("BME280 sensor initialized at 0x77.");
+        initialized_ = true;
+    } else {
+        Serial.println("Could not find BME280 at 0x76 or 0x77, check wiring!");
+        initialized_ = false;
     }
 }
 
