@@ -38,8 +38,17 @@ private:
   // Helper to extract value from "Label:Value" string
   String getValueFromLog(String logLine, String label);
 
-  // New: Removes the first line from the queue file
+  // Converts "Tuesday, 2026-07-14 13:50:41" → "2026-07-14T13:50:41Z" for ThingSpeak
+  String toISO8601(String timestamp);
+
+  // Returns empty string for "nan" so ThingSpeak accepts the entry
+  String formatField(String value);
+
+  // Removes the first line from the queue file
   bool popQueue();
+
+  // Appends a permanently-rejected log line to /rejected.txt
+  void logRejected(String logLine);
 
   // ThingSpeak Config
   const String API_KEY_1 = "0UOU523VQPM2FZXJ";

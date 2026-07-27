@@ -21,6 +21,11 @@ void DataLogger::begin() {
 }
 
 void DataLogger::logSensorData(String timestamp, SensorData data) {
+    // Strip day name to avoid commas in the log (e.g. "Tuesday, 2026-07-14 13:50:41" → "2026-07-14T13:50:41")
+    int commaIdx = timestamp.indexOf(", ");
+    if (commaIdx != -1) timestamp = timestamp.substring(commaIdx + 2);
+    timestamp.replace(" ", "T");
+
     String dataStr = "";
     dataStr += "Time:" + timestamp + ",";
     dataStr += "Press:" + String(data.airPressure, 2) + ",";
@@ -87,36 +92,43 @@ void DataLogger::uploadPendingData(GSM &gsmModule, unsigned long startTimeMs, un
         }
 
         Serial.println("[Queue] Attempting upload of oldest record...");
-        
+
+        String rawTime = getValueFromLog(line, "Time");
+        bool validTs = rawTime.length() >= 19 && rawTime.substring(0, 4) != "2000";
+        String created_at = validTs ? toISO8601(rawTime) : "";
+
         // CHANNEL 1
         String url1 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_1;
-        url1 += "&field1=" + getValueFromLog(line, "Temp");
-        url1 += "&field2=" + getValueFromLog(line, "Hum");
-        url1 += "&field3=" + getValueFromLog(line, "Press");
-        url1 += "&field4=" + getValueFromLog(line, "Rain");
-        url1 += "&field5=" + getValueFromLog(line, "WSpd");
-        url1 += "&field6=" + getValueFromLog(line, "WDir");
-        url1 += "&field7=" + getValueFromLog(line, "Light");
-        url1 += "&field8=" + getValueFromLog(line, "SoilM");
+        if (validTs) url1 += "&created_at=" + created_at;
+        url1 += "&field1=" + formatField(getValueFromLog(line, "Temp"));
+        url1 += "&field2=" + formatField(getValueFromLog(line, "Hum"));
+        url1 += "&field3=" + formatField(getValueFromLog(line, "Press"));
+        url1 += "&field4=" + formatField(getValueFromLog(line, "Rain"));
+        url1 += "&field5=" + formatField(getValueFromLog(line, "WSpd"));
+        url1 += "&field6=" + formatField(getValueFromLog(line, "WDir"));
+        url1 += "&field7=" + formatField(getValueFromLog(line, "Light"));
+        url1 += "&field8=" + formatField(getValueFromLog(line, "SoilM"));
 
         bool success = gsmModule.sendThingSpeakRequest(url1);
         
         if (success) {
             delay(16000); // Rate limit
-            
+
             // CHANNEL 2
             String url2 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_2;
+            if (validTs) url2 += "&created_at=" + created_at;
             url2 += "&field1=" + getValueFromLog(line, "V33");
             url2 += "&field2=" + getValueFromLog(line, "V5");
             url2 += "&field3=" + getValueFromLog(line, "VBatt");
             url2 += "&field4=" + getValueFromLog(line, "VSol");
             url2 += "&field5=" + getValueFromLog(line, "VDC");
             gsmModule.sendThingSpeakRequest(url2);
-            
+
             delay(16000); // Rate limit
 
             // CHANNEL 3
             String url3 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_3;
+            if (validTs) url3 += "&created_at=" + created_at;
             url3 += "&field1=" + getValueFromLog(line, "CBatt");
             url3 += "&field2=" + getValueFromLog(line, "CSol");
             gsmModule.sendThingSpeakRequest(url3);
@@ -169,59 +181,100 @@ bool DataLogger::uploadPendingDataWiFi(unsigned long startTimeMs, unsigned long 
         }
 
         Serial.println("[Queue WiFi] Attempting upload of oldest record...");
-        
+
+        String rawTime = getValueFromLog(line, "Time");
+        bool validTs = rawTime.length() >= 19 && rawTime.substring(0, 4) != "2000";
+        String created_at = validTs ? toISO8601(rawTime) : "";
+
         // CHANNEL 1
         String url1 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_1;
-        url1 += "&field1=" + getValueFromLog(line, "Temp");
-        url1 += "&field2=" + getValueFromLog(line, "Hum");
-        url1 += "&field3=" + getValueFromLog(line, "Press");
-        url1 += "&field4=" + getValueFromLog(line, "Rain");
-        url1 += "&field5=" + getValueFromLog(line, "WSpd");
-        url1 += "&field6=" + getValueFromLog(line, "WDir");
-        url1 += "&field7=" + getValueFromLog(line, "Light");
-        url1 += "&field8=" + getValueFromLog(line, "SoilM");
+        if (validTs) url1 += "&created_at=" + created_at;
+        url1 += "&field1=" + formatField(getValueFromLog(line, "Temp"));
+        url1 += "&field2=" + formatField(getValueFromLog(line, "Hum"));
+        url1 += "&field3=" + formatField(getValueFromLog(line, "Press"));
+        url1 += "&field4=" + formatField(getValueFromLog(line, "Rain"));
+        url1 += "&field5=" + formatField(getValueFromLog(line, "WSpd"));
+        url1 += "&field6=" + formatField(getValueFromLog(line, "WDir"));
+        url1 += "&field7=" + formatField(getValueFromLog(line, "Light"));
+        url1 += "&field8=" + formatField(getValueFromLog(line, "SoilM"));
 
         Serial.println("[Queue WiFi] Uploading Channel 1: " + url1);
         http.begin(url1);
         int httpCode = http.GET();
-        bool success = (httpCode == 200 || httpCode == 302);
+        String body = http.getString();
+        Serial.printf("[Queue WiFi] CH1 HTTP %d, body: %s\n", httpCode, body.c_str());
         http.end();
 
-        if (success) {
-            delay(16000); // Rate limit
-            
-            // CHANNEL 2
-            String url2 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_2;
-            url2 += "&field1=" + getValueFromLog(line, "V33");
-            url2 += "&field2=" + getValueFromLog(line, "V5");
-            url2 += "&field3=" + getValueFromLog(line, "VBatt");
-            url2 += "&field4=" + getValueFromLog(line, "VSol");
-            url2 += "&field5=" + getValueFromLog(line, "VDC");
-            
-            Serial.println("[Queue WiFi] Uploading Channel 2: " + url2);
-            http.begin(url2);
-            http.GET();
-            http.end();
-            
-            delay(16000); // Rate limit
-
-            // CHANNEL 3
-            String url3 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_3;
-            url3 += "&field1=" + getValueFromLog(line, "CBatt");
-            url3 += "&field2=" + getValueFromLog(line, "CSol");
-            
-            Serial.println("[Queue WiFi] Uploading Channel 3: " + url3);
-            http.begin(url3);
-            http.GET();
-            http.end();
-
-            Serial.println("[Queue WiFi] Upload successful. Popping from queue.");
-            popQueue();
-        } else {
+        // Non-200 means network/WiFi problem — stop and retry next cycle
+        if (httpCode != 200 && httpCode != 302) {
             Serial.printf("[Queue WiFi] Upload failed, HTTP code: %d. Stopping WiFi upload.\n", httpCode);
             anyFailure = true;
-            break; // Stop trying if WiFi is failing
+            break;
         }
+
+        bool success = (body != "0");
+
+        // Body "0" with created_at — ThingSpeak may have rejected the timestamp.
+        // Retry once without created_at (let ThingSpeak use server time).
+        if (!success && validTs) {
+            Serial.println("[Queue WiFi] Body '0' with created_at. Retrying without timestamp...");
+            String url1Retry = THINGSPEAK_IP + "/update?api_key=" + API_KEY_1;
+            url1Retry += "&field1=" + formatField(getValueFromLog(line, "Temp"));
+            url1Retry += "&field2=" + formatField(getValueFromLog(line, "Hum"));
+            url1Retry += "&field3=" + formatField(getValueFromLog(line, "Press"));
+            url1Retry += "&field4=" + formatField(getValueFromLog(line, "Rain"));
+            url1Retry += "&field5=" + formatField(getValueFromLog(line, "WSpd"));
+            url1Retry += "&field6=" + formatField(getValueFromLog(line, "WDir"));
+            url1Retry += "&field7=" + formatField(getValueFromLog(line, "Light"));
+            url1Retry += "&field8=" + formatField(getValueFromLog(line, "SoilM"));
+            http.begin(url1Retry);
+            httpCode = http.GET();
+            body = http.getString();
+            Serial.printf("[Queue WiFi] CH1 Retry HTTP %d, body: %s\n", httpCode, body.c_str());
+            http.end();
+            success = (httpCode == 200 || httpCode == 302) && body != "0";
+            if (success) validTs = false; // Channels 2 & 3 should also skip created_at
+        }
+
+        // Still body "0" — record is permanently bad. Log it and skip.
+        if (!success) {
+            Serial.println("[Queue WiFi] Record rejected by ThingSpeak. Logging to /rejected.txt and skipping.");
+            logRejected(line);
+            popQueue();
+            continue;
+        }
+
+        delay(16000); // Rate limit
+
+        // CHANNEL 2
+        String url2 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_2;
+        if (validTs) url2 += "&created_at=" + created_at;
+        url2 += "&field1=" + getValueFromLog(line, "V33");
+        url2 += "&field2=" + getValueFromLog(line, "V5");
+        url2 += "&field3=" + getValueFromLog(line, "VBatt");
+        url2 += "&field4=" + getValueFromLog(line, "VSol");
+        url2 += "&field5=" + getValueFromLog(line, "VDC");
+
+        Serial.println("[Queue WiFi] Uploading Channel 2: " + url2);
+        http.begin(url2);
+        http.GET();
+        http.end();
+
+        delay(16000); // Rate limit
+
+        // CHANNEL 3
+        String url3 = THINGSPEAK_IP + "/update?api_key=" + API_KEY_3;
+        if (validTs) url3 += "&created_at=" + created_at;
+        url3 += "&field1=" + getValueFromLog(line, "CBatt");
+        url3 += "&field2=" + getValueFromLog(line, "CSol");
+
+        Serial.println("[Queue WiFi] Uploading Channel 3: " + url3);
+        http.begin(url3);
+        http.GET();
+        http.end();
+
+        Serial.println("[Queue WiFi] Upload successful. Popping from queue.");
+        popQueue();
     }
 
     return !anyFailure;
@@ -289,6 +342,44 @@ bool DataLogger::popQueue() {
     return true;
 }
 
+String DataLogger::toISO8601(String timestamp) {
+    // Timestamp in log is EAT (UTC+3): "2026-07-08T11:18:15"
+    // ThingSpeak created_at requires UTC. Subtract 3 hours and append Z.
+    if (timestamp.length() < 19) return timestamp;
+
+    int year   = timestamp.substring(0, 4).toInt();
+    int month  = timestamp.substring(5, 7).toInt();
+    int day    = timestamp.substring(8, 10).toInt();
+    int hour   = timestamp.substring(11, 13).toInt();
+    int minute = timestamp.substring(14, 16).toInt();
+    int second = timestamp.substring(17, 19).toInt();
+
+    hour -= 3; // EAT → UTC
+    if (hour < 0) {
+        hour += 24;
+        day -= 1;
+        if (day < 1) {
+            month -= 1;
+            if (month < 1) { month = 12; year -= 1; }
+            const int daysInMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+            bool leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+            day = (month == 2 && leap) ? 29 : daysInMonth[month - 1];
+        }
+    }
+
+    char buf[22];
+    snprintf(buf, sizeof(buf), "%04d-%02d-%02dT%02d:%02d:%02dZ",
+             year, month, day, hour, minute, second);
+    return String(buf);
+}
+
+String DataLogger::formatField(String value) {
+    // ThingSpeak rejects entries with created_at when all fields are "nan"
+    // Return empty string so ThingSpeak stores null instead
+    if (value == "nan" || value == "NaN") return "";
+    return value;
+}
+
 String DataLogger::getValueFromLog(String logLine, String label) {
     String searchKey = label + ":";
     int startIndex = logLine.indexOf(searchKey);
@@ -309,5 +400,16 @@ void DataLogger::logUSSDMessage(String timestamp, String message) {
         Serial.println("[SD] USSD message logged to /ussd_log.txt");
     } else {
         Serial.println("[SD] Failed to open /ussd_log.txt for writing");
+    }
+}
+
+void DataLogger::logRejected(String logLine) {
+    File f = SD.open("/rejected.txt", FILE_APPEND);
+    if (f) {
+        f.println(logLine);
+        f.close();
+        Serial.println("[SD] Rejected record saved to /rejected.txt");
+    } else {
+        Serial.println("[SD] Failed to open /rejected.txt for writing");
     }
 }

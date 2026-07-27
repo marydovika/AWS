@@ -134,6 +134,14 @@ void enterDeepSleep(unsigned long tonStart) {
     gpio_hold_en((gpio_num_t)POWER_BOARD_SYNC_PIN);
     gpio_deep_sleep_hold_en();
 
+    // Mark this as a scheduled sleep so next boot knows it's not a manual power-on
+    {
+        Preferences prefs;
+        prefs.begin("weather_station", false);
+        prefs.putBool("scheduled", true);
+        prefs.end();
+    }
+
     Serial.flush(); // Ensure serial output completes before sleep
 
     esp_sleep_enable_timer_wakeup(sleepUs);
@@ -220,38 +228,40 @@ void transmitData(SensorData &data, unsigned long tonStart) {
     loraSleep();
 
     bool wifiSuccess = false;
-    Serial.println("[WiFi] Setting up WiFi (AP_STA mode) for transmission...");
-    WiFi.mode(WIFI_AP_STA);
-    
-    // Start Config AP early so it runs concurrently
-    if (WiFi.softAP("ESP32_Weather_Config")) {
-        Serial.println("[WiFi AP] Config AP Started successfully!");
-        Serial.print("[WiFi AP] AP IP Address: ");
-        Serial.println(WiFi.softAPIP());
-    } else {
-        Serial.println("[WiFi AP] AP Failed to start.");
-    }
 
-    // Try connecting to router
-    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-    Serial.printf("[WiFi STA] Connecting to router SSID: %s ", WIFI_SSID);
-    
-    int elapsed = 0;
-    while (WiFi.status() != WL_CONNECTED && elapsed < 15) {
-        Serial.print(".");
-        delay(1000);
-        elapsed++;
+    // Ensure AP_STA mode and AP are up (may already be from pre-log sync)
+    if (WiFi.getMode() != WIFI_AP_STA) {
+        WiFi.mode(WIFI_AP_STA);
     }
-    Serial.println();
+    if (WiFi.softAPIP() == IPAddress(0, 0, 0, 0)) {
+        if (WiFi.softAP("ESP32_Weather_Config")) {
+            Serial.println("[WiFi AP] Config AP Started successfully!");
+        }
+    }
+    Serial.print("[WiFi AP] AP IP Address: ");
+    Serial.println(WiFi.softAPIP());
+
+    // Connect to router only if not already connected from pre-log sync
+    if (WiFi.status() != WL_CONNECTED) {
+        WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+        Serial.printf("[WiFi STA] Connecting to router SSID: %s ", WIFI_SSID);
+        int elapsed = 0;
+        while (WiFi.status() != WL_CONNECTED && elapsed < 15) {
+            Serial.print(".");
+            delay(1000);
+            elapsed++;
+        }
+        Serial.println();
+    } else {
+        Serial.println("[WiFi STA] Already connected from pre-log sync.");
+    }
 
     if (WiFi.status() == WL_CONNECTED) {
-        Serial.println("[WiFi STA] Connected successfully!");
+        Serial.println("[WiFi STA] Connected!");
         Serial.print("[WiFi STA] IP Address: ");
         Serial.println(WiFi.localIP());
 
-        // Sync RTC using NTP
-        rtc1.syncWithNTP("pool.ntp.org", 3 * 3600, 0); // EAT (GMT+3)
-
+        // NTP already synced before logging — no need to sync again
         // Upload queue data over WiFi
         wifiSuccess = dataLogger.uploadPendingDataWiFi(tonStart, TON_MS);
         if (wifiSuccess) {
@@ -263,88 +273,18 @@ void transmitData(SensorData &data, unsigned long tonStart) {
         Serial.println("[WiFi STA] Failed to connect to router (timeout).");
     }
 
-    // Fallback to GSM if WiFi failed
+    // GSM fallback disabled — WiFi only for now
+    // if (!wifiSuccess) {
+    //     Serial.println("[Fallback] WiFi failed. Powering on GSM...");
+    //     gsmPowerOn();
+    //     String networkTime = simmodule.getNetworkTime();
+    //     if (networkTime != "") { rtc1.syncWithGSM(networkTime); }
+    //     dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
+    //     simmodule.disconnectGPRS();
+    //     gsmPowerOff();
+    // }
     if (!wifiSuccess) {
-        Serial.println("[Fallback] WiFi failed. Powering on GSM...");
-        gsmPowerOn();
-        
-        // SYNC EARLY: Get network time as soon as GPRS is connected
-        String networkTime = simmodule.getNetworkTime();
-        if (networkTime != "") {
-            rtc1.syncWithGSM(networkTime);
-        }
-
-        // Hybrid USSD Balance Check
-        uint32_t totalUsed = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
-        float pctRemaining = (1.0f - ((float)totalUsed / (float)TOTAL_BUNDLE_BYTES)) * 100.0f;
-        if (pctRemaining < 0.0f) pctRemaining = 0.0f;
-
-        Serial.printf("[GSM] Soft-tracked Data Usage: %lu bytes used of %lu (%.2f%% remaining)\n", 
-                      (unsigned long)totalUsed, (unsigned long)TOTAL_BUNDLE_BYTES, pctRemaining);
-
-        // Run USSD check only when remaining drops below threshold AND at most once per 24 hours
-        uint32_t cyclesInADay = (24 * 60) / updateIntervalMinutes;
-        if (cyclesInADay == 0) cyclesInADay = 1; // Prevent division by zero
-
-        if (pctRemaining <= USSD_THRESHOLD_PCT && cyclesSinceLastUSSD >= cyclesInADay) {
-            Serial.printf("[GSM] Data bundle estimate < %.1f%%. Triggering carrier USSD validation...\n", USSD_THRESHOLD_PCT);
-            String ussdResponse = simmodule.queryUSSD(USSD_CODE, 15000);
-            String cleanMsg = simmodule.extractUSSDMessage(ussdResponse);
-            
-            Serial.println("[GSM] Raw USSD Response: " + ussdResponse);
-            Serial.println("[GSM] Cleaned USSD Message: " + cleanMsg);
-            
-            // Log clean message to SD card
-            dataLogger.logUSSDMessage(rtc1.getDateTime().c_str(), cleanMsg);
-            
-            // Self-healing balance reset if recharged
-            float actualMB = simmodule.parseBalanceFromUSSD(cleanMsg);
-            if (actualMB >= 0.0f) {
-                float actualBytes = actualMB * 1024.0f * 1024.0f;
-                float actualPct = (actualBytes / (float)TOTAL_BUNDLE_BYTES) * 100.0f;
-                Serial.printf("[GSM] Carrier Balance: %.2f MB (%.2f%% remaining)\n", actualMB, actualPct);
-                
-                if (actualPct > USSD_THRESHOLD_PCT) {
-                    Serial.println("[GSM] Carrier reports data has been replenished. Resetting local counters!");
-                    simmodule.resetByteCounters();
-                }
-            }
-            cyclesSinceLastUSSD = 0;
-        } else {
-            cyclesSinceLastUSSD++;
-            Serial.printf("[GSM] Cycles since last USSD check: %lu (Next check in %lu cycles)\n", 
-                          (unsigned long)cyclesSinceLastUSSD, 
-                          (unsigned long)(cyclesSinceLastUSSD >= cyclesInADay ? 0 : cyclesInADay - cyclesSinceLastUSSD));
-        }
-
-        // Save USSD cycles to preferences
-        Preferences preferences;
-        preferences.begin("weather_station", false);
-        preferences.putUInt("ussd_cycles", cyclesSinceLastUSSD);
-        preferences.end();
-
-        dataLogger.uploadPendingData(simmodule, tonStart, TON_MS);
-
-        // Display Byte Usage
-        Serial.println("\n[GSM] === Data Usage Stats ===");
-        Serial.printf("[GSM] Total Sent: %u bytes\n", simmodule.getTotalBytesSent());
-        Serial.printf("[GSM] Total Received: %u bytes\n", simmodule.getTotalBytesReceived());
-        uint32_t total = simmodule.getTotalBytesSent() + simmodule.getTotalBytesReceived();
-        Serial.printf("[GSM] Total Traffic: %u bytes (%.2f KB)\n", total, total / 1024.0);
-        Serial.printf("[GSM] Total Cycles: %u\n", simmodule.getCycleCount());
-        if (simmodule.getCycleCount() > 0) {
-            Serial.printf("[GSM] Avg per Cycle: %.2f KB\n", (total / 1024.0) / simmodule.getCycleCount());
-        }
-        Serial.println("[GSM] ========================\n");
-
-        // Log to SD
-        dataLogger.logGSMStats(rtc1.getDateTime().c_str(), 
-                               simmodule.getTotalBytesSent(), 
-                               simmodule.getTotalBytesReceived(), 
-                               simmodule.getCycleCount());
-
-        simmodule.disconnectGPRS();
-        gsmPowerOff();
+        Serial.println("[Fallback] WiFi failed. GSM fallback is disabled.");
     }
 
     Serial.println("[DC] TX Phase complete.");
@@ -520,7 +460,7 @@ void handleRoot() {
     <div class="container">
         <div class="logo">AURA</div>
         <div class="subtitle">Weather Station Control Center</div>
-        <form action="/save" method="GET">
+        <form action="/save" method="POST">
             <div class="form-group">
                 <label for="interval">Sleeping Interval</label>
                 <div class="input-wrapper">
@@ -546,14 +486,22 @@ void handleSave() {
             Preferences preferences;
             preferences.begin("weather_station", false);
             preferences.putUInt("interval", newInterval);
+            preferences.putBool("scheduled", false); // next boot is a fresh manual session
             preferences.end();
+
+            // Verify the save actually took
+            Preferences verify;
+            verify.begin("weather_station", true);
+            uint32_t savedVal = verify.getUInt("interval", 0);
+            verify.end();
+            bool saveOk = (savedVal == newInterval);
 
             String html = R"rawliteral(<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Updating Station...</title>
+    <title>Settings Saved</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -562,6 +510,8 @@ void handleSave() {
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --green: #22c55e;
+            --red: #ef4444;
         }
         body {
             font-family: 'Outfit', sans-serif;
@@ -584,35 +534,57 @@ void handleSave() {
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
+        .icon { font-size: 3rem; margin-bottom: 16px; }
+        .status-ok  { color: var(--green); }
+        .status-err { color: var(--red); }
+        h2 { font-weight: 600; margin-bottom: 12px; }
+        .value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 12px 0;
+        }
+        p { color: var(--text-muted); font-size: 0.95rem; margin-top: 8px; }
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(255,255,255,0.1);
+            width: 24px; height: 24px;
+            border: 2px solid rgba(255,255,255,0.15);
             border-radius: 50%;
             border-top-color: #6366f1;
-            animation: spin 1s ease-in-out infinite;
-            margin: 0 auto 24px auto;
+            animation: spin 1s linear infinite;
+            display: inline-block; vertical-align: middle; margin-right: 8px;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        h2 { font-weight: 600; margin-bottom: 12px; }
-        p { color: var(--text-muted); font-size: 0.95rem; }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="spinner"></div>
-        <h2>Applying Settings</h2>
-        <p>Interval updated to %NEW_INTERVAL% minutes. The station is rebooting now...</p>
+        %STATUS_BLOCK%
     </div>
 </body>
 </html>)rawliteral";
 
-            html.replace("%NEW_INTERVAL%", String(newInterval));
+            String statusBlock;
+            if (saveOk) {
+                statusBlock = "<div class='icon status-ok'>&#10003;</div>"
+                              "<h2>Setting Confirmed</h2>"
+                              "<div class='value'>%NEW_INTERVAL% min</div>"
+                              "<p>Interval saved successfully.</p>"
+                              "<p style='margin-top:20px'><span class='spinner'></span>Station rebooting...</p>";
+            } else {
+                statusBlock = "<div class='icon status-err'>&#10007;</div>"
+                              "<h2>Save Failed</h2>"
+                              "<p>The interval could not be written to flash. Please try again.</p>";
+            }
+            statusBlock.replace("%NEW_INTERVAL%", String(newInterval));
+            html.replace("%STATUS_BLOCK%", statusBlock);
+
             configServer.send(200, "text/html", html);
-            delay(2000);
-            ESP.restart();
+            if (saveOk) {
+                delay(2000);
+                ESP.restart();
+            }
             return;
         }
     }
@@ -640,7 +612,7 @@ void runConfigPortal(unsigned long tonStart, bool isManualBoot) {
     }
 
     configServer.on("/", handleRoot);
-    configServer.on("/save", handleSave);
+    configServer.on("/save", HTTP_POST, handleSave);
     configServer.begin();
     Serial.println("[WiFi AP] HTTP server started on port 80");
 
@@ -686,16 +658,20 @@ void setup() {
     
     // Load config from preferences
     Preferences preferences;
-    preferences.begin("weather_station", true);
+    preferences.begin("weather_station", false); // read-write to clear scheduled flag
     updateIntervalMinutes = preferences.getUInt("interval", 10);
     cyclesSinceLastUSSD = preferences.getUInt("ussd_cycles", 9999);
+    bool wasScheduled = preferences.getBool("scheduled", false);
+    preferences.putBool("scheduled", false); // clear — will be re-set before next sleep
     preferences.end();
     
     Wire.setTimeOut(50); // Set global I2C timeout to prevent hangs
     
     esp_sleep_wakeup_cause_t wakeup_reason = esp_sleep_get_wakeup_cause();
     esp_reset_reason_t reset_reason = esp_reset_reason();
-    bool isManualBoot = (wakeup_reason != ESP_SLEEP_WAKEUP_TIMER);
+    // Relay cuts full power, so wakeup_reason is always "undefined" after a relay cycle.
+    // Instead, use the Preferences flag written just before each sleep to detect scheduled wakeups.
+    bool isManualBoot = !wasScheduled;
 
     Serial.println("\n[DC] ================================");
     Serial.print("[DC] Wakeup reason: ");
@@ -749,6 +725,27 @@ void setup() {
     Serial.println("[DC] before readAllSensors");
     SensorData currentData = readAllSensors();
     Serial.println("[DC] after readAllSensors");
+
+    // Sync RTC via NTP BEFORE logging so the timestamp is accurate
+    {
+        WiFi.mode(WIFI_AP_STA);
+        WiFi.softAP("ESP32_Weather_Config");
+        WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+        Serial.printf("[WiFi] Pre-log NTP sync: connecting to %s", WIFI_SSID);
+        int elapsed = 0;
+        while (WiFi.status() != WL_CONNECTED && elapsed < 15) {
+            Serial.print(".");
+            delay(1000);
+            elapsed++;
+        }
+        Serial.println();
+        if (WiFi.status() == WL_CONNECTED) {
+            rtc1.syncWithNTP("pool.ntp.org", 3 * 3600, 0); // EAT (GMT+3)
+            Serial.println("[WiFi] NTP synced. Timestamp will be accurate.");
+        } else {
+            Serial.println("[WiFi] Pre-log connect failed. Logging with existing RTC time.");
+        }
+    }
 
     Serial.println("[DC] before logToSD");
     logToSD(currentData);
