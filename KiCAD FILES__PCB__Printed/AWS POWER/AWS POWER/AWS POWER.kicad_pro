@@ -39,9 +39,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 1.0,
-          "height": 1.508,
-          "width": 1.508
+          "drill": 0.8,
+          "height": 1.27,
+          "width": 1.27
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -60,7 +60,7 @@
           "hatch_smoothing_level": 0,
           "hatch_smoothing_value": 0.1,
           "hatch_thickness": 1.0,
-          "min_clearance": 0.0,
+          "min_clearance": 0.5,
           "min_island_area": 10.0,
           "min_thickness": 0.25,
           "pad_connection": 1,
@@ -82,7 +82,7 @@
       },
       "rule_severities": {
         "annular_width": "error",
-        "clearance": "ignore",
+        "clearance": "error",
         "connection_width": "warning",
         "copper_edge_clearance": "error",
         "copper_sliver": "warning",
@@ -90,7 +90,7 @@
         "creepage": "error",
         "diff_pair_gap_out_of_range": "error",
         "diff_pair_uncoupled_length_too_long": "error",
-        "drill_out_of_range": "ignore",
+        "drill_out_of_range": "error",
         "duplicate_footprints": "warning",
         "extra_footprint": "warning",
         "footprint": "error",
@@ -116,9 +116,9 @@
         "missing_tuning_profile": "warning",
         "net_conflict": "warning",
         "nonmirrored_text_on_back_layer": "warning",
-        "npth_inside_courtyard": "ignore",
+        "npth_inside_courtyard": "error",
         "padstack": "warning",
-        "pth_inside_courtyard": "ignore",
+        "pth_inside_courtyard": "error",
         "shorting_items": "error",
         "silk_edge_clearance": "warning",
         "silk_over_copper": "warning",
@@ -139,7 +139,7 @@
         "track_width": "error",
         "tracks_crossing": "error",
         "tuning_profile_track_geometries": "ignore",
-        "unconnected_items": "ignore",
+        "unconnected_items": "error",
         "unresolved_variable": "error",
         "via_dangling": "warning",
         "zones_intersect": "error"
@@ -150,8 +150,8 @@
         "min_connection": 0.0,
         "min_copper_edge_clearance": 0.5,
         "min_groove_width": 0.0,
-        "min_hole_clearance": 0.1,
-        "min_hole_to_hole": 0.1,
+        "min_hole_clearance": 0.25,
+        "min_hole_to_hole": 0.25,
         "min_microvia_diameter": 0.2,
         "min_microvia_drill": 0.1,
         "min_resolved_spokes": 2,
@@ -159,8 +159,8 @@
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
         "min_through_hole_diameter": 0.3,
-        "min_track_width": 0.0,
-        "min_via_annular_width": 0.05,
+        "min_track_width": 0.2,
+        "min_via_annular_width": 0.1,
         "min_via_diameter": 0.5,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
@@ -211,11 +211,10 @@
       ],
       "track_widths": [
         0.0,
-        0.25,
-        1.5,
+        0.5,
+        1.0,
         2.0,
         3.0,
-        4.0,
         5.0
       ],
       "tuning_pattern_settings": {
@@ -468,7 +467,6 @@
       "footprint_filter": "ignore",
       "footprint_link_issues": "warning",
       "four_way_junction": "ignore",
-      "global_label_dangling": "warning",
       "ground_pin_not_ground": "warning",
       "hier_label_mismatch": "error",
       "isolated_pin_label": "warning",
@@ -508,7 +506,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "aws.kicad_pro",
+    "filename": "AWS POWER.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -542,14 +540,11 @@
   },
   "pcbnew": {
     "last_paths": {
-      "gencad": "",
       "idf": "",
-      "netlist": "aws.net",
+      "netlist": "",
       "plot": "",
-      "pos_files": "",
       "specctra_dsn": "",
-      "step": "../AWS PROJECT 3D files.step",
-      "svg": "",
+      "step": "",
       "vrml": ""
     },
     "page_layout_descr_file": ""
@@ -613,6 +608,18 @@
         },
         {
           "group_by": true,
+          "label": "Exclude from Simulation",
+          "name": "${EXCLUDE_FROM_SIM}",
+          "show": true
+        },
+        {
+          "group_by": true,
+          "label": "Exclude from Position Files",
+          "name": "${EXCLUDE_FROM_POS_FILES}",
+          "show": true
+        },
+        {
+          "group_by": true,
           "label": "Footprint",
           "name": "Footprint",
           "show": true
@@ -622,24 +629,6 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
-        },
-        {
-          "group_by": false,
-          "label": "Attrition Qty",
-          "name": "Attrition Qty",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Availability",
-          "name": "Availability",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Breakdown Voltage",
-          "name": "Breakdown Voltage",
-          "show": false
         },
         {
           "group_by": false,
@@ -663,12 +652,6 @@
           "group_by": false,
           "label": "Continuous Drain Current (Id)",
           "name": "Continuous Drain Current (Id)",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "DESCRIPTION",
-          "name": "DESCRIPTION",
           "show": false
         },
         {
@@ -703,8 +686,20 @@
         },
         {
           "group_by": false,
+          "label": "Input Bias Current (Ib)",
+          "name": "Input Bias Current (Ib)",
+          "show": false
+        },
+        {
+          "group_by": false,
           "label": "Input Capacitance (Ciss@Vds)",
           "name": "Input Capacitance (Ciss@Vds)",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Input Offset Voltage (Vos)",
+          "name": "Input Offset Voltage (Vos)",
           "show": false
         },
         {
@@ -733,12 +728,6 @@
         },
         {
           "group_by": false,
-          "label": "MAXIMUM_PACKAGE_HEIGHT",
-          "name": "MAXIMUM_PACKAGE_HEIGHT",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "MF",
           "name": "MF",
           "show": false
@@ -763,12 +752,6 @@
         },
         {
           "group_by": false,
-          "label": "Manufacturer",
-          "name": "Manufacturer",
-          "show": false
-        },
-        {
-          "group_by": false,
           "label": "Maximum Clamping Voltage",
           "name": "Maximum Clamping Voltage",
           "show": false
@@ -777,6 +760,12 @@
           "group_by": false,
           "label": "Minimum Qty",
           "name": "Minimum Qty",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Number Of Elements",
+          "name": "Number Of Elements",
           "show": false
         },
         {
@@ -801,24 +790,6 @@
           "group_by": false,
           "label": "Operating Temperature",
           "name": "Operating Temperature",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PACKAGE",
-          "name": "PACKAGE",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PARTREV",
-          "name": "PARTREV",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "PRICE",
-          "name": "PRICE",
           "show": false
         },
         {
@@ -931,6 +902,18 @@
         },
         {
           "group_by": false,
+          "label": "Supply Current",
+          "name": "Supply Current",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Supply Voltage",
+          "name": "Supply Voltage",
+          "show": false
+        },
+        {
+          "group_by": false,
           "label": "Type",
           "name": "Type",
           "show": false
@@ -943,8 +926,8 @@
         },
         {
           "group_by": false,
-          "label": "AVAILABILITY",
-          "name": "AVAILABILITY",
+          "label": "Breakdown Voltage",
+          "name": "Breakdown Voltage",
           "show": false
         },
         {
@@ -955,8 +938,20 @@
         },
         {
           "group_by": false,
+          "label": "Availability",
+          "name": "Availability",
+          "show": false
+        },
+        {
+          "group_by": false,
           "label": "#",
           "name": "${ITEM_NUMBER}",
+          "show": false
+        },
+        {
+          "group_by": false,
+          "label": "Attrition Qty",
+          "name": "Attrition Qty",
           "show": false
         }
       ],
@@ -996,49 +991,25 @@
     "meta": {
       "version": 1
     },
-    "net_format_name": "",
-    "ngspice": {
-      "fix_include_paths": true,
-      "meta": {
-        "version": 0
-      },
-      "model_mode": 4,
-      "workbook_filename": ""
-    },
     "page_layout_descr_file": "",
     "plot_directory": "",
     "reuse_designators": true,
-    "space_save_all_events": true,
-    "spice_current_sheet_as_root": false,
-    "spice_external_command": "spice \"%I\"",
-    "spice_model_current_sheet_as_root": true,
-    "spice_save_all_currents": false,
-    "spice_save_all_dissipations": false,
-    "spice_save_all_voltages": false,
     "subpart_first_id": 65,
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "aws.kicad_sch",
-        "name": "aws",
-        "uuid": "28dd5718-f0db-4cd1-9b2d-c2f5533a75a3"
+        "filename": "AWS POWER.kicad_sch",
+        "name": "Root",
+        "uuid": "1d74282b-38de-4d6c-a6bb-c9e8702b093c"
       }
     ],
-    "used_designators": "H1-8",
+    "used_designators": "",
     "variants": []
   },
   "sheets": [
     [
-      "28dd5718-f0db-4cd1-9b2d-c2f5533a75a3",
-      "aws"
-    ],
-    [
-      "918a84d0-2382-4e9e-a083-abfab5a808df",
-      "gate way"
-    ],
-    [
-      "4ecbf471-21e7-4b8d-82a4-6ddc1c8d89c4",
-      "power board"
+      "1d74282b-38de-4d6c-a6bb-c9e8702b093c",
+      "Root"
     ]
   ],
   "text_variables": {},
