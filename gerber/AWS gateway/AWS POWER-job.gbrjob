@@ -3,19 +3,19 @@
     "GenerationSoftware": {
       "Vendor": "KiCad",
       "Application": "Pcbnew",
-      "Version": "9.0.6"
+      "Version": "10.0.1"
     },
-    "CreationDate": "2026-02-17T13:33:01+03:00"
+    "CreationDate": "2026-08-20T11:00:57+03:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
-      "Name": "AWS PROJECT",
-      "GUID": "41575320-5052-44f4-9a45-43542e6b6963",
+      "Name": "AWS POWER",
+      "GUID": "41575320-504f-4574-9552-2e6b69636164",
       "Revision": "rev?"
     },
     "Size": {
-      "X": 206.38,
-      "Y": 91.3
+      "X": 182.55,
+      "Y": 90.05
     },
     "LayerNumber": 2,
     "BoardThickness": 1.6,
@@ -24,57 +24,57 @@
   "DesignRules": [
     {
       "Layers": "Outer",
-      "PadToPad": 0.1,
-      "PadToTrack": 0.1,
+      "PadToPad": 0.2,
+      "PadToTrack": 0.2,
       "TrackToTrack": 0.2,
-      "MinLineWidth": 0.2,
+      "MinLineWidth": 0.5,
       "TrackToRegion": 0.5,
       "RegionToRegion": 0.5
     }
   ],
   "FilesAttributes": [
     {
-      "Path": "AWS PROJECT-F_Cu.gbr",
+      "Path": "AWS POWER-F_Cu.gbr",
       "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "AWS PROJECT-B_Cu.gbr",
+      "Path": "AWS POWER-B_Cu.gbr",
       "FileFunction": "Copper,L2,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "AWS PROJECT-F_Paste.gbr",
+      "Path": "AWS POWER-F_Paste.gbr",
       "FileFunction": "SolderPaste,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "AWS PROJECT-B_Paste.gbr",
+      "Path": "AWS POWER-B_Paste.gbr",
       "FileFunction": "SolderPaste,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "AWS PROJECT-F_Silkscreen.gbr",
+      "Path": "AWS POWER-F_Silkscreen.gbr",
       "FileFunction": "Legend,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "AWS PROJECT-B_Silkscreen.gbr",
+      "Path": "AWS POWER-B_Silkscreen.gbr",
       "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "AWS PROJECT-F_Mask.gbr",
+      "Path": "AWS POWER-F_Mask.gbr",
       "FileFunction": "SolderMask,Top",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "AWS PROJECT-B_Mask.gbr",
+      "Path": "AWS POWER-B_Mask.gbr",
       "FileFunction": "SolderMask,Bot",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "AWS PROJECT-Edge_Cuts.gbr",
+      "Path": "AWS POWER-Edge_Cuts.gbr",
       "FileFunction": "Profile",
       "FilePolarity": "Positive"
     }
