@@ -7,6 +7,13 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "AWS GATEWAY PCB")
+		(rev "Version 03")
+		(company "IoT-ra Lab")
+		(comment 1 "By TN Muhanguzi and team at github.com/marydovika/AWS")
+		(comment 2 "For AdEMNEA Project, 2025-2026")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(2 "B.Cu" signal)

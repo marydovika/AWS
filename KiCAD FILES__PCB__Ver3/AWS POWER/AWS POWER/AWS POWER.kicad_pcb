@@ -7,6 +7,13 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "AWS POWER PCB")
+		(rev "Version 03")
+		(company "IoT-ra Lab")
+		(comment 1 "For AdEMNEA Project 2025-2026")
+		(comment 2 "By TN Muhanguzi and team at github.com/marydovika/AWS")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(2 "B.Cu" signal)
